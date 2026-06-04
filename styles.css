@@ -2930,7 +2930,7 @@ textarea.form-control {
 /* 6. Form Upload Panels & Preview Cards */
 .admin-form-container {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1.1fr 0.9fr;
   gap: 40px;
   align-items: start;
 }
@@ -3306,6 +3306,198 @@ textarea.form-control {
     font-size: 0.82rem; /* Reduced from 0.95rem */
     -webkit-line-clamp: 2; /* Reduced from 3 lines */
     margin-bottom: 12px; /* Reduced from 24px */
+  }
+}
+
+/* ==========================================
+   ADDITIONAL RESPONSIVENESS OVERRIDES
+   ========================================== */
+
+/* Admin dashboard steps checklist grid */
+.admin-steps-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+}
+
+@media (max-width: 992px) {
+  /* Industries container column stack */
+  .modern-services-container,
+  .modern-industries-container {
+    grid-template-columns: 1fr !important;
+    gap: 30px !important;
+    margin-top: 30px !important;
+  }
+  
+  .services-list-sidebar,
+  .industries-sidebar {
+    display: flex !important;
+    flex-direction: column !important;
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+    width: 100% !important;
+  }
+  
+  /* Industries spotlight card layout */
+  .spotlight-card {
+    grid-template-columns: 1fr !important;
+    padding: 24px !important;
+    gap: 24px !important;
+  }
+  
+  /* Place image above text on mobile */
+  .spotlight-visual {
+    height: 240px !important;
+    order: -1 !important;
+  }
+  
+  /* Disable translation shifts on mobile active tabs */
+  .industry-tab-item.active {
+    transform: none !important;
+  }
+  
+  .service-spotlight-card {
+    padding: 24px !important;
+    gap: 20px !important;
+  }
+}
+
+@media (max-width: 768px) {
+  /* Admin portal layout adjustments */
+  .admin-panel-header {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 12px !important;
+    padding-bottom: 16px !important;
+    margin-bottom: 20px !important;
+  }
+  
+  .admin-panel-title {
+    font-size: 1.5rem !important;
+  }
+  
+  /* Compact admin sidebar header for mobile viewports */
+  .sidebar-header {
+    padding: 12px 16px !important;
+    gap: 8px !important;
+  }
+  
+  .sidebar-header img {
+    max-height: 36px !important;
+  }
+  
+  .sidebar-header div {
+    font-size: 0.65rem !important;
+  }
+  
+  /* Table touch scrolling smoothness */
+  .table-responsive {
+    -webkit-overflow-scrolling: touch !important;
+  }
+  
+  /* Prevent squeezed table headers by forcing minimum width */
+  .leads-table {
+    min-width: 850px !important;
+  }
+  
+  .admin-steps-grid {
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+  }
+}
+
+@media (max-width: 580px) {
+  /* Grid inputs vertical spacing when stacked */
+  .form-group-row {
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  /* Fluid content padding adjustment for minor widths */
+  .container {
+    padding: 0 16px !important;
+  }
+
+  /* Header components scaling to fit mobile widths without wrapping */
+  .logo {
+    gap: 8px !important;
+  }
+  
+  .logo img {
+    height: 36px !important;
+  }
+  
+  .logo-text {
+    font-size: 1rem !important;
+  }
+  
+  .logo-text span:last-child {
+    font-size: 0.65rem !important;
+    letter-spacing: 0.1em !important;
+  }
+  
+  .header {
+    height: 65px !important;
+  }
+  
+  .header.scrolled {
+    height: 60px !important;
+  }
+  
+  .theme-toggle {
+    width: 36px !important;
+    height: 36px !important;
+  }
+  
+  .menu-btn {
+    width: 26px !important;
+    height: 18px !important;
+  }
+
+  /* Hero section absolute overlay cards hide to prevent container overflow */
+  .floating-overlay-card,
+  .floating-overlay-card-2 {
+    display: none !important;
+  }
+  
+  .hero-card-stack {
+    height: 330px !important;
+  }
+  
+  .main-visual-card img {
+    height: 270px !important;
+  }
+
+  /* Image height frame fluid scaling */
+  .about-img-frame img {
+    height: 300px !important;
+  }
+
+  /* Card layouts fluid columns */
+  .blog-grid {
+    grid-template-columns: 1fr !important;
+  }
+  
+  .gallery-grid {
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+  }
+
+  /* Admin login overlay card resizing */
+  .login-card {
+    padding: 24px 20px !important;
+    margin: 16px !important;
+    max-width: calc(100% - 32px) !important;
+  }
+  
+  .login-logo img {
+    height: 48px !important;
+  }
+  
+  .login-logo h2 {
+    font-size: 1.2rem !important;
   }
 }
 
