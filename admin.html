@@ -1,0 +1,1296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Placement Keepers People Pulse - Administration Portal">
+  <title>Admin Dashboard | People Pulse Pvt. Ltd.</title>
+  
+  <link rel="icon" type="image/x-icon" href="assets/images/logo.jpeg">
+  <link rel="stylesheet" href="styles.css">
+  
+  <style>
+    /* Custom modifications inside admin.html to support fluid height and layout overrides */
+    body {
+      background-color: var(--bg-base);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ==========================================
+       ADMIN LOCK SCREEN (LOGIN OVERLAY)
+       ========================================== -->
+  <div id="loginOverlay" class="admin-login-overlay">
+    <div class="login-card glass-panel">
+      <div class="login-logo">
+        <img src="assets/images/logo.jpeg" alt="Logo">
+        <h2>PLACEMENT KEEPERS</h2>
+        <span>Admin Portal</span>
+      </div>
+      
+      <div id="loginError" class="login-error">Invalid admin credentials. Please try again.</div>
+      
+      <form id="loginForm" novalidate>
+        <div class="form-group" style="text-align: left;">
+          <label for="username" class="form-label">Username</label>
+          <input type="text" id="username" class="form-control" placeholder="Enter username" required>
+        </div>
+        <div class="form-group" style="text-align: left; margin-bottom: 30px;">
+          <label for="password" class="form-label">Password</label>
+          <input type="password" id="password" class="form-control" placeholder="Enter password" required>
+        </div>
+        <button type="submit" class="btn btn-primary" style="width: 100%;">Unlock Dashboard</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ==========================================
+       MAIN DASHBOARD PANEL WRAPPER
+       ========================================== -->
+  <div class="admin-wrapper">
+    
+    <!-- Sidebar Navigation -->
+    <aside class="admin-sidebar">
+      <div class="sidebar-header" style="display: flex; flex-direction: column; align-items: center; gap: 12px; padding: 24px 20px;">
+        <img src="assets/images/logo.jpeg" alt="Logo" style="width: auto; max-width: 100%; height: auto; max-height: 48px; object-fit: contain;">
+        <div style="font-family: var(--font-heading); font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: var(--primary); text-align: center; line-height: 1.2;">
+          Management Dashboard
+        </div>
+      </div>
+      
+      <nav class="sidebar-menu">
+        <button class="sidebar-btn active" data-tab="panel-overview">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2H6a2 2 0 01-2-2v-4zM14 16a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2h-2a2 2 0 01-2-2v-4z"></path>
+          </svg>
+          Overview
+        </button>
+        <button class="sidebar-btn" data-tab="panel-articles">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"></path>
+          </svg>
+          Manage Articles
+        </button>
+        <button class="sidebar-btn" data-tab="panel-gallery">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+          </svg>
+          Manage Gallery
+        </button>
+        <button class="sidebar-btn" data-tab="panel-leads">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+          </svg>
+          Inquiries & Leads
+        </button>
+        <button class="sidebar-btn" data-tab="panel-integrations">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"></path>
+          </svg>
+          Google Sheets Config
+        </button>
+      </nav>
+      
+      <div class="sidebar-footer">
+        <button id="logoutBtn" class="btn btn-secondary" style="width: 100%; padding: 10px; font-size: 0.9rem;">
+          <svg style="width: 18px; height: 18px; margin-right: 6px; vertical-align: middle;" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path>
+          </svg>
+          Lock Dashboard
+        </button>
+      </div>
+    </aside>
+    
+    <!-- Main Scrollable Dashboard Content Panel -->
+    <main class="admin-main">
+
+      <!-- ==========================================
+           TAB PANEL: OVERVIEW
+           ========================================== -->
+      <section id="panel-overview" class="admin-panel active">
+        <div class="admin-panel-header">
+          <h2 class="admin-panel-title">Dashboard <span>Overview</span></h2>
+          <a href="index.html" class="btn btn-secondary" target="_blank">View Live Website</a>
+        </div>
+        
+        <div class="admin-overview-grid">
+          <div class="overview-card glass-panel">
+            <div class="overview-icon">
+              <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"></path>
+              </svg>
+            </div>
+            <div class="overview-details">
+              <h4>Total Articles</h4>
+              <p id="stat-articles">0</p>
+            </div>
+          </div>
+          
+          <div class="overview-card glass-panel">
+            <div class="overview-icon">
+              <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+              </svg>
+            </div>
+            <div class="overview-details">
+              <h4>Gallery Images</h4>
+              <p id="stat-images">0</p>
+            </div>
+          </div>
+          
+          <div class="overview-card glass-panel">
+            <div class="overview-icon">
+              <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+              </svg>
+            </div>
+            <div class="overview-details">
+              <h4>Total Inquiries</h4>
+              <p id="stat-leads">0</p>
+            </div>
+          </div>
+        </div>
+
+        <h3 style="font-family: var(--font-heading); font-size: 1.4rem; font-weight: 700; margin-bottom: 20px;">Quick Steps Checklist</h3>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px;">
+          <div class="step-card">
+            <h4><span class="step-num">1</span>Add Articles</h4>
+            <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 8px;">Upload technical career insights or company announcements. They render instantly on the landing page!</p>
+          </div>
+          <div class="step-card">
+            <h4><span class="step-num">2</span>Add Photos</h4>
+            <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 8px;">Drop high-resolution links in the gallery tab. Categories filter on the homepage seamlessly.</p>
+          </div>
+          <div class="step-card">
+            <h4><span class="step-num">3</span>Sheets Webhook</h4>
+            <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 8px;">Copy the Apps Script code in integrations, save the URL, and sync submissions automatically.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================
+           TAB PANEL: ARTICLES / BLOG MANAGEMENT
+           ========================================== -->
+      <section id="panel-articles" class="admin-panel">
+        <div class="admin-panel-header">
+          <h2 class="admin-panel-title">Manage <span>Articles</span></h2>
+        </div>
+        
+        <div class="admin-form-container">
+          <!-- Article Submission form -->
+          <div class="admin-form-box glass-panel">
+            <h3 style="font-family: var(--font-heading); font-size: 1.25rem; font-weight: 700; margin-bottom: 24px;">Publish New Article</h3>
+            <form id="articleForm">
+              <div class="form-group">
+                <label for="artTitle" class="form-label">Article Title</label>
+                <input id="artTitle" type="text" class="form-control" placeholder="E.g., Tech Hiring Trends" required>
+              </div>
+              <div class="form-group-row">
+                <div class="form-group">
+                  <label for="artCategory" class="form-label">Category</label>
+                  <input id="artCategory" type="text" class="form-control" placeholder="E.g., IT Sourcing" required>
+                </div>
+                <div class="form-group">
+                  <label for="artImage" class="form-label">Cover Image URL</label>
+                  <input id="artImage" type="url" class="form-control" placeholder="https://images.unsplash.com/..." required>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="artDesc" class="form-label">Short Summary Description</label>
+                <textarea id="artDesc" class="form-control" placeholder="Write a short 2-3 sentence overview..." style="min-height: 80px;" required></textarea>
+              </div>
+              <div class="form-group">
+                <label for="artContent" class="form-label">Full HTML/Rich Content</label>
+                <textarea id="artContent" class="form-control" placeholder="<p>Full article paragraph...</p>" style="min-height: 180px;" required></textarea>
+              </div>
+              <button type="submit" class="btn btn-primary" style="width: 100%;">Publish Article</button>
+            </form>
+          </div>
+          
+          <!-- Live preview card & Existing list -->
+          <div>
+            <div class="preview-box-title">Live Preview Card</div>
+            <div class="preview-container" style="margin-bottom: 40px;">
+              <article class="blog-card glass-panel" style="margin:0;">
+                <div class="blog-img-box">
+                  <img id="prevArtImg" src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=500&q=80" alt="Cover">
+                  <span id="prevArtCat" class="blog-category-badge">IT Insights</span>
+                </div>
+                <div class="blog-body">
+                  <div class="blog-meta">
+                    <span>Today's Date</span>
+                    <span>•</span>
+                    <span>By Sourcing Team</span>
+                  </div>
+                  <h3 id="prevArtTitle" class="blog-card-title">Enter Title Above</h3>
+                  <p id="prevArtDesc" class="blog-card-desc">Your summary description will display here dynamically as you write...</p>
+                  <button class="blog-card-btn" style="pointer-events: none;">Read Full Article</button>
+                </div>
+              </article>
+            </div>
+            
+            <div class="preview-box-title">Existing Articles List</div>
+            <div id="articlesList" class="manage-list">
+              <!-- Rendered dynamically -->
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================
+           TAB PANEL: GALLERY MANAGEMENT
+           ========================================== -->
+      <section id="panel-gallery" class="admin-panel">
+        <div class="admin-panel-header">
+          <h2 class="admin-panel-title">Manage <span>Gallery</span></h2>
+        </div>
+        
+        <div class="admin-form-container">
+          <!-- Gallery upload form -->
+          <div class="admin-form-box glass-panel">
+            <h3 style="font-family: var(--font-heading); font-size: 1.25rem; font-weight: 700; margin-bottom: 24px;">Upload Gallery Photo</h3>
+            <form id="galleryForm">
+              <div class="form-group">
+                <label for="galTitle" class="form-label">Photo Title / Caption</label>
+                <input id="galTitle" type="text" class="form-control" placeholder="E.g., ISO Standards Celebration" required>
+              </div>
+              <div class="form-group-row">
+                <div class="form-group">
+                  <label for="galCategory" class="form-label">Category</label>
+                  <select id="galCategory" class="form-control" style="appearance: none; background-image: url('data:image/svg+xml;utf8,<svg fill=%22%236b7280%22 viewBox=%220 0 20 20%22 xmlns=%22http://www.w3.org/2000/svg%22><path fill-rule=%22evenodd%22 d=%22M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z%22 clip-rule=%22evenodd%22></path></svg>'); background-repeat: no-repeat; background-position: right 18px center; background-size: 20px;">
+                    <option value="office">Office & Culture</option>
+                    <option value="events">Corporate Events</option>
+                    <option value="team">Team Bonding</option>
+                    <option value="achievements">Achievements</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="galImage" class="form-label">Photo URL</label>
+                  <input id="galImage" type="url" class="form-control" placeholder="https://images.unsplash.com/...">
+                </div>
+              </div>
+              <div class="form-group" style="margin-bottom: 24px;">
+                <label for="galFileInput" class="form-label">Or Upload Local Image File</label>
+                <input id="galFileInput" type="file" class="form-control" accept="image/*" style="padding: 10px 14px;">
+                <div style="font-size: 0.72rem; color: var(--text-muted); margin-top: 6px;">Securely uploads directly to a dedicated folder in your Google Drive!</div>
+              </div>
+              <button type="submit" id="galSubmitBtn" class="btn btn-primary" style="width: 100%;">Upload Photo</button>
+            </form>
+          </div>
+          
+          <!-- Live Preview & list -->
+          <div>
+            <div class="preview-box-title">Live Preview Thumbnail</div>
+            <div class="preview-container" style="margin-bottom: 40px;">
+              <div class="gallery-item" style="margin:0; width: 100%; max-width: 320px;">
+                <img id="prevGalImg" src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=600&q=80" alt="Workspace">
+                <div class="gallery-overlay" style="opacity:1;">
+                  <h4 id="prevGalTitle" class="gallery-title">ISO Celebration</h4>
+                  <span id="prevGalCat" class="gallery-tag">Office & Culture</span>
+                </div>
+              </div>
+            </div>
+            
+            <div class="preview-box-title">Existing Gallery Photos</div>
+            <div id="galleryList" class="manage-list">
+              <!-- Rendered dynamically -->
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================
+           TAB PANEL: LEADS / INQUIRIES LOG
+           ========================================== -->
+      <section id="panel-leads" class="admin-panel">
+        <div class="admin-panel-header" style="flex-wrap: wrap; gap: 16px;">
+          <h2 class="admin-panel-title">Inquiries & <span>Lead Comments</span></h2>
+          <div style="display: flex; gap: 12px;">
+            <button id="btnExportCSV" class="btn btn-secondary" style="padding: 10px 16px; font-size: 0.85rem;">Export to CSV</button>
+            <button id="btnClearLeads" class="btn btn-danger" style="padding: 10px 16px; font-size: 0.85rem;">Clear All Logs</button>
+          </div>
+        </div>
+        
+        <!-- Table Search & Filter Bar -->
+        <div class="glass-panel" style="padding: 20px; border-radius: var(--radius-md); display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 24px;">
+          <div style="flex-grow: 1; min-width: 200px; position: relative;">
+            <input id="leadsSearch" type="text" class="form-control" placeholder="Search leads by name, email, keyword...">
+          </div>
+          <div style="min-width: 180px;">
+            <select id="leadsFilter" class="form-control" style="appearance: none; background-image: url('data:image/svg+xml;utf8,<svg fill=%22%236b7280%22 viewBox=%220 0 20 20%22 xmlns=%22http://www.w3.org/2000/svg%22><path fill-rule=%22evenodd%22 d=%22M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z%22 clip-rule=%22evenodd%22></path></svg>'); background-repeat: no-repeat; background-position: right 18px center; background-size: 20px;">
+              <option value="all">All Services</option>
+              <option value="permanent">Permanent Staffing</option>
+              <option value="contract">Contract Hiring</option>
+              <option value="bulk">Bulk Volume Sourcing</option>
+              <option value="it-augmentation">IT Augmentation</option>
+              <option value="payroll">Payroll Outsourcing</option>
+              <option value="other">Other staffing need</option>
+            </select>
+          </div>
+        </div>
+        
+        <!-- Interactive leads Table container -->
+        <div class="table-responsive">
+          <table class="leads-table">
+            <thead>
+              <tr>
+                <th style="width: 15%;">Submitted Date</th>
+                <th style="width: 20%;">Corporate Name</th>
+                <th style="width: 25%;">Email & Phone</th>
+                <th style="width: 15%;">Service Needed</th>
+                <th style="width: 20%;">Message Inquiry</th>
+                <th style="width: 5%; text-align: center;">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="leadsTableBody">
+              <!-- Populated dynamically -->
+            </tbody>
+          </table>
+          
+          <div id="leadsEmptyState" class="empty-state" style="display: none;">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 19v-8.93a2 2 0 01.89-1.664l8-5.333a2 2 0 012.22 0l8 5.333A2 2 0 0121 10.07V19M3 19a2 2 0 002 2h14a2 2 0 002-2M3 19l6.75-4.5M21 19l-6.75-4.5M3 10l6.75 4.5M21 10l-6.75 4.5m0 0l-2.25-1.5a2 2 0 00-2.22 0l-2.25 1.5"></path>
+            </svg>
+            <h3>No inquiries recorded yet</h3>
+            <p>Your incoming contact form submits will display in this table log.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================
+           TAB PANEL: GOOGLE SHEETS WEBHOOK INTEGRATION
+           ========================================== -->
+      <section id="panel-integrations" class="admin-panel">
+        <div class="admin-panel-header">
+          <h2 class="admin-panel-title">Google Sheets <span>Webhook Setup</span></h2>
+        </div>
+        
+        <div class="admin-form-container" style="grid-template-columns: 1.1fr 0.9fr;">
+          <!-- Setup Steps card -->
+          <div>
+            <h3 style="font-family: var(--font-heading); font-size: 1.25rem; font-weight: 700; margin-bottom: 20px;">Inquiries to Google Sheets in 3 Steps</h3>
+            
+            <div class="step-card">
+              <h4><span class="step-num">1</span>Create a Google Sheet</h4>
+              <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 6px;">Open a new spreadsheet in Google Sheets. From the menu bar, click on <strong>Extensions</strong> and select <strong>Apps Script</strong>.</p>
+            </div>
+            
+            <div class="step-card">
+              <h4><span class="step-num">2</span>Paste code & Deploy</h4>
+              <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 6px;">Erase any existing code in the editor, copy the CORS-enabled code block shown on the right, and paste it. Click <strong>Deploy</strong> &rarr; <strong>New Deployment</strong>. Select type <strong>Web App</strong>, change Access to <strong>Anyone</strong>, and click Deploy.</p>
+            </div>
+            
+            <div class="step-card">
+              <h4><span class="step-num">3</span>Save Web App URL Below</h4>
+              <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 6px;">Copy the generated <strong>Web App URL</strong> from Google, paste it in the field below, and click Save. That's it! Your forms are dynamically connected.</p>
+            </div>
+            
+            <!-- Connection Input Box -->
+            <div class="glass-panel" style="padding: 24px; border-radius: var(--radius-md);">
+              <h4 style="font-family: var(--font-heading); font-size: 1.05rem; font-weight: 700; margin-bottom: 12px;">Active Spreadsheet URL</h4>
+              <form id="integrationForm" style="display: flex; gap: 12px; flex-direction: column;">
+                <div style="position: relative;">
+                  <input id="sheetsUrl" type="url" class="form-control" placeholder="https://script.google.com/macros/s/.../exec" required>
+                </div>
+                <button type="submit" class="btn btn-primary" style="align-self: flex-start; padding: 10px 24px; font-size: 0.9rem;">Save Connection URL</button>
+              </form>
+            </div>
+          </div>
+          
+          <!-- Code Block & Copy Box -->
+          <div>
+            <div class="preview-box-title">Apps Script Code Block</div>
+            <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 12px;">This lightweight script processes submissions, appends headers automatically, and formats timestamps.</p>
+            
+            <div class="code-copy-box">
+              <button id="btnCopyCode" class="btn-copy">Copy Code</button>
+              <pre><code id="scriptCode">function doGet(e) {
+  var action = e.parameter.action;
+  if (action === 'get_articles') {
+    return getArticles();
+  } else if (action === 'get_gallery') {
+    return getGallery();
+  }
+  return ContentService.createTextOutput(JSON.stringify({ "status": "error", "message": "Invalid action" }))
+                       .setMimeType(ContentService.MimeType.JSON);
+}
+
+function doPost(e) {
+  try {
+    var data = JSON.parse(e.postData.contents);
+    var action = data.action;
+    
+    if (action === 'add_lead') {
+      return addLead(data);
+    } else if (action === 'delete_lead') {
+      return deleteLead(data.id);
+    } else if (action === 'add_article') {
+      return addArticle(data);
+    } else if (action === 'delete_article') {
+      return deleteArticle(data.id);
+    } else if (action === 'add_gallery') {
+      return addGallery(data);
+    } else if (action === 'delete_gallery') {
+      return deleteGallery(data.id);
+    } else if (action === 'upload_to_drive') {
+      return uploadToDrive(data);
+    }
+    
+    return addLead(data);
+  } catch(error) {
+    return ContentService.createTextOutput(JSON.stringify({ "status": "error", "message": error.toString() }))
+                         .setMimeType(ContentService.MimeType.JSON);
+  }
+}
+
+function getArticles() {
+  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  var sheet = ss.getSheetByName("Articles");
+  if (!sheet) {
+    return ContentService.createTextOutput(JSON.stringify([]))
+                         .setMimeType(ContentService.MimeType.JSON);
+  }
+  
+  var data = sheet.getDataRange().getValues();
+  if (data.length <= 1) {
+    return ContentService.createTextOutput(JSON.stringify([]))
+                         .setMimeType(ContentService.MimeType.JSON);
+  }
+  
+  var articles = [];
+  var headers = data[0];
+  for (var i = 1; i < data.length; i++) {
+    var row = data[i];
+    var article = {};
+    for (var j = 0; j < headers.length; j++) {
+      var key = headers[j].toLowerCase();
+      if (key === 'image url') key = 'img';
+      article[key] = row[j];
+    }
+    articles.push(article);
+  }
+  
+  return ContentService.createTextOutput(JSON.stringify(articles))
+                       .setMimeType(ContentService.MimeType.JSON);
+}
+
+function addArticle(data) {
+  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  var sheet = ss.getSheetByName("Articles");
+  if (!sheet) {
+    sheet = ss.insertSheet("Articles");
+  }
+  
+  if (sheet.getLastRow() === 0) {
+    sheet.appendRow(["ID", "Title", "Category", "Meta", "Image URL", "Desc", "Content"]);
+  }
+  
+  sheet.appendRow([data.id, data.title, data.category, data.meta, data.img, data.desc, data.content]);
+  
+  return ContentService.createTextOutput(JSON.stringify({ "status": "success" }))
+                       .setMimeType(ContentService.MimeType.JSON);
+}
+
+function deleteArticle(id) {
+  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  var sheet = ss.getSheetByName("Articles");
+  if (sheet) {
+    var data = sheet.getDataRange().getValues();
+    for (var i = 1; i < data.length; i++) {
+      if (data[i][0] == id) {
+        sheet.deleteRow(i + 1);
+        break;
+      }
+    }
+  }
+  return ContentService.createTextOutput(JSON.stringify({ "status": "success" }))
+                       .setMimeType(ContentService.MimeType.JSON);
+}
+
+function getGallery() {
+  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  var sheet = ss.getSheetByName("Gallery");
+  if (!sheet) {
+    return ContentService.createTextOutput(JSON.stringify([]))
+                         .setMimeType(ContentService.MimeType.JSON);
+  }
+  
+  var data = sheet.getDataRange().getValues();
+  if (data.length <= 1) {
+    return ContentService.createTextOutput(JSON.stringify([]))
+                         .setMimeType(ContentService.MimeType.JSON);
+  }
+  
+  var items = [];
+  var headers = data[0];
+  for (var i = 1; i < data.length; i++) {
+    var row = data[i];
+    var item = {};
+    for (var j = 0; j < headers.length; j++) {
+      var key = headers[j].toLowerCase();
+      if (key === 'image url') key = 'img';
+      item[key] = row[j];
+    }
+    items.push(item);
+  }
+  
+  return ContentService.createTextOutput(JSON.stringify(items))
+                       .setMimeType(ContentService.MimeType.JSON);
+}
+
+function addGallery(data) {
+  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  var sheet = ss.getSheetByName("Gallery");
+  if (!sheet) {
+    sheet = ss.insertSheet("Gallery");
+  }
+  
+  if (sheet.getLastRow() === 0) {
+    sheet.appendRow(["ID", "Title", "Category", "Image URL"]);
+  }
+  
+  sheet.appendRow([data.id, data.title, data.category, data.img]);
+  
+  return ContentService.createTextOutput(JSON.stringify({ "status": "success" }))
+                       .setMimeType(ContentService.MimeType.JSON);
+}
+
+function deleteGallery(id) {
+  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  var sheet = ss.getSheetByName("Gallery");
+  if (sheet) {
+    var data = sheet.getDataRange().getValues();
+    for (var i = 1; i < data.length; i++) {
+      if (data[i][0] == id) {
+        sheet.deleteRow(i + 1);
+        break;
+      }
+    }
+  }
+  return ContentService.createTextOutput(JSON.stringify({ "status": "success" }))
+                       .setMimeType(ContentService.MimeType.JSON);
+}
+
+function addLead(data) {
+  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  var sheet = ss.getSheetByName("Inquiries");
+  if (!sheet) {
+    sheet = ss.insertSheet("Inquiries");
+  }
+  
+  if (sheet.getLastRow() === 0) {
+    sheet.appendRow(["ID", "Timestamp", "Name", "Email", "Phone", "Service Needed", "Message"]);
+  }
+  
+  sheet.appendRow([data.id, new Date(), data.name, data.email, data.phone, data.service, data.message]);
+  
+  return ContentService.createTextOutput(JSON.stringify({ "status": "success" }))
+                       .setMimeType(ContentService.MimeType.JSON);
+}
+
+function deleteLead(id) {
+  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  var sheet = ss.getSheetByName("Inquiries");
+  if (sheet) {
+    var data = sheet.getDataRange().getValues();
+    for (var i = 1; i < data.length; i++) {
+      if (data[i][0] == id) {
+        sheet.deleteRow(i + 1);
+        break;
+      }
+    }
+  }
+  return ContentService.createTextOutput(JSON.stringify({ "status": "success" }))
+                       .setMimeType(ContentService.MimeType.JSON);
+}
+
+function uploadToDrive(data) {
+  try {
+    var folderName = "PeoplePulse_Gallery";
+    var folder;
+    var folders = DriveApp.getFoldersByName(folderName);
+    if (folders.hasNext()) {
+      folder = folders.next();
+    } else {
+      folder = DriveApp.createFolder(folderName);
+    }
+    
+    var decoded = Utilities.base64Decode(data.base64);
+    var blob = Utilities.newBlob(decoded, data.mimeType, data.filename);
+    var file = folder.createFile(blob);
+    
+    try {
+      file.setSharing(DriveApp.Access.ANYONE_WITH_LINK, DriveApp.Permission.VIEW);
+    } catch(shareError) {
+      Logger.log("Sharing restriction: " + shareError.toString());
+    }
+    
+    var fileId = file.getId();
+    var directUrl = "https://lh3.googleusercontent.com/d/" + fileId;
+    
+    return ContentService.createTextOutput(JSON.stringify({ "status": "success", "url": directUrl }))
+                         .setMimeType(ContentService.MimeType.JSON);
+  } catch(error) {
+    return ContentService.createTextOutput(JSON.stringify({ "status": "error", "message": error.toString() }))
+                         .setMimeType(ContentService.MimeType.JSON);
+  }
+}</code></pre>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- ==========================================
+       ADMIN DASHBOARD LOGICAL BEHAVIORS
+       ========================================== -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+
+      // ==========================================
+      // A1. LOCK SCREEN & LOGIN SYSTEM
+      // ==========================================
+      const loginOverlay = document.getElementById('loginOverlay');
+      const loginForm = document.getElementById('loginForm');
+      const loginError = document.getElementById('loginError');
+      const usernameInput = document.getElementById('username');
+      const passwordInput = document.getElementById('password');
+      const logoutBtn = document.getElementById('logoutBtn');
+
+      // Check current session state on load
+      if (sessionStorage.getItem('admin_logged_in') === 'true') {
+        loginOverlay.style.display = 'none';
+        loadDashboardData();
+      }
+
+      loginForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        
+        const username = usernameInput.value.trim();
+        const password = passwordInput.value.trim();
+
+        if (username === 'admin' && password === 'admin') {
+          sessionStorage.setItem('admin_logged_in', 'true');
+          
+          // Smooth slide-out out of viewport
+          loginOverlay.style.opacity = '0';
+          loginOverlay.style.transform = 'scale(0.95)';
+          setTimeout(() => {
+            loginOverlay.style.display = 'none';
+          }, 350);
+          
+          loginError.style.display = 'none';
+          loadDashboardData();
+        } else {
+          // Display shake animation on card
+          loginError.style.display = 'block';
+          const card = document.querySelector('.login-card');
+          card.classList.add('shake');
+          setTimeout(() => {
+            card.classList.remove('shake');
+          }, 400);
+          passwordInput.value = '';
+        }
+      });
+
+      // Logout handler
+      logoutBtn.addEventListener('click', () => {
+        sessionStorage.removeItem('admin_logged_in');
+        loginOverlay.style.display = 'flex';
+        setTimeout(() => {
+          loginOverlay.style.opacity = '1';
+          loginOverlay.style.transform = 'scale(1)';
+        }, 50);
+        usernameInput.value = '';
+        passwordInput.value = '';
+      });
+
+      // ==========================================
+      // A2. SIDEBAR PANELS NAVIGATION
+      // ==========================================
+      const sidebarBtns = document.querySelectorAll('.sidebar-btn');
+      const adminPanels = document.querySelectorAll('.admin-panel');
+
+      sidebarBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          const targetPanel = btn.getAttribute('data-tab');
+
+          sidebarBtns.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+
+          adminPanels.forEach(panel => {
+            panel.classList.remove('active');
+            if (panel.getAttribute('id') === targetPanel) {
+              panel.classList.add('active');
+            }
+          });
+        });
+      });
+
+      // ==========================================
+      // A3. LIVE CARD INPUT PREVIEWS
+      // ==========================================
+      
+      // Live Article Previews
+      const artTitleInput = document.getElementById('artTitle');
+      const artCatInput = document.getElementById('artCategory');
+      const artImgInput = document.getElementById('artImage');
+      const artDescInput = document.getElementById('artDesc');
+
+      const prevArtTitle = document.getElementById('prevArtTitle');
+      const prevArtCat = document.getElementById('prevArtCat');
+      const prevArtImg = document.getElementById('prevArtImg');
+      const prevArtDesc = document.getElementById('prevArtDesc');
+
+      const updateArtPreview = () => {
+        prevArtTitle.textContent = artTitleInput.value.trim() !== '' ? artTitleInput.value.trim() : 'Enter Title Above';
+        prevArtCat.textContent = artCatInput.value.trim() !== '' ? artCatInput.value.trim() : 'IT Insights';
+        prevArtDesc.textContent = artDescInput.value.trim() !== '' ? artDescInput.value.trim() : 'Your summary description will display here dynamically as you write...';
+        if (artImgInput.value.trim() !== '') {
+          prevArtImg.setAttribute('src', artImgInput.value.trim());
+        } else {
+          prevArtImg.setAttribute('src', 'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=500&q=80');
+        }
+      };
+
+      artTitleInput.addEventListener('input', updateArtPreview);
+      artCatInput.addEventListener('input', updateArtPreview);
+      artImgInput.addEventListener('input', updateArtPreview);
+      artDescInput.addEventListener('input', updateArtPreview);
+
+      // Live Gallery Previews
+      const galTitleInput = document.getElementById('galTitle');
+      const galCatInput = document.getElementById('galCategory');
+      const galImgInput = document.getElementById('galImage');
+
+      const prevGalTitle = document.getElementById('prevGalTitle');
+      const prevGalCat = document.getElementById('prevGalCat');
+      const prevGalImg = document.getElementById('prevGalImg');
+
+      const updateGalPreview = () => {
+        prevGalTitle.textContent = galTitleInput.value.trim() !== '' ? galTitleInput.value.trim() : 'ISO Celebration';
+        prevGalCat.textContent = galCatInput.value === 'office' ? 'Office & Culture' : (galCatInput.value === 'events' ? 'Corporate Events' : (galCatInput.value === 'team' ? 'Team Bonding' : 'Achievements'));
+        if (galImgInput.value.trim() !== '') {
+          prevGalImg.setAttribute('src', galImgInput.value.trim());
+        } else {
+          prevGalImg.setAttribute('src', 'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=600&q=80');
+        }
+      };
+
+      galTitleInput.addEventListener('input', updateGalPreview);
+      galCatInput.addEventListener('change', updateGalPreview);
+      galImgInput.addEventListener('input', updateGalPreview);
+
+      const galFileInput = document.getElementById('galFileInput');
+      galFileInput.addEventListener('change', () => {
+        if (galFileInput.files.length > 0) {
+          const file = galFileInput.files[0];
+          const reader = new FileReader();
+          reader.onload = (e) => {
+            prevGalImg.setAttribute('src', e.target.result);
+          };
+          reader.readAsDataURL(file);
+        } else {
+          updateGalPreview();
+        }
+      });
+
+      // ==========================================
+      // A4. DASHBOARD DATA LOADER & FORMS HANDLERS
+      // ==========================================
+      
+      // Clear forms
+      const resetArtForm = () => {
+        document.getElementById('articleForm').reset();
+        updateArtPreview();
+      };
+      
+      const resetGalForm = () => {
+        document.getElementById('galleryForm').reset();
+        updateGalPreview();
+      };
+
+      function loadDashboardData() {
+        const googleSheetsUrl = localStorage.getItem('google_sheets_url');
+        const galleryItems = JSON.parse(localStorage.getItem('gallery_items')) || [];
+        const leads = JSON.parse(localStorage.getItem('contact_submissions')) || [];
+
+        // 1. Update Gallery & Leads overview counts
+        document.getElementById('stat-images').textContent = galleryItems.length;
+        document.getElementById('stat-leads').textContent = leads.length;
+
+        // Render articles list helper
+        const displayArticlesList = (articles) => {
+          document.getElementById('stat-articles').textContent = articles.length;
+          const articlesList = document.getElementById('articlesList');
+          articlesList.innerHTML = '';
+          articles.forEach(article => {
+            const item = document.createElement('div');
+            item.className = 'manage-item';
+            item.innerHTML = `
+              <div class="manage-item-info">
+                <img class="manage-item-thumb" src="${article.img}" alt="Thumb">
+                <div class="manage-item-text">
+                  <h4>${article.title}</h4>
+                  <p>${article.category} • ${article.meta.split('•')[0]}</p>
+                </div>
+              </div>
+              <button class="btn-danger delete-art-btn" data-id="${article.id}">Delete</button>
+            `;
+            articlesList.appendChild(item);
+          });
+          bindDeleteButtons();
+        };
+
+        // Load Articles from Google Sheet or Cache fallback
+        if (googleSheetsUrl && googleSheetsUrl.trim() !== '') {
+          fetch(`${googleSheetsUrl}?action=get_articles`)
+            .then(res => res.json())
+            .then(remoteArticles => {
+              if (Array.isArray(remoteArticles) && remoteArticles.length > 0) {
+                localStorage.setItem('blog_articles', JSON.stringify(remoteArticles));
+                displayArticlesList(remoteArticles);
+              } else {
+                const articles = JSON.parse(localStorage.getItem('blog_articles')) || [];
+                displayArticlesList(articles);
+              }
+            })
+            .catch(err => {
+              console.warn('Could not load remote articles. Using cached list:', err);
+              const articles = JSON.parse(localStorage.getItem('blog_articles')) || [];
+              displayArticlesList(articles);
+            });
+        } else {
+          const articles = JSON.parse(localStorage.getItem('blog_articles')) || [];
+          displayArticlesList(articles);
+        }
+
+        // 3. Manage Gallery list
+        const galleryList = document.getElementById('galleryList');
+        galleryList.innerHTML = '';
+        galleryItems.forEach(photo => {
+          const item = document.createElement('div');
+          item.className = 'manage-item';
+          item.innerHTML = `
+            <div class="manage-item-info">
+              <img class="manage-item-thumb" src="${photo.img}" alt="Thumb">
+              <div class="manage-item-text">
+                <h4>${photo.title}</h4>
+                <p>${photo.category.toUpperCase()}</p>
+              </div>
+            </div>
+            <button class="btn-danger delete-gal-btn" data-id="${photo.id}">Delete</button>
+          `;
+          galleryList.appendChild(item);
+        });
+
+        // 4. Inquiries Log List
+        renderLeadsTable(leads);
+      }
+
+      // Render leads table helper with filters
+      function renderLeadsTable(leads) {
+        const tableBody = document.getElementById('leadsTableBody');
+        const emptyState = document.getElementById('leadsEmptyState');
+        const searchTerm = document.getElementById('leadsSearch').value.toLowerCase().trim();
+        const selectedFilter = document.getElementById('leadsFilter').value;
+
+        // Apply filters
+        const filteredLeads = leads.filter(lead => {
+          const matchesSearch = lead.name.toLowerCase().includes(searchTerm) || 
+                                lead.email.toLowerCase().includes(searchTerm) || 
+                                lead.message.toLowerCase().includes(searchTerm) || 
+                                lead.phone.includes(searchTerm);
+          
+          const matchesFilter = selectedFilter === 'all' || lead.service === selectedFilter;
+          
+          return matchesSearch && matchesFilter;
+        });
+
+        tableBody.innerHTML = '';
+        if (filteredLeads.length === 0) {
+          emptyState.style.display = 'block';
+        } else {
+          emptyState.style.display = 'none';
+          filteredLeads.forEach(lead => {
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+              <td style="font-weight:600;">${lead.date}</td>
+              <td style="font-weight:700; color:var(--primary);">${lead.name}</td>
+              <td>
+                <div style="font-weight:500;">${lead.email}</div>
+                <div style="font-size:0.8rem; color:var(--text-muted); margin-top:2px;">${lead.phone}</div>
+              </td>
+              <td><span class="badge-service">${lead.service}</span></td>
+              <td style="font-size:0.85rem; line-height:1.4; color:var(--text-muted);">${lead.message}</td>
+              <td style="text-align:center;"><button class="btn-danger delete-lead-btn" data-id="${lead.id}" style="padding:4px 8px;">&times;</button></td>
+            `;
+            tableBody.appendChild(tr);
+          });
+        }
+        bindDeleteButtons();
+      }
+
+      // Bind dynamic delete buttons
+      function bindDeleteButtons() {
+        const googleSheetsUrl = localStorage.getItem('google_sheets_url');
+
+        // Delete Articles
+        document.querySelectorAll('.delete-art-btn').forEach(btn => {
+          btn.replaceWith(btn.cloneNode(true));
+        });
+        document.querySelectorAll('.delete-art-btn').forEach(btn => {
+          btn.addEventListener('click', () => {
+            const id = btn.getAttribute('data-id');
+            let articles = JSON.parse(localStorage.getItem('blog_articles')) || [];
+            articles = articles.filter(a => a.id !== id);
+            localStorage.setItem('blog_articles', JSON.stringify(articles));
+            
+            // Dispatch Delete to Sheets
+            if (googleSheetsUrl && googleSheetsUrl.trim() !== '') {
+              fetch(googleSheetsUrl, {
+                method: 'POST',
+                headers: { 'Content-Type': 'text/plain' },
+                body: JSON.stringify({
+                  action: 'delete_article',
+                  id: id
+                })
+              }).catch(err => console.error('Failed to delete remote article row:', err));
+            }
+            
+            loadDashboardData();
+          });
+        });
+
+        // Delete Gallery items
+        document.querySelectorAll('.delete-gal-btn').forEach(btn => {
+          btn.replaceWith(btn.cloneNode(true));
+        });
+        document.querySelectorAll('.delete-gal-btn').forEach(btn => {
+          btn.addEventListener('click', () => {
+            const id = btn.getAttribute('data-id');
+            let galleryItems = JSON.parse(localStorage.getItem('gallery_items')) || [];
+            galleryItems = galleryItems.filter(item => item.id !== id);
+            localStorage.setItem('gallery_items', JSON.stringify(galleryItems));
+            
+            // Dispatch Delete to Sheets
+            if (googleSheetsUrl && googleSheetsUrl.trim() !== '') {
+              fetch(googleSheetsUrl, {
+                method: 'POST',
+                headers: { 'Content-Type': 'text/plain' },
+                body: JSON.stringify({
+                  action: 'delete_gallery',
+                  id: id
+                })
+              }).catch(err => console.error('Failed to delete remote gallery row:', err));
+            }
+
+            loadDashboardData();
+          });
+        });
+
+        // Delete Individual Leads
+        document.querySelectorAll('.delete-lead-btn').forEach(btn => {
+          btn.replaceWith(btn.cloneNode(true));
+        });
+        document.querySelectorAll('.delete-lead-btn').forEach(btn => {
+          btn.addEventListener('click', () => {
+            const id = btn.getAttribute('data-id');
+            let leads = JSON.parse(localStorage.getItem('contact_submissions')) || [];
+            leads = leads.filter(l => l.id !== id);
+            localStorage.setItem('contact_submissions', JSON.stringify(leads));
+            
+            // Dispatch Delete to Sheets
+            if (googleSheetsUrl && googleSheetsUrl.trim() !== '') {
+              fetch(googleSheetsUrl, {
+                method: 'POST',
+                headers: { 'Content-Type': 'text/plain' },
+                body: JSON.stringify({
+                  action: 'delete_lead',
+                  id: id
+                })
+              }).catch(err => console.error('Failed to delete remote lead row:', err));
+            }
+
+            loadDashboardData();
+          });
+        });
+      }
+
+      // Search & Filters triggers on Leads Table
+      document.getElementById('leadsSearch').addEventListener('input', () => {
+        const leads = JSON.parse(localStorage.getItem('contact_submissions')) || [];
+        renderLeadsTable(leads);
+      });
+
+      document.getElementById('leadsFilter').addEventListener('change', () => {
+        const leads = JSON.parse(localStorage.getItem('contact_submissions')) || [];
+        renderLeadsTable(leads);
+      });
+
+      // Form Submits: Publish Article
+      const articleForm = document.getElementById('articleForm');
+      articleForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        
+        const articles = JSON.parse(localStorage.getItem('blog_articles')) || [];
+        const newArt = {
+          id: "art_" + Date.now(),
+          title: document.getElementById('artTitle').value.trim(),
+          category: document.getElementById('artCategory').value.trim(),
+          meta: `Published ${new Date().toLocaleDateString('en-US', {month: 'long', day: 'numeric', year: 'numeric'})} • By Admin Sourcing`,
+          img: document.getElementById('artImage').value.trim(),
+          desc: document.getElementById('artDesc').value.trim(),
+          content: document.getElementById('artContent').value.trim()
+        };
+
+        articles.unshift(newArt); // Add new article to beginning
+        localStorage.setItem('blog_articles', JSON.stringify(articles));
+        
+        // Dispatch article to Google Sheets Webhook
+        const googleSheetsUrl = localStorage.getItem('google_sheets_url');
+        let sheetsDispatch = Promise.resolve();
+
+        if (googleSheetsUrl && googleSheetsUrl.trim() !== '') {
+          sheetsDispatch = fetch(googleSheetsUrl, {
+            method: 'POST',
+            headers: { 'Content-Type': 'text/plain' },
+            body: JSON.stringify({
+              action: 'add_article',
+              id: newArt.id,
+              title: newArt.title,
+              category: newArt.category,
+              meta: newArt.meta,
+              img: newArt.img,
+              desc: newArt.desc,
+              content: newArt.content
+            })
+          }).catch(err => console.error('Failed to dispatch article to Sheets:', err));
+        }
+
+        sheetsDispatch.finally(() => {
+          alert('Article published successfully!');
+          resetArtForm();
+          loadDashboardData();
+        });
+      });
+
+      // Form Submits: Upload Photo (Support local files to Google Drive)
+      const galleryForm = document.getElementById('galleryForm');
+      galleryForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        
+        const galTitle = document.getElementById('galTitle').value.trim();
+        const galCategory = document.getElementById('galCategory').value;
+        const galImageInput = document.getElementById('galImage');
+        const galFileInput = document.getElementById('galFileInput');
+        const submitBtn = document.getElementById('galSubmitBtn');
+        const googleSheetsUrl = localStorage.getItem('google_sheets_url');
+
+        const saveGalleryLocally = (imgUrl) => {
+          const galleryItems = JSON.parse(localStorage.getItem('gallery_items')) || [];
+          const newPhoto = {
+            id: "gal_" + Date.now(),
+            title: galTitle,
+            category: galCategory,
+            img: imgUrl
+          };
+          galleryItems.push(newPhoto);
+          localStorage.setItem('gallery_items', JSON.stringify(galleryItems));
+
+          // Save photo remotely inside Sheet 3
+          if (googleSheetsUrl && googleSheetsUrl.trim() !== '') {
+            fetch(googleSheetsUrl, {
+              method: 'POST',
+              headers: { 'Content-Type': 'text/plain' },
+              body: JSON.stringify({
+                action: 'add_gallery',
+                id: newPhoto.id,
+                title: newPhoto.title,
+                category: newPhoto.category,
+                img: newPhoto.img
+              })
+            }).catch(err => console.error('Failed to save remote gallery row:', err));
+          }
+
+          alert('Photo uploaded successfully!');
+          resetGalForm();
+          loadDashboardData();
+        };
+
+        // Check if local file is selected
+        if (galFileInput.files.length > 0) {
+          const file = galFileInput.files[0];
+          
+          if (!googleSheetsUrl || googleSheetsUrl.trim() === '') {
+            alert('Please configure your Google Sheets Webhook URL first under "Google Sheets Config" tab to upload local files directly to Google Drive!');
+            return;
+          }
+
+          // Active visual loading state on submit button
+          const originalText = submitBtn.innerHTML;
+          submitBtn.innerHTML = `
+            Uploading to Google Drive...
+            <svg style="width:20px; height:20px; animation: spin 1s linear infinite; display: inline-block; vertical-align: middle; margin-left: 8px;" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 4v5h.582m15.356 2A8.001 8.001 0 1121.21 8H18.9"></path>
+            </svg>
+          `;
+          submitBtn.setAttribute('disabled', 'disabled');
+
+          const reader = new FileReader();
+          reader.onload = () => {
+            const base64Content = reader.result.split(',')[1];
+            
+            // Post local image to Google Drive Webhook
+            fetch(googleSheetsUrl, {
+              method: 'POST',
+              headers: { 'Content-Type': 'text/plain' },
+              body: JSON.stringify({
+                action: 'upload_to_drive',
+                base64: base64Content,
+                filename: file.name,
+                mimeType: file.type
+              })
+            })
+            .then(res => {
+              if (!res.ok) {
+                throw new Error(`HTTP Error Status: ${res.status}`);
+              }
+              return res.text();
+            })
+            .then(text => {
+              let driveRes;
+              try {
+                driveRes = JSON.parse(text);
+              } catch (e) {
+                console.error('Non-JSON response from Apps Script:', text);
+                if (text.includes('<!DOCTYPE') || text.includes('<html')) {
+                  throw new Error("Apps Script returned an HTML page instead of JSON. This usually means the Web App is either not deployed properly, requires authorization, or the URL is incorrect. Response snippet:\n\n" + text.replace(/<[^>]*>/g, '').substring(0, 300));
+                } else {
+                  throw new Error(`Invalid JSON response: ${text.substring(0, 200)}`);
+                }
+              }
+              
+              submitBtn.innerHTML = originalText;
+              submitBtn.removeAttribute('disabled');
+              
+              if (driveRes.status === 'success') {
+                saveGalleryLocally(driveRes.url);
+              } else {
+                alert('Failed to upload image to Google Drive: ' + (driveRes.message || 'Unknown error'));
+              }
+            })
+            .catch(err => {
+              submitBtn.innerHTML = originalText;
+              submitBtn.removeAttribute('disabled');
+              console.error('Drive upload failed:', err);
+              alert('Error uploading to Google Drive:\n\n' + err.message + '\n\nActive Web App URL tried:\n' + googleSheetsUrl + '\n\nPlease ensure your Web App URL is correct, access is set to "Anyone", and you have authorized Google Drive permissions in Apps Script.');
+            });
+          };
+          reader.readAsDataURL(file);
+        } else if (galImageInput.value.trim() !== '') {
+          // Fallback to pasted image link URL
+          saveGalleryLocally(galImageInput.value.trim());
+        } else {
+          alert('Please paste an image URL or choose a local file to upload.');
+        }
+      });
+
+      // Clear all inquiries
+      const btnClearLeads = document.getElementById('btnClearLeads');
+      btnClearLeads.addEventListener('click', () => {
+        if (confirm('Are you absolutely sure you want to delete all Inquiry Log logs? This cannot be undone.')) {
+          localStorage.setItem('contact_submissions', JSON.stringify([]));
+          loadDashboardData();
+        }
+      });
+
+      // Export Leads to CSV File
+      const btnExportCSV = document.getElementById('btnExportCSV');
+      btnExportCSV.addEventListener('click', () => {
+        const leads = JSON.parse(localStorage.getItem('contact_submissions')) || [];
+        if (leads.length === 0) {
+          alert('There are no inquiries logged to export.');
+          return;
+        }
+
+        let csvContent = "data:text/csv;charset=utf-8,";
+        // CSV Header
+        csvContent += "Date,Name,Email,Phone,Service Required,Message\n";
+        
+        leads.forEach(lead => {
+          // Escape quotes inside text to maintain CSV syntax
+          const name = `"${lead.name.replace(/"/g, '""')}"`;
+          const email = `"${lead.email.replace(/"/g, '""')}"`;
+          const phone = `"${lead.phone.replace(/"/g, '""')}"`;
+          const service = `"${lead.service.replace(/"/g, '""')}"`;
+          const msg = `"${lead.message.replace(/"/g, '""')}"`;
+          csvContent += `"${lead.date}",${name},${email},${phone},${service},${msg}\n`;
+        });
+
+        // Generate download action trigger
+        const encodedUri = encodeURI(csvContent);
+        const link = document.createElement("a");
+        link.setAttribute("href", encodedUri);
+        link.setAttribute("download", `Inquiries_Report_${Date.now()}.csv`);
+        document.body.appendChild(link); // Required for Firefox support
+        link.click();
+        document.body.removeChild(link);
+      });
+
+      // ==========================================
+      // A5. INTEGRATIONS & COPY CODES CONTROLS
+      // ==========================================
+      
+      // Load saved Spreadsheet webhook url on load
+      const sheetsUrlInput = document.getElementById('sheetsUrl');
+      const savedSheetsUrl = localStorage.getItem('google_sheets_url');
+      if (savedSheetsUrl) {
+        sheetsUrlInput.value = savedSheetsUrl;
+      }
+
+      // Save Sheets webhook url
+      const integrationForm = document.getElementById('integrationForm');
+      integrationForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const url = sheetsUrlInput.value.trim();
+        
+        if (!url.includes('script.google.com/macros/s/') || !url.includes('/exec')) {
+          const proceed = confirm('Warning: The URL you entered does not look like a Google Apps Script Web App URL.\n\nIt should look like:\nhttps://script.google.com/macros/s/.../exec\n\nDid you copy the Google Sheet page URL by mistake? If yes, click Cancel and paste the Web App URL from the deployment screen. If you are sure this URL is correct, click OK to save.');
+          if (!proceed) return;
+        }
+        
+        localStorage.setItem('google_sheets_url', url);
+        alert('Google Sheets Webhook URL saved successfully!');
+        loadDashboardData();
+      });
+
+      // Apps Script Code Copy trigger
+      const btnCopyCode = document.getElementById('btnCopyCode');
+      btnCopyCode.addEventListener('click', () => {
+        const codeText = document.getElementById('scriptCode').textContent;
+        navigator.clipboard.writeText(codeText)
+          .then(() => {
+            btnCopyCode.textContent = 'Copied!';
+            btnCopyCode.style.backgroundColor = 'var(--success)';
+            btnCopyCode.style.borderColor = 'var(--success)';
+            
+            setTimeout(() => {
+              btnCopyCode.textContent = 'Copy Code';
+              btnCopyCode.style.backgroundColor = '';
+              btnCopyCode.style.borderColor = '';
+            }, 3000);
+          })
+          .catch(err => {
+            console.error('Clipboard copy failed:', err);
+            alert('Failed to copy. Please select the code manually.');
+          });
+      });
+
+    });
+  </script>
+</body>
+</html>
