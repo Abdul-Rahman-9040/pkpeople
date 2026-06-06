@@ -13,7 +13,7 @@
   <link rel="icon" type="image/x-icon" href="assets/images/logo.jpeg">
   
   <!-- Stylesheet -->
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.css?v=1.2">
   
   <!-- JavaScript (Deferred) -->
   <script src="script.js" defer></script>
@@ -36,20 +36,95 @@
     <div class="container">
       <a href="#home" class="logo">
         <img src="assets/images/logo.jpeg" alt="Placement Keepers People Pulse Logo">
-        <div class="logo-text">
-          <span>PLACEMENT KEEPERS</span>
-          <span>PEOPLE PULSE</span>
-        </div>
       </a>
       
       <nav id="nav-menu" class="nav-menu">
-        <a href="#home" class="nav-link active">Home</a>
-        <a href="#about" class="nav-link">About Us</a>
-        <a href="#services" class="nav-link">Services</a>
-        <a href="#team" class="nav-link">Our Team</a>
-        <a href="#gallery" class="nav-link">Gallery</a>
-        <a href="#blog" class="nav-link">Insights</a>
-        <a href="#contact" class="nav-link">Contact</a>
+        <div class="nav-item">
+          <a href="#home" class="nav-link active">Home</a>
+        </div>
+        <div class="nav-item has-dropdown">
+          <a href="#about" class="nav-link dropdown-trigger">
+            About Us
+            <svg class="dropdown-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7" />
+            </svg>
+          </a>
+          <div class="dropdown-menu">
+            <a href="#about" class="dropdown-item">
+              <div class="dropdown-item-icon">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
+              </div>
+              <div class="dropdown-item-content">
+                <span class="dropdown-item-title">Our Profile</span>
+                <span class="dropdown-item-desc">Who we are & our vision</span>
+              </div>
+            </a>
+            <a href="#team" class="dropdown-item">
+              <div class="dropdown-item-icon">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+              </div>
+              <div class="dropdown-item-content">
+                <span class="dropdown-item-title">Corporate Leadership</span>
+                <span class="dropdown-item-desc">Meet our co-founders & team</span>
+              </div>
+            </a>
+            <a href="#testimonials" class="dropdown-item">
+              <div class="dropdown-item-icon">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg>
+              </div>
+              <div class="dropdown-item-content">
+                <span class="dropdown-item-title">Testimonials</span>
+                <span class="dropdown-item-desc">What our clients say about us</span>
+              </div>
+            </a>
+            <a href="#gallery" class="dropdown-item">
+              <div class="dropdown-item-icon">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+              </div>
+              <div class="dropdown-item-content">
+                <span class="dropdown-item-title">Office Gallery</span>
+                <span class="dropdown-item-desc">Glimpse of our work environment</span>
+              </div>
+            </a>
+          </div>
+        </div>
+        <div class="nav-item has-dropdown">
+          <a href="#services" class="nav-link dropdown-trigger">
+            Services
+            <svg class="dropdown-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7" />
+            </svg>
+          </a>
+          <div class="dropdown-menu">
+            <a href="#services" class="dropdown-item">
+              <div class="dropdown-item-icon">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+              </div>
+              <div class="dropdown-item-content">
+                <span class="dropdown-item-title">Recruitment Services</span>
+                <span class="dropdown-item-desc">Staffing, IT augmentation & payroll</span>
+              </div>
+            </a>
+            <a href="#industries" class="dropdown-item">
+              <div class="dropdown-item-icon">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 002 2h2a2.5 2.5 0 002.5-2.5V9a2 2 0 00-2-2h-1.07a2 2 0 01-1.414-.586l-.902-.902A2 2 0 0011.54 3H8.382a2 2 0 00-1.328.508L5.3 5.382A2 2 0 005 6.764L5 8"/></svg>
+              </div>
+              <div class="dropdown-item-content">
+                <span class="dropdown-item-title">Industries We Serve</span>
+                <span class="dropdown-item-desc">Manufacturing, Auto, Tech & Logistics</span>
+              </div>
+            </a>
+          </div>
+        </div>
+        <div class="nav-item">
+          <a href="#careers" class="nav-link">Careers</a>
+        </div>
+        <div class="nav-item">
+          <a href="#blog" class="nav-link">Insights</a>
+        </div>
+        <div class="nav-item">
+          <a href="#contact" class="nav-link">Contact</a>
+        </div>
       </nav>
       
       <div class="nav-actions">
@@ -63,7 +138,7 @@
           </svg>
         </button>
         
-        <a href="#contact" class="btn btn-primary btn-sm" style="padding: 10px 20px; font-size: 0.9rem; display: none;">Get in Touch</a>
+        <a href="#contact" class="btn btn-primary btn-sm header-cta" style="padding: 10px 20px; font-size: 0.9rem;">Get in Touch</a>
         
         <!-- Hamburger Menu -->
         <button id="menuBtn" class="menu-btn" aria-label="Toggle mobile menu">
@@ -267,84 +342,94 @@
   </section>
 
   <!-- ==========================================
-       SERVICES SECTION
+       SPECIALIZED RECRUITMENT SERVICES SECTION
        ========================================== -->
-  <section id="services" class="section-padding">
+  <section id="services" class="section-padding services-section">
     <div class="container">
       <div class="section-header reveal reveal-slide-up">
         <div class="section-tag">Our Services</div>
-        <h2 class="section-title">Comprehensive <span>Workforce Solutions</span> Tailored For You</h2>
-        <p class="section-subtitle">We handle the full recruitment spectrum, letting you focus on scaling operations and achieving core business growth.</p>
+        <h2 class="section-title">Specialized <span>Recruitment Services</span></h2>
+        <p class="section-subtitle">We deliver industry-leading workforce solutions designed to meet the exact talent needs of modern corporations.</p>
       </div>
       
       <div class="modern-services-container">
-        <!-- Left Side: Sleek Interactive List -->
+        <!-- Left Side: Interactive Numbers List (01 to 07) -->
         <div class="services-list-sidebar reveal reveal-slide-left">
-          <div class="service-list-item active" data-service-index="0">
+          <div class="service-list-item active" data-index="0">
             <span class="service-list-num">01</span>
             <div class="service-list-info">
-              <h3>Permanent Staffing / Direct Hire</h3>
-              <p>Place high-caliber professionals for full-time executive roles.</p>
+              <h3>Permanent Staffing</h3>
+              <p>Direct placement for long-term growth.</p>
               <div class="timer-progress-bar"><div class="timer-progress"></div></div>
             </div>
             <div class="service-list-arrow">&rarr;</div>
           </div>
           
-          <div class="service-list-item" data-service-index="1">
+          <div class="service-list-item" data-index="1">
             <span class="service-list-num">02</span>
             <div class="service-list-info">
-              <h3>Contract Staffing & Support</h3>
-              <p>Flexible staffing models designed to augment your teams temporarily.</p>
+              <h3>Contract Staffing</h3>
+              <p>Flexible short & long-term personnel.</p>
               <div class="timer-progress-bar"><div class="timer-progress"></div></div>
             </div>
             <div class="service-list-arrow">&rarr;</div>
           </div>
           
-          <div class="service-list-item" data-service-index="2">
+          <div class="service-list-item" data-index="2">
             <span class="service-list-num">03</span>
             <div class="service-list-info">
               <h3>Bulk & Volume Hiring</h3>
-              <p>Rapidly build production-ready staff or customer support teams.</p>
+              <p>Rapid deployment for mass campaigns.</p>
               <div class="timer-progress-bar"><div class="timer-progress"></div></div>
             </div>
             <div class="service-list-arrow">&rarr;</div>
           </div>
           
-          <div class="service-list-item" data-service-index="3">
+          <div class="service-list-item" data-index="3">
             <span class="service-list-num">04</span>
             <div class="service-list-info">
               <h3>IT Staff Augmentation</h3>
-              <p>Plug specialized technical gaps with immediate technical talent.</p>
+              <p>Skilled tech professionals on demand.</p>
               <div class="timer-progress-bar"><div class="timer-progress"></div></div>
             </div>
             <div class="service-list-arrow">&rarr;</div>
           </div>
           
-          <div class="service-list-item" data-service-index="4">
+          <div class="service-list-item" data-index="4">
             <span class="service-list-num">05</span>
             <div class="service-list-info">
-              <h3>Payroll & Compliance Management</h3>
-              <p>We manage payroll processing, statutory benefits, and local compliance.</p>
+              <h3>Payroll & Compliance</h3>
+              <p>Statutory management & salary processing.</p>
               <div class="timer-progress-bar"><div class="timer-progress"></div></div>
             </div>
             <div class="service-list-arrow">&rarr;</div>
           </div>
           
-          <div class="service-list-item" data-service-index="5">
+          <div class="service-list-item" data-index="5">
             <span class="service-list-num">06</span>
             <div class="service-list-info">
-              <h3>Internships & Campus Placement</h3>
-              <p>Connecting fresh engineering and business talent with industry.</p>
+              <h3>Internship & Placement</h3>
+              <p>Fresh grads & trainees matching.</p>
+              <div class="timer-progress-bar"><div class="timer-progress"></div></div>
+            </div>
+            <div class="service-list-arrow">&rarr;</div>
+          </div>
+          
+          <div class="service-list-item" data-index="6">
+            <span class="service-list-num">07</span>
+            <div class="service-list-info">
+              <h3>Campus Recruitment</h3>
+              <p>Hiring drives and university relationships.</p>
               <div class="timer-progress-bar"><div class="timer-progress"></div></div>
             </div>
             <div class="service-list-arrow">&rarr;</div>
           </div>
         </div>
 
-        <!-- Right Side: Spotlight Detail Panel -->
+        <!-- Right Side: Spotlight Showcase Detail Card -->
         <div class="services-spotlight reveal reveal-slide-right">
           <div class="service-spotlight-card glass-panel" id="serviceSpotlightCard">
-            <!-- Populated dynamically by JavaScript -->
+            <!-- Rendered dynamically by JavaScript -->
           </div>
         </div>
       </div>
@@ -354,7 +439,7 @@
   <!-- ==========================================
        INDUSTRIES WE SERVE SECTION
        ========================================== -->
-  <section class="section-padding industries-section">
+  <section id="industries" class="section-padding industries-section">
     <div class="container">
       <div class="section-header reveal reveal-slide-up">
         <div class="section-tag">Industries We Serve</div>
@@ -491,67 +576,145 @@
       </div>
       
       <!-- Other Team Members Subtitle -->
-      <h3 class="team-sub-header reveal reveal-slide-up">Our Core Management & Innovators</h3>
+      <h3 class="team-sub-header reveal reveal-slide-up">Companies We Support</h3>
       
-      <!-- Core Team Grid -->
-      <div class="team-grid">
-        <!-- Team Member 1: Mr. Jeeva I -->
-        <div class="team-card glass-panel reveal reveal-slide-up reveal-stagger-1">
-          <div class="team-img-wrapper">
-            <img src="assets/images/Mr. Jeeva I -Sr. Manager (Automobile & Manufacturing Industry).jpeg" alt="Mr. Jeeva I - Sr. Manager">
+      <!-- Clients Logo Carousel Track -->
+      <div class="clients-slider reveal reveal-fade-in" style="margin-top: 30px;">
+        <div class="clients-track">
+          <!-- 1. TVS Motor Company -->
+          <div class="client-logo-wrapper">
+            <img src="assets/images/TVS_Motor_Company-Logo.wine.svg" alt="TVS Motor Company">
           </div>
-          <h4 class="team-member-name">Mr. Jeeva I</h4>
-          <div class="team-member-title">Sr. Manager (Automobile & Manufacturing)</div>
-          <p class="team-member-desc">Specializes in technical manpower sourcing for heavy industrial assembly lines, process systems, and fabrication operations.</p>
-          <span class="team-member-exp">8+ Years Experience</span>
-        </div>
-        
-        <!-- Team Member 2: Miss. Pooja R -->
-        <div class="team-card glass-panel reveal reveal-slide-up reveal-stagger-2">
-          <div class="team-img-wrapper">
-            <img src="assets/images/Miss. Pooja R - technical Head.jpeg" alt="Miss. Pooja R - Technical Head">
+          <!-- 2. Indo-MIM Private Limited -->
+          <div class="client-logo-wrapper">
+            <img src="assets/images/indo-mim-logo-vector.svg" alt="Indo-MIM Private Limited">
           </div>
-          <h4 class="team-member-name">Miss. Pooja R</h4>
-          <div class="team-member-title">Technical Recruitment Head</div>
-          <p class="team-member-desc">Leads the IT Staff Augmentation vertical, analyzing complex skills lists to find senior developers and cloud architects.</p>
-          <span class="team-member-exp">7+ Years Experience</span>
-        </div>
-        
-        <!-- Team Member 3: Miss. Lavanya -->
-        <div class="team-card glass-panel reveal reveal-slide-up reveal-stagger-3">
-          <div class="team-img-wrapper">
-            <img src="assets/images/Miss. Lavanya - Manager.jpeg" alt="Miss. Lavanya - Manager">
+          <!-- 3. Tata Group -->
+          <div class="client-logo-wrapper">
+            <img src="assets/images/tata-logo.svg" alt="Tata Group">
           </div>
-          <h4 class="team-member-name">Miss. Lavanya</h4>
-          <div class="team-member-title">Manager - Operations & Client Relations</div>
-          <p class="team-member-desc">Directs HR operations, structured onboarding workflows, payroll management pipelines, and key corporate client accounts.</p>
-          <span class="team-member-exp">6+ Years Experience</span>
-        </div>
-        
-        <!-- Team Member 4: Mr. Ajith -->
-        <div class="team-card glass-panel reveal reveal-slide-up reveal-stagger-4">
-          <div class="team-img-wrapper">
-            <img src="assets/images/Mr. Ajith- Manager Recruitment.jpeg" alt="Mr. Ajith - Manager Recruitment">
+          <!-- 4. TAFE -->
+          <div class="client-logo-wrapper">
+            <img src="assets/images/TAFE_id_3QC4cVb_1.svg" alt="TAFE - Tractors and Farm Equipment Limited">
           </div>
-          <h4 class="team-member-name">Mr. Ajith</h4>
-          <div class="team-member-title">Manager - Sourcing & Placements</div>
-          <p class="team-member-desc">Manages active college campus partnerships, training programs, internship cycles, and large-scale bulk recruitment events.</p>
-          <span class="team-member-exp">5+ Years Experience</span>
-        </div>
-        
-        <!-- Team Member 5: Mr. Bhuvan Shet -->
-        <div class="team-card glass-panel reveal reveal-slide-up reveal-stagger-5">
-          <div class="team-img-wrapper">
-            <img src="assets/images/Mr. Bhuvan Shet - Software Developer.jpeg" alt="Mr. Bhuvan Shet - Software Developer">
+          <!-- 5. Palanisami Constructions Private Limited -->
+          <div class="client-logo-wrapper">
+            <img src="assets/images/palanisami.svg" alt="Palanisami Constructions Private Limited">
           </div>
-          <h4 class="team-member-name">Mr. Bhuvan Shet</h4>
-          <div class="team-member-title">Senior Software Developer</div>
-          <p class="team-member-desc">Creates and scales internal web tools, search engines, and smart algorithms to link corporate roles with candidate profiles.</p>
-          <span class="team-member-exp">4+ Years Experience</span>
+          <!-- 6. Royal Enfield -->
+          <div class="client-logo-wrapper">
+            <img src="assets/images/Royal_Enfield_idd-waL4jJ_0.svg" alt="Royal Enfield">
+          </div>
+          <!-- 7. Foxconn -->
+          <div class="client-logo-wrapper">
+            <img src="assets/images/foxconn.svg" alt="Foxconn">
+          </div>
+          
+          <!-- Duplicate set for seamless loop -->
+          <!-- 1. TVS Motor Company -->
+          <div class="client-logo-wrapper">
+            <img src="assets/images/TVS_Motor_Company-Logo.wine.svg" alt="TVS Motor Company">
+          </div>
+          <!-- 2. Indo-MIM Private Limited -->
+          <div class="client-logo-wrapper">
+            <img src="assets/images/indo-mim-logo-vector.svg" alt="Indo-MIM Private Limited">
+          </div>
+          <!-- 3. Tata Group -->
+          <div class="client-logo-wrapper">
+            <img src="assets/images/tata-logo.svg" alt="Tata Group">
+          </div>
+          <!-- 4. TAFE -->
+          <div class="client-logo-wrapper">
+            <img src="assets/images/TAFE_id_3QC4cVb_1.svg" alt="TAFE - Tractors and Farm Equipment Limited">
+          </div>
+          <!-- 5. Palanisami Constructions Private Limited -->
+          <div class="client-logo-wrapper">
+            <img src="assets/images/palanisami.svg" alt="Palanisami Constructions Private Limited">
+          </div>
+          <!-- 6. Royal Enfield -->
+          <div class="client-logo-wrapper">
+            <img src="assets/images/Royal_Enfield_idd-waL4jJ_0.svg" alt="Royal Enfield">
+          </div>
+          <!-- 7. Foxconn -->
+          <div class="client-logo-wrapper">
+            <img src="assets/images/foxconn.svg" alt="Foxconn">
+          </div>
         </div>
       </div>
     </div>
   </section>
+
+  <!-- ==========================================
+       CAREERS (CURRENT OPENINGS) SECTION
+       ========================================== -->
+  <section id="careers" class="section-padding careers-section">
+    <div class="container">
+      <div class="section-header reveal reveal-slide-up">
+        <div class="section-tag">Active Opportunities</div>
+        <h2 class="section-title">Explore Our <span>Current Openings</span></h2>
+        <p class="section-subtitle">Join leading manufacturing, automotive, construction, and IT firms. Apply today to take the next step in your professional journey.</p>
+      </div>
+      
+      <!-- Filter and Search Bar -->
+      <div class="careers-filter-bar reveal reveal-slide-up">
+        <div class="careers-search">
+          <input type="text" id="jobSearch" class="form-control" placeholder="Search by job title, location, or company...">
+          <div class="careers-search-icon">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+            </svg>
+          </div>
+        </div>
+        <select id="jobLocationFilter" class="form-control careers-select">
+          <option value="all">All Locations</option>
+        </select>
+      </div>
+      
+      <!-- Jobs Grid -->
+      <div class="jobs-grid reveal reveal-fade-in" id="jobsGrid">
+        <!-- Rendered dynamically by JavaScript -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Careers Apply Modal -->
+  <div id="jobApplyModal" class="careers-modal">
+    <div class="careers-modal-container glass-panel">
+      <button id="jobApplyModalClose" class="careers-modal-close" aria-label="Close modal">&times;</button>
+      <h3 id="jobModalTitle" class="careers-modal-title">Job Title</h3>
+      <div id="jobModalSubtitle" class="careers-modal-subtitle">Company Name • Location</div>
+      
+      <div class="careers-modal-section">
+        <h4>Experience Required</h4>
+        <p id="jobModalExp">Experience details</p>
+      </div>
+      
+      <div class="careers-modal-section">
+        <h4>Offered Salary</h4>
+        <p id="jobModalSalary">Salary details</p>
+      </div>
+      
+      <div class="careers-modal-section">
+        <h4>Job Description</h4>
+        <p id="jobModalDesc">Full job description...</p>
+      </div>
+      
+      <div class="careers-modal-section">
+        <h4>Available Vacancies</h4>
+        <p id="jobModalVacancies">Vacancies count</p>
+      </div>
+      
+      <div class="careers-modal-section">
+        <h4>Contact / How to Apply</h4>
+        <p id="jobModalContact">Contact details...</p>
+      </div>
+      
+      <div class="careers-modal-footer">
+        <a id="jobModalApplyBtn" href="" class="btn btn-primary">Apply Via Email</a>
+        <button id="jobModalCloseBtn" class="btn btn-secondary">Close Details</button>
+      </div>
+    </div>
+  </div>
 
   <!-- ==========================================
        GALLERY SECTION
@@ -751,6 +914,25 @@
   </div>
 
   <!-- ==========================================
+       TESTIMONIALS SECTION
+       ========================================== -->
+  <section id="testimonials" class="section-padding" style="background-color: var(--bg-surface-alt); overflow: hidden; padding: 80px 0;">
+    <div class="container">
+      <div class="section-header reveal reveal-slide-up">
+        <div class="section-tag">Testimonials</div>
+        <h2 class="section-title">What Our <span>Partners & Candidates Say</span></h2>
+        <p class="section-subtitle">We build long-term relationships through trust, quality service, and dedicated workforce delivery.</p>
+      </div>
+    </div>
+    
+    <div class="testimonials-slider reveal reveal-fade-in" style="margin-top: 50px; width: 100%;">
+      <div class="testimonials-track" id="testimonialsGrid">
+        <!-- Loaded dynamically from localStorage/JS (duplicated sets for marquee loop) -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================
        CONTACT US & MAP SECTION
        ========================================== -->
   <section id="contact" class="section-padding">
@@ -905,8 +1087,10 @@
             <li><a href="#about" class="footer-link-item">About Company</a></li>
             <li><a href="#services" class="footer-link-item">Hiring Services</a></li>
             <li><a href="#team" class="footer-link-item">Corporate Team</a></li>
+            <li><a href="#careers" class="footer-link-item">Current Openings</a></li>
             <li><a href="#gallery" class="footer-link-item">Cultural Gallery</a></li>
             <li><a href="#blog" class="footer-link-item">Industry Insights</a></li>
+            <li><a href="#testimonials" class="footer-link-item">Client Testimonials</a></li>
           </ul>
         </div>
         

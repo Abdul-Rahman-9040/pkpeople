@@ -125,6 +125,58 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   ];
 
+  // Default Job Openings Data
+  const defaultJobOpenings = [
+    {
+      id: "job_1",
+      title: "Senior Full-Stack Developer",
+      company: "Placement Keepers People Pulse",
+      location: "Bangalore, Karnataka",
+      experience: "5+ Years",
+      salary: "₹12,00,000 - ₹18,00,000 P.A.",
+      description: "We are seeking a senior engineer to manage internal recruitment tools, client-facing applicant systems, and database integrations. Experience with modern front-end frameworks and Node.js is required.",
+      vacancies: "2",
+      contact: "careers@pkpeople.com",
+      active: true
+    },
+    {
+      id: "job_2",
+      title: "Production Planning Control (PPC) Engineer",
+      company: "Indo-MIM Private Limited",
+      location: "Bangalore, Karnataka",
+      experience: "3-6 Years",
+      salary: "₹6,00,000 - ₹9,00,000 P.A.",
+      description: "Oversee process planning for Metal Injection Molding, establish daily scheduling baselines, coordinate logistics, and manage high-volume manufacturing capacities.",
+      vacancies: "4",
+      contact: "hr@indomim.com",
+      active: true
+    },
+    {
+      id: "job_3",
+      title: "Quality Control Inspector",
+      company: "TVS Motor Company",
+      location: "Hosur, Tamil Nadu",
+      experience: "2-4 Years",
+      salary: "₹4,00,000 - ₹5,50,000 P.A.",
+      description: "Conduct dimensional audits on two-wheeler vehicle chassis, log defect rates, and coordinate with assembly floor managers to maintain ISO compliance.",
+      vacancies: "5",
+      contact: "careers@tvs.co.in",
+      active: true
+    },
+    {
+      id: "job_4",
+      title: "Structural Design Engineer",
+      company: "Palanisami Constructions Private Limited",
+      location: "Coimbatore, Tamil Nadu",
+      experience: "4+ Years",
+      salary: "₹7,50,000 - ₹11,00,000 P.A.",
+      description: "Develop structural layouts, perform load calculations using STAAD.Pro, and review building designs to ensure conformance with local construction standards.",
+      vacancies: "1",
+      contact: "hr@palanisamiconstructions.com",
+      active: true
+    }
+  ];
+
   // Database Seeding Logic
   const initializeDatabase = () => {
     if (!localStorage.getItem('gallery_items')) {
@@ -135,6 +187,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     if (!localStorage.getItem('contact_submissions')) {
       localStorage.setItem('contact_submissions', JSON.stringify([]));
+    }
+    if (!localStorage.getItem('job_openings')) {
+      localStorage.setItem('job_openings', JSON.stringify(defaultJobOpenings));
     }
   };
   initializeDatabase();
@@ -202,9 +257,41 @@ document.addEventListener('DOMContentLoaded', () => {
     menuBtn.addEventListener('click', toggleMenu);
 
     navLinks.forEach(link => {
-      link.addEventListener('click', () => {
+      link.addEventListener('click', (e) => {
+        // If it's a mobile screen and it is a dropdown trigger, toggle the dropdown accordion instead of closing the menu
+        if (window.innerWidth <= 992 && link.classList.contains('dropdown-trigger')) {
+          e.preventDefault();
+          const parentItem = link.closest('.nav-item');
+          if (parentItem) {
+            // Toggle active state for this dropdown
+            parentItem.classList.toggle('active');
+            
+            // Close other dropdowns
+            document.querySelectorAll('.nav-item.has-dropdown').forEach(item => {
+              if (item !== parentItem) {
+                item.classList.remove('active');
+              }
+            });
+          }
+        } else {
+          // Normal link clicked: close mobile menu
+          menuBtn.classList.remove('active');
+          navMenu.classList.remove('active');
+        }
+      });
+    });
+
+    // Close mobile menu when a dropdown-item is clicked
+    const dropdownItems = document.querySelectorAll('.dropdown-item');
+    dropdownItems.forEach(item => {
+      item.addEventListener('click', () => {
         menuBtn.classList.remove('active');
         navMenu.classList.remove('active');
+        
+        // Collapse all mobile dropdown accordions
+        document.querySelectorAll('.nav-item.has-dropdown').forEach(d => {
+          d.classList.remove('active');
+        });
       });
     });
   }
@@ -818,17 +905,22 @@ document.addEventListener('DOMContentLoaded', () => {
           <div class="spotlight-icon-box">${data.icon}</div>
           <h3 class="spotlight-title">${data.title}</h3>
           <p class="spotlight-desc">${data.desc}</p>
-          <a href="#contact" class="spotlight-cta btn btn-primary" style="padding: 12px 24px;">
-            Partner with us
-            <svg style="width: 18px; height: 18px; margin-left: 6px; vertical-align: middle;" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"></path>
-            </svg>
-          </a>
+          <div style="display: flex; gap: 12px; margin-top: 24px; flex-wrap: wrap;">
+            <a href="industry-details.html?id=${index}" class="spotlight-cta btn btn-primary" style="padding: 12px 24px;">
+              View Details
+              <svg style="width: 18px; height: 18px; margin-left: 6px; vertical-align: middle;" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"></path>
+              </svg>
+            </a>
+            <a href="#contact" class="spotlight-cta btn btn-secondary" style="padding: 12px 24px;">
+              Partner with Us
+            </a>
+          </div>
         </div>
-        <div class="spotlight-visual">
+        <a href="industry-details.html?id=${index}" class="spotlight-visual" style="display: block;">
           <img src="${data.img}" alt="${data.title}">
           <span class="spotlight-visual-badge">${data.badge}</span>
-        </div>
+        </a>
       `;
 
       // Fade effect in
@@ -877,11 +969,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Add click listeners to tab buttons
   tabItems.forEach((tab, index) => {
     tab.addEventListener('click', () => {
-      // Clear timers
-      if (slideTimer) clearInterval(slideTimer);
-      isPaused = true; // Stay on the clicked slide as per user request
-      activeSlideIdx = index;
-      renderActiveSpotlight(activeSlideIdx);
+      window.location.href = `industry-details.html?id=${index}`;
     });
   });
 
@@ -891,51 +979,260 @@ document.addEventListener('DOMContentLoaded', () => {
     startSlideShow();
   }
 
+
+
   // ==========================================
-  // 12. SERVICES SPOTLIGHT CONTROLLER
+  // 13. CAREERS (CURRENT OPENINGS) RENDERER
+  // ==========================================
+  const jobsGrid = document.getElementById('jobsGrid');
+  const jobSearch = document.getElementById('jobSearch');
+  const jobLocationFilter = document.getElementById('jobLocationFilter');
+  const jobApplyModal = document.getElementById('jobApplyModal');
+  const jobApplyModalClose = document.getElementById('jobApplyModalClose');
+  const jobModalCloseBtn = document.getElementById('jobModalCloseBtn');
+
+  const renderJobs = () => {
+    if (!jobsGrid) return;
+
+    const storedJobs = JSON.parse(localStorage.getItem('job_openings')) || [];
+    const activeJobs = storedJobs.filter(job => job.active);
+
+    // Populate Location Dropdown based on active jobs
+    const locations = ['all', ...new Set(activeJobs.map(job => job.location))];
+    const currentSelectedLocation = jobLocationFilter.value || 'all';
+    
+    jobLocationFilter.innerHTML = '';
+    locations.forEach(loc => {
+      const opt = document.createElement('option');
+      opt.value = loc;
+      opt.textContent = loc === 'all' ? 'All Locations' : loc;
+      if (loc === currentSelectedLocation) {
+        opt.selected = true;
+      }
+      jobLocationFilter.appendChild(opt);
+    });
+
+    const displayJobs = (filteredJobs) => {
+      jobsGrid.innerHTML = '';
+      if (filteredJobs.length === 0) {
+        jobsGrid.innerHTML = `
+          <div style="grid-column: 1 / -1; text-align: center; padding: 60px; color: var(--text-muted);">
+            <svg style="width: 48px; height: 48px; margin-bottom: 16px; color: var(--text-muted); opacity: 0.6;" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+            </svg>
+            <h3 style="font-family: var(--font-heading); font-size: 1.25rem; font-weight: 700; color: var(--text-main);">No active job openings found</h3>
+            <p style="font-size: 0.9rem; margin-top: 8px;">Please try modifying your search term or location filter.</p>
+          </div>
+        `;
+        return;
+      }
+
+      filteredJobs.forEach(job => {
+        const vacanciesNum = parseInt(job.vacancies, 10) || 1;
+        const vacanciesClass = vacanciesNum === 1 ? 'job-vacancies low' : 'job-vacancies';
+        const vacanciesText = vacanciesNum === 1 ? '<span>Only 1</span> vacancy left' : `<span>${vacanciesNum}</span> vacancies`;
+
+        const card = document.createElement('div');
+        card.className = 'job-card glass-panel reveal reveal-slide-up';
+        card.innerHTML = `
+          <div class="job-card-header">
+            <h3 class="job-title">${job.title}</h3>
+            <div class="job-company">
+              <svg style="width: 16px; height: 16px;" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
+              ${job.company}
+            </div>
+            <div class="job-location">
+              <svg style="width: 14px; height: 14px;" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+              ${job.location}
+            </div>
+          </div>
+          <div class="job-details-pills">
+            <span class="job-pill job-pill-primary">${job.experience}</span>
+            <span class="job-pill">${job.salary}</span>
+          </div>
+          <p class="job-desc">${job.description.length > 140 ? job.description.substring(0, 140) + '...' : job.description}</p>
+          <div class="job-footer">
+            <div class="${vacanciesClass}">
+              ${vacanciesText}
+            </div>
+            <button class="btn btn-primary btn-sm btn-apply-trigger" data-id="${job.id}" style="padding: 10px 18px; font-size: 0.85rem;">View Details</button>
+          </div>
+        `;
+        jobsGrid.appendChild(card);
+      });
+
+      // Bind Apply Modal Triggers
+      document.querySelectorAll('.btn-apply-trigger').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const jobId = btn.getAttribute('data-id');
+          openJobModal(jobId);
+        });
+      });
+
+      // Trigger scroll reveals for dynamic elements
+      if (typeof initializeScrollReveals === 'function') {
+        initializeScrollReveals();
+      } else {
+        const revealElements = document.querySelectorAll('.reveal');
+        const revealObserver = new IntersectionObserver((entries, observer) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('active');
+              observer.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.1 });
+        revealElements.forEach(el => revealObserver.observe(el));
+      }
+    };
+
+    // Apply Filter Logic
+    const filterJobs = () => {
+      const searchVal = jobSearch.value.toLowerCase().trim();
+      const locVal = jobLocationFilter.value;
+
+      const filtered = activeJobs.filter(job => {
+        const matchesSearch = job.title.toLowerCase().includes(searchVal) ||
+                              job.company.toLowerCase().includes(searchVal) ||
+                              job.description.toLowerCase().includes(searchVal);
+        const matchesLoc = locVal === 'all' || job.location === locVal;
+        return matchesSearch && matchesLoc;
+      });
+
+      displayJobs(filtered);
+    };
+
+    jobSearch.addEventListener('input', filterJobs);
+    jobLocationFilter.addEventListener('change', filterJobs);
+
+    // Initial Display
+    displayJobs(activeJobs);
+  };
+
+  const openJobModal = (jobId) => {
+    const storedJobs = JSON.parse(localStorage.getItem('job_openings')) || [];
+    const job = storedJobs.find(j => j.id === jobId);
+    if (!job) return;
+
+    document.getElementById('jobModalTitle').textContent = job.title;
+    document.getElementById('jobModalSubtitle').textContent = `${job.company} • ${job.location}`;
+    document.getElementById('jobModalExp').textContent = job.experience;
+    document.getElementById('jobModalSalary').textContent = job.salary;
+    document.getElementById('jobModalDesc').textContent = job.description;
+    document.getElementById('jobModalVacancies').textContent = `${job.vacancies} position(s) available`;
+    document.getElementById('jobModalContact').textContent = `Please contact: ${job.contact}`;
+
+    const applyBtn = document.getElementById('jobModalApplyBtn');
+    if (job.contact.includes('@')) {
+      applyBtn.setAttribute('href', `mailto:${job.contact}?subject=Application for ${encodeURIComponent(job.title)}`);
+      applyBtn.textContent = 'Apply Via Email';
+      applyBtn.style.display = 'inline-flex';
+    } else if (job.contact.startsWith('+') || /^\d+/.test(job.contact)) {
+      applyBtn.setAttribute('href', `tel:${job.contact.replace(/\s+/g, '')}`);
+      applyBtn.textContent = 'Call Sourcing Team';
+      applyBtn.style.display = 'inline-flex';
+    } else {
+      applyBtn.setAttribute('href', '#contact');
+      applyBtn.textContent = 'Contact Us';
+    }
+
+    jobApplyModal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  };
+
+  const jobModalClose = () => {
+    jobApplyModal.classList.remove('active');
+    document.body.style.overflow = '';
+  };
+
+  if (jobApplyModalClose) jobApplyModalClose.addEventListener('click', jobModalClose);
+  if (jobModalCloseBtn) jobModalCloseBtn.addEventListener('click', jobModalClose);
+  if (jobApplyModal) {
+    jobApplyModal.addEventListener('click', (e) => {
+      if (e.target === jobApplyModal) jobModalClose();
+    });
+  }
+
+  // ==========================================
+  // 14. Overhauled Services Sidebar Tabs & Slideshow
   // ==========================================
   const servicesData = [
     {
-      title: "Permanent Staffing / Direct Hire",
-      desc: "End-to-end recruitment solutions to source, screen, and place high-caliber professionals for full-time executive roles within your core organization. Let our recruitment experts handle the full vetting, interviewing, and negotiation cycles.",
-      badge: "Full-Time Executive Search",
-      cta: "Get Sourcing Info",
-      icon: `<svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>`
+      title: "Permanent Staffing / Direct Hiring",
+      desc: "End-to-end recruitment solutions for permanent positions across multiple industries, helping organizations hire qualified and long-term talent.",
+      badge: "Direct Placement",
+      img: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=800&q=80",
+      icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="2" y="7" width="20" height="14" rx="2" ry="2"/>
+        <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
+      </svg>`
     },
     {
-      title: "Contract Staffing & Support",
-      desc: "Flexible, agile staffing models designed to augment your teams temporarily during project spikes, seasonal demands, or specialized workflows. Mitigate risk and scale personnel dynamically as operations require.",
-      badge: "Flexible Staff Augmentation",
-      cta: "Explore Flexible Plans",
-      icon: `<svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>`
+      title: "Contract Staffing & Workforce Support",
+      desc: "Flexible staffing solutions for short-term, long-term, and project-based workforce requirements, ensuring operational efficiency and scalability.",
+      badge: "Flexible Staffing",
+      img: "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=800&q=80",
+      icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+        <circle cx="9" cy="7" r="4"/>
+        <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+        <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+      </svg>`
     },
     {
       title: "Bulk & Volume Hiring",
-      desc: "Rapidly build production-ready staff or customer support teams. Perfect for factory launches, industrial expansions, BPO centers, and scale-ups where speed, quantity, and consistent quality are critical.",
-      badge: "Mass Scale Placement SLA",
-      cta: "Request Mass Pricing",
-      icon: `<svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>`
+      desc: "Large-scale recruitment support for manufacturing, logistics, retail, automotive, and other industries requiring rapid workforce deployment.",
+      badge: "Mass Scale Recruitment",
+      img: "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80",
+      icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+        <circle cx="9" cy="7" r="4"/>
+        <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+        <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+        <circle cx="19" cy="7" r="2"/>
+      </svg>`
     },
     {
       title: "IT Staff Augmentation",
-      desc: "Plug specialized technical gaps. Get immediate access to software engineering, cloud architecture, system admin, and digital transformation talent. Ensure your sprints stay on track with fully vetted engineers.",
-      badge: "IT Talent Delivery SLA",
-      cta: "View IT Capabilities",
-      icon: `<svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg>`
+      desc: "Providing skilled IT professionals on demand for project-based assignments, contract roles, and long-term resource requirements.",
+      badge: "On-Demand Tech Talent",
+      img: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=800&q=80",
+      icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="16 18 22 12 16 6"/>
+        <polyline points="8 6 2 12 8 18"/>
+        <line x1="14" y1="4" x2="10" y2="20"/>
+      </svg>`
     },
     {
       title: "Payroll & Compliance Management",
-      desc: "Eliminate administrative burdens. We manage structured payroll processing, statutory benefits, tax filings, and full compliance under local laws so your core managers can focus on building products.",
-      badge: "100% Audit Proof Operations",
-      cta: "Outsource Payroll Setup",
-      icon: `<svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>`
+      desc: "Comprehensive payroll processing, statutory compliance, employee record management, attendance tracking, and workforce administration.",
+      badge: "Corporate HR Support",
+      img: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=800&q=80",
+      icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+        <polyline points="9 11 11 13 15 9"/>
+      </svg>`
     },
     {
-      title: "Internships & Campus Placement",
-      desc: "Connecting fresh, highly-trained engineering and business talent with industry-leading corporations, building long-term talent succession lines and nurturing the next generation of business leaders.",
-      badge: "Industry Readiness Programs",
-      cta: "Campus Partner Program",
-      icon: `<svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>`
+      title: "Internship & Placement Services",
+      desc: "Connecting fresh graduates and trainees with active corporate slots, helping organizations source young minds and groom them early.",
+      badge: "Emerging Talent Grooming",
+      img: "https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=800&q=80",
+      icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M22 10v6M2 10l10-5 10 5-10 5z"/>
+        <path d="M6 12v5c0 2 2.5 3.5 6 3.5s6-1.5 6-3.5v-5"/>
+      </svg>`
+    },
+    {
+      title: "Campus Recruitment Services",
+      desc: "Organizing campus hiring drives, partner university relationships, logistics support, and online test coordination for massive recruitments.",
+      badge: "University Collaboration",
+      img: "https://images.unsplash.com/photo-1541339907198-e08756dedf3f?auto=format&fit=crop&w=800&q=80",
+      icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M22 10v6M2 10l10-5 10 5-10 5z"/>
+        <path d="M6 12v5c0 2 2.5 3.5 6 3.5s6-1.5 6-3.5v-5"/>
+        <line x1="12" y1="22" x2="12" y2="15"/>
+      </svg>`
     }
   ];
 
@@ -946,7 +1243,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const serviceSlideDuration = 5000; // 5 seconds
   let isServicePaused = false;
 
-  const renderActiveService = (index) => {
+  const renderActiveServiceSpotlight = (index) => {
     if (!serviceSpotlightCard) return;
     const data = servicesData[index];
 
@@ -960,13 +1257,22 @@ document.addEventListener('DOMContentLoaded', () => {
           <div class="service-spotlight-icon-box">${data.icon}</div>
           <h3 class="service-spotlight-title">${data.title}</h3>
           <p class="service-spotlight-desc">${data.desc}</p>
-          <a href="#contact" class="service-spotlight-cta btn btn-primary" style="padding: 12px 24px;">
-            ${data.cta}
-            <svg style="width: 18px; height: 18px; margin-left: 6px; vertical-align: middle;" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"></path>
-            </svg>
-          </a>
+          <div style="display: flex; gap: 12px; margin-top: 15px; flex-wrap: wrap;">
+            <a href="service-details.html?id=${index}" class="service-spotlight-cta btn btn-primary" style="padding: 12px 24px;">
+              View Details
+              <svg style="width: 18px; height: 18px; margin-left: 6px; vertical-align: middle;" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"></path>
+              </svg>
+            </a>
+            <a href="#contact" class="service-spotlight-cta btn btn-secondary" style="padding: 12px 24px;">
+              Inquire Now
+            </a>
+          </div>
         </div>
+        <a href="service-details.html?id=${index}" class="spotlight-visual" style="display: block;">
+          <img src="${data.img}" alt="${data.title}">
+          <span class="spotlight-visual-badge">${data.badge}</span>
+        </a>
       `;
 
       // Fade effect in
@@ -1008,25 +1314,130 @@ document.addEventListener('DOMContentLoaded', () => {
     
     serviceSlideTimer = setInterval(() => {
       activeServiceIdx = (activeServiceIdx + 1) % servicesData.length;
-      renderActiveService(activeServiceIdx);
+      renderActiveServiceSpotlight(activeServiceIdx);
     }, serviceSlideDuration);
   };
 
-  // Add click listeners to tab buttons
+  // Add click listeners to tab buttons (redirect immediately)
   serviceTabItems.forEach((tab, index) => {
     tab.addEventListener('click', () => {
-      // Clear timers
-      if (serviceSlideTimer) clearInterval(serviceSlideTimer);
-      isServicePaused = true; // Stay on the clicked slide as per user request
-      activeServiceIdx = index;
-      renderActiveService(activeServiceIdx);
+      window.location.href = `service-details.html?id=${index}`;
     });
   });
 
-  // Initialize
+  // Initialize Services Spotlight
   if (serviceTabItems.length > 0) {
-    renderActiveService(0);
+    renderActiveServiceSpotlight(0);
     startServiceSlideShow();
   }
+
+  // ==========================================
+  // 15. Dynamic Testimonials Seeding & Renderer
+  // ==========================================
+  const seedTestimonials = [
+    {
+      id: "testi-1",
+      author: "Rajesh Kumar",
+      company: "HR Lead at TVS Motor Company",
+      text: "Placement Keepers has been an invaluable staffing partner. They successfully placed over 50 skilled machine operators in Hosur within a record 5-day window. Their payroll compliance handling is completely error-free.",
+      rating: 5,
+      active: true
+    },
+    {
+      id: "testi-2",
+      author: "Meera Sen",
+      company: "Senior Operations Director at Foxconn",
+      text: "For our seasonal electronic manufacturing ramp-ups, the contract staffing from People Pulse has been top-notch. Highly professional onboarding, transparent timesheet management, and immediate replacement when required.",
+      rating: 5,
+      active: true
+    },
+    {
+      id: "testi-3",
+      author: "Amit Varma",
+      company: "Engineering Head at Indo-MIM",
+      text: "Their IT staff augmentation team provided us with three exceptional Senior CAD Engineers on short notice. Outstanding technical vetting and extremely reliable performance tracking.",
+      rating: 5,
+      active: true
+    }
+  ];
+
+  const initTestimonials = () => {
+    let storedTestimonials = localStorage.getItem('testimonials');
+    if (!storedTestimonials) {
+      localStorage.setItem('testimonials', JSON.stringify(seedTestimonials));
+      storedTestimonials = JSON.stringify(seedTestimonials);
+    }
+    renderTestimonials();
+  };
+
+  const renderTestimonials = () => {
+    const grid = document.getElementById('testimonialsGrid');
+    if (!grid) return;
+    
+    const stored = JSON.parse(localStorage.getItem('testimonials')) || [];
+    const activeTestimonials = stored.filter(t => t.active);
+    
+    grid.innerHTML = '';
+    
+    if (activeTestimonials.length === 0) {
+      grid.innerHTML = `
+        <div style="text-align: center; padding: 40px; color: var(--text-muted); width: 100%;">
+          <p>No active testimonials found.</p>
+        </div>
+      `;
+      return;
+    }
+    
+    // Duplicate the active list so it scrolls seamlessly in a loop
+    const displayList = [...activeTestimonials, ...activeTestimonials];
+    
+    displayList.forEach(t => {
+      // Get initials
+      const names = t.author.split(' ');
+      const initials = names.map(n => n.charAt(0)).join('').substring(0, 2).toUpperCase();
+      
+      // Star rating display
+      const stars = '★'.repeat(t.rating) + '☆'.repeat(5 - t.rating);
+      
+      const card = document.createElement('div');
+      card.className = 'testimonial-card';
+      card.innerHTML = `
+        <div>
+          <div class="testimonial-quote-icon">&ldquo;</div>
+          <p class="testimonial-text">${t.text}</p>
+        </div>
+        <div>
+          <div class="testimonial-rating" title="${t.rating} Stars">${stars}</div>
+          <div class="testimonial-user-info">
+            <div class="testimonial-avatar">${initials}</div>
+            <div>
+              <h4 class="testimonial-author-name">${t.author}</h4>
+              <span class="testimonial-author-company">${t.company}</span>
+            </div>
+          </div>
+        </div>
+      `;
+      grid.appendChild(card);
+    });
+  };
+
+  initTestimonials();
+
+  // Render jobs on load
+  renderJobs();
+
+  // Listen for storage events (if admin changes jobs in another tab)
+  window.addEventListener('storage', (e) => {
+    if (e.key === 'job_openings') {
+      renderJobs();
+    }
+    if (e.key === 'testimonials') {
+      renderTestimonials();
+    }
+  });
+
+  // Export renderers to window so admin can call them when refreshing
+  window.refreshJobsOnHome = renderJobs;
+  window.refreshTestimonialsOnHome = renderTestimonials;
 
 });

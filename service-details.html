@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="In-depth details of our recruitment services including Permanent Staffing, IT Augmentation, Payroll, and Bulk Hiring. Placement Keepers People Pulse.">
+  <meta name="keywords" content="Placement Keepers Services, Permanent Hiring Bangalore, IT Augmentation, BPO Bulk Sourcing, Payroll Compliance">
+  <meta name="author" content="Placement Keepers People Pulse">
+  
+  <title>Service Details | Placement Keepers People Pulse</title>
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="assets/images/logo.jpeg">
+  
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="styles.css?v=1.2">
+  
+  <!-- Custom styles for Service Details Page -->
+  <style>
+    .details-hero {
+      padding-top: 100px;
+      padding-bottom: 40px;
+      background: radial-gradient(circle at 10% 20%, hsla(var(--primary-hue), var(--primary-sat), var(--primary-lightness), 0.04) 0%, transparent 60%);
+      position: relative;
+    }
+    
+    .details-back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-heading);
+      font-weight: 600;
+      color: var(--primary);
+      margin-bottom: 16px;
+      transition: transform var(--transition-fast);
+    }
+    
+    .details-back-link:hover {
+      transform: translateX(-5px);
+    }
+    
+    .details-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 30px;
+      margin-top: 15px;
+      align-items: start;
+    }
+    
+    .details-card {
+      padding: 30px;
+      border-radius: var(--radius-lg);
+      margin-bottom: 20px;
+    }
+    
+    .details-title-section {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 16px;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 16px;
+    }
+    
+    .details-icon {
+      width: 56px;
+      height: 56px;
+      border-radius: var(--radius-md);
+      background-color: var(--primary-glow);
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    
+    .details-icon svg {
+      width: 28px;
+      height: 28px;
+    }
+    
+    .details-title {
+      font-family: var(--font-heading);
+      font-size: 1.85rem;
+      font-weight: 800;
+      line-height: 1.2;
+      color: var(--text-main);
+    }
+    
+    .details-badge {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--primary);
+      background-color: var(--primary-glow);
+      padding: 3px 10px;
+      border-radius: var(--radius-full);
+      margin-top: 4px;
+    }
+    
+    .details-text {
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+    
+    .process-section {
+      margin-top: 24px;
+    }
+    
+    .process-title {
+      font-family: var(--font-heading);
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .process-timeline {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      position: relative;
+      padding-left: 20px;
+      border-left: 2px dashed var(--border-color);
+      margin-left: 10px;
+    }
+    
+    .process-step {
+      position: relative;
+    }
+    
+    .process-step::before {
+      content: "";
+      position: absolute;
+      left: -25px;
+      top: 6px;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background-color: var(--primary);
+      border: 2px solid var(--bg-surface);
+    }
+    
+    .process-step h5 {
+      font-family: var(--font-heading);
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 2px;
+    }
+    
+    .process-step p {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+    
+    .profiles-section {
+      margin-top: 24px;
+      border-top: 1px solid var(--border-color);
+      padding-top: 20px;
+    }
+    
+    .profiles-title {
+      font-family: var(--font-heading);
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 12px;
+    }
+    
+    .profiles-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 10px;
+    }
+    
+    .profile-item {
+      padding: 10px 14px;
+      border-radius: var(--radius-sm);
+      background-color: var(--bg-base);
+      border: 1px solid var(--border-color);
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .profile-bullet {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background-color: var(--primary);
+    }
+    
+    .details-sidebar {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    
+    .sidebar-widget {
+      padding: 20px;
+      border-radius: var(--radius-lg);
+    }
+    
+    .visual-widget {
+      padding: 0;
+      overflow: hidden;
+      position: relative;
+      height: 200px;
+      box-shadow: var(--shadow-lg);
+    }
+    
+    .visual-widget img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: var(--radius-lg);
+    }
+    
+    .stats-widget {
+      background: linear-gradient(135deg, var(--secondary) 0%, hsl(var(--secondary-hue), var(--secondary-sat), 10%) 100%);
+      color: #ffffff;
+      border: none;
+    }
+    
+    .stats-widget h4 {
+      font-family: var(--font-heading);
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      padding-bottom: 8px;
+    }
+    
+    .stat-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    
+    .stat-row:last-child {
+      border-bottom: none;
+    }
+    
+    .stat-val {
+      font-family: var(--font-heading);
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--primary);
+    }
+    
+    .cta-widget {
+      text-align: center;
+    }
+    
+    .cta-widget h4 {
+      font-family: var(--font-heading);
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 8px;
+    }
+    
+    .cta-widget p {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+    }
+    
+    @media (max-width: 992px) {
+      .details-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ==========================================
+       HEADER & NAVIGATION
+       ========================================== -->
+  <header id="header" class="header scrolled">
+    <div class="container">
+      <a href="index.html#home" class="logo">
+        <img src="assets/images/logo.jpeg" alt="Placement Keepers People Pulse Logo">
+      </a>
+      
+      <nav id="nav-menu" class="nav-menu">
+        <div class="nav-item">
+          <a href="index.html#home" class="nav-link">Home</a>
+        </div>
+        <div class="nav-item has-dropdown">
+          <a href="index.html#about" class="nav-link dropdown-trigger">
+            About Us
+            <svg class="dropdown-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7" />
+            </svg>
+          </a>
+          <div class="dropdown-menu">
+            <a href="index.html#about" class="dropdown-item">
+              <div class="dropdown-item-icon">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
+              </div>
+              <div class="dropdown-item-content">
+                <span class="dropdown-item-title">Our Profile</span>
+                <span class="dropdown-item-desc">Who we are & our vision</span>
+              </div>
+            </a>
+            <a href="index.html#team" class="dropdown-item">
+              <div class="dropdown-item-icon">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+              </div>
+              <div class="dropdown-item-content">
+                <span class="dropdown-item-title">Corporate Leadership</span>
+                <span class="dropdown-item-desc">Meet our co-founders & team</span>
+              </div>
+            </a>
+            <a href="index.html#testimonials" class="dropdown-item">
+              <div class="dropdown-item-icon">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg>
+              </div>
+              <div class="dropdown-item-content">
+                <span class="dropdown-item-title">Testimonials</span>
+                <span class="dropdown-item-desc">What our clients say about us</span>
+              </div>
+            </a>
+            <a href="index.html#gallery" class="dropdown-item">
+              <div class="dropdown-item-icon">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+              </div>
+              <div class="dropdown-item-content">
+                <span class="dropdown-item-title">Office Gallery</span>
+                <span class="dropdown-item-desc">Glimpse of our work environment</span>
+              </div>
+            </a>
+          </div>
+        </div>
+        <div class="nav-item has-dropdown">
+          <a href="index.html#services" class="nav-link dropdown-trigger">
+            Services
+            <svg class="dropdown-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7" />
+            </svg>
+          </a>
+          <div class="dropdown-menu">
+            <a href="index.html#services" class="dropdown-item">
+              <div class="dropdown-item-icon">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+              </div>
+              <div class="dropdown-item-content">
+                <span class="dropdown-item-title">Recruitment Services</span>
+                <span class="dropdown-item-desc">Staffing, IT augmentation & payroll</span>
+              </div>
+            </a>
+            <a href="index.html#industries" class="dropdown-item">
+              <div class="dropdown-item-icon">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 002 2h2a2.5 2.5 0 002.5-2.5V9a2 2 0 00-2-2h-1.07a2 2 0 01-1.414-.586l-.902-.902A2 2 0 0011.54 3H8.382a2 2 0 00-1.328.508L5.3 5.382A2 2 0 005 6.764L5 8"/></svg>
+              </div>
+              <div class="dropdown-item-content">
+                <span class="dropdown-item-title">Industries We Serve</span>
+                <span class="dropdown-item-desc">Manufacturing, Auto, Tech & Logistics</span>
+              </div>
+            </a>
+          </div>
+        </div>
+        <div class="nav-item">
+          <a href="index.html#careers" class="nav-link">Careers</a>
+        </div>
+        <div class="nav-item">
+          <a href="index.html#blog" class="nav-link">Insights</a>
+        </div>
+        <div class="nav-item">
+          <a href="index.html#contact" class="nav-link">Contact</a>
+        </div>
+      </nav>
+      
+      <div class="nav-actions">
+        <!-- Theme Toggle -->
+        <button id="themeToggle" class="theme-toggle" aria-label="Toggle dark/light theme">
+          <svg class="moon-icon" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+            <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+          </svg>
+          <svg class="sun-icon" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd"></path>
+          </svg>
+        </button>
+        
+        <a href="index.html#contact" class="btn btn-primary btn-sm header-cta" style="padding: 10px 20px; font-size: 0.9rem;">Get in Touch</a>
+        
+        <!-- Hamburger Menu -->
+        <button id="menuBtn" class="menu-btn" aria-label="Toggle mobile menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ==========================================
+       DETAILS MAIN CONTENT
+       ========================================== -->
+  <section class="details-hero">
+    <div class="container">
+      <a href="index.html#services" class="details-back-link">
+        <svg style="width: 20px; height: 20px;" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+        </svg>
+        Back to Services
+      </a>
+      
+      <div class="details-grid">
+        <!-- Left details panel -->
+        <main>
+          <div class="details-card glass-panel" id="detailsMainCard">
+            <!-- Loaded dynamically based on ID -->
+          </div>
+        </main>
+        
+        <!-- Right sidebar -->
+        <aside class="details-sidebar">
+          <!-- Banner Image Widget -->
+          <div class="sidebar-widget visual-widget" id="sidebarImageWidget">
+            <!-- Loaded dynamically -->
+          </div>
+          
+          <!-- Key Metrics Widget -->
+          <div class="sidebar-widget stats-widget glass-panel">
+            <h4>Service SLA Benchmarks</h4>
+            <div id="sidebarStatsWidget">
+              <!-- Loaded dynamically -->
+            </div>
+          </div>
+          
+          <!-- CTA Widget -->
+          <div class="sidebar-widget cta-widget glass-panel">
+            <h4>Need this Service?</h4>
+            <p>Deploy our workforce consulting expertise to build high-performance pipelines for your enterprise.</p>
+            <a href="index.html#contact" class="btn btn-primary" style="width: 100%;">Inquire About Service</a>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       FOOTER SECTION
+       ========================================== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="footer-logo">
+            <img src="assets/images/logo.jpeg" alt="Placement Keepers Logo">
+            <span>Placement Keepers</span>
+          </div>
+          <p class="footer-desc">Your trusted, ISO-certified staffing partner helping companies build stable and highly scalable workforce pipelines.</p>
+        </div>
+        
+        <div class="footer-links">
+          <h4>Quick Links</h4>
+          <a href="index.html#home">Home</a>
+          <a href="index.html#about">About Us</a>
+          <a href="index.html#services">Services</a>
+          <a href="index.html#careers">Careers</a>
+          <a href="index.html#testimonials">Testimonials</a>
+        </div>
+        
+        <div class="footer-links">
+          <h4>Sectors</h4>
+          <a href="industry-details.html?id=0">Manufacturing</a>
+          <a href="industry-details.html?id=1">Automobile</a>
+          <a href="industry-details.html?id=3">Engineering</a>
+          <a href="industry-details.html?id=4">IT & Software</a>
+        </div>
+        
+        <div class="footer-links">
+          <h4>Contact Us</h4>
+          <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 8px;">No. 29, 2nd Floor, CMH Road, Indiranagar, Bangalore - 560038</p>
+          <p style="color: var(--text-muted); font-size: 0.9rem;">Email: contact@placementkeepers.com</p>
+        </div>
+      </div>
+      
+      <div class="footer-bottom">
+        <p>&copy; 2026 Placement Keepers People Pulse Pvt. Ltd. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Script logic to load dynamic service info -->
+  <script>
+    // Theme Manager
+    const body = document.body;
+    const themeToggle = document.getElementById('themeToggle');
+    const savedTheme = localStorage.getItem('theme');
+    const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    
+    if (savedTheme === 'dark' || (!savedTheme && systemPrefersDark)) {
+      body.classList.add('dark-theme');
+    } else {
+      body.classList.remove('dark-theme');
+    }
+    
+    themeToggle.addEventListener('click', () => {
+      body.classList.toggle('dark-theme');
+      const activeTheme = body.classList.contains('dark-theme') ? 'dark' : 'light';
+      localStorage.setItem('theme', activeTheme);
+    });
+
+    // Service Data Dictionary
+    const serviceDetailsData = {
+      0: {
+        title: "Permanent Staffing / Direct Hiring",
+        badge: "Direct Placement",
+        desc: "We deliver full-cycle direct placement solutions to connect you with qualified, pre-screened professionals for long-term growth. Our vertical specialized headhunters manage the complete pipeline from search and initial screening to technical assessment, package negotiation, and onboarding support.",
+        icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>`,
+        img: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=800&q=80",
+        profiles: ["Executive Directors", "Technical Leads", "Department Heads", "Sales Directors", "Operations Managers", "HR Managers"],
+        steps: [
+          { title: "Profile Mapping & Kickoff", desc: "Understanding the client's technology stacks, culture, and core competency targets." },
+          { title: "Sourcing & Headhunting", desc: "Tapping passive talent pools and active profiles through localized referral channels." },
+          { title: "Pre-Screening & Evaluation", desc: "Conducting technical diagnostics and reference checks before introduction." },
+          { title: "Onboarding & Retention Review", desc: "Coordinating negotiation and tracking performance during the 120-day guarantee period." }
+        ],
+        stats: {
+          "Sourcing SLA": "48 Hours",
+          "CV Conversion": "90% Success",
+          "Guaranteed Period": "120 Days",
+          "Domain Match": "98%"
+        }
+      },
+      1: {
+        title: "Contract Staffing & Workforce Support",
+        badge: "Flexible Staffing",
+        desc: "Enable operational agility with our flexible, scale-on-demand workforce solutions. We deploy skilled contract personnel for short-term projects, peak seasonal ramp-ups, or temporary coverages while managing complete compliance, payroll, attendance, and administrative overheads.",
+        icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>`,
+        img: "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=800&q=80",
+        profiles: ["Project Associates", "Contract Engineers", "Support Staff", "Helpdesk Operators", "Administrative Assistants", "Data Entry Officers"],
+        steps: [
+          { title: "Requirement Definition", desc: "Scoping project duration, resource skills, and compliance boundaries." },
+          { title: "Talent Deployment", desc: "Onboarding pre-vetted specialists under Placement Keepers payroll." },
+          { title: "Performance & Attendance Tracking", desc: "Managing timesheets, leaves, and operational feedback loops." },
+          { title: "Monthly Compliance Clearance", desc: "Filing PF, ESI, and statutory bills securely on behalf of the team." }
+        ],
+        stats: {
+          "Replacement SLA": "24 Hours",
+          "Statutory Compliance": "100% Guaranteed",
+          "Payroll Accuracy": "99.9%",
+          "Contract Flexibility": "On-Demand"
+        }
+      },
+      2: {
+        title: "Bulk & Volume Hiring",
+        badge: "Mass Scale Recruitment",
+        desc: "For rapid business expansion, warehouse setups, or plant openings, our bulk hiring services mobilize large groups of vetted talent within record time. We organize specialized mass recruitment drives, documentation desks, and fast-track induction pipelines.",
+        icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/><circle cx="19" cy="7" r="2"/></svg>`,
+        img: "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80",
+        profiles: ["Machine Operators", "Warehouse Loaders", "Retail Associates", "Delivery Partners", "Telecallers", "Assembly Workers"],
+        steps: [
+          { title: "Volume Planning", desc: "Mapping hiring targets, demographic preferences, and timeline SLAs." },
+          { title: "Hiring Campaigns", desc: "Setting up regional walk-in drives and digital sourcing coordinates." },
+          { title: "Fast-Track Vetting", desc: "Running concurrent background, fitness, and qualification checks." },
+          { title: "Batch Induction", desc: "Managing documentation and onboarding in batches of 50-200 candidates." }
+        ],
+        stats: {
+          "Avg. Time to Fill": "5 Days",
+          "Batch Capacity": "200+ Profiles",
+          "Onboarding SLA": "99.5% Met",
+          "Attrition Management": "Active"
+        }
+      },
+      3: {
+        title: "IT Staff Augmentation",
+        badge: "On-Demand Tech Talent",
+        desc: "Empower your software development lifecycle by integrating vetted, senior-level developers, engineers, and architects. Our IT augmentation service sources tech resources pre-screened for technical proficiency, system design, and communication.",
+        icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/><line x1="14" y1="4" x2="10" y2="20"/></svg>`,
+        img: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=800&q=80",
+        profiles: ["Frontend Developers (React)", "Backend Engineers (Node/Java)", "Cloud & DevOps Engineers", "Cybersecurity Specialists", "QA Automation Engineers", "Mobile Developers (iOS/Android)"],
+        steps: [
+          { title: "Tech Stack Evaluation", desc: "Defining project frameworks, security requirements, and team structure." },
+          { title: "Technical Diagnostics", desc: "Vetting developers through live coding challenges and architecture discussions." },
+          { title: "Seamless Integration", desc: "Introducing augmented engineers to active sprints and repository structures." },
+          { title: "Weekly Performance Review", desc: "Monitoring contribution velocity and project feedback." }
+        ],
+        stats: {
+          "CV Matching SLA": "48 Hours",
+          "Tech Vetting Pass": "92%",
+          "Augmented Team Retention": "94%",
+          "Tech Categories": "30+"
+        }
+      },
+      4: {
+        title: "Payroll & Compliance Management",
+        badge: "Corporate HR Support",
+        desc: "Outsource your payroll complexities to save administrative hours and reduce regulatory risks. We manage end-to-end salary calculations, attendance compilations, leaves, tax deductions, and statutory compliance filings (PF, ESI, LWF, PT) under one platform.",
+        icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 11 11 13 15 9"/></svg>`,
+        img: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=800&q=80",
+        profiles: ["Full Workforce Payroll", "Statutory Audits", "PF/ESI Administration", "Attendance System Integration", "HR Operations", "Tax Management"],
+        steps: [
+          { title: "System Setup", desc: "Integrating attendance files, leave policies, and salary structures." },
+          { title: "Calculation Cycle", desc: "Processing monthly payouts, tax exemptions, and deductions." },
+          { title: "Disbursement & Slip Generation", desc: "Releasing payroll on-time and sending encrypted payslips to employees." },
+          { title: "Statutory Filing", desc: "Submitting monthly ESI, PF, and PT documents to portal records." }
+        ],
+        stats: {
+          "Filing Compliance": "100% Error-Free",
+          "Disbursement SLA": "Before 5th",
+          "Audit Pass Record": "100%",
+          "Penalty Rate": "0%"
+        }
+      },
+      5: {
+        title: "Internship & Placement Services",
+        badge: "Emerging Talent Grooming",
+        desc: "We coordinate with corporate clients to introduce skilled, entry-level candidates, fresh graduates, and management trainees. This program is designed to inject fresh perspectives into your workspace while building your future leadership pipeline.",
+        icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c0 2 2.5 3.5 6 3.5s6-1.5 6-3.5v-5"/></svg>`,
+        img: "https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=800&q=80",
+        profiles: ["Management Trainees", "Software Engineering Interns", "Sales & Marketing Trainees", "Operations Interns", "Customer Support Interns", "Technical Trainees"],
+        steps: [
+          { title: "Needs Mapping", desc: "Setting up internship duration, training budgets, and conversion goals." },
+          { title: "Academic Outreach", desc: "Sourcing high-achieving candidates from regional colleges." },
+          { title: "Fundamental Vetting", desc: "Screening profiles for cognitive abilities, domain basics, and agility." },
+          { title: "Onboarding & Progress Review", desc: "Coordinating corporate induction and tracking conversion performance." }
+        ],
+        stats: {
+          "Freshers Placed": "500+ Annually",
+          "Intern-to-FTE Conversion": "85%",
+          "Interview-to-Offer": "92%",
+          "Training Accuracy": "96%"
+        }
+      },
+      6: {
+        title: "Campus Recruitment Services",
+        badge: "University Collaboration",
+        desc: "Streamline your campus hiring drives through our integrated logistics and screening services. We act as your single-point interface to plan college visits, conduct online coding tests, host group discussions, and release spot offers to top graduates.",
+        icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c0 2 2.5 3.5 6 3.5s6-1.5 6-3.5v-5"/><line x1="12" y1="22" x2="12" y2="15"/></svg>`,
+        img: "https://images.unsplash.com/photo-1541339907198-e08756dedf3f?auto=format&fit=crop&w=800&q=80",
+        profiles: ["Engineering Graduates", "Management (MBA) Graduates", "Arts & Science Graduates", "Graduate Engineer Trainees (GETs)", "Research Trainees", "Sales Trainees"],
+        steps: [
+          { title: "Institute Selection", desc: "Vetting and partnering with top-tier universities matching corporate budgets." },
+          { title: "Branding & Webinars", desc: "Hosting corporate presentations to attract high-quality applicants." },
+          { title: "Online Testing", desc: "Conducting dynamic coding and aptitude screenings on scale." },
+          { title: "Panel Interviews", desc: "Hosting structured technical and HR rounds, delivering final offer letters." }
+        ],
+        stats: {
+          "Partner Universities": "30+",
+          "Campus Offers Made": "1,000+",
+          "Logistics Delivery": "100%",
+          "Feedback Rating": "98%"
+        }
+      }
+    };
+
+    // Load dynamic parameters
+    const getQueryParam = (name) => {
+      const urlParams = new URLSearchParams(window.location.search);
+      return urlParams.get(name);
+    };
+
+    const serviceId = parseInt(getQueryParam('id')) || 0;
+    const data = serviceDetailsData[serviceId] || serviceDetailsData[0];
+
+    // Load content dynamically
+    document.title = `${data.title} | Placement Keepers People Pulse`;
+
+    const detailsMainCard = document.getElementById('detailsMainCard');
+    const sidebarImageWidget = document.getElementById('sidebarImageWidget');
+    const sidebarStatsWidget = document.getElementById('sidebarStatsWidget');
+
+    // Load Main Details Card
+    let profilesHtml = '';
+    data.profiles.forEach(profile => {
+      profilesHtml += `
+        <div class="profile-item">
+          <span class="profile-bullet"></span>
+          <span>${profile}</span>
+        </div>
+      `;
+    });
+
+    let stepsHtml = '';
+    data.steps.forEach((step, idx) => {
+      stepsHtml += `
+        <div class="process-step">
+          <h5>Step 0${idx + 1}: ${step.title}</h5>
+          <p>${step.desc}</p>
+        </div>
+      `;
+    });
+
+    detailsMainCard.innerHTML = `
+      <div class="details-title-section">
+        <div class="details-icon">${data.icon}</div>
+        <div>
+          <h2 class="details-title">${data.title}</h2>
+          <span class="details-badge">${data.badge}</span>
+        </div>
+      </div>
+      
+      <p class="details-text">${data.desc}</p>
+      
+      <div class="process-section">
+        <h3 class="process-title">
+          <svg style="width: 24px; height: 24px; color: var(--primary);" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+          </svg>
+          Hiring & Workflow Process
+        </h3>
+        <div class="process-timeline">
+          ${stepsHtml}
+        </div>
+      </div>
+      
+      <div class="profiles-section">
+        <h3 class="profiles-title">Core Talent Profiles Sourced</h3>
+        <div class="profiles-grid">
+          ${profilesHtml}
+        </div>
+      </div>
+    `;
+
+    // Load Sidebar Image
+    sidebarImageWidget.innerHTML = `
+      <img src="${data.img}" alt="${data.title}">
+    `;
+
+    // Load Sidebar Stats
+    let statsHtml = '';
+    for (const [key, value] of Object.entries(data.stats)) {
+      statsHtml += `
+        <div class="stat-row">
+          <span style="font-size: 0.95rem; color: rgba(255,255,255,0.7); font-weight: 500;">${key}</span>
+          <span class="stat-val">${value}</span>
+        </div>
+      `;
+    }
+    sidebarStatsWidget.innerHTML = statsHtml;
+  </script>
+</body>
+</html>

@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Detailed overview of our specialized recruitment and staffing solutions across core industrial sectors. Placement Keepers People Pulse Pvt. Ltd.">
+  <meta name="keywords" content="Placement Keepers, Staffing Industries, Recruitment Details, Manufacturing Recruitment, IT Staffing, Automobile Staffing, Logistics Hiring">
+  <meta name="author" content="Placement Keepers People Pulse">
+  
+  <title>Industry Details | Placement Keepers People Pulse</title>
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="assets/images/logo.jpeg">
+  
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="styles.css?v=1.2">
+  
+  <!-- Custom styles for Details Page -->
+  <style>
+    .details-hero {
+      padding-top: 100px; /* Pulls content closer to scrolled sticky header */
+      padding-bottom: 40px;
+      background: radial-gradient(circle at 10% 20%, hsla(var(--primary-hue), var(--primary-sat), var(--primary-lightness), 0.04) 0%, transparent 60%);
+      position: relative;
+    }
+    
+    .details-back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-heading);
+      font-weight: 600;
+      color: var(--primary);
+      margin-bottom: 16px; /* Reduced from 24px */
+      transition: transform var(--transition-fast);
+    }
+    
+    .details-back-link:hover {
+      transform: translateX(-5px);
+    }
+    
+    .details-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 30px; /* Reduced from 50px */
+      margin-top: 15px; /* Reduced from 40px */
+      align-items: start; /* Prevents sidebar stretching and huge empty gaps */
+    }
+    
+    .details-card {
+      padding: 30px; /* Reduced padding from 40px */
+      border-radius: var(--radius-lg);
+      margin-bottom: 20px;
+    }
+    
+    .details-title-section {
+      display: flex;
+      align-items: center;
+      gap: 16px; /* Reduced from 20px */
+      margin-bottom: 16px; /* Reduced from 24px */
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 16px; /* Reduced from 24px */
+    }
+    
+    .details-icon {
+      width: 56px; /* Reduced from 64px */
+      height: 56px;
+      border-radius: var(--radius-md);
+      background-color: var(--primary-glow);
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    
+    .details-icon svg {
+      width: 28px;
+      height: 28px;
+    }
+    
+    .details-title {
+      font-family: var(--font-heading);
+      font-size: 1.85rem; /* Balanced size */
+      font-weight: 800;
+      line-height: 1.2;
+      color: var(--text-main);
+    }
+    
+    .details-badge {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--primary);
+      background-color: var(--primary-glow);
+      padding: 3px 10px;
+      border-radius: var(--radius-full);
+      margin-top: 4px;
+    }
+    
+    .details-text {
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin-bottom: 20px; /* Reduced from 30px */
+    }
+    
+    .roles-section {
+      margin-top: 24px; /* Reduced from 40px */
+    }
+    
+    .roles-title {
+      font-family: var(--font-heading);
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 12px; /* Reduced from 20px */
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .roles-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 12px; /* Reduced from 16px */
+    }
+    
+    .role-item {
+      padding: 10px 14px; /* Reduced from 16px 20px */
+      border-radius: var(--radius-sm);
+      background-color: var(--bg-base);
+      border: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 500;
+      font-size: 0.95rem; /* Balanced font size */
+      transition: all var(--transition-fast);
+    }
+    
+    .role-item:hover {
+      border-color: var(--primary);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-sm);
+    }
+    
+    .role-bullet {
+      width: 6px;
+      height: 6px;
+      border-radius: var(--radius-full);
+      background-color: var(--primary);
+      flex-shrink: 0;
+    }
+    
+    .details-sidebar {
+      display: flex;
+      flex-direction: column;
+      gap: 20px; /* Reduced from 30px */
+    }
+    
+    .sidebar-widget {
+      padding: 20px; /* Reduced padding from 30px */
+      border-radius: var(--radius-lg);
+    }
+    
+    .visual-widget {
+      padding: 0;
+      overflow: hidden;
+      position: relative;
+      height: 200px; /* Reduced image height from 280px to save vertical space */
+      box-shadow: var(--shadow-lg);
+    }
+    
+    .visual-widget img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: var(--radius-lg);
+    }
+    
+    .stats-widget {
+      background: linear-gradient(135deg, var(--secondary) 0%, hsl(var(--secondary-hue), var(--secondary-sat), 10%) 100%);
+      color: #ffffff;
+      border: none;
+    }
+    
+    .stats-widget h4 {
+      font-family: var(--font-heading);
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin-bottom: 12px; /* Reduced from 20px */
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      padding-bottom: 8px; /* Reduced from 15px */
+    }
+    
+    .stat-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px 0; /* Reduced from 12px */
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    
+    .stat-row:last-child {
+      border-bottom: none;
+    }
+    
+    .stat-val {
+      font-family: var(--font-heading);
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--primary);
+    }
+    
+    .cta-widget {
+      text-align: center;
+    }
+    
+    .cta-widget h4 {
+      font-family: var(--font-heading);
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 8px; /* Reduced from 12px */
+    }
+    
+    .cta-widget p {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-bottom: 16px; /* Reduced from 24px */
+    }
+    
+    .approach-section {
+      margin-top: 24px; /* Reduced from 40px */
+      border-top: 1px solid var(--border-color);
+      padding-top: 20px; /* Reduced from 40px */
+    }
+    
+    .approach-title {
+      font-family: var(--font-heading);
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 8px; /* Reduced from 16px */
+    }
+    
+    .approach-text {
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin-bottom: 12px;
+    }
+    
+    @media (max-width: 992px) {
+      .details-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ==========================================
+       HEADER & NAVIGATION
+       ========================================== -->
+  <header id="header" class="header scrolled">
+    <div class="container">
+      <a href="index.html#home" class="logo">
+        <img src="assets/images/logo.jpeg" alt="Placement Keepers People Pulse Logo">
+      </a>
+      
+      <nav id="nav-menu" class="nav-menu">
+        <div class="nav-item">
+          <a href="index.html#home" class="nav-link">Home</a>
+        </div>
+        <div class="nav-item has-dropdown">
+          <a href="index.html#about" class="nav-link dropdown-trigger">
+            About Us
+            <svg class="dropdown-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7" />
+            </svg>
+          </a>
+          <div class="dropdown-menu">
+            <a href="index.html#about" class="dropdown-item">
+              <div class="dropdown-item-icon">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
+              </div>
+              <div class="dropdown-item-content">
+                <span class="dropdown-item-title">Our Profile</span>
+                <span class="dropdown-item-desc">Who we are & our vision</span>
+              </div>
+            </a>
+            <a href="index.html#team" class="dropdown-item">
+              <div class="dropdown-item-icon">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+              </div>
+              <div class="dropdown-item-content">
+                <span class="dropdown-item-title">Corporate Leadership</span>
+                <span class="dropdown-item-desc">Meet our co-founders & team</span>
+              </div>
+            </a>
+            <a href="index.html#testimonials" class="dropdown-item">
+              <div class="dropdown-item-icon">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg>
+              </div>
+              <div class="dropdown-item-content">
+                <span class="dropdown-item-title">Testimonials</span>
+                <span class="dropdown-item-desc">What our clients say about us</span>
+              </div>
+            </a>
+            <a href="index.html#gallery" class="dropdown-item">
+              <div class="dropdown-item-icon">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+              </div>
+              <div class="dropdown-item-content">
+                <span class="dropdown-item-title">Office Gallery</span>
+                <span class="dropdown-item-desc">Glimpse of our work environment</span>
+              </div>
+            </a>
+          </div>
+        </div>
+        <div class="nav-item has-dropdown">
+          <a href="index.html#services" class="nav-link dropdown-trigger">
+            Services
+            <svg class="dropdown-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7" />
+            </svg>
+          </a>
+          <div class="dropdown-menu">
+            <a href="index.html#services" class="dropdown-item">
+              <div class="dropdown-item-icon">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+              </div>
+              <div class="dropdown-item-content">
+                <span class="dropdown-item-title">Recruitment Services</span>
+                <span class="dropdown-item-desc">Staffing, IT augmentation & payroll</span>
+              </div>
+            </a>
+            <a href="index.html#industries" class="dropdown-item">
+              <div class="dropdown-item-icon">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 002 2h2a2.5 2.5 0 002.5-2.5V9a2 2 0 00-2-2h-1.07a2 2 0 01-1.414-.586l-.902-.902A2 2 0 0011.54 3H8.382a2 2 0 00-1.328.508L5.3 5.382A2 2 0 005 6.764L5 8"/></svg>
+              </div>
+              <div class="dropdown-item-content">
+                <span class="dropdown-item-title">Industries We Serve</span>
+                <span class="dropdown-item-desc">Manufacturing, Auto, Tech & Logistics</span>
+              </div>
+            </a>
+          </div>
+        </div>
+        <div class="nav-item">
+          <a href="index.html#careers" class="nav-link">Careers</a>
+        </div>
+        <div class="nav-item">
+          <a href="index.html#blog" class="nav-link">Insights</a>
+        </div>
+        <div class="nav-item">
+          <a href="index.html#contact" class="nav-link">Contact</a>
+        </div>
+      </nav>
+      
+      <div class="nav-actions">
+        <!-- Theme Toggle -->
+        <button id="themeToggle" class="theme-toggle" aria-label="Toggle dark/light theme">
+          <svg class="moon-icon" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+            <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+          </svg>
+          <svg class="sun-icon" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd"></path>
+          </svg>
+        </button>
+        
+        <a href="index.html#contact" class="btn btn-primary btn-sm header-cta" style="padding: 10px 20px; font-size: 0.9rem;">Get in Touch</a>
+        
+        <!-- Hamburger Menu -->
+        <button id="menuBtn" class="menu-btn" aria-label="Toggle mobile menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ==========================================
+       DETAILS MAIN CONTENT
+       ========================================== -->
+  <section class="details-hero">
+    <div class="container">
+      <a href="index.html#services" class="details-back-link">
+        <svg style="width: 20px; height: 20px;" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+        </svg>
+        Back to Industries
+      </a>
+      
+      <div class="details-grid">
+        <!-- Left details panel -->
+        <main>
+          <div class="details-card glass-panel" id="detailsMainCard">
+            <!-- Loaded dynamically based on ID -->
+          </div>
+        </main>
+        
+        <!-- Right sidebar -->
+        <aside class="details-sidebar">
+          <!-- Banner Image Widget -->
+          <div class="sidebar-widget visual-widget" id="sidebarImageWidget">
+            <!-- Loaded dynamically -->
+          </div>
+          
+          <!-- Key Metrics Widget -->
+          <div class="sidebar-widget stats-widget glass-panel">
+            <h4>Domain Track Record</h4>
+            <div id="sidebarStatsWidget">
+              <!-- Loaded dynamically -->
+            </div>
+          </div>
+          
+          <!-- CTA Widget -->
+          <div class="sidebar-widget cta-widget glass-panel">
+            <h4>Ready to Partner?</h4>
+            <p>Connect with our vertical recruitment specialists to source top-tier talent for your business.</p>
+            <a href="index.html#contact" class="btn btn-primary" style="width: 100%;">Contact Domain Expert</a>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       FOOTER SECTION
+       ========================================== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="footer-logo">
+            <img src="assets/images/logo.jpeg" alt="Placement Keepers Logo">
+            <span>Placement Keepers</span>
+          </div>
+          <p class="footer-desc">Your trusted, ISO-certified staffing partner helping companies build stable and highly scalable workforce pipelines.</p>
+        </div>
+        
+        <div class="footer-links">
+          <h4>Quick Links</h4>
+          <a href="index.html#home">Home</a>
+          <a href="index.html#about">About Us</a>
+          <a href="index.html#services">Services</a>
+          <a href="index.html#careers">Careers</a>
+          <a href="index.html#testimonials">Testimonials</a>
+        </div>
+        
+        <div class="footer-links">
+          <h4>Sectors</h4>
+          <a href="industry-details.html?id=0">Manufacturing</a>
+          <a href="industry-details.html?id=1">Automobile</a>
+          <a href="industry-details.html?id=3">Engineering</a>
+          <a href="industry-details.html?id=4">IT & Software</a>
+        </div>
+        
+        <div class="footer-links">
+          <h4>Contact Us</h4>
+          <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 8px;">No. 29, 2nd Floor, CMH Road, Indiranagar, Bangalore - 560038</p>
+          <p style="color: var(--text-muted); font-size: 0.9rem;">Email: contact@placementkeepers.com</p>
+        </div>
+      </div>
+      
+      <div class="footer-bottom">
+        <p>&copy; 2026 Placement Keepers People Pulse Pvt. Ltd. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Script logic to load dynamic industry info -->
+  <script>
+    // Theme Manager
+    const body = document.body;
+    const themeToggle = document.getElementById('themeToggle');
+    const savedTheme = localStorage.getItem('theme');
+    const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    
+    if (savedTheme === 'dark' || (!savedTheme && systemPrefersDark)) {
+      body.classList.add('dark-theme');
+    } else {
+      body.classList.remove('dark-theme');
+    }
+    
+    themeToggle.addEventListener('click', () => {
+      body.classList.toggle('dark-theme');
+      const activeTheme = body.classList.contains('dark-theme') ? 'dark' : 'light';
+      localStorage.setItem('theme', activeTheme);
+    });
+
+    // Industry Data Dictionary
+    const industryDetailsData = {
+      0: {
+        title: "Manufacturing Industries",
+        badge: "ISO 9001 Vetted",
+        desc: "Our manufacturing recruitment team has extensive experience placing highly skilled personnel across automated factories, production plants, and engineering floors. We understand the critical importance of assembly line throughput, safety standards, and quality controls.",
+        icon: `<svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 9.172V5L8 4z"></path></svg>`,
+        img: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=800&q=80",
+        roles: ["CNC Operators", "Assembly Line Staff", "Production Supervisors", "Quality Inspectors", "Plant Engineers", "Logistics Handlers", "Industrial Safety Officers", "Maintenance Technicians"],
+        approach: "We perform rigorous skill vetting and verification of equipment handling certifications. Our recruitment models accommodate both direct permanent staffing and bulk temporary manpower support during seasonal production cycles.",
+        stats: {
+          "Candidates Placed": "1,200+",
+          "Average SLA Match": "48 Hours",
+          "Verification Pass": "100%",
+          "Retention Rate": "94%"
+        }
+      },
+      1: {
+        title: "Automobile Sector",
+        badge: "EV & Tech Compliant",
+        desc: "Sourcing for the automotive vertical requires matching deep technical engineering capabilities with practical assembly expertise. We support traditional automobile giants and cutting-edge EV developers in assembling design, production, and testing units.",
+        icon: `<svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>`,
+        img: "https://images.unsplash.com/photo-1617788138017-80ad40651399?auto=format&fit=crop&w=800&q=80",
+        roles: ["CAD Design Engineers", "Automobile Mechanics", "EV Battery Specialists", "Quality Assurance Engineers", "Robotics Technicians", "Tool & Die Designers", "Auto Assembly Workers", "Product Managers"],
+        approach: "We utilize specialized industry recruiters who screen candidates for high familiarity with advanced computer-aided design tools (like SolidWorks or CATIA) and modern electric powertrain architectures.",
+        stats: {
+          "Candidates Placed": "850+",
+          "Design Engineer SLA": "72 Hours",
+          "EV Specialist Match": "96%",
+          "Contract-to-Hire Rate": "88%"
+        }
+      },
+      2: {
+        title: "Logistics & Transport",
+        badge: "Supply Chain Precision",
+        desc: "Efficient supply chain management is the backbone of modern retail and commerce. We specialize in volume hiring and support staffing requirements for warehouses, shipping lines, and distribution networks, ensuring high logistics reliability.",
+        icon: `<svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17a2 2 0 11-4 0 2 2 0 014 0zM19 17a2 2 0 11-4 0 2 2 0 014 0zM13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h1m8-1a1 1 0 01-1 1H9m4-1V8a1 1 0 011-1h2.586a1 1 0 01.707.293l2.414 2.414a1 1 0 01.293.707V15a1 1 0 01-1 1h-1m-6 0a2 2 0 002-2h2a2 2 0 002 2m0 0V9a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path></svg>`,
+        img: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=800&q=80",
+        roles: ["Warehouse Supervisors", "Supply Chain Analysts", "Inventory Planners", "Distribution Coordinators", "Commercial Fleet Operators", "Forklift Operators", "Loading Supervisors", "Logistics Admins"],
+        approach: "We conduct strict background vetting, commercial license verifications, and drug screenings. Our system maintains a ready pool of pre-screened logistic candidates to address peak retail seasons.",
+        stats: {
+          "Candidates Placed": "1,500+",
+          "Shift Staffing SLA": "24 Hours",
+          "Background Check Pass": "100%",
+          "Seasonal Ramp Time": "48 Hours"
+        }
+      },
+      3: {
+        title: "Engineering Services",
+        badge: "Core Engineering Domain",
+        desc: "Sourcing for civil, mechanical, structural, and electrical engineering positions requires validation of professional expertise. We support structural consultancies, construction firms, and product R&D laboratories in building elite technical panels.",
+        icon: `<svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>`,
+        img: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=800&q=80",
+        roles: ["Mechanical Design Engineers", "Structural Civil Engineers", "Electrical Grid Architects", "Project Site Supervisors", "CAD Draftsmen", "R&D Specialists", "Quality Assurance Engineers", "Cost Estimators"],
+        approach: "We coordinate portfolio assessments and check academic and professional board registration details to ensure full compliance with civil and structural regulation authorities.",
+        stats: {
+          "Candidates Placed": "650+",
+          "Project Manager SLA": "5 Days",
+          "Verification Match": "100%",
+          "Client Retention": "96%"
+        }
+      },
+      4: {
+        title: "IT & Software Engineering",
+        badge: "Vetted Tech Talents",
+        desc: "Sourcing for tech teams demands speed and deep technical evaluation. Our specialized IT recruiters screen candidates across full-stack development, cloud infrastructure, QA, product strategy, and cybersecurity domains.",
+        icon: `<svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>`,
+        img: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=800&q=80",
+        roles: ["Frontend Developers", "Backend Engineers", "DevOps & Cloud Engineers", "Cybersecurity Architects", "UI/UX Product Designers", "Product Managers", "QA Automation Analysts", "Scrum Masters"],
+        approach: "We utilize code assessment platforms to verify the technical caliber of candidates before introducing them. We focus heavily on engineering excellence, scalable design patterns, and agile workflows.",
+        stats: {
+          "Candidates Placed": "500+",
+          "Average Sourcing SLA": "48 Hours",
+          "Assessment Match Rate": "92%",
+          "Contract Extension Rate": "89%"
+        }
+      },
+      5: {
+        title: "BPO Services & Sales Support",
+        badge: "High Efficiency Staffing",
+        desc: "High volume BPO operations and sales departments need candidates with strong communication, typing, and troubleshooting capabilities. We manage large-scale staffing campaigns to place customer service agents, helpdesks, and sales support teams.",
+        icon: `<svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>`,
+        img: "https://images.unsplash.com/photo-1549923746-c502d488b3ea?auto=format&fit=crop&w=800&q=80",
+        roles: ["Customer Care Agents", "Inside Sales Reps", "Technical Support Admins", "Back Office Executives", "Billing Coordinators", "Rotational Shift Operators", "CRM Data Entry Clerks", "Team Leaders"],
+        approach: "We conduct voice testing, typing speed diagnostics, and active empathy assessments to screen candidate performance. Our volume hiring methods ensure high ramp-up speeds with low staff turnover rates.",
+        stats: {
+          "Candidates Placed": "2,000+",
+          "Batch Ramp-up SLA": "5 Days",
+          "Rotational Slot Fill": "99%",
+          "Retention Guarantee": "120 Days"
+        }
+      }
+    };
+
+    // Load dynamic parameters
+    const getQueryParam = (name) => {
+      const urlParams = new URLSearchParams(window.location.search);
+      return urlParams.get(name);
+    };
+
+    const industryId = parseInt(getQueryParam('id')) || 0;
+    const data = industryDetailsData[industryId] || industryDetailsData[0];
+
+    // Load content dynamically
+    document.title = `${data.title} | Placement Keepers People Pulse`;
+
+    const detailsMainCard = document.getElementById('detailsMainCard');
+    const sidebarImageWidget = document.getElementById('sidebarImageWidget');
+    const sidebarStatsWidget = document.getElementById('sidebarStatsWidget');
+
+    // Load Main Details Card
+    let rolesHtml = '';
+    data.roles.forEach(role => {
+      rolesHtml += `
+        <div class="role-item">
+          <span class="role-bullet"></span>
+          <span>${role}</span>
+        </div>
+      `;
+    });
+
+    detailsMainCard.innerHTML = `
+      <div class="details-title-section">
+        <div class="details-icon">${data.icon}</div>
+        <div>
+          <h2 class="details-title">${data.title}</h2>
+          <span class="details-badge">${data.badge}</span>
+        </div>
+      </div>
+      
+      <p class="details-text">${data.desc}</p>
+      
+      <div class="roles-section">
+        <h3 class="roles-title">
+          <svg style="width: 24px; height: 24px; color: var(--primary);" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+          </svg>
+          Core Roles We Recruit
+        </h3>
+        <div class="roles-grid">
+          ${rolesHtml}
+        </div>
+      </div>
+      
+      <div class="approach-section">
+        <h3 class="approach-title">Sourcing & Screening Approach</h3>
+        <p class="approach-text">${data.approach}</p>
+        <p class="approach-text">Our deep industry integration allows us to filter candidates based on actual performance, past employer feedback, and practical technical tests, saving hours of interviewer evaluation time for our clients.</p>
+      </div>
+    `;
+
+    // Load Sidebar Image
+    sidebarImageWidget.innerHTML = `
+      <img src="${data.img}" alt="${data.title}">
+    `;
+
+    // Load Sidebar Stats
+    let statsHtml = '';
+    for (const [key, value] of Object.entries(data.stats)) {
+      statsHtml += `
+        <div class="stat-row">
+          <span style="font-size: 0.95rem; color: rgba(255,255,255,0.7); font-weight: 500;">${key}</span>
+          <span class="stat-val">${value}</span>
+        </div>
+      `;
+    }
+    sidebarStatsWidget.innerHTML = statsHtml;
+  </script>
+</body>
+</html>

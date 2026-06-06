@@ -78,6 +78,18 @@
           </svg>
           Manage Gallery
         </button>
+        <button class="sidebar-btn" data-tab="panel-openings">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+          </svg>
+          Manage Openings
+        </button>
+        <button class="sidebar-btn" data-tab="panel-testimonials">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
+          </svg>
+          Manage Testimonials
+        </button>
         <button class="sidebar-btn" data-tab="panel-leads">
           <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
@@ -148,6 +160,30 @@
             <div class="overview-details">
               <h4>Total Inquiries</h4>
               <p id="stat-leads">0</p>
+            </div>
+          </div>
+          
+          <div class="overview-card glass-panel">
+            <div class="overview-icon">
+              <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+              </svg>
+            </div>
+            <div class="overview-details">
+              <h4>Job Openings</h4>
+              <p id="stat-openings">0</p>
+            </div>
+          </div>
+          
+          <div class="overview-card glass-panel">
+            <div class="overview-icon">
+              <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
+              </svg>
+            </div>
+            <div class="overview-details">
+              <h4>Testimonials</h4>
+              <p id="stat-testimonials">0</p>
             </div>
           </div>
         </div>
@@ -354,6 +390,199 @@
             </svg>
             <h3>No inquiries recorded yet</h3>
             <p>Your incoming contact form submits will display in this table log.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================
+           TAB PANEL: OPENINGS / CAREERS MANAGEMENT
+           ========================================== -->
+      <section id="panel-openings" class="admin-panel">
+        <div class="admin-panel-header">
+          <h2 class="admin-panel-title">Manage <span>Job Openings</span></h2>
+        </div>
+        
+        <div class="admin-form-container">
+          <!-- Job Opening Form -->
+          <div class="admin-form-box glass-panel">
+            <h3 id="jobFormTitle" style="font-family: var(--font-heading); font-size: 1.25rem; font-weight: 700; margin-bottom: 24px;">Post New Job Opening</h3>
+            <form id="jobForm">
+              <input type="hidden" id="jobEditId">
+              
+              <div class="form-group">
+                <label for="jobTitleInput" class="form-label">Job Title</label>
+                <input id="jobTitleInput" type="text" class="form-control" placeholder="E.g., Production Supervisor" required>
+              </div>
+              
+              <div class="form-group-row">
+                <div class="form-group">
+                  <label for="jobCompanyInput" class="form-label">Company Name</label>
+                  <input id="jobCompanyInput" type="text" class="form-control" placeholder="E.g., TVS Motor Company" required>
+                </div>
+                <div class="form-group">
+                  <label for="jobLocationInput" class="form-label">Location</label>
+                  <input id="jobLocationInput" type="text" class="form-control" placeholder="E.g., Hosur, Tamil Nadu" required>
+                </div>
+              </div>
+              
+              <div class="form-group-row">
+                <div class="form-group">
+                  <label for="jobExpInput" class="form-label">Experience Required</label>
+                  <input id="jobExpInput" type="text" class="form-control" placeholder="E.g., 2-4 Years" required>
+                </div>
+                <div class="form-group">
+                  <label for="jobSalaryInput" class="form-label">Salary Details</label>
+                  <input id="jobSalaryInput" type="text" class="form-control" placeholder="E.g., ₹4,00,000 - ₹5,50,000 P.A." required>
+                </div>
+              </div>
+              
+              <div class="form-group-row">
+                <div class="form-group">
+                  <label for="jobVacanciesInput" class="form-label">Number of Vacancies</label>
+                  <input id="jobVacanciesInput" type="number" class="form-control" placeholder="E.g., 5" min="1" required>
+                </div>
+                <div class="form-group">
+                  <label for="jobContactInput" class="form-label">Apply Email / Contact Details</label>
+                  <input id="jobContactInput" type="text" class="form-control" placeholder="E.g., careers@tvs.co.in or +91..." required>
+                </div>
+              </div>
+              
+              <div class="form-group">
+                <label for="jobDescInput" class="form-label">Job Description</label>
+                <textarea id="jobDescInput" class="form-control" placeholder="Briefly describe key roles, responsibilities, and qualifications..." style="min-height: 120px;" required></textarea>
+              </div>
+              
+              <div class="form-group" style="display: flex; align-items: center; gap: 10px; margin-bottom: 24px;">
+                <input id="jobActiveInput" type="checkbox" checked style="width: 20px; height: 20px; accent-color: var(--primary); cursor: pointer;">
+                <label for="jobActiveInput" class="form-label" style="margin-bottom: 0; cursor: pointer; font-weight: 600;">Mark opening as Active (visible on live website)</label>
+              </div>
+              
+              <div style="display: flex; gap: 12px;">
+                <button type="submit" id="jobSubmitBtn" class="btn btn-primary" style="flex: 2;">Post Job Opening</button>
+                <button type="button" id="jobCancelEditBtn" class="btn btn-secondary" style="flex: 1; display: none;">Cancel Edit</button>
+              </div>
+            </form>
+          </div>
+          
+          <!-- Live Preview Card & Existing List -->
+          <div>
+            <div class="preview-box-title">Live Preview Card</div>
+            <div class="preview-container" style="margin-bottom: 40px; pointer-events: none;">
+              <div class="job-card glass-panel" style="margin: 0; width: 100%;">
+                <div class="job-card-header">
+                  <h3 id="prevJobTitle" class="job-title">Job Title</h3>
+                  <div class="job-company">
+                    <svg style="width: 16px; height: 16px;" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
+                    <span id="prevJobCompany">Company Name</span>
+                  </div>
+                  <div class="job-location">
+                    <svg style="width: 14px; height: 14px;" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                    <span id="prevJobLocation">Location</span>
+                  </div>
+                </div>
+                <div class="job-details-pills">
+                  <span id="prevJobExp" class="job-pill job-pill-primary">Experience Required</span>
+                  <span id="prevJobSalary" class="job-pill">Salary Details</span>
+                </div>
+                <p id="prevJobDesc" class="job-desc">Job description preview will populate here as you type...</p>
+                <div class="job-footer">
+                  <div class="job-vacancies">
+                    <span id="prevJobVacancies">1</span> vacancy
+                  </div>
+                  <span class="badge-status active" id="prevJobStatus" style="font-size: 0.7rem;">Active</span>
+                </div>
+              </div>
+            </div>
+            
+            <div class="preview-box-title">Existing Job Openings</div>
+            <div id="jobsList" class="manage-list">
+              <!-- Rendered dynamically -->
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================
+           TAB PANEL: TESTIMONIALS MANAGEMENT
+           ========================================== -->
+      <section id="panel-testimonials" class="admin-panel">
+        <div class="admin-panel-header">
+          <h2 class="admin-panel-title">Manage <span>Testimonials</span></h2>
+        </div>
+        
+        <div class="admin-form-container">
+          <!-- Testimonial Form -->
+          <div class="admin-form-box glass-panel">
+            <h3 id="testimonialFormTitle" style="font-family: var(--font-heading); font-size: 1.25rem; font-weight: 700; margin-bottom: 24px;">Add New Testimonial</h3>
+            <form id="testimonialForm">
+              <input type="hidden" id="testimonialEditId">
+              
+              <div class="form-group">
+                <label for="testimonialAuthorInput" class="form-label">Client/Candidate Name</label>
+                <input id="testimonialAuthorInput" type="text" class="form-control" placeholder="E.g., Rajesh Kumar" required>
+              </div>
+              
+              <div class="form-group-row">
+                <div class="form-group">
+                  <label for="testimonialCompanyInput" class="form-label">Company Name / Designation</label>
+                  <input id="testimonialCompanyInput" type="text" class="form-control" placeholder="E.g., HR Manager at TVS Motor" required>
+                </div>
+                <div class="form-group">
+                  <label for="testimonialRatingInput" class="form-label">Rating</label>
+                  <select id="testimonialRatingInput" class="form-control" style="background-color: var(--bg-surface); cursor: pointer;" required>
+                    <option value="5">5 Stars</option>
+                    <option value="4">4 Stars</option>
+                    <option value="3">3 Stars</option>
+                    <option value="2">2 Stars</option>
+                    <option value="1">1 Star</option>
+                  </select>
+                </div>
+              </div>
+              
+              <div class="form-group">
+                <label for="testimonialTextInput" class="form-label">Testimonial Feedback / Review</label>
+                <textarea id="testimonialTextInput" class="form-control" placeholder="What did they say about Placement Keepers People Pulse..." style="min-height: 120px;" required></textarea>
+              </div>
+              
+              <div class="form-group" style="display: flex; align-items: center; gap: 10px; margin-bottom: 24px;">
+                <input id="testimonialActiveInput" type="checkbox" checked style="width: 20px; height: 20px; accent-color: var(--primary); cursor: pointer;">
+                <label for="testimonialActiveInput" class="form-label" style="margin-bottom: 0; cursor: pointer; font-weight: 600;">Mark testimonial as Active (visible on live website)</label>
+              </div>
+              
+              <div style="display: flex; gap: 12px;">
+                <button type="submit" id="testimonialSubmitBtn" class="btn btn-primary" style="flex: 2;">Add Testimonial</button>
+                <button type="button" id="testimonialCancelEditBtn" class="btn btn-secondary" style="flex: 1; display: none;">Cancel Edit</button>
+              </div>
+            </form>
+          </div>
+          
+          <!-- Live Preview Card & Existing List -->
+          <div>
+            <div class="preview-box-title">Live Preview Card</div>
+            <div class="preview-container" style="margin-bottom: 40px; pointer-events: none;">
+              <!-- Testimonial card structure -->
+              <div class="testimonial-card glass-panel" style="margin: 0; width: 100%; padding: 24px; border-radius: var(--radius-md); position: relative; border: 1px solid var(--border-color); background: var(--glass-bg); backdrop-filter: blur(var(--glass-blur));">
+                <div class="testimonial-quote-icon" style="color: var(--primary); font-size: 2rem; line-height: 1; margin-bottom: 8px;">&ldquo;</div>
+                <p id="prevTestimonialText" class="testimonial-text" style="font-size: 0.9rem; color: var(--text-muted); font-style: italic; line-height: 1.5; margin-bottom: 16px;">Testimonial review text will populate here as you type...</p>
+                <div class="testimonial-rating" id="prevTestimonialRating" style="display: flex; gap: 4px; margin-bottom: 16px; color: #fbbf24; font-size: 1rem;">
+                  ★★★★★
+                </div>
+                <div style="display: flex; align-items: center; gap: 12px;">
+                  <div id="prevTestimonialAvatar" style="width: 40px; height: 40px; border-radius: 50%; background-color: var(--primary-glow); color: var(--primary); font-weight: 700; font-size: 0.95rem; display: flex; align-items: center; justify-content: center; font-family: var(--font-heading);">
+                    RK
+                  </div>
+                  <div>
+                    <h5 id="prevTestimonialAuthor" style="font-family: var(--font-heading); font-size: 0.9rem; font-weight: 700; color: var(--text-main); margin-bottom: 2px;">Rajesh Kumar</h5>
+                    <span id="prevTestimonialCompany" style="font-size: 0.75rem; color: var(--text-muted);">HR Manager at TVS Motor</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="preview-box-title">Existing Testimonials</div>
+            <div id="testimonialsList" class="manage-list">
+              <!-- Rendered dynamically -->
+            </div>
           </div>
         </div>
       </section>
@@ -815,12 +1044,103 @@ function uploadToDrive(data) {
 
       function loadDashboardData() {
         const googleSheetsUrl = localStorage.getItem('google_sheets_url');
+        
+        // Seed job openings if not present
+        if (!localStorage.getItem('job_openings')) {
+          const defaultJobs = [
+            {
+              id: "job_1",
+              title: "Senior Full-Stack Developer",
+              company: "Placement Keepers People Pulse",
+              location: "Bangalore, Karnataka",
+              experience: "5+ Years",
+              salary: "₹12,0,000 - ₹18,00,000 P.A.",
+              description: "We are seeking a senior engineer to manage internal recruitment tools, client-facing applicant systems, and database integrations. Experience with modern front-end frameworks and Node.js is required.",
+              vacancies: "2",
+              contact: "careers@pkpeople.com",
+              active: true
+            },
+            {
+              id: "job_2",
+              title: "Production Planning Control (PPC) Engineer",
+              company: "Indo-MIM Private Limited",
+              location: "Bangalore, Karnataka",
+              experience: "3-6 Years",
+              salary: "₹6,00,000 - ₹9,00,000 P.A.",
+              description: "Oversee process planning for Metal Injection Molding, establish daily scheduling baselines, coordinate logistics, and manage high-volume manufacturing capacities.",
+              vacancies: "4",
+              contact: "hr@indomim.com",
+              active: true
+            },
+            {
+              id: "job_3",
+              title: "Quality Control Inspector",
+              company: "TVS Motor Company",
+              location: "Hosur, Tamil Nadu",
+              experience: "2-4 Years",
+              salary: "₹4,00,000 - ₹5,50,000 P.A.",
+              description: "Conduct dimensional audits on two-wheeler vehicle chassis, log defect rates, and coordinate with assembly floor managers to maintain ISO compliance.",
+              vacancies: "5",
+              contact: "careers@tvs.co.in",
+              active: true
+            },
+            {
+              id: "job_4",
+              title: "Structural Design Engineer",
+              company: "Palanisami Constructions Private Limited",
+              location: "Coimbatore, Tamil Nadu",
+              experience: "4+ Years",
+              salary: "₹7,50,000 - ₹11,00,000 P.A.",
+              description: "Develop structural layouts, perform load calculations using STAAD.Pro, and review building designs to ensure conformance with local construction standards.",
+              vacancies: "1",
+              contact: "hr@palanisamiconstructions.com",
+              active: true
+            }
+          ];
+          localStorage.setItem('job_openings', JSON.stringify(defaultJobs));
+        }
+
+        // Initialize Testimonials database if it doesn't exist
+        if (!localStorage.getItem('testimonials')) {
+          const defaultTestimonials = [
+            {
+              id: "testi-1",
+              author: "Rajesh Kumar",
+              company: "HR Lead at TVS Motor Company",
+              text: "Placement Keepers has been an invaluable staffing partner. They successfully placed over 50 skilled machine operators in Hosur within a record 5-day window. Their payroll compliance handling is completely error-free.",
+              rating: 5,
+              active: true
+            },
+            {
+              id: "testi-2",
+              author: "Meera Sen",
+              company: "Senior Operations Director at Foxconn",
+              text: "For our seasonal electronic manufacturing ramp-ups, the contract staffing from People Pulse has been top-notch. Highly professional onboarding, transparent timesheet management, and immediate replacement when required.",
+              rating: 5,
+              active: true
+            },
+            {
+              id: "testi-3",
+              author: "Amit Varma",
+              company: "Engineering Head at Indo-MIM",
+              text: "Their IT staff augmentation team provided us with three exceptional Senior CAD Engineers on short notice. Outstanding technical vetting and extremely reliable performance tracking.",
+              rating: 5,
+              active: true
+            }
+          ];
+          localStorage.setItem('testimonials', JSON.stringify(defaultTestimonials));
+        }
+
         const galleryItems = JSON.parse(localStorage.getItem('gallery_items')) || [];
         const leads = JSON.parse(localStorage.getItem('contact_submissions')) || [];
+        const jobs = JSON.parse(localStorage.getItem('job_openings')) || [];
+        const testimonials = JSON.parse(localStorage.getItem('testimonials')) || [];
 
-        // 1. Update Gallery & Leads overview counts
+        // 1. Update Gallery, Leads, Openings & Testimonials overview counts
         document.getElementById('stat-images').textContent = galleryItems.length;
         document.getElementById('stat-leads').textContent = leads.length;
+        document.getElementById('stat-openings').textContent = jobs.length;
+        document.getElementById('stat-testimonials').textContent = testimonials.length;
 
         // Render articles list helper
         const displayArticlesList = (articles) => {
@@ -889,6 +1209,37 @@ function uploadToDrive(data) {
 
         // 4. Inquiries Log List
         renderLeadsTable(leads);
+
+        // 5. Manage Job Openings List
+        const jobsList = document.getElementById('jobsList');
+        if (jobsList) {
+          jobsList.innerHTML = '';
+          jobs.forEach(job => {
+            const item = document.createElement('div');
+            item.className = 'manage-item';
+            
+            const activeBadge = job.active 
+              ? '<span class="badge-status active">Active</span>' 
+              : '<span class="badge-status inactive">Inactive</span>';
+
+            item.innerHTML = `
+              <div class="manage-item-info">
+                <div class="manage-item-text" style="padding-left: 0;">
+                  <h4 style="font-size:1.1rem; font-weight:700;">${job.title}</h4>
+                  <p style="font-size:0.85rem; color:var(--text-muted); margin-top:2px;">
+                    ${job.company} • ${job.location} • ${activeBadge}
+                  </p>
+                </div>
+              </div>
+              <div style="display: flex; gap: 8px;">
+                <button class="btn btn-secondary btn-sm edit-job-btn" data-id="${job.id}" style="padding: 6px 12px; font-size: 0.8rem;">Edit</button>
+                <button class="btn-danger delete-job-btn" data-id="${job.id}" style="padding: 6px 12px; font-size: 0.8rem; border-radius:var(--radius-sm);">Delete</button>
+              </div>
+            `;
+            jobsList.appendChild(item);
+          });
+          bindJobActionButtons();
+        }
       }
 
       // Render leads table helper with filters
@@ -1289,6 +1640,174 @@ function uploadToDrive(data) {
             alert('Failed to copy. Please select the code manually.');
           });
       });
+
+      // ==========================================
+      // A6. CAREERS / JOB OPENINGS MANAGEMENT
+      // ==========================================
+      const jobForm = document.getElementById('jobForm');
+      const jobSubmitBtn = document.getElementById('jobSubmitBtn');
+      const jobCancelEditBtn = document.getElementById('jobCancelEditBtn');
+      const jobEditId = document.getElementById('jobEditId');
+
+      // Form inputs
+      const jobTitleInput = document.getElementById('jobTitleInput');
+      const jobCompanyInput = document.getElementById('jobCompanyInput');
+      const jobLocationInput = document.getElementById('jobLocationInput');
+      const jobExpInput = document.getElementById('jobExpInput');
+      const jobSalaryInput = document.getElementById('jobSalaryInput');
+      const jobVacanciesInput = document.getElementById('jobVacanciesInput');
+      const jobContactInput = document.getElementById('jobContactInput');
+      const jobDescInput = document.getElementById('jobDescInput');
+      const jobActiveInput = document.getElementById('jobActiveInput');
+
+      // Previews
+      const prevJobTitle = document.getElementById('prevJobTitle');
+      const prevJobCompany = document.getElementById('prevJobCompany');
+      const prevJobLocation = document.getElementById('prevJobLocation');
+      const prevJobExp = document.getElementById('prevJobExp');
+      const prevJobSalary = document.getElementById('prevJobSalary');
+      const prevJobDesc = document.getElementById('prevJobDesc');
+      const prevJobVacancies = document.getElementById('prevJobVacancies');
+      const prevJobStatus = document.getElementById('prevJobStatus');
+
+      const updateJobPreview = () => {
+        if (!prevJobTitle) return;
+        prevJobTitle.textContent = jobTitleInput.value.trim() !== '' ? jobTitleInput.value.trim() : 'Job Title';
+        prevJobCompany.textContent = jobCompanyInput.value.trim() !== '' ? jobCompanyInput.value.trim() : 'Company Name';
+        prevJobLocation.textContent = jobLocationInput.value.trim() !== '' ? jobLocationInput.value.trim() : 'Location';
+        prevJobExp.textContent = jobExpInput.value.trim() !== '' ? jobExpInput.value.trim() : 'Experience Required';
+        prevJobSalary.textContent = jobSalaryInput.value.trim() !== '' ? jobSalaryInput.value.trim() : 'Salary Details';
+        prevJobDesc.textContent = jobDescInput.value.trim() !== '' ? jobDescInput.value.trim() : 'Job description preview will populate here as you type...';
+        prevJobVacancies.textContent = jobVacanciesInput.value.trim() !== '' ? jobVacanciesInput.value.trim() : '1';
+        
+        if (jobActiveInput.checked) {
+          prevJobStatus.textContent = 'Active';
+          prevJobStatus.className = 'badge-status active';
+        } else {
+          prevJobStatus.textContent = 'Inactive';
+          prevJobStatus.className = 'badge-status inactive';
+        }
+      };
+
+      // Bind input events for live preview
+      [jobTitleInput, jobCompanyInput, jobLocationInput, jobExpInput, jobSalaryInput, jobVacanciesInput, jobContactInput, jobDescInput].forEach(input => {
+        if (input) input.addEventListener('input', updateJobPreview);
+      });
+      if (jobActiveInput) jobActiveInput.addEventListener('change', updateJobPreview);
+
+      // Reset form & preview
+      const resetJobForm = () => {
+        if (!jobForm) return;
+        jobForm.reset();
+        jobEditId.value = '';
+        jobSubmitBtn.textContent = 'Post Job Opening';
+        jobCancelEditBtn.style.display = 'none';
+        document.getElementById('jobFormTitle').textContent = 'Post New Job Opening';
+        updateJobPreview();
+      };
+
+      if (jobCancelEditBtn) {
+        jobCancelEditBtn.addEventListener('click', resetJobForm);
+      }
+
+      // Submit form: Add / Update Job
+      if (jobForm) {
+        jobForm.addEventListener('submit', (e) => {
+          e.preventDefault();
+
+          const jobs = JSON.parse(localStorage.getItem('job_openings')) || [];
+          const editId = jobEditId.value;
+
+          const jobData = {
+            title: jobTitleInput.value.trim(),
+            company: jobCompanyInput.value.trim(),
+            location: jobLocationInput.value.trim(),
+            experience: jobExpInput.value.trim(),
+            salary: jobSalaryInput.value.trim(),
+            vacancies: jobVacanciesInput.value.trim(),
+            contact: jobContactInput.value.trim(),
+            description: jobDescInput.value.trim(),
+            active: jobActiveInput.checked
+          };
+
+          if (editId) {
+            // Edit mode
+            const index = jobs.findIndex(j => j.id === editId);
+            if (index !== -1) {
+              jobs[index] = { ...jobs[index], ...jobData, id: editId };
+              localStorage.setItem('job_openings', JSON.stringify(jobs));
+              alert('Job opening updated successfully!');
+            }
+          } else {
+            // Add mode
+            jobData.id = 'job_' + Date.now();
+            jobs.unshift(jobData);
+            localStorage.setItem('job_openings', JSON.stringify(jobs));
+            alert('Job opening posted successfully!');
+          }
+
+          resetJobForm();
+          loadDashboardData();
+          
+          // Refresh home page openings list if open in parent
+          if (window.opener && window.opener.refreshJobsOnHome) {
+            window.opener.refreshJobsOnHome();
+          }
+        });
+      }
+
+      // Bind edit/delete triggers on jobs list
+      function bindJobActionButtons() {
+        // Edit Opening
+        document.querySelectorAll('.edit-job-btn').forEach(btn => {
+          btn.addEventListener('click', () => {
+            const id = btn.getAttribute('data-id');
+            const jobs = JSON.parse(localStorage.getItem('job_openings')) || [];
+            const job = jobs.find(j => j.id === id);
+            if (!job) return;
+
+            // Populate form
+            jobEditId.value = job.id;
+            jobTitleInput.value = job.title;
+            jobCompanyInput.value = job.company;
+            jobLocationInput.value = job.location;
+            jobExpInput.value = job.experience;
+            jobSalaryInput.value = job.salary;
+            jobVacanciesInput.value = job.vacancies;
+            jobContactInput.value = job.contact;
+            jobDescInput.value = job.description;
+            jobActiveInput.checked = job.active;
+
+            // Update UI styles
+            jobSubmitBtn.textContent = 'Save Changes';
+            jobCancelEditBtn.style.display = 'inline-flex';
+            document.getElementById('jobFormTitle').textContent = 'Edit Job Opening';
+            
+            updateJobPreview();
+            
+            // Scroll to form
+            document.getElementById('jobFormTitle').scrollIntoView({ behavior: 'smooth' });
+          });
+        });
+
+        // Delete Opening
+        document.querySelectorAll('.delete-job-btn').forEach(btn => {
+          btn.addEventListener('click', () => {
+            if (confirm('Are you sure you want to delete this job opening? This cannot be undone.')) {
+              const id = btn.getAttribute('data-id');
+              let jobs = JSON.parse(localStorage.getItem('job_openings')) || [];
+              jobs = jobs.filter(j => j.id !== id);
+              localStorage.setItem('job_openings', JSON.stringify(jobs));
+              
+              loadDashboardData();
+
+              if (window.opener && window.opener.refreshJobsOnHome) {
+                window.opener.refreshJobsOnHome();
+              }
+            }
+          });
+        });
+      }
 
     });
   </script>
