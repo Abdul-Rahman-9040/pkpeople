@@ -1,0 +1,974 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Manage Articles - Placement Keepers People Pulse Admin">
+  <title>Manage Articles | Admin Dashboard</title>
+  <link rel="icon" type="image/x-icon" href="assets/images/logo.jpeg">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    body { background-color: var(--bg-base); }
+
+    /* ── Page-level table styles ── */
+    .art-table-wrap { overflow-x: auto; border-radius: var(--radius-md); }
+
+    .art-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.875rem;
+    }
+    .art-table thead th {
+      background: var(--bg-surface);
+      color: var(--text-muted);
+      font-weight: 700;
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      padding: 14px 16px;
+      text-align: left;
+      border-bottom: 1px solid var(--border-color);
+      white-space: nowrap;
+      cursor: pointer;
+      user-select: none;
+      transition: color 0.2s;
+    }
+    .art-table thead th:hover { color: var(--primary); }
+    .art-table thead th .sort-icon { margin-left: 4px; opacity: 0.4; font-size: 0.65rem; }
+    .art-table thead th.sorted-asc .sort-icon::after  { content: " ▲"; opacity: 1; color: var(--primary); }
+    .art-table thead th.sorted-desc .sort-icon::after { content: " ▼"; opacity: 1; color: var(--primary); }
+    .art-table thead th:not(.sorted-asc):not(.sorted-desc) .sort-icon::after { content: " ⇅"; }
+
+    .art-table tbody tr {
+      border-bottom: 1px solid var(--border-color);
+      transition: background 0.15s;
+    }
+    .art-table tbody tr:last-child { border-bottom: none; }
+    .art-table tbody tr:hover { background: rgba(99,102,241,0.04); }
+    .art-table tbody tr.selected-row { background: rgba(99,102,241,0.08); }
+
+    .art-table td {
+      padding: 14px 16px;
+      vertical-align: middle;
+      color: var(--text-main);
+    }
+
+    .art-thumb {
+      width: 56px;
+      height: 42px;
+      object-fit: cover;
+      border-radius: 6px;
+      border: 1px solid var(--border-color);
+      background: var(--bg-surface);
+    }
+    .art-title-cell h4 {
+      font-weight: 700;
+      font-size: 0.9rem;
+      color: var(--text-main);
+      margin: 0 0 3px;
+      line-height: 1.3;
+    }
+    .art-title-cell p {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin: 0;
+    }
+
+    .badge-cat {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 20px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      background: var(--primary-glow);
+      color: var(--primary);
+      white-space: nowrap;
+    }
+
+    .art-desc-cell {
+      max-width: 240px;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      line-height: 1.4;
+      overflow: hidden;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+    }
+
+    .art-actions { display: flex; gap: 8px; align-items: center; }
+
+    /* Pagination */
+    .pagination-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-top: 20px;
+    }
+    .pagination-info { font-size: 0.82rem; color: var(--text-muted); }
+    .pagination-btns { display: flex; gap: 6px; }
+    .page-btn {
+      min-width: 36px;
+      height: 36px;
+      padding: 0 10px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border-color);
+      background: var(--bg-surface);
+      color: var(--text-main);
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .page-btn:hover { border-color: var(--primary); color: var(--primary); }
+    .page-btn.active { background: var(--primary); color: #fff; border-color: var(--primary); }
+    .page-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+    /* Toolbar */
+    .table-toolbar {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    .toolbar-search {
+      flex: 1;
+      min-width: 220px;
+      position: relative;
+    }
+    .toolbar-search svg {
+      position: absolute;
+      left: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 16px;
+      height: 16px;
+      color: var(--text-muted);
+    }
+    .toolbar-search input {
+      padding-left: 40px !important;
+    }
+    .per-page-select {
+      min-width: 130px;
+    }
+    .bulk-bar {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 16px;
+      border-radius: var(--radius-sm);
+      background: var(--primary-glow);
+      border: 1px solid rgba(99,102,241,0.25);
+      margin-bottom: 16px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--primary);
+      display: none;
+    }
+    .bulk-bar.visible { display: flex; }
+
+    /* Split layout: form + table */
+    .articles-layout {
+      display: grid;
+      grid-template-columns: 380px 1fr;
+      gap: 28px;
+      align-items: start;
+    }
+    @media (max-width: 1100px) {
+      .articles-layout { grid-template-columns: 1fr; }
+    }
+
+    .form-sticky {
+      position: sticky;
+      top: 24px;
+    }
+
+    /* Empty state */
+    .table-empty {
+      text-align: center;
+      padding: 60px 20px;
+      color: var(--text-muted);
+    }
+    .table-empty svg { width: 48px; height: 48px; margin: 0 auto 16px; display: block; opacity: 0.4; }
+    .table-empty h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 6px; color: var(--text-main); }
+    .table-empty p { font-size: 0.85rem; }
+
+    /* Live preview compact */
+    .preview-compact {
+      margin-top: 20px;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      border: 1px solid var(--border-color);
+    }
+    .preview-compact img {
+      width: 100%;
+      height: 140px;
+      object-fit: cover;
+    }
+    .preview-compact-body {
+      padding: 14px;
+      background: var(--bg-surface);
+    }
+    .preview-compact-body .badge-cat { margin-bottom: 8px; }
+    .preview-compact-body h4 { font-size: 0.95rem; font-weight: 700; margin-bottom: 4px; }
+    .preview-compact-body p { font-size: 0.78rem; color: var(--text-muted); line-height: 1.5; }
+  </style>
+</head>
+<body>
+
+  <!-- ── LOGIN OVERLAY ── -->
+  <div id="loginOverlay" class="admin-login-overlay">
+    <div class="login-card glass-panel">
+      <div class="login-logo">
+        <img src="assets/images/logo.jpeg" alt="Logo">
+        <h2>PLACEMENT KEEPERS</h2>
+        <span>Admin Portal</span>
+      </div>
+      <div id="loginError" class="login-error">Invalid admin credentials. Please try again.</div>
+      <form id="loginForm" novalidate>
+        <div class="form-group" style="text-align:left;">
+          <label for="username" class="form-label">Username</label>
+          <input type="text" id="username" class="form-control" placeholder="Enter username" required>
+        </div>
+        <div class="form-group" style="text-align:left; margin-bottom:30px;">
+          <label for="password" class="form-label">Password</label>
+          <input type="password" id="password" class="form-control" placeholder="Enter password" required>
+        </div>
+        <button type="submit" class="btn btn-primary" style="width:100%;">Unlock Dashboard</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ── MAIN WRAPPER ── -->
+  <div class="admin-wrapper">
+
+    <!-- Sidebar -->
+    <aside class="admin-sidebar">
+      <div class="sidebar-header" style="display:flex;flex-direction:column;align-items:center;gap:12px;padding:24px 20px;">
+        <img src="assets/images/logo.jpeg" alt="Logo" style="width:auto;max-width:100%;height:auto;max-height:48px;object-fit:contain;">
+        <div style="font-family:var(--font-heading);font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;color:var(--primary);text-align:center;line-height:1.2;">
+          Management Dashboard
+        </div>
+      </div>
+      <nav class="sidebar-menu">
+        <a href="admin.html" class="sidebar-btn">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2H6a2 2 0 01-2-2v-4zM14 16a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2h-2a2 2 0 01-2-2v-4z"></path></svg>
+          Overview
+        </a>
+        <a href="admin-articles.html" class="sidebar-btn active">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"></path></svg>
+          Manage Articles
+        </a>
+        <a href="admin-gallery.html" class="sidebar-btn">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+          Manage Gallery
+        </a>
+        <a href="admin-jobs.html" class="sidebar-btn">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+          Manage Openings
+        </a>
+        <a href="admin-testimonials.html" class="sidebar-btn">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path></svg>
+          Manage Testimonials
+        </a>
+        <a href="admin-leads.html" class="sidebar-btn">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+          Inquiries &amp; Leads
+        </a>
+        <a href="admin-integrations.html" class="sidebar-btn">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"></path></svg>
+          Google Sheets Config
+        </a>
+      </nav>
+      <div class="sidebar-footer">
+        <button id="logoutBtn" class="btn btn-secondary" style="width:100%;padding:10px;font-size:0.9rem;">
+          <svg style="width:18px;height:18px;margin-right:6px;vertical-align:middle;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
+          Lock Dashboard
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="admin-main">
+      <div class="admin-panel active">
+
+        <!-- Header -->
+        <div class="admin-panel-header">
+          <h2 class="admin-panel-title">Manage <span>Articles</span></h2>
+          <div style="display:flex;gap:10px;align-items:center;">
+            <span id="totalCount" style="font-size:0.82rem;color:var(--text-muted);font-weight:600;"></span>
+            <a href="index.html" class="btn btn-secondary" target="_blank">View Live Site</a>
+          </div>
+        </div>
+
+        <!-- Two-column layout: form (sticky) + table -->
+        <div class="articles-layout">
+
+          <!-- LEFT: Publish Form -->
+          <div class="form-sticky">
+            <div class="glass-panel" style="padding:28px;border-radius:var(--radius-md);">
+              <h3 style="font-family:var(--font-heading);font-size:1.15rem;font-weight:700;margin-bottom:22px;">
+                📝 Publish New Article
+              </h3>
+              <form id="articleForm">
+                <div class="form-group">
+                  <label for="artTitle" class="form-label">Article Title</label>
+                  <input id="artTitle" type="text" class="form-control" placeholder="E.g., Tech Hiring Trends 2025" required>
+                </div>
+                <div class="form-group">
+                  <label for="artCategory" class="form-label">Category</label>
+                  <input id="artCategory" type="text" class="form-control" placeholder="E.g., IT Sourcing" required>
+                </div>
+                <div class="form-group">
+                  <label for="artImage" class="form-label">Cover Image URL</label>
+                  <input id="artImage" type="url" class="form-control" placeholder="https://images.unsplash.com/...">
+                </div>
+                <div class="form-group" style="margin-bottom:8px;">
+                  <label for="artFileInput" class="form-label">Or Upload Cover Image</label>
+                  <input id="artFileInput" type="file" class="form-control" accept="image/*" style="padding:10px 14px;">
+                  <div style="font-size:0.7rem;color:var(--text-muted);margin-top:5px;">Uploads to Google Drive (Webhook required)</div>
+                </div>
+                <div class="form-group">
+                  <label for="artDesc" class="form-label">Short Summary</label>
+                  <textarea id="artDesc" class="form-control" placeholder="2-3 sentence overview..." style="min-height:72px;" required></textarea>
+                </div>
+                <div class="form-group">
+                  <label for="artContent" class="form-label">Full HTML Content</label>
+                  <textarea id="artContent" class="form-control" placeholder="<p>Full article...</p>" style="min-height:120px;" required></textarea>
+                </div>
+                <button type="submit" id="artSubmitBtn" class="btn btn-primary" style="width:100%;">Publish Article</button>
+              </form>
+            </div>
+          </div>
+
+          <!-- RIGHT: Table -->
+          <div>
+            <div class="glass-panel" style="padding:24px;border-radius:var(--radius-md);">
+
+              <!-- Toolbar + Live Preview side by side -->
+              <div style="display:flex;gap:20px;align-items:flex-start;margin-bottom:20px;flex-wrap:wrap;">
+
+                <!-- Filters column -->
+                <div style="flex:1;min-width:260px;display:flex;flex-direction:column;gap:10px;">
+                  <div class="toolbar-search" style="position:relative;">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" style="position:absolute;left:14px;top:50%;transform:translateY(-50%);width:16px;height:16px;color:var(--text-muted);"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                    <input id="searchInput" type="text" class="form-control" placeholder="Search title, category, summary..." style="padding-left:40px;">
+                  </div>
+                  <div style="display:flex;gap:10px;flex-wrap:wrap;">
+                    <select id="categoryFilter" class="form-control" style="flex:1;min-width:120px;">
+                      <option value="">All Categories</option>
+                    </select>
+                    <select id="sortSelect" class="form-control" style="flex:1;min-width:130px;">
+                      <option value="newest">Newest First</option>
+                      <option value="oldest">Oldest First</option>
+                      <option value="title_asc">Title A→Z</option>
+                      <option value="title_desc">Title Z→A</option>
+                      <option value="cat_asc">Category A→Z</option>
+                    </select>
+                    <select id="perPageSelect" class="form-control" style="flex:1;min-width:100px;">
+                      <option value="10">10 / page</option>
+                      <option value="25">25 / page</option>
+                      <option value="50">50 / page</option>
+                      <option value="100">100 / page</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div style="width:260px;flex-shrink:0;">
+                  <div style="font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--text-muted);margin-bottom:8px;">Live Preview</div>
+                  <div style="border-radius:var(--radius-md);overflow:hidden;border:1px solid var(--border-color);background:var(--bg-surface);">
+                    <div id="prevImgWrap" style="width:100%;height:110px;background:linear-gradient(135deg,rgba(99,102,241,0.12),rgba(99,102,241,0.04));display:flex;align-items:center;justify-content:center;">
+                      <img id="prevImg" src="" alt="" style="width:100%;height:110px;object-fit:cover;display:none;">
+                      <svg id="prevImgPlaceholder" style="width:36px;height:36px;opacity:0.25;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                    </div>
+                    <div style="padding:10px 12px;">
+                      <div id="prevCat" class="badge-cat" style="margin-bottom:6px;font-size:0.65rem;">IT Insights</div>
+                      <h4 id="prevTitle" style="font-size:0.82rem;font-weight:700;margin:0 0 4px;color:var(--text-main);line-height:1.3;">Enter Title Above</h4>
+                      <p id="prevDesc" style="font-size:0.72rem;color:var(--text-muted);margin:0;line-height:1.4;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;">Your summary will appear here...</p>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+
+              <!-- Bulk action bar -->
+              <div id="bulkBar" class="bulk-bar">
+                <input type="checkbox" id="selectAllCheck" style="width:16px;height:16px;accent-color:var(--primary);cursor:pointer;">
+                <span id="bulkCount">0 selected</span>
+                <button id="bulkDeleteBtn" class="btn btn-danger" style="padding:6px 14px;font-size:0.8rem;border-radius:var(--radius-sm);">Delete Selected</button>
+                <button id="bulkClearBtn" class="btn btn-secondary" style="padding:6px 14px;font-size:0.8rem;">Clear Selection</button>
+              </div>
+
+              <!-- Table -->
+              <div class="art-table-wrap">
+                <table class="art-table">
+                  <thead>
+                    <tr>
+                      <th style="width:36px;cursor:default;">
+                        <input type="checkbox" id="headerCheck" style="width:15px;height:15px;accent-color:var(--primary);cursor:pointer;">
+                      </th>
+                      <th style="width:70px;cursor:default;">#</th>
+                      <th style="width:64px;cursor:default;">Cover</th>
+                      <th data-col="title" class="sortable">Title <span class="sort-icon"></span></th>
+                      <th data-col="category" class="sortable">Category <span class="sort-icon"></span></th>
+                      <th data-col="desc">Summary</th>
+                      <th data-col="meta" class="sortable">Published <span class="sort-icon"></span></th>
+                      <th style="width:110px;text-align:center;cursor:default;">Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody id="articlesTableBody">
+                    <!-- populated dynamically -->
+                  </tbody>
+                </table>
+              </div>
+
+              <!-- Empty state -->
+              <div id="tableEmpty" class="table-empty" style="display:none;">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                <h3>No articles found</h3>
+                <p>Publish your first article using the form on the left.</p>
+              </div>
+
+              <!-- Pagination -->
+              <div class="pagination-bar" id="paginationBar">
+                <div class="pagination-info" id="paginationInfo"></div>
+                <div class="pagination-btns" id="paginationBtns"></div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </main>
+  </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+
+  // ── STATE (must be first — called by init() which auth triggers) ──
+  let allArticles    = [];
+  let filteredArticles = [];
+  let currentPage   = 1;
+  let perPage       = 10;
+  let selectedIds   = new Set();
+
+  // ── AUTH ──
+  const loginOverlay = document.getElementById('loginOverlay');
+  if (sessionStorage.getItem('admin_logged_in') !== 'true') {
+    loginOverlay.style.display = 'flex';
+  } else {
+    loginOverlay.style.display = 'none';
+    init();
+  }
+
+  document.getElementById('loginForm').addEventListener('submit', e => {
+    e.preventDefault();
+    const u = document.getElementById('username').value.trim();
+    const p = document.getElementById('password').value.trim();
+    if (u === 'admin' && p === 'admin') {
+      sessionStorage.setItem('admin_logged_in', 'true');
+      loginOverlay.style.opacity = '0';
+      loginOverlay.style.transform = 'scale(0.95)';
+      setTimeout(() => { loginOverlay.style.display = 'none'; init(); }, 350);
+      document.getElementById('loginError').style.display = 'none';
+    } else {
+      document.getElementById('loginError').style.display = 'block';
+      const card = document.querySelector('.login-card');
+      card.classList.add('shake');
+      setTimeout(() => card.classList.remove('shake'), 400);
+      document.getElementById('password').value = '';
+    }
+  });
+
+  document.getElementById('logoutBtn').addEventListener('click', () => {
+    sessionStorage.removeItem('admin_logged_in');
+    window.location.href = 'admin.html';
+  });
+
+  // ── INIT ──
+  function init() {
+    loadArticles();
+    bindPreview();
+    bindForm();
+    bindControls();
+  }
+
+  function loadArticles() {
+    const googleSheetsUrl = localStorage.getItem('google_sheets_url');
+    if (googleSheetsUrl && googleSheetsUrl.trim() !== '') {
+      fetch(`${googleSheetsUrl}?action=get_articles`)
+        .then(r => r.json())
+        .then(remote => {
+          if (Array.isArray(remote) && remote.length > 0) {
+            localStorage.setItem('blog_articles', JSON.stringify(remote));
+            allArticles = remote;
+          } else {
+            allArticles = JSON.parse(localStorage.getItem('blog_articles')) || [];
+          }
+          buildCategoryFilter();
+          renderTable();
+        })
+        .catch(() => {
+          allArticles = JSON.parse(localStorage.getItem('blog_articles')) || [];
+          buildCategoryFilter();
+          renderTable();
+        });
+    } else {
+      allArticles = JSON.parse(localStorage.getItem('blog_articles')) || [];
+      buildCategoryFilter();
+      renderTable();
+    }
+  }
+
+  function buildCategoryFilter() {
+    const cats = [...new Set(allArticles.map(a => a.category).filter(Boolean))].sort();
+    const sel = document.getElementById('categoryFilter');
+    sel.innerHTML = '<option value="">All Categories</option>';
+    cats.forEach(c => {
+      const o = document.createElement('option');
+      o.value = c; o.textContent = c;
+      sel.appendChild(o);
+    });
+  }
+
+  function getFiltered() {
+    const q = document.getElementById('searchInput').value.toLowerCase().trim();
+    const cat = document.getElementById('categoryFilter').value;
+    const sortVal = document.getElementById('sortSelect').value;
+
+    let arr = allArticles.filter(a => {
+      const matchQ = !q ||
+        (a.title || '').toLowerCase().includes(q) ||
+        (a.category || '').toLowerCase().includes(q) ||
+        (a.desc || '').toLowerCase().includes(q);
+      const matchCat = !cat || a.category === cat;
+      return matchQ && matchCat;
+    });
+
+    // Sort
+    arr = arr.slice().sort((a, b) => {
+      if (sortVal === 'newest') return 0; // already newest-first from unshift
+      if (sortVal === 'oldest') return 0;
+      if (sortVal === 'title_asc') return (a.title||'').localeCompare(b.title||'');
+      if (sortVal === 'title_desc') return (b.title||'').localeCompare(a.title||'');
+      if (sortVal === 'cat_asc') return (a.category||'').localeCompare(b.category||'');
+      return 0;
+    });
+    if (sortVal === 'oldest') arr.reverse();
+
+    return arr;
+  }
+
+  function renderTable() {
+    filteredArticles = getFiltered();
+    const total = filteredArticles.length;
+    const totalPages = Math.max(1, Math.ceil(total / perPage));
+    if (currentPage > totalPages) currentPage = totalPages;
+
+    document.getElementById('totalCount').textContent = `${total} article${total !== 1 ? 's' : ''}`;
+
+    const start = (currentPage - 1) * perPage;
+    const pageItems = filteredArticles.slice(start, start + perPage);
+
+    const tbody = document.getElementById('articlesTableBody');
+    tbody.innerHTML = '';
+
+    const empty = document.getElementById('tableEmpty');
+    if (total === 0) {
+      empty.style.display = 'block';
+      document.getElementById('paginationBar').style.display = 'none';
+    } else {
+      empty.style.display = 'none';
+      document.getElementById('paginationBar').style.display = 'flex';
+    }
+
+    pageItems.forEach((art, idx) => {
+      const globalIdx = start + idx + 1;
+      const isSelected = selectedIds.has(art.id);
+      const tr = document.createElement('tr');
+      if (isSelected) tr.classList.add('selected-row');
+      tr.innerHTML = `
+        <td><input type="checkbox" class="row-check" data-id="${art.id}" style="width:15px;height:15px;accent-color:var(--primary);cursor:pointer;" ${isSelected ? 'checked' : ''}></td>
+        <td style="color:var(--text-muted);font-size:0.78rem;font-weight:600;">${globalIdx}</td>
+        <td><img class="art-thumb" src="${art.img || 'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=100&q=60'}" alt="" onerror="this.src='https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=100&q=60'"></td>
+        <td class="art-title-cell">
+          <h4>${escHtml(art.title)}</h4>
+          <p>${escHtml((art.meta||'').split('•')[0].trim())}</p>
+        </td>
+        <td><span class="badge-cat">${escHtml(art.category)}</span></td>
+        <td><div class="art-desc-cell">${escHtml(art.desc)}</div></td>
+        <td style="font-size:0.78rem;color:var(--text-muted);white-space:nowrap;">${getDate(art.meta)}</td>
+        <td>
+          <div class="art-actions">
+            <button class="btn btn-danger btn-sm delete-art-btn" data-id="${art.id}" style="padding:5px 10px;font-size:0.75rem;border-radius:var(--radius-sm);">Delete</button>
+          </div>
+        </td>
+      `;
+      tbody.appendChild(tr);
+    });
+
+    // Bind row checkboxes
+    document.querySelectorAll('.row-check').forEach(cb => {
+      cb.addEventListener('change', () => {
+        const id = cb.getAttribute('data-id');
+        if (cb.checked) selectedIds.add(id); else selectedIds.delete(id);
+        updateBulkBar();
+        cb.closest('tr').classList.toggle('selected-row', cb.checked);
+      });
+    });
+
+    // Bind delete buttons
+    document.querySelectorAll('.delete-art-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const id = btn.getAttribute('data-id');
+        if (!confirm('Delete this article? This cannot be undone.')) return;
+        deleteArticles([id]);
+      });
+    });
+
+    renderPagination(total, totalPages);
+    updateHeaderCheck();
+  }
+
+  function getDate(meta) {
+    if (!meta) return '—';
+    // meta = "Published June 15, 2025 • By Admin Sourcing"
+    const m = meta.match(/Published (.+?)(\s*•|$)/);
+    return m ? m[1].trim() : '—';
+  }
+
+  function escHtml(str) {
+    if (!str) return '';
+    return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+
+  function renderPagination(total, totalPages) {
+    const info = document.getElementById('paginationInfo');
+    const btns = document.getElementById('paginationBtns');
+
+    const start = Math.min((currentPage - 1) * perPage + 1, total);
+    const end = Math.min(currentPage * perPage, total);
+    info.textContent = total === 0 ? 'No results' : `Showing ${start}–${end} of ${total}`;
+
+    btns.innerHTML = '';
+
+    // Prev
+    const prev = document.createElement('button');
+    prev.className = 'page-btn';
+    prev.textContent = '‹';
+    prev.disabled = currentPage === 1;
+    prev.addEventListener('click', () => { currentPage--; renderTable(); });
+    btns.appendChild(prev);
+
+    // Page numbers (max 7 visible)
+    const range = getPageRange(currentPage, totalPages);
+    range.forEach(p => {
+      if (p === '...') {
+        const el = document.createElement('span');
+        el.textContent = '…';
+        el.style.cssText = 'display:flex;align-items:center;padding:0 6px;color:var(--text-muted);font-size:0.82rem;';
+        btns.appendChild(el);
+      } else {
+        const btn = document.createElement('button');
+        btn.className = 'page-btn' + (p === currentPage ? ' active' : '');
+        btn.textContent = p;
+        btn.addEventListener('click', () => { currentPage = p; renderTable(); });
+        btns.appendChild(btn);
+      }
+    });
+
+    // Next
+    const next = document.createElement('button');
+    next.className = 'page-btn';
+    next.textContent = '›';
+    next.disabled = currentPage === totalPages;
+    next.addEventListener('click', () => { currentPage++; renderTable(); });
+    btns.appendChild(next);
+  }
+
+  function getPageRange(cur, total) {
+    if (total <= 7) return Array.from({length: total}, (_, i) => i + 1);
+    if (cur <= 4) return [1, 2, 3, 4, 5, '...', total];
+    if (cur >= total - 3) return [1, '...', total-4, total-3, total-2, total-1, total];
+    return [1, '...', cur-1, cur, cur+1, '...', total];
+  }
+
+  function updateBulkBar() {
+    const bar = document.getElementById('bulkBar');
+    const count = selectedIds.size;
+    if (count > 0) {
+      bar.classList.add('visible');
+      document.getElementById('bulkCount').textContent = `${count} selected`;
+    } else {
+      bar.classList.remove('visible');
+    }
+    updateHeaderCheck();
+  }
+
+  function updateHeaderCheck() {
+    const hc = document.getElementById('headerCheck');
+    const pageIds = [...document.querySelectorAll('.row-check')].map(c => c.getAttribute('data-id'));
+    const allChecked = pageIds.length > 0 && pageIds.every(id => selectedIds.has(id));
+    hc.checked = allChecked;
+    hc.indeterminate = !allChecked && pageIds.some(id => selectedIds.has(id));
+  }
+
+  function deleteArticles(ids) {
+    let articles = JSON.parse(localStorage.getItem('blog_articles')) || [];
+    articles = articles.filter(a => !ids.includes(a.id));
+    localStorage.setItem('blog_articles', JSON.stringify(articles));
+
+    const googleSheetsUrl = localStorage.getItem('google_sheets_url');
+    ids.forEach(id => {
+      if (googleSheetsUrl && googleSheetsUrl.trim() !== '') {
+        fetch(googleSheetsUrl, {
+          method: 'POST', headers: {'Content-Type':'text/plain'},
+          body: JSON.stringify({ action: 'delete_article', id })
+        }).catch(err => console.error('Sheets delete error:', err));
+      }
+      selectedIds.delete(id);
+    });
+
+    allArticles = articles;
+    buildCategoryFilter();
+    updateBulkBar();
+    renderTable();
+  }
+
+  function bindControls() {
+    document.getElementById('searchInput').addEventListener('input', () => { currentPage = 1; renderTable(); });
+    document.getElementById('categoryFilter').addEventListener('change', () => { currentPage = 1; renderTable(); });
+    document.getElementById('sortSelect').addEventListener('change', () => { currentPage = 1; renderTable(); });
+    document.getElementById('perPageSelect').addEventListener('change', e => { perPage = parseInt(e.target.value); currentPage = 1; renderTable(); });
+
+    // Header checkbox
+    document.getElementById('headerCheck').addEventListener('change', e => {
+      const pageIds = [...document.querySelectorAll('.row-check')].map(c => c.getAttribute('data-id'));
+      pageIds.forEach(id => { if (e.target.checked) selectedIds.add(id); else selectedIds.delete(id); });
+      renderTable();
+      updateBulkBar();
+    });
+
+    // Select all check
+    document.getElementById('selectAllCheck').addEventListener('change', e => {
+      if (e.target.checked) {
+        filteredArticles.forEach(a => selectedIds.add(a.id));
+      } else {
+        selectedIds.clear();
+      }
+      renderTable();
+      updateBulkBar();
+    });
+
+    // Bulk delete
+    document.getElementById('bulkDeleteBtn').addEventListener('click', () => {
+      if (!confirm(`Delete ${selectedIds.size} selected article(s)? This cannot be undone.`)) return;
+      deleteArticles([...selectedIds]);
+    });
+
+    // Bulk clear
+    document.getElementById('bulkClearBtn').addEventListener('click', () => {
+      selectedIds.clear();
+      updateBulkBar();
+      renderTable();
+    });
+
+    // Column header sort clicks
+    document.querySelectorAll('.art-table thead th[data-col]').forEach(th => {
+      th.addEventListener('click', () => {
+        const col = th.getAttribute('data-col');
+        const sortSel = document.getElementById('sortSelect');
+        if (col === 'title') sortSel.value = sortSel.value === 'title_asc' ? 'title_desc' : 'title_asc';
+        else if (col === 'category') sortSel.value = 'cat_asc';
+        else if (col === 'meta') sortSel.value = sortSel.value === 'newest' ? 'oldest' : 'newest';
+        currentPage = 1;
+        renderTable();
+      });
+    });
+  }
+
+  // ── LIVE PREVIEW ──
+  function bindPreview() {
+    const artTitle = document.getElementById('artTitle');
+    const artCat   = document.getElementById('artCategory');
+    const artImg   = document.getElementById('artImage');
+    const artDesc  = document.getElementById('artDesc');
+    const artFile  = document.getElementById('artFileInput');
+
+    function setPreviewImage(src) {
+      const img  = document.getElementById('prevImg');
+      const ph   = document.getElementById('prevImgPlaceholder');
+      const wrap = document.getElementById('prevImgWrap');
+      if (src) {
+        img.onload  = () => { img.style.display = 'block'; ph.style.display = 'none'; };
+        img.onerror = () => { img.style.display = 'none';  ph.style.display = 'block'; };
+        img.src = src;
+      } else {
+        img.src = ''; img.style.display = 'none';
+        ph.style.display = 'block';
+      }
+    }
+
+    function updateText() {
+      document.getElementById('prevTitle').textContent = artTitle.value.trim() || 'Enter Title Above';
+      document.getElementById('prevCat').textContent   = artCat.value.trim()   || 'IT Insights';
+      document.getElementById('prevDesc').textContent  = artDesc.value.trim()  || 'Your summary will appear here...';
+    }
+
+    // text fields – fire on every keystroke
+    artTitle.addEventListener('input', updateText);
+    artCat.addEventListener('input',   updateText);
+    artDesc.addEventListener('input',  updateText);
+
+    // image URL field – fire on type AND paste
+    ['input', 'change', 'paste'].forEach(evt =>
+      artImg.addEventListener(evt, () => {
+        // slight delay so paste event has filled the value
+        setTimeout(() => {
+          const v = artImg.value.trim();
+          updateText();
+          if (v) setPreviewImage(v);
+        }, 50);
+      })
+    );
+
+    // local file picker
+    artFile.addEventListener('change', () => {
+      if (artFile.files && artFile.files[0]) {
+        const blobUrl = URL.createObjectURL(artFile.files[0]);
+        setPreviewImage(blobUrl);
+        artImg.value = ''; // clear URL field
+      }
+    });
+  }
+
+  // ── PUBLISH FORM ──
+  function bindForm() {
+    const form = document.getElementById('articleForm');
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+      const btn            = document.getElementById('artSubmitBtn');
+      const fileInput      = document.getElementById('artFileInput');
+      const googleSheetsUrl = localStorage.getItem('google_sheets_url');
+
+      const publish = (imgUrl) => {
+        const arts = JSON.parse(localStorage.getItem('blog_articles')) || [];
+        const newArt = {
+          id:       'art_' + Date.now(),
+          title:    document.getElementById('artTitle').value.trim(),
+          category: document.getElementById('artCategory').value.trim(),
+          meta:     `Published ${new Date().toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'})} • By Admin Sourcing`,
+          img:      imgUrl || '',
+          desc:     document.getElementById('artDesc').value.trim(),
+          content:  document.getElementById('artContent').value.trim()
+        };
+        arts.unshift(newArt);
+        localStorage.setItem('blog_articles', JSON.stringify(arts));
+
+        if (googleSheetsUrl && googleSheetsUrl.trim() !== '') {
+          fetch(googleSheetsUrl, {
+            method: 'POST', headers: {'Content-Type':'text/plain'},
+            body: JSON.stringify({ action:'add_article', ...newArt })
+          }).catch(err => console.error('Sheets dispatch error:', err));
+        }
+
+        btn.innerHTML = 'Publish Article';
+        btn.removeAttribute('disabled');
+
+        // Reset preview
+        const prevImg = document.getElementById('prevImg');
+        const placeholder = document.getElementById('prevImgPlaceholder');
+        prevImg.src = ''; prevImg.style.display = 'none';
+        if (placeholder) placeholder.style.display = 'block';
+        document.getElementById('prevTitle').textContent = 'Enter Title Above';
+        document.getElementById('prevCat').textContent   = 'IT Insights';
+        document.getElementById('prevDesc').textContent  = 'Your summary will appear here...';
+
+        // Reload table
+        allArticles = JSON.parse(localStorage.getItem('blog_articles')) || [];
+        buildCategoryFilter();
+        currentPage = 1;
+        renderTable();
+
+        form.reset();
+        alert('✅ Article published successfully!');
+      };
+
+      // ── FILE SELECTED ──
+      if (fileInput.files.length > 0) {
+        const file = fileInput.files[0];
+        const origText = btn.innerHTML;
+        btn.innerHTML = 'Reading image… <svg style="width:18px;height:18px;animation:spin 1s linear infinite;display:inline-block;vertical-align:middle;margin-left:6px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 4v5h.582m15.356 2A8.001 8.001 0 1121.21 8H18.9"></path></svg>';
+        btn.setAttribute('disabled', 'disabled');
+
+        // Always read as base64 data URI first (persists across pages, unlike blob URLs)
+        const reader = new FileReader();
+        reader.onload = () => {
+          const dataUri = reader.result; // "data:image/jpeg;base64,..."
+
+          // If no webhook → publish immediately with data URI (always works locally)
+          if (!googleSheetsUrl || googleSheetsUrl.trim() === '') {
+            publish(dataUri);
+            btn.innerHTML = origText;
+            btn.removeAttribute('disabled');
+            return;
+          }
+
+          // Webhook configured → try Drive upload, fall back to data URI
+          btn.innerHTML = 'Uploading to Drive… <svg style="width:18px;height:18px;animation:spin 1s linear infinite;display:inline-block;vertical-align:middle;margin-left:6px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 4v5h.582m15.356 2A8.001 8.001 0 1121.21 8H18.9"></path></svg>';
+          fetch(googleSheetsUrl, {
+            method: 'POST',
+            headers: { 'Content-Type': 'text/plain' },
+            body: JSON.stringify({
+              action:   'upload_to_drive',
+              base64:   dataUri.split(',')[1],
+              filename: file.name,
+              mimeType: file.type
+            })
+          })
+          .then(r => r.text())
+          .then(text => {
+            const res = JSON.parse(text);
+            if (res.status === 'success' && res.url) {
+              publish(res.url); // Drive public URL (best option)
+            } else {
+              throw new Error(res.message || 'Drive upload returned error');
+            }
+          })
+          .catch(err => {
+            console.warn('Drive upload failed – using base64 data URI instead:', err);
+            publish(dataUri); // Fall back to base64 (always works)
+          })
+          .finally(() => {
+            btn.innerHTML = origText;
+            btn.removeAttribute('disabled');
+          });
+        };
+
+        reader.onerror = () => {
+          btn.innerHTML = origText;
+          btn.removeAttribute('disabled');
+          alert('Could not read the selected file. Please try again.');
+        };
+
+        reader.readAsDataURL(file);
+
+      } else {
+        // ── NO FILE: use URL field (optional) ──
+        const imgUrl = document.getElementById('artImage').value.trim();
+        publish(imgUrl); // imgUrl can be empty — image is optional
+      }
+    });
+  }
+
+});
+</script>
+</body>
+</html>

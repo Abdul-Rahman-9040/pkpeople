@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Manage Gallery | Admin Dashboard</title>
+  <link rel="icon" type="image/x-icon" href="assets/images/logo.jpeg">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    body { background-color: var(--bg-base); }
+    .gal-layout { display: grid; grid-template-columns: 360px 1fr; gap: 28px; align-items: start; }
+    @media (max-width: 1100px) { .gal-layout { grid-template-columns: 1fr; } }
+    .form-sticky { position: sticky; top: 24px; }
+
+    /* Toolbar */
+    .table-toolbar { display:flex; gap:12px; flex-wrap:wrap; align-items:center; margin-bottom:20px; }
+    .toolbar-search { flex:1; min-width:200px; position:relative; }
+    .toolbar-search svg { position:absolute; left:14px; top:50%; transform:translateY(-50%); width:16px; height:16px; color:var(--text-muted); }
+    .toolbar-search input { padding-left:40px !important; }
+
+    /* Grid */
+    .gallery-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(180px, 1fr)); gap:16px; }
+    .gal-card { border-radius:var(--radius-md); overflow:hidden; border:1px solid var(--border-color); background:var(--bg-surface); transition:transform 0.2s, box-shadow 0.2s; position:relative; }
+    .gal-card:hover { transform:translateY(-2px); box-shadow:0 8px 24px rgba(0,0,0,0.18); }
+    .gal-card img { width:100%; height:130px; object-fit:cover; display:block; }
+    .gal-card-body { padding:10px 12px; }
+    .gal-card-body h4 { font-size:0.82rem; font-weight:700; margin:0 0 3px; color:var(--text-main); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+    .gal-card-body p { font-size:0.7rem; color:var(--text-muted); margin:0; }
+    .gal-card-del { position:absolute; top:8px; right:8px; background:rgba(239,68,68,0.9); border:none; border-radius:50%; width:28px; height:28px; color:#fff; font-size:1rem; cursor:pointer; display:flex; align-items:center; justify-content:center; opacity:0; transition:opacity 0.2s; }
+    .gal-card:hover .gal-card-del { opacity:1; }
+
+    /* Checkbox overlay */
+    .gal-card-check { position:absolute; top:8px; left:8px; opacity:0; transition:opacity 0.15s; }
+    .gal-card:hover .gal-card-check, .gal-card.selected .gal-card-check { opacity:1; }
+    .gal-card.selected { outline:2px solid var(--primary); }
+
+    /* Bulk bar */
+    .bulk-bar { display:none; align-items:center; gap:12px; padding:10px 16px; border-radius:var(--radius-sm); background:var(--primary-glow); border:1px solid rgba(99,102,241,0.25); margin-bottom:16px; font-size:0.85rem; font-weight:600; color:var(--primary); }
+    .bulk-bar.visible { display:flex; }
+
+    /* Pagination */
+    .pagination-bar { display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap; margin-top:20px; }
+    .pagination-info { font-size:0.82rem; color:var(--text-muted); }
+    .pagination-btns { display:flex; gap:6px; }
+    .page-btn { min-width:36px; height:36px; padding:0 10px; border-radius:var(--radius-sm); border:1px solid var(--border-color); background:var(--bg-surface); color:var(--text-main); font-size:0.82rem; font-weight:600; cursor:pointer; transition:all 0.2s; display:flex; align-items:center; justify-content:center; }
+    .page-btn:hover { border-color:var(--primary); color:var(--primary); }
+    .page-btn.active { background:var(--primary); color:#fff; border-color:var(--primary); }
+    .page-btn:disabled { opacity:0.4; cursor:not-allowed; }
+
+    .table-empty { text-align:center; padding:60px 20px; color:var(--text-muted); }
+    .table-empty svg { width:48px; height:48px; margin:0 auto 16px; display:block; opacity:0.4; }
+    .table-empty h3 { font-size:1.1rem; font-weight:700; margin-bottom:6px; color:var(--text-main); }
+
+    .preview-compact { margin-top:20px; border-radius:var(--radius-md); overflow:hidden; border:1px solid var(--border-color); }
+    .preview-compact img { width:100%; height:150px; object-fit:cover; }
+    .preview-compact-body { padding:12px; background:var(--bg-surface); }
+    .preview-compact-body h4 { font-size:0.9rem; font-weight:700; margin:0 0 3px; }
+    .preview-compact-body p { font-size:0.75rem; color:var(--text-muted); margin:0; }
+  </style>
+</head>
+<body>
+
+  <div id="loginOverlay" class="admin-login-overlay">
+    <div class="login-card glass-panel">
+      <div class="login-logo">
+        <img src="assets/images/logo.jpeg" alt="Logo">
+        <h2>PLACEMENT KEEPERS</h2>
+        <span>Admin Portal</span>
+      </div>
+      <div id="loginError" class="login-error">Invalid admin credentials.</div>
+      <form id="loginForm" novalidate>
+        <div class="form-group" style="text-align:left;"><label for="username" class="form-label">Username</label><input type="text" id="username" class="form-control" placeholder="Enter username" required></div>
+        <div class="form-group" style="text-align:left;margin-bottom:30px;"><label for="password" class="form-label">Password</label><input type="password" id="password" class="form-control" placeholder="Enter password" required></div>
+        <button type="submit" class="btn btn-primary" style="width:100%;">Unlock Dashboard</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="admin-wrapper">
+    <aside class="admin-sidebar">
+      <div class="sidebar-header" style="display:flex;flex-direction:column;align-items:center;gap:12px;padding:24px 20px;">
+        <img src="assets/images/logo.jpeg" alt="Logo" style="width:auto;max-width:100%;height:auto;max-height:48px;object-fit:contain;">
+        <div style="font-family:var(--font-heading);font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;color:var(--primary);text-align:center;line-height:1.2;">Management Dashboard</div>
+      </div>
+      <nav class="sidebar-menu">
+        <a href="admin.html" class="sidebar-btn"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2H6a2 2 0 01-2-2v-4zM14 16a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2h-2a2 2 0 01-2-2v-4z"></path></svg>Overview</a>
+        <a href="admin-articles.html" class="sidebar-btn"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"></path></svg>Manage Articles</a>
+        <a href="admin-gallery.html" class="sidebar-btn active"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>Manage Gallery</a>
+        <a href="admin-jobs.html" class="sidebar-btn"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>Manage Openings</a>
+        <a href="admin-testimonials.html" class="sidebar-btn"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path></svg>Manage Testimonials</a>
+        <a href="admin-leads.html" class="sidebar-btn"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>Inquiries &amp; Leads</a>
+        <a href="admin-integrations.html" class="sidebar-btn"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"></path></svg>Google Sheets Config</a>
+      </nav>
+      <div class="sidebar-footer">
+        <button id="logoutBtn" class="btn btn-secondary" style="width:100%;padding:10px;font-size:0.9rem;">
+          <svg style="width:18px;height:18px;margin-right:6px;vertical-align:middle;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
+          Lock Dashboard
+        </button>
+      </div>
+    </aside>
+
+    <main class="admin-main">
+      <div class="admin-panel active">
+        <div class="admin-panel-header">
+          <h2 class="admin-panel-title">Manage <span>Gallery</span></h2>
+          <span id="totalCount" style="font-size:0.82rem;color:var(--text-muted);font-weight:600;"></span>
+        </div>
+
+        <div class="gal-layout">
+          <!-- Upload Form -->
+          <div class="form-sticky">
+            <div class="glass-panel" style="padding:28px;border-radius:var(--radius-md);">
+              <h3 style="font-family:var(--font-heading);font-size:1.15rem;font-weight:700;margin-bottom:22px;">🖼️ Upload Gallery Photo</h3>
+              <form id="galleryForm">
+                <div class="form-group">
+                  <label for="galTitle" class="form-label">Photo Title / Caption</label>
+                  <input id="galTitle" type="text" class="form-control" placeholder="E.g., ISO Standards Celebration" required>
+                </div>
+                <div class="form-group">
+                  <label for="galCategory" class="form-label">Category</label>
+                  <select id="galCategory" class="form-control" style="appearance:none;background-image:url('data:image/svg+xml;utf8,<svg fill=%22%236b7280%22 viewBox=%220 0 20 20%22 xmlns=%22http://www.w3.org/2000/svg%22><path fill-rule=%22evenodd%22 d=%22M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z%22 clip-rule=%22evenodd%22></path></svg>');background-repeat:no-repeat;background-position:right 18px center;background-size:20px;">
+                    <option value="office">Office &amp; Culture</option>
+                    <option value="events">Corporate Events</option>
+                    <option value="team">Team Bonding</option>
+                    <option value="achievements">Achievements</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="galImage" class="form-label">Photo URL</label>
+                  <input id="galImage" type="url" class="form-control" placeholder="https://images.unsplash.com/...">
+                </div>
+                <div class="form-group">
+                  <label for="galFileInput" class="form-label">Or Upload Local Image</label>
+                  <input id="galFileInput" type="file" class="form-control" accept="image/*" style="padding:10px 14px;">
+                  <div style="font-size:0.7rem;color:var(--text-muted);margin-top:5px;">Uploads to Google Drive (Webhook required)</div>
+                </div>
+                <button type="submit" id="galSubmitBtn" class="btn btn-primary" style="width:100%;">Upload Photo</button>
+              </form>
+            </div>
+          </div>
+
+          <!-- Gallery Grid -->
+          <div>
+            <div class="glass-panel" style="padding:24px;border-radius:var(--radius-md);">
+
+              <!-- Filters + Live Preview side by side -->
+              <div style="display:flex;gap:20px;align-items:flex-start;margin-bottom:20px;flex-wrap:wrap;">
+
+                <!-- Filters column -->
+                <div style="flex:1;min-width:240px;display:flex;flex-direction:column;gap:10px;">
+                  <div style="position:relative;">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" style="position:absolute;left:14px;top:50%;transform:translateY(-50%);width:16px;height:16px;color:var(--text-muted);"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                    <input id="searchInput" type="text" class="form-control" placeholder="Search by title or category..." style="padding-left:40px;">
+                  </div>
+                  <div style="display:flex;gap:10px;flex-wrap:wrap;">
+                    <select id="categoryFilter" class="form-control" style="flex:1;min-width:130px;">
+                      <option value="">All Categories</option>
+                      <option value="office">Office &amp; Culture</option>
+                      <option value="events">Corporate Events</option>
+                      <option value="team">Team Bonding</option>
+                      <option value="achievements">Achievements</option>
+                    </select>
+                    <select id="perPageSelect" class="form-control" style="flex:1;min-width:100px;">
+                      <option value="12">12 / page</option>
+                      <option value="24">24 / page</option>
+                      <option value="48">48 / page</option>
+                    </select>
+                  </div>
+                </div>
+
+                <!-- Live Preview column -->
+                <div style="width:240px;flex-shrink:0;">
+                  <div style="font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--text-muted);margin-bottom:8px;">Live Preview</div>
+                  <div style="border-radius:var(--radius-md);overflow:hidden;border:1px solid var(--border-color);background:var(--bg-surface);">
+                    <img id="prevGalImg" src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=400&q=70" alt="" style="width:100%;height:110px;object-fit:cover;display:block;">
+                    <div style="padding:10px 12px;">
+                      <h4 id="prevGalTitle" style="font-size:0.85rem;font-weight:700;margin:0 0 3px;color:var(--text-main);">ISO Celebration</h4>
+                      <p id="prevGalCat" style="font-size:0.72rem;color:var(--text-muted);margin:0;">Office &amp; Culture</p>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+
+              <div id="bulkBar" class="bulk-bar">
+                <span id="bulkCount">0 selected</span>
+                <button id="bulkDeleteBtn" class="btn btn-danger" style="padding:6px 14px;font-size:0.8rem;border-radius:var(--radius-sm);">Delete Selected</button>
+                <button id="bulkClearBtn" class="btn btn-secondary" style="padding:6px 14px;font-size:0.8rem;">Clear</button>
+              </div>
+
+              <div id="galleryGrid" class="gallery-grid"></div>
+
+              <div id="tableEmpty" class="table-empty" style="display:none;">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                <h3>No photos found</h3>
+                <p>Upload your first photo using the form on the left.</p>
+              </div>
+
+              <div class="pagination-bar" id="paginationBar">
+                <div class="pagination-info" id="paginationInfo"></div>
+                <div class="pagination-btns" id="paginationBtns"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  let allPhotos = [], filtered = [], currentPage = 1, perPage = 12, selectedIds = new Set();
+
+  const loginOverlay = document.getElementById('loginOverlay');
+  if (sessionStorage.getItem('admin_logged_in') !== 'true') {
+    loginOverlay.style.display = 'flex';
+  } else {
+    loginOverlay.style.display = 'none';
+    init();
+  }
+  document.getElementById('loginForm').addEventListener('submit', e => {
+    e.preventDefault();
+    if (document.getElementById('username').value.trim() === 'admin' && document.getElementById('password').value.trim() === 'admin') {
+      sessionStorage.setItem('admin_logged_in', 'true');
+      loginOverlay.style.opacity = '0'; loginOverlay.style.transform = 'scale(0.95)';
+      setTimeout(() => { loginOverlay.style.display = 'none'; init(); }, 350);
+      document.getElementById('loginError').style.display = 'none';
+    } else {
+      document.getElementById('loginError').style.display = 'block';
+      const card = document.querySelector('.login-card'); card.classList.add('shake');
+      setTimeout(() => card.classList.remove('shake'), 400);
+      document.getElementById('password').value = '';
+    }
+  });
+  document.getElementById('logoutBtn').addEventListener('click', () => { sessionStorage.removeItem('admin_logged_in'); window.location.href = 'admin.html'; });
+
+  function init() { loadGallery(); bindPreview(); bindForm(); bindControls(); }
+
+  function loadGallery() {
+    const url = localStorage.getItem('google_sheets_url');
+    if (url && url.trim()) {
+      fetch(`${url}?action=get_gallery`).then(r => r.json()).then(remote => {
+        if (Array.isArray(remote) && remote.length > 0) { localStorage.setItem('gallery_items', JSON.stringify(remote)); allPhotos = remote; }
+        else allPhotos = JSON.parse(localStorage.getItem('gallery_items')) || [];
+        renderGrid();
+      }).catch(() => { allPhotos = JSON.parse(localStorage.getItem('gallery_items')) || []; renderGrid(); });
+    } else { allPhotos = JSON.parse(localStorage.getItem('gallery_items')) || []; renderGrid(); }
+  }
+
+  function getFiltered() {
+    const q = document.getElementById('searchInput').value.toLowerCase().trim();
+    const cat = document.getElementById('categoryFilter').value;
+    return allPhotos.filter(p => {
+      const mQ = !q || (p.title||'').toLowerCase().includes(q) || (p.category||'').toLowerCase().includes(q);
+      const mC = !cat || p.category === cat;
+      return mQ && mC;
+    });
+  }
+
+  const catLabel = { office:'Office & Culture', events:'Corporate Events', team:'Team Bonding', achievements:'Achievements' };
+
+  function renderGrid() {
+    filtered = getFiltered();
+    const total = filtered.length;
+    const totalPages = Math.max(1, Math.ceil(total / perPage));
+    if (currentPage > totalPages) currentPage = totalPages;
+    document.getElementById('totalCount').textContent = `${total} photo${total !== 1 ? 's' : ''}`;
+    const start = (currentPage - 1) * perPage;
+    const pageItems = filtered.slice(start, start + perPage);
+    const grid = document.getElementById('galleryGrid');
+    grid.innerHTML = '';
+    const empty = document.getElementById('tableEmpty');
+    if (total === 0) { empty.style.display = 'block'; document.getElementById('paginationBar').style.display = 'none'; return; }
+    empty.style.display = 'none'; document.getElementById('paginationBar').style.display = 'flex';
+    pageItems.forEach(photo => {
+      const card = document.createElement('div');
+      card.className = 'gal-card' + (selectedIds.has(photo.id) ? ' selected' : '');
+      card.innerHTML = `
+        <input type="checkbox" class="gal-card-check" data-id="${photo.id}" ${selectedIds.has(photo.id) ? 'checked' : ''} style="width:16px;height:16px;accent-color:var(--primary);cursor:pointer;">
+        <img src="${photo.img}" alt="${photo.title}" onerror="this.src='https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=300&q=60'">
+        <div class="gal-card-body">
+          <h4>${photo.title}</h4>
+          <p>${catLabel[photo.category] || photo.category}</p>
+        </div>
+        <button class="gal-card-del" data-id="${photo.id}" title="Delete">×</button>
+      `;
+      card.querySelector('.gal-card-del').addEventListener('click', e => {
+        e.stopPropagation();
+        if (confirm('Delete this photo?')) deletePhotos([photo.id]);
+      });
+      card.querySelector('.gal-card-check').addEventListener('change', cb => {
+        const id = cb.target.getAttribute('data-id');
+        if (cb.target.checked) selectedIds.add(id); else selectedIds.delete(id);
+        card.classList.toggle('selected', cb.target.checked);
+        updateBulkBar();
+      });
+      grid.appendChild(card);
+    });
+    renderPagination(total, totalPages);
+  }
+
+  function renderPagination(total, totalPages) {
+    const info = document.getElementById('paginationInfo');
+    const btns = document.getElementById('paginationBtns');
+    const s = Math.min((currentPage-1)*perPage+1,total), e = Math.min(currentPage*perPage,total);
+    info.textContent = `Showing ${s}–${e} of ${total}`;
+    btns.innerHTML = '';
+    const prev = document.createElement('button'); prev.className='page-btn'; prev.textContent='‹'; prev.disabled=currentPage===1;
+    prev.addEventListener('click',()=>{currentPage--;renderGrid();}); btns.appendChild(prev);
+    getPageRange(currentPage,totalPages).forEach(p => {
+      if(p==='...'){const el=document.createElement('span');el.textContent='…';el.style.cssText='display:flex;align-items:center;padding:0 6px;color:var(--text-muted);font-size:0.82rem;';btns.appendChild(el);}
+      else{const b=document.createElement('button');b.className='page-btn'+(p===currentPage?' active':'');b.textContent=p;b.addEventListener('click',()=>{currentPage=p;renderGrid();});btns.appendChild(b);}
+    });
+    const next=document.createElement('button'); next.className='page-btn'; next.textContent='›'; next.disabled=currentPage===totalPages;
+    next.addEventListener('click',()=>{currentPage++;renderGrid();}); btns.appendChild(next);
+  }
+
+  function getPageRange(cur,total){ if(total<=7)return Array.from({length:total},(_,i)=>i+1); if(cur<=4)return[1,2,3,4,5,'...',total]; if(cur>=total-3)return[1,'...',total-4,total-3,total-2,total-1,total]; return[1,'...',cur-1,cur,cur+1,'...',total]; }
+
+  function updateBulkBar() {
+    const bar = document.getElementById('bulkBar'); const c = selectedIds.size;
+    bar.classList.toggle('visible', c > 0);
+    if (c > 0) document.getElementById('bulkCount').textContent = `${c} selected`;
+  }
+
+  function deletePhotos(ids) {
+    let photos = JSON.parse(localStorage.getItem('gallery_items')) || [];
+    photos = photos.filter(p => !ids.includes(p.id));
+    localStorage.setItem('gallery_items', JSON.stringify(photos));
+    const url = localStorage.getItem('google_sheets_url');
+    ids.forEach(id => {
+      selectedIds.delete(id);
+      if (url && url.trim()) fetch(url,{method:'POST',headers:{'Content-Type':'text/plain'},body:JSON.stringify({action:'delete_gallery',id})}).catch(()=>{});
+    });
+    allPhotos = photos; updateBulkBar(); renderGrid();
+  }
+
+  function bindControls() {
+    document.getElementById('searchInput').addEventListener('input',()=>{currentPage=1;renderGrid();});
+    document.getElementById('categoryFilter').addEventListener('change',()=>{currentPage=1;renderGrid();});
+    document.getElementById('perPageSelect').addEventListener('change',e=>{perPage=parseInt(e.target.value);currentPage=1;renderGrid();});
+    document.getElementById('bulkDeleteBtn').addEventListener('click',()=>{ if(!confirm(`Delete ${selectedIds.size} photo(s)?`))return; deletePhotos([...selectedIds]); });
+    document.getElementById('bulkClearBtn').addEventListener('click',()=>{selectedIds.clear();updateBulkBar();renderGrid();});
+  }
+
+  function bindPreview() {
+    const galTitle=document.getElementById('galTitle'), galCat=document.getElementById('galCategory'), galImg=document.getElementById('galImage'), galFile=document.getElementById('galFileInput');
+    const prevImg=document.getElementById('prevGalImg');
+    
+    function setImg(src) {
+      if(src) { prevImg.src = src; prevImg.onerror = () => { prevImg.src = 'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=800&q=80'; }; }
+      else { prevImg.src = 'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=600&q=80'; }
+    }
+
+    function update() {
+      document.getElementById('prevGalTitle').textContent = galTitle.value.trim() || 'ISO Celebration';
+      document.getElementById('prevGalCat').textContent = catLabel[galCat.value] || 'Office & Culture';
+    }
+
+    ['input','change','paste'].forEach(evt => galImg.addEventListener(evt, () => { setTimeout(() => { setImg(galImg.value.trim()); update(); }, 50); }));
+    galTitle.addEventListener('input', update);
+    galCat.addEventListener('change', update);
+
+    galFile.addEventListener('change',()=>{ 
+      if(galFile.files.length>0){
+        setImg(URL.createObjectURL(galFile.files[0]));
+        galImg.value = '';
+      }
+    });
+  }
+
+  function bindForm() {
+    document.getElementById('galleryForm').addEventListener('submit', e => {
+      e.preventDefault();
+      const title=document.getElementById('galTitle').value.trim(), cat=document.getElementById('galCategory').value, imgUrl=document.getElementById('galImage').value.trim(), fileInput=document.getElementById('galFileInput'), submitBtn=document.getElementById('galSubmitBtn'), url=localStorage.getItem('google_sheets_url');
+      const save = (img) => {
+        const photos = JSON.parse(localStorage.getItem('gallery_items'))||[];
+        const p = {id:'gal_'+Date.now(), title, category:cat, img};
+        photos.push(p); localStorage.setItem('gallery_items',JSON.stringify(photos));
+        if(url&&url.trim()) fetch(url,{method:'POST',headers:{'Content-Type':'text/plain'},body:JSON.stringify({action:'add_gallery',...p})}).catch(()=>{});
+        alert('Photo uploaded!'); document.getElementById('galleryForm').reset();
+        document.getElementById('prevGalImg').src='https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=600&q=80';
+        allPhotos = JSON.parse(localStorage.getItem('gallery_items'))||[]; renderGrid();
+      };
+      if(fileInput.files.length>0){
+        const file=fileInput.files[0];
+        const orig=submitBtn.innerHTML;
+        submitBtn.innerHTML='Reading image...<svg style="width:18px;height:18px;animation:spin 1s linear infinite;display:inline-block;vertical-align:middle;margin-left:6px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 4v5h.582m15.356 2A8.001 8.001 0 1121.21 8H18.9"></path></svg>';
+        submitBtn.setAttribute('disabled','disabled');
+        const reader=new FileReader();
+        reader.onload=()=>{
+          const dataUri = reader.result;
+          if(!url||!url.trim()){ save(dataUri); submitBtn.innerHTML=orig; submitBtn.removeAttribute('disabled'); return; }
+          submitBtn.innerHTML='Uploading to Drive...<svg style="width:18px;height:18px;animation:spin 1s linear infinite;display:inline-block;vertical-align:middle;margin-left:6px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 4v5h.582m15.356 2A8.001 8.001 0 1121.21 8H18.9"></path></svg>';
+          fetch(url,{method:'POST',headers:{'Content-Type':'text/plain'},body:JSON.stringify({action:'upload_to_drive',base64:dataUri.split(',')[1],filename:file.name,mimeType:file.type})})
+          .then(r=>r.text()).then(t=>{const d=JSON.parse(t);if(d.status==='success')save(d.url);else throw new Error(d.message||'Upload failed');})
+          .catch(err=>{ console.warn('Drive upload failed, using local base64 fallback:', err); save(dataUri); })
+          .finally(()=>{ submitBtn.innerHTML=orig; submitBtn.removeAttribute('disabled'); });
+        };
+        reader.readAsDataURL(file);
+      } else {
+        save(imgUrl || '');
+      }
+    });
+  }
+});
+</script>
+</body>
+</html>

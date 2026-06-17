@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inquiries & Leads | Admin Dashboard</title>
+  <link rel="icon" type="image/x-icon" href="assets/images/logo.jpeg">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    body { background-color: var(--bg-base); }
+    .leads-table-wrap { overflow-x:auto; border-radius:var(--radius-md); }
+    .leads-table { width:100%; border-collapse:collapse; font-size:0.875rem; }
+    .leads-table thead th { background:var(--bg-surface); color:var(--text-muted); font-weight:700; font-size:0.72rem; text-transform:uppercase; letter-spacing:0.06em; padding:14px 16px; text-align:left; border-bottom:1px solid var(--border-color); white-space:nowrap; cursor:pointer; user-select:none; transition:color 0.2s; }
+    .leads-table thead th:hover { color:var(--primary); }
+    .leads-table thead th.sorted-asc .sort-icon::after { content:" ▲"; color:var(--primary); }
+    .leads-table thead th.sorted-desc .sort-icon::after { content:" ▼"; color:var(--primary); }
+    .leads-table thead th:not(.sorted-asc):not(.sorted-desc) .sort-icon::after { content:" ⇅"; opacity:0.4; }
+    .sort-icon { font-size:0.65rem; }
+    .leads-table tbody tr { border-bottom:1px solid var(--border-color); transition:background 0.15s; }
+    .leads-table tbody tr:last-child { border-bottom:none; }
+    .leads-table tbody tr:hover { background:rgba(99,102,241,0.04); }
+    .leads-table tbody tr.selected-row { background:rgba(99,102,241,0.07); }
+    .leads-table td { padding:14px 16px; vertical-align:middle; }
+    .badge-service { display:inline-block; padding:3px 10px; border-radius:20px; font-size:0.7rem; font-weight:700; background:var(--primary-glow); color:var(--primary); }
+    .table-toolbar { display:flex; gap:12px; flex-wrap:wrap; align-items:center; margin-bottom:20px; }
+    .toolbar-search { flex:1; min-width:200px; position:relative; }
+    .toolbar-search svg { position:absolute; left:14px; top:50%; transform:translateY(-50%); width:16px; height:16px; color:var(--text-muted); }
+    .toolbar-search input { padding-left:40px !important; }
+    .pagination-bar { display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap; margin-top:20px; }
+    .pagination-info { font-size:0.82rem; color:var(--text-muted); }
+    .pagination-btns { display:flex; gap:6px; }
+    .page-btn { min-width:36px; height:36px; padding:0 10px; border-radius:var(--radius-sm); border:1px solid var(--border-color); background:var(--bg-surface); color:var(--text-main); font-size:0.82rem; font-weight:600; cursor:pointer; transition:all 0.2s; display:flex; align-items:center; justify-content:center; }
+    .page-btn:hover { border-color:var(--primary); color:var(--primary); }
+    .page-btn.active { background:var(--primary); color:#fff; border-color:var(--primary); }
+    .page-btn:disabled { opacity:0.4; cursor:not-allowed; }
+    .table-empty { text-align:center; padding:60px 20px; color:var(--text-muted); }
+    .table-empty svg { width:48px; height:48px; margin:0 auto 16px; display:block; opacity:0.4; }
+    .table-empty h3 { font-size:1.1rem; font-weight:700; margin-bottom:6px; color:var(--text-main); }
+    .table-empty p { font-size:0.85rem; }
+    .bulk-bar { display:none; align-items:center; gap:12px; padding:10px 16px; border-radius:var(--radius-sm); background:rgba(239,68,68,0.06); border:1px solid rgba(239,68,68,0.2); margin-bottom:16px; font-size:0.85rem; font-weight:600; color:#ef4444; }
+    .bulk-bar.visible { display:flex; }
+    .msg-cell { max-width:220px; font-size:0.8rem; color:var(--text-muted); overflow:hidden; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; line-height:1.4; }
+  </style>
+</head>
+<body>
+
+  <div id="loginOverlay" class="admin-login-overlay">
+    <div class="login-card glass-panel">
+      <div class="login-logo"><img src="assets/images/logo.jpeg" alt="Logo"><h2>PLACEMENT KEEPERS</h2><span>Admin Portal</span></div>
+      <div id="loginError" class="login-error">Invalid admin credentials.</div>
+      <form id="loginForm" novalidate>
+        <div class="form-group" style="text-align:left;"><label for="username" class="form-label">Username</label><input type="text" id="username" class="form-control" placeholder="Enter username" required></div>
+        <div class="form-group" style="text-align:left;margin-bottom:30px;"><label for="password" class="form-label">Password</label><input type="password" id="password" class="form-control" placeholder="Enter password" required></div>
+        <button type="submit" class="btn btn-primary" style="width:100%;">Unlock Dashboard</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="admin-wrapper">
+    <aside class="admin-sidebar">
+      <div class="sidebar-header" style="display:flex;flex-direction:column;align-items:center;gap:12px;padding:24px 20px;">
+        <img src="assets/images/logo.jpeg" alt="Logo" style="width:auto;max-width:100%;height:auto;max-height:48px;object-fit:contain;">
+        <div style="font-family:var(--font-heading);font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;color:var(--primary);text-align:center;line-height:1.2;">Management Dashboard</div>
+      </div>
+      <nav class="sidebar-menu">
+        <a href="admin.html" class="sidebar-btn"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2H6a2 2 0 01-2-2v-4zM14 16a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2h-2a2 2 0 01-2-2v-4z"></path></svg>Overview</a>
+        <a href="admin-articles.html" class="sidebar-btn"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"></path></svg>Manage Articles</a>
+        <a href="admin-gallery.html" class="sidebar-btn"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>Manage Gallery</a>
+        <a href="admin-jobs.html" class="sidebar-btn"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>Manage Openings</a>
+        <a href="admin-testimonials.html" class="sidebar-btn"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path></svg>Manage Testimonials</a>
+        <a href="admin-leads.html" class="sidebar-btn active"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>Inquiries &amp; Leads</a>
+        <a href="admin-integrations.html" class="sidebar-btn"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"></path></svg>Google Sheets Config</a>
+      </nav>
+      <div class="sidebar-footer">
+        <button id="logoutBtn" class="btn btn-secondary" style="width:100%;padding:10px;font-size:0.9rem;"><svg style="width:18px;height:18px;margin-right:6px;vertical-align:middle;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>Lock Dashboard</button>
+      </div>
+    </aside>
+
+    <main class="admin-main">
+      <div class="admin-panel active">
+        <div class="admin-panel-header" style="flex-wrap:wrap;gap:16px;">
+          <h2 class="admin-panel-title">Inquiries &amp; <span>Lead Comments</span></h2>
+          <div style="display:flex;gap:10px;align-items:center;">
+            <span id="totalCount" style="font-size:0.82rem;color:var(--text-muted);font-weight:600;"></span>
+            <button id="btnExportCSV" class="btn btn-secondary" style="padding:10px 16px;font-size:0.85rem;">Export CSV</button>
+            <button id="btnClearLeads" class="btn btn-danger" style="padding:10px 16px;font-size:0.85rem;">Clear All</button>
+          </div>
+        </div>
+
+        <div class="glass-panel" style="padding:24px;border-radius:var(--radius-md);">
+          <!-- Filters row -->
+          <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:20px;">
+            <div style="position:relative;">
+              <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" style="position:absolute;left:14px;top:50%;transform:translateY(-50%);width:16px;height:16px;color:var(--text-muted);"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+              <input id="searchInput" type="text" class="form-control" placeholder="Search by name, email, phone, message..." style="padding-left:40px;">
+            </div>
+            <div style="display:flex;gap:10px;flex-wrap:wrap;">
+              <select id="serviceFilter" class="form-control" style="flex:2;min-width:160px;">
+                <option value="">All Services</option>
+                <option value="permanent">Permanent Staffing</option>
+                <option value="contract">Contract Hiring</option>
+                <option value="bulk">Bulk Volume Sourcing</option>
+                <option value="it-augmentation">IT Augmentation</option>
+                <option value="payroll">Payroll Outsourcing</option>
+                <option value="other">Other</option>
+              </select>
+              <select id="sortSelect" class="form-control" style="flex:1;min-width:130px;">
+                <option value="newest">Newest First</option>
+                <option value="oldest">Oldest First</option>
+                <option value="name_asc">Name A→Z</option>
+                <option value="name_desc">Name Z→A</option>
+              </select>
+              <select id="perPageSelect" class="form-control" style="flex:1;min-width:100px;">
+                <option value="20">20 / page</option>
+                <option value="50">50 / page</option>
+                <option value="100">100 / page</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Bulk bar -->
+          <div id="bulkBar" class="bulk-bar">
+            <input type="checkbox" id="selectAllCheck" style="width:16px;height:16px;accent-color:#ef4444;cursor:pointer;">
+            <span id="bulkCount">0 selected</span>
+            <button id="bulkDeleteBtn" class="btn btn-danger" style="padding:6px 14px;font-size:0.8rem;border-radius:var(--radius-sm);">Delete Selected</button>
+            <button id="bulkClearBtn" class="btn btn-secondary" style="padding:6px 14px;font-size:0.8rem;">Clear</button>
+          </div>
+
+          <div class="leads-table-wrap">
+            <table class="leads-table">
+              <thead><tr>
+                <th style="width:36px;cursor:default;"><input type="checkbox" id="headerCheck" style="width:15px;height:15px;accent-color:var(--primary);cursor:pointer;"></th>
+                <th>#</th>
+                <th data-col="date" class="sortable">Date <span class="sort-icon"></span></th>
+                <th data-col="name" class="sortable">Name <span class="sort-icon"></span></th>
+                <th>Email &amp; Phone</th>
+                <th data-col="service" class="sortable">Service <span class="sort-icon"></span></th>
+                <th>Message</th>
+                <th style="text-align:center;cursor:default;">Actions</th>
+              </tr></thead>
+              <tbody id="leadsTableBody"></tbody>
+            </table>
+          </div>
+
+          <div id="tableEmpty" class="table-empty" style="display:none;">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 19v-8.93a2 2 0 01.89-1.664l8-5.333a2 2 0 012.22 0l8 5.333A2 2 0 0121 10.07V19M3 19a2 2 0 002 2h14a2 2 0 002-2M3 19l6.75-4.5M21 19l-6.75-4.5M3 10l6.75 4.5M21 10l-6.75 4.5m0 0l-2.25-1.5a2 2 0 00-2.22 0l-2.25 1.5"></path></svg>
+            <h3>No inquiries recorded yet</h3><p>Incoming contact form submissions will appear here.</p>
+          </div>
+
+          <div class="pagination-bar" id="paginationBar">
+            <div class="pagination-info" id="paginationInfo"></div>
+            <div class="pagination-btns" id="paginationBtns"></div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const loginOverlay = document.getElementById('loginOverlay');
+  if (sessionStorage.getItem('admin_logged_in') !== 'true') { loginOverlay.style.display='flex'; }
+  else { loginOverlay.style.display='none'; init(); }
+  document.getElementById('loginForm').addEventListener('submit', e => {
+    e.preventDefault();
+    if(document.getElementById('username').value.trim()==='admin'&&document.getElementById('password').value.trim()==='admin'){
+      sessionStorage.setItem('admin_logged_in','true'); loginOverlay.style.opacity='0'; loginOverlay.style.transform='scale(0.95)';
+      setTimeout(()=>{loginOverlay.style.display='none';init();},350); document.getElementById('loginError').style.display='none';
+    } else { document.getElementById('loginError').style.display='block'; const c=document.querySelector('.login-card'); c.classList.add('shake'); setTimeout(()=>c.classList.remove('shake'),400); document.getElementById('password').value=''; }
+  });
+  document.getElementById('logoutBtn').addEventListener('click',()=>{sessionStorage.removeItem('admin_logged_in');window.location.href='admin.html';});
+
+  let allLeads=[], filteredLeads=[], currentPage=1, perPage=20, selectedIds=new Set(), sortCol='date', sortDir='desc';
+
+  function init() { allLeads=JSON.parse(localStorage.getItem('contact_submissions'))||[]; renderTable(); bindControls(); }
+
+  function esc(s){return(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+
+  function getFiltered(){
+    const q=document.getElementById('searchInput').value.toLowerCase().trim();
+    const svc=document.getElementById('serviceFilter').value;
+    const srt=document.getElementById('sortSelect').value;
+    let arr=allLeads.filter(l=>{
+      const mQ=!q||(l.name||'').toLowerCase().includes(q)||(l.email||'').toLowerCase().includes(q)||(l.phone||'').includes(q)||(l.message||'').toLowerCase().includes(q);
+      const mS=!svc||l.service===svc;
+      return mQ&&mS;
+    });
+    if(srt==='oldest')arr=[...arr].reverse();
+    else if(srt==='name_asc')arr=[...arr].sort((a,b)=>(a.name||'').localeCompare(b.name||''));
+    else if(srt==='name_desc')arr=[...arr].sort((a,b)=>(b.name||'').localeCompare(a.name||''));
+    return arr;
+  }
+
+  function renderTable(){
+    filteredLeads=getFiltered(); const total=filteredLeads.length;
+    const totalPages=Math.max(1,Math.ceil(total/perPage));
+    if(currentPage>totalPages)currentPage=totalPages;
+    document.getElementById('totalCount').textContent=`${total} lead${total!==1?'s':''}`;
+    const start=(currentPage-1)*perPage; const items=filteredLeads.slice(start,start+perPage);
+    const tbody=document.getElementById('leadsTableBody'); tbody.innerHTML='';
+    const empty=document.getElementById('tableEmpty');
+    if(total===0){empty.style.display='block';document.getElementById('paginationBar').style.display='none';return;}
+    empty.style.display='none'; document.getElementById('paginationBar').style.display='flex';
+    items.forEach((l,i)=>{
+      const isSelected=selectedIds.has(l.id);
+      const tr=document.createElement('tr'); if(isSelected)tr.classList.add('selected-row');
+      tr.innerHTML=`<td><input type="checkbox" class="row-check" data-id="${l.id}" style="width:15px;height:15px;accent-color:var(--primary);cursor:pointer;" ${isSelected?'checked':''}></td>
+        <td style="color:var(--text-muted);font-size:0.78rem;font-weight:600;">${start+i+1}</td>
+        <td style="font-size:0.8rem;white-space:nowrap;font-weight:600;">${esc(l.date)}</td>
+        <td style="font-weight:700;color:var(--primary);">${esc(l.name)}</td>
+        <td><div style="font-weight:500;">${esc(l.email)}</div><div style="font-size:0.78rem;color:var(--text-muted);margin-top:2px;">${esc(l.phone)}</div></td>
+        <td><span class="badge-service">${esc(l.service)}</span></td>
+        <td><div class="msg-cell">${esc(l.message)}</div></td>
+        <td style="text-align:center;"><button class="btn btn-danger btn-sm del-lead-btn" data-id="${l.id}" style="padding:5px 10px;font-size:0.75rem;border-radius:var(--radius-sm);">Delete</button></td>`;
+      tbody.appendChild(tr);
+    });
+    document.querySelectorAll('.row-check').forEach(cb=>{cb.addEventListener('change',()=>{const id=cb.getAttribute('data-id');if(cb.checked)selectedIds.add(id);else selectedIds.delete(id);updateBulkBar();cb.closest('tr').classList.toggle('selected-row',cb.checked);});});
+    document.querySelectorAll('.del-lead-btn').forEach(btn=>{btn.addEventListener('click',()=>{if(!confirm('Delete this lead?'))return;deleteLeads([btn.getAttribute('data-id')]);});});
+    renderPagination(total,totalPages); updateHeaderCheck();
+  }
+
+  function deleteLeads(ids){
+    let leads=JSON.parse(localStorage.getItem('contact_submissions'))||[];
+    leads=leads.filter(l=>!ids.includes(l.id));
+    localStorage.setItem('contact_submissions',JSON.stringify(leads));
+    const url=localStorage.getItem('google_sheets_url');
+    ids.forEach(id=>{selectedIds.delete(id);if(url&&url.trim())fetch(url,{method:'POST',headers:{'Content-Type':'text/plain'},body:JSON.stringify({action:'delete_lead',id})}).catch(()=>{});});
+    allLeads=leads; updateBulkBar(); renderTable();
+  }
+
+  function updateBulkBar(){
+    const bar=document.getElementById('bulkBar'); const c=selectedIds.size;
+    bar.classList.toggle('visible',c>0);
+    if(c>0)document.getElementById('bulkCount').textContent=`${c} selected`;
+    updateHeaderCheck();
+  }
+
+  function updateHeaderCheck(){
+    const hc=document.getElementById('headerCheck');
+    const pageIds=[...document.querySelectorAll('.row-check')].map(c=>c.getAttribute('data-id'));
+    const allChecked=pageIds.length>0&&pageIds.every(id=>selectedIds.has(id));
+    hc.checked=allChecked; hc.indeterminate=!allChecked&&pageIds.some(id=>selectedIds.has(id));
+  }
+
+  function renderPagination(total,totalPages){
+    const info=document.getElementById('paginationInfo'), btns=document.getElementById('paginationBtns');
+    const s=Math.min((currentPage-1)*perPage+1,total),e=Math.min(currentPage*perPage,total);
+    info.textContent=`Showing ${s}–${e} of ${total}`; btns.innerHTML='';
+    const prev=document.createElement('button'); prev.className='page-btn'; prev.textContent='‹'; prev.disabled=currentPage===1; prev.addEventListener('click',()=>{currentPage--;renderTable();}); btns.appendChild(prev);
+    getRange(currentPage,totalPages).forEach(p=>{if(p==='...'){const el=document.createElement('span');el.textContent='…';el.style.cssText='display:flex;align-items:center;padding:0 6px;color:var(--text-muted);font-size:0.82rem;';btns.appendChild(el);}else{const b=document.createElement('button');b.className='page-btn'+(p===currentPage?' active':'');b.textContent=p;b.addEventListener('click',()=>{currentPage=p;renderTable();});btns.appendChild(b);}});
+    const next=document.createElement('button'); next.className='page-btn'; next.textContent='›'; next.disabled=currentPage===totalPages; next.addEventListener('click',()=>{currentPage++;renderTable();}); btns.appendChild(next);
+  }
+  function getRange(cur,total){if(total<=7)return Array.from({length:total},(_,i)=>i+1);if(cur<=4)return[1,2,3,4,5,'...',total];if(cur>=total-3)return[1,'...',total-4,total-3,total-2,total-1,total];return[1,'...',cur-1,cur,cur+1,'...',total];}
+
+  function bindControls(){
+    document.getElementById('searchInput').addEventListener('input',()=>{currentPage=1;renderTable();});
+    document.getElementById('serviceFilter').addEventListener('change',()=>{currentPage=1;renderTable();});
+    document.getElementById('sortSelect').addEventListener('change',()=>{currentPage=1;renderTable();});
+    document.getElementById('perPageSelect').addEventListener('change',e=>{perPage=parseInt(e.target.value);currentPage=1;renderTable();});
+    document.getElementById('headerCheck').addEventListener('change',e=>{const pageIds=[...document.querySelectorAll('.row-check')].map(c=>c.getAttribute('data-id'));pageIds.forEach(id=>{if(e.target.checked)selectedIds.add(id);else selectedIds.delete(id);});renderTable();updateBulkBar();});
+    document.getElementById('selectAllCheck').addEventListener('change',e=>{if(e.target.checked)filteredLeads.forEach(l=>selectedIds.add(l.id));else selectedIds.clear();renderTable();updateBulkBar();});
+    document.getElementById('bulkDeleteBtn').addEventListener('click',()=>{if(!confirm(`Delete ${selectedIds.size} lead(s)?`))return;deleteLeads([...selectedIds]);});
+    document.getElementById('bulkClearBtn').addEventListener('click',()=>{selectedIds.clear();updateBulkBar();renderTable();});
+    document.getElementById('btnClearLeads').addEventListener('click',()=>{if(!confirm('Delete ALL inquiry logs? Cannot be undone.'))return;localStorage.setItem('contact_submissions',JSON.stringify([]));allLeads=[];selectedIds.clear();updateBulkBar();renderTable();});
+    document.getElementById('btnExportCSV').addEventListener('click',()=>{
+      const leads=JSON.parse(localStorage.getItem('contact_submissions'))||[];
+      if(!leads.length){alert('No inquiries to export.');return;}
+      let csv='data:text/csv;charset=utf-8,Date,Name,Email,Phone,Service,Message\n';
+      leads.forEach(l=>{csv+=`"${l.date}","${(l.name||'').replace(/"/g,'""')}","${(l.email||'').replace(/"/g,'""')}","${(l.phone||'').replace(/"/g,'""')}","${(l.service||'').replace(/"/g,'""')}","${(l.message||'').replace(/"/g,'""')}"\n`;});
+      const link=document.createElement('a'); link.href=encodeURI(csv); link.download=`Leads_${Date.now()}.csv`; document.body.appendChild(link); link.click(); document.body.removeChild(link);
+    });
+  }
+});
+</script>
+</body>
+</html>

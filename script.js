@@ -406,7 +406,7 @@ document.addEventListener('DOMContentLoaded', () => {
         card.className = 'gallery-item';
         card.setAttribute('data-category', item.category);
         card.innerHTML = `
-          <img src="${item.img}" alt="${item.title}" loading="lazy">
+          <img src="${item.img || 'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=800&q=80'}" alt="${item.title}" loading="lazy" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=800&q=80';">
           <div class="gallery-overlay">
             <h4 class="gallery-title">${item.title}</h4>
             <span class="gallery-tag">${item.category === 'office' ? 'Office & Culture' : (item.category === 'events' ? 'Corporate Events' : (item.category === 'team' ? 'Team Bonding' : 'Achievements'))}</span>
@@ -572,7 +572,7 @@ document.addEventListener('DOMContentLoaded', () => {
         card.setAttribute('data-id', article.id);
         card.innerHTML = `
           <div class="blog-img-box">
-            <img src="${article.img}" alt="${article.title}" loading="lazy">
+            <img src="${article.img || 'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=800&q=80'}" alt="${article.title}" loading="lazy" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=800&q=80';">
             <span class="blog-category-badge">${article.category}</span>
           </div>
           <div class="blog-body">
@@ -602,7 +602,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const article = storedArticles.find(a => a.id === articleId);
         if (!article) return;
 
-        blogModalImg.setAttribute('src', article.img);
+        blogModalImg.setAttribute('src', article.img || 'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=800&q=80');
+        blogModalImg.onerror = () => { blogModalImg.src = 'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=800&q=80'; };
         blogModalCategory.textContent = article.category;
         blogModalTitle.textContent = article.title;
         blogModalMeta.textContent = article.meta;

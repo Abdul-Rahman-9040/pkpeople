@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Google Sheets Config | Admin Dashboard</title>
+  <link rel="icon" type="image/x-icon" href="assets/images/logo.jpeg">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    body { background-color: var(--bg-base); }
+  </style>
+</head>
+<body>
+
+  <div id="loginOverlay" class="admin-login-overlay">
+    <div class="login-card glass-panel">
+      <div class="login-logo"><img src="assets/images/logo.jpeg" alt="Logo"><h2>PLACEMENT KEEPERS</h2><span>Admin Portal</span></div>
+      <div id="loginError" class="login-error">Invalid admin credentials.</div>
+      <form id="loginForm" novalidate>
+        <div class="form-group" style="text-align:left;"><label for="username" class="form-label">Username</label><input type="text" id="username" class="form-control" placeholder="Enter username" required></div>
+        <div class="form-group" style="text-align:left;margin-bottom:30px;"><label for="password" class="form-label">Password</label><input type="password" id="password" class="form-control" placeholder="Enter password" required></div>
+        <button type="submit" class="btn btn-primary" style="width:100%;">Unlock Dashboard</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="admin-wrapper">
+    <aside class="admin-sidebar">
+      <div class="sidebar-header" style="display:flex;flex-direction:column;align-items:center;gap:12px;padding:24px 20px;">
+        <img src="assets/images/logo.jpeg" alt="Logo" style="width:auto;max-width:100%;height:auto;max-height:48px;object-fit:contain;">
+        <div style="font-family:var(--font-heading);font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;color:var(--primary);text-align:center;line-height:1.2;">Management Dashboard</div>
+      </div>
+      <nav class="sidebar-menu">
+        <a href="admin.html" class="sidebar-btn"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2H6a2 2 0 01-2-2v-4zM14 16a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2h-2a2 2 0 01-2-2v-4z"></path></svg>Overview</a>
+        <a href="admin-articles.html" class="sidebar-btn"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"></path></svg>Manage Articles</a>
+        <a href="admin-gallery.html" class="sidebar-btn"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>Manage Gallery</a>
+        <a href="admin-jobs.html" class="sidebar-btn"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>Manage Openings</a>
+        <a href="admin-testimonials.html" class="sidebar-btn"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path></svg>Manage Testimonials</a>
+        <a href="admin-leads.html" class="sidebar-btn"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>Inquiries &amp; Leads</a>
+        <a href="admin-integrations.html" class="sidebar-btn active"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"></path></svg>Google Sheets Config</a>
+      </nav>
+      <div class="sidebar-footer">
+        <button id="logoutBtn" class="btn btn-secondary" style="width:100%;padding:10px;font-size:0.9rem;"><svg style="width:18px;height:18px;margin-right:6px;vertical-align:middle;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>Lock Dashboard</button>
+      </div>
+    </aside>
+
+    <main class="admin-main">
+      <div class="admin-panel active">
+        <div class="admin-panel-header">
+          <h2 class="admin-panel-title">Google Sheets <span>Webhook Setup</span></h2>
+        </div>
+
+        <div class="admin-form-container">
+          <!-- Steps -->
+          <div>
+            <h3 style="font-family:var(--font-heading);font-size:1.25rem;font-weight:700;margin-bottom:20px;">Inquiries to Google Sheets in 3 Steps</h3>
+            <div class="step-card"><h4><span class="step-num">1</span>Create a Google Sheet</h4><p style="font-size:0.85rem;color:var(--text-muted);margin-top:6px;">Open a new spreadsheet in Google Sheets. From the menu bar, click on <strong>Extensions</strong> and select <strong>Apps Script</strong>.</p></div>
+            <div class="step-card"><h4><span class="step-num">2</span>Paste code &amp; Deploy</h4><p style="font-size:0.85rem;color:var(--text-muted);margin-top:6px;">Erase any existing code, copy the CORS-enabled code block on the right, and paste it. Click <strong>Deploy → New Deployment</strong>. Select type <strong>Web App</strong>, change Access to <strong>Anyone</strong>, and click Deploy.</p></div>
+            <div class="step-card"><h4><span class="step-num">3</span>Save Web App URL Below</h4><p style="font-size:0.85rem;color:var(--text-muted);margin-top:6px;">Copy the generated <strong>Web App URL</strong> from Google, paste it in the field below, and click Save.</p></div>
+            <div class="glass-panel" style="padding:24px;border-radius:var(--radius-md);margin-top:20px;">
+              <h4 style="font-family:var(--font-heading);font-size:1.05rem;font-weight:700;margin-bottom:12px;">Active Spreadsheet URL</h4>
+              <form id="integrationForm" style="display:flex;gap:12px;flex-direction:column;">
+                <input id="sheetsUrl" type="url" class="form-control" placeholder="https://script.google.com/macros/s/.../exec" required>
+                <button type="submit" class="btn btn-primary" style="align-self:flex-start;padding:10px 24px;font-size:0.9rem;">Save Connection URL</button>
+              </form>
+              <div id="savedIndicator" style="display:none;margin-top:10px;font-size:0.82rem;color:#10b981;font-weight:600;">✓ Webhook URL saved and active.</div>
+            </div>
+          </div>
+
+          <!-- Code block -->
+          <div>
+            <div class="preview-box-title">Apps Script Code Block</div>
+            <p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:12px;">This lightweight script processes submissions, appends headers automatically, and handles file uploads to Google Drive.</p>
+            <div class="code-copy-box">
+              <button id="btnCopyCode" class="btn-copy">Copy Code</button>
+              <pre><code id="scriptCode">function doGet(e) {
+  var action = e.parameter.action;
+  if (action === 'get_articles') {
+    return getArticles();
+  } else if (action === 'get_gallery') {
+    return getGallery();
+  }
+  return ContentService.createTextOutput(JSON.stringify({ "status": "error", "message": "Invalid action" }))
+                       .setMimeType(ContentService.MimeType.JSON);
+}
+
+function doPost(e) {
+  try {
+    var data = JSON.parse(e.postData.contents);
+    var action = data.action;
+    if (action === 'add_lead') return addLead(data);
+    else if (action === 'delete_lead') return deleteLead(data.id);
+    else if (action === 'add_article') return addArticle(data);
+    else if (action === 'delete_article') return deleteArticle(data.id);
+    else if (action === 'add_gallery') return addGallery(data);
+    else if (action === 'delete_gallery') return deleteGallery(data.id);
+    else if (action === 'upload_to_drive') return uploadToDrive(data);
+    return addLead(data);
+  } catch(error) {
+    return ContentService.createTextOutput(JSON.stringify({ "status": "error", "message": error.toString() }))
+                         .setMimeType(ContentService.MimeType.JSON);
+  }
+}
+
+function getArticles() {
+  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  var sheet = ss.getSheetByName("Articles");
+  if (!sheet) return ContentService.createTextOutput(JSON.stringify([])).setMimeType(ContentService.MimeType.JSON);
+  var data = sheet.getDataRange().getValues();
+  if (data.length <= 1) return ContentService.createTextOutput(JSON.stringify([])).setMimeType(ContentService.MimeType.JSON);
+  var articles = []; var headers = data[0];
+  for (var i = 1; i < data.length; i++) {
+    var row = data[i]; var article = {};
+    for (var j = 0; j < headers.length; j++) {
+      var key = headers[j].toLowerCase();
+      if (key === 'image url') key = 'img';
+      article[key] = row[j];
+    }
+    articles.push(article);
+  }
+  return ContentService.createTextOutput(JSON.stringify(articles)).setMimeType(ContentService.MimeType.JSON);
+}
+
+function addArticle(data) {
+  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  var sheet = ss.getSheetByName("Articles");
+  if (!sheet) sheet = ss.insertSheet("Articles");
+  if (sheet.getLastRow() === 0) sheet.appendRow(["ID","Title","Category","Meta","Image URL","Desc","Content"]);
+  sheet.appendRow([data.id, data.title, data.category, data.meta, data.img, data.desc, data.content]);
+  return ContentService.createTextOutput(JSON.stringify({ "status": "success" })).setMimeType(ContentService.MimeType.JSON);
+}
+
+function deleteArticle(id) {
+  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  var sheet = ss.getSheetByName("Articles");
+  if (sheet) {
+    var data = sheet.getDataRange().getValues();
+    for (var i = 1; i < data.length; i++) { if (data[i][0] == id) { sheet.deleteRow(i+1); break; } }
+  }
+  return ContentService.createTextOutput(JSON.stringify({ "status": "success" })).setMimeType(ContentService.MimeType.JSON);
+}
+
+function getGallery() {
+  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  var sheet = ss.getSheetByName("Gallery");
+  if (!sheet) return ContentService.createTextOutput(JSON.stringify([])).setMimeType(ContentService.MimeType.JSON);
+  var data = sheet.getDataRange().getValues();
+  if (data.length <= 1) return ContentService.createTextOutput(JSON.stringify([])).setMimeType(ContentService.MimeType.JSON);
+  var items = []; var headers = data[0];
+  for (var i = 1; i < data.length; i++) {
+    var row = data[i]; var item = {};
+    for (var j = 0; j < headers.length; j++) {
+      var key = headers[j].toLowerCase();
+      if (key === 'image url') key = 'img';
+      item[key] = row[j];
+    }
+    items.push(item);
+  }
+  return ContentService.createTextOutput(JSON.stringify(items)).setMimeType(ContentService.MimeType.JSON);
+}
+
+function addGallery(data) {
+  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  var sheet = ss.getSheetByName("Gallery");
+  if (!sheet) sheet = ss.insertSheet("Gallery");
+  if (sheet.getLastRow() === 0) sheet.appendRow(["ID","Title","Category","Image URL"]);
+  sheet.appendRow([data.id, data.title, data.category, data.img]);
+  return ContentService.createTextOutput(JSON.stringify({ "status": "success" })).setMimeType(ContentService.MimeType.JSON);
+}
+
+function deleteGallery(id) {
+  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  var sheet = ss.getSheetByName("Gallery");
+  if (sheet) {
+    var data = sheet.getDataRange().getValues();
+    for (var i = 1; i < data.length; i++) { if (data[i][0] == id) { sheet.deleteRow(i+1); break; } }
+  }
+  return ContentService.createTextOutput(JSON.stringify({ "status": "success" })).setMimeType(ContentService.MimeType.JSON);
+}
+
+function addLead(data) {
+  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  var sheet = ss.getSheetByName("Inquiries");
+  if (!sheet) sheet = ss.insertSheet("Inquiries");
+  if (sheet.getLastRow() === 0) sheet.appendRow(["ID","Timestamp","Name","Email","Phone","Service Needed","Message"]);
+  sheet.appendRow([data.id, new Date(), data.name, data.email, data.phone, data.service, data.message]);
+  return ContentService.createTextOutput(JSON.stringify({ "status": "success" })).setMimeType(ContentService.MimeType.JSON);
+}
+
+function deleteLead(id) {
+  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  var sheet = ss.getSheetByName("Inquiries");
+  if (sheet) {
+    var data = sheet.getDataRange().getValues();
+    for (var i = 1; i < data.length; i++) { if (data[i][0] == id) { sheet.deleteRow(i+1); break; } }
+  }
+  return ContentService.createTextOutput(JSON.stringify({ "status": "success" })).setMimeType(ContentService.MimeType.JSON);
+}
+
+function uploadToDrive(data) {
+  try {
+    var folderName = "PeoplePulse_Gallery";
+    var folder;
+    var folders = DriveApp.getFoldersByName(folderName);
+    if (folders.hasNext()) folder = folders.next();
+    else folder = DriveApp.createFolder(folderName);
+    var decoded = Utilities.base64Decode(data.base64);
+    var blob = Utilities.newBlob(decoded, data.mimeType, data.filename);
+    var file = folder.createFile(blob);
+    try { file.setSharing(DriveApp.Access.ANYONE_WITH_LINK, DriveApp.Permission.VIEW); } catch(e) {}
+    var fileId = file.getId();
+    var directUrl = "https://lh3.googleusercontent.com/d/" + fileId;
+    return ContentService.createTextOutput(JSON.stringify({ "status": "success", "url": directUrl })).setMimeType(ContentService.MimeType.JSON);
+  } catch(error) {
+    return ContentService.createTextOutput(JSON.stringify({ "status": "error", "message": error.toString() })).setMimeType(ContentService.MimeType.JSON);
+  }
+}</code></pre>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const loginOverlay = document.getElementById('loginOverlay');
+  if (sessionStorage.getItem('admin_logged_in') !== 'true') { loginOverlay.style.display='flex'; }
+  else { loginOverlay.style.display='none'; init(); }
+  document.getElementById('loginForm').addEventListener('submit', e => {
+    e.preventDefault();
+    if(document.getElementById('username').value.trim()==='admin'&&document.getElementById('password').value.trim()==='admin'){
+      sessionStorage.setItem('admin_logged_in','true'); loginOverlay.style.opacity='0'; loginOverlay.style.transform='scale(0.95)';
+      setTimeout(()=>{loginOverlay.style.display='none';init();},350); document.getElementById('loginError').style.display='none';
+    } else { document.getElementById('loginError').style.display='block'; const c=document.querySelector('.login-card'); c.classList.add('shake'); setTimeout(()=>c.classList.remove('shake'),400); document.getElementById('password').value=''; }
+  });
+  document.getElementById('logoutBtn').addEventListener('click',()=>{sessionStorage.removeItem('admin_logged_in');window.location.href='admin.html';});
+
+  function init() {
+    const saved = localStorage.getItem('google_sheets_url');
+    if (saved) {
+      document.getElementById('sheetsUrl').value = saved;
+      document.getElementById('savedIndicator').style.display = 'block';
+    }
+
+    document.getElementById('integrationForm').addEventListener('submit', e => {
+      e.preventDefault();
+      const url = document.getElementById('sheetsUrl').value.trim();
+      if (!url.includes('script.google.com/macros/s/') || !url.includes('/exec')) {
+        if (!confirm('This URL does not look like a Google Apps Script URL. Save anyway?')) return;
+      }
+      localStorage.setItem('google_sheets_url', url);
+      document.getElementById('savedIndicator').style.display = 'block';
+      alert('Google Sheets Webhook URL saved successfully!');
+    });
+
+    document.getElementById('btnCopyCode').addEventListener('click', () => {
+      const code = document.getElementById('scriptCode').textContent;
+      navigator.clipboard.writeText(code).then(() => {
+        const btn = document.getElementById('btnCopyCode');
+        btn.textContent = 'Copied!'; btn.style.backgroundColor='var(--success)'; btn.style.borderColor='var(--success)';
+        setTimeout(()=>{btn.textContent='Copy Code';btn.style.backgroundColor='';btn.style.borderColor='';},3000);
+      }).catch(()=>alert('Failed to copy. Please select manually.'));
+    });
+  }
+});
+</script>
+</body>
+</html>
