@@ -245,11 +245,27 @@
     </div>
   </div>
 
+  <!-- ── RESPONSIVE MOBILE TOPBAR ── -->
+  <header class="admin-mobile-topbar">
+    <div class="topbar-brand">
+      <img src="assets/images/logo.jpeg" alt="Logo">
+      <div class="topbar-title">People Pulse Admin</div>
+    </div>
+    <button id="adminHamburgerBtn" class="admin-hamburger" aria-label="Toggle Navigation Menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </header>
+
   <!-- ── MAIN WRAPPER ── -->
   <div class="admin-wrapper">
 
+    <!-- Sidebar Navigation Backdrop -->
+    <div id="adminSidebarOverlay" class="admin-sidebar-overlay"></div>
+
     <!-- Sidebar -->
-    <aside class="admin-sidebar">
+    <aside id="adminSidebar" class="admin-sidebar">
       <div class="sidebar-header" style="display:flex;flex-direction:column;align-items:center;gap:12px;padding:24px 20px;">
         <img src="assets/images/logo.jpeg" alt="Logo" style="width:auto;max-width:100%;height:auto;max-height:48px;object-fit:contain;">
         <div style="font-family:var(--font-heading);font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;color:var(--primary);text-align:center;line-height:1.2;">
@@ -452,6 +468,26 @@
 <script>
 document.addEventListener('DOMContentLoaded', () => {
 
+  // ── MOBILE SIDEBAR TOGGLE ──
+  const adminHamburgerBtn = document.getElementById('adminHamburgerBtn');
+  const adminSidebar = document.querySelector('.admin-sidebar');
+  const adminSidebarOverlay = document.getElementById('adminSidebarOverlay');
+
+  const toggleDrawer = () => {
+    adminHamburgerBtn.classList.toggle('active');
+    adminSidebar.classList.toggle('open');
+    adminSidebarOverlay.classList.toggle('active');
+  };
+
+  const closeDrawer = () => {
+    adminHamburgerBtn.classList.remove('active');
+    adminSidebar.classList.remove('open');
+    adminSidebarOverlay.classList.remove('active');
+  };
+
+  if (adminHamburgerBtn) adminHamburgerBtn.addEventListener('click', toggleDrawer);
+  if (adminSidebarOverlay) adminSidebarOverlay.addEventListener('click', closeDrawer);
+
   // ── STATE (must be first — called by init() which auth triggers) ──
   let allArticles    = [];
   let filteredArticles = [];
@@ -506,7 +542,7 @@ document.addEventListener('DOMContentLoaded', () => {
       fetch(`${googleSheetsUrl}?action=get_articles`)
         .then(r => r.json())
         .then(remote => {
-          if (Array.isArray(remote) && remote.length > 0) {
+          if (Array.isArray(remote)) {
             localStorage.setItem('blog_articles', JSON.stringify(remote));
             allArticles = remote;
           } else {
@@ -802,11 +838,22 @@ document.addEventListener('DOMContentLoaded', () => {
     const artDesc  = document.getElementById('artDesc');
     const artFile  = document.getElementById('artFileInput');
 
+    const isValidImageSrc = (val) => {
+      if (!val) return false;
+      val = val.trim();
+      if (val === '') return false;
+      if (/^(https?:\/\/|data:|blob:)/i.test(val)) return true;
+      if (/^(\/|\.\/|\.\.\/)/.test(val)) return true;
+      if (val.includes('/') && !val.endsWith('/')) return true;
+      if (/\.(png|jpe?g|gif|webp|svg|bmp)$/i.test(val)) return true;
+      return false;
+    };
+
     function setPreviewImage(src) {
       const img  = document.getElementById('prevImg');
       const ph   = document.getElementById('prevImgPlaceholder');
       const wrap = document.getElementById('prevImgWrap');
-      if (src) {
+      if (src && isValidImageSrc(src)) {
         img.onload  = () => { img.style.display = 'block'; ph.style.display = 'none'; };
         img.onerror = () => { img.style.display = 'none';  ph.style.display = 'block'; };
         img.src = src;

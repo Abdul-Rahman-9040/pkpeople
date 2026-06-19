@@ -63,8 +63,24 @@
     </div>
   </div>
 
+  <!-- ── RESPONSIVE MOBILE TOPBAR ── -->
+  <header class="admin-mobile-topbar">
+    <div class="topbar-brand">
+      <img src="assets/images/logo.jpeg" alt="Logo">
+      <div class="topbar-title">People Pulse Admin</div>
+    </div>
+    <button id="adminHamburgerBtn" class="admin-hamburger" aria-label="Toggle Navigation Menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </header>
+
   <div class="admin-wrapper">
-    <aside class="admin-sidebar">
+    <!-- Sidebar Navigation Backdrop -->
+    <div id="adminSidebarOverlay" class="admin-sidebar-overlay"></div>
+
+    <aside id="adminSidebar" class="admin-sidebar">
       <div class="sidebar-header" style="display:flex;flex-direction:column;align-items:center;gap:12px;padding:24px 20px;">
         <img src="assets/images/logo.jpeg" alt="Logo" style="width:auto;max-width:100%;height:auto;max-height:48px;object-fit:contain;">
         <div style="font-family:var(--font-heading);font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;color:var(--primary);text-align:center;line-height:1.2;">Management Dashboard</div>
@@ -185,6 +201,26 @@
 
 <script>
 document.addEventListener('DOMContentLoaded', () => {
+
+  // ── MOBILE SIDEBAR TOGGLE ──
+  const adminHamburgerBtn = document.getElementById('adminHamburgerBtn');
+  const adminSidebar = document.querySelector('.admin-sidebar');
+  const adminSidebarOverlay = document.getElementById('adminSidebarOverlay');
+
+  const toggleDrawer = () => {
+    adminHamburgerBtn.classList.toggle('active');
+    adminSidebar.classList.toggle('open');
+    adminSidebarOverlay.classList.toggle('active');
+  };
+
+  const closeDrawer = () => {
+    adminHamburgerBtn.classList.remove('active');
+    adminSidebar.classList.remove('open');
+    adminSidebarOverlay.classList.remove('active');
+  };
+
+  if (adminHamburgerBtn) adminHamburgerBtn.addEventListener('click', toggleDrawer);
+  if (adminSidebarOverlay) adminSidebarOverlay.addEventListener('click', closeDrawer);
   const loginOverlay = document.getElementById('loginOverlay');
   if (sessionStorage.getItem('admin_logged_in') !== 'true') { loginOverlay.style.display='flex'; }
   else { loginOverlay.style.display='none'; init(); }
@@ -199,7 +235,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   let allJobs=[], currentPage=1, perPage=10, editId=null;
 
-  const DEFAULT_JOBS=[{id:'job_1',title:'Senior Full-Stack Developer',company:'Placement Keepers People Pulse',location:'Bangalore, Karnataka',experience:'5+ Years',salary:'₹12,00,000 - ₹18,00,000 P.A.',description:'Senior engineer for internal recruitment tools.',vacancies:'2',contact:'careers@pkpeople.com',active:true},{id:'job_2',title:'Production Planning Control Engineer',company:'Indo-MIM Private Limited',location:'Bangalore, Karnataka',experience:'3-6 Years',salary:'₹6,00,000 - ₹9,00,000 P.A.',description:'Oversee process planning for Metal Injection Molding.',vacancies:'4',contact:'hr@indomim.com',active:true},{id:'job_3',title:'Quality Control Inspector',company:'TVS Motor Company',location:'Hosur, Tamil Nadu',experience:'2-4 Years',salary:'₹4,00,000 - ₹5,50,000 P.A.',description:'Dimensional audits on vehicle chassis.',vacancies:'5',contact:'careers@tvs.co.in',active:true}];
+  const DEFAULT_JOBS=[];
 
   function init() {
     if(!localStorage.getItem('job_openings')) localStorage.setItem('job_openings',JSON.stringify(DEFAULT_JOBS));

@@ -55,8 +55,24 @@
     </div>
   </div>
 
+  <!-- ── RESPONSIVE MOBILE TOPBAR ── -->
+  <header class="admin-mobile-topbar">
+    <div class="topbar-brand">
+      <img src="assets/images/logo.jpeg" alt="Logo">
+      <div class="topbar-title">People Pulse Admin</div>
+    </div>
+    <button id="adminHamburgerBtn" class="admin-hamburger" aria-label="Toggle Navigation Menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </header>
+
   <div class="admin-wrapper">
-    <aside class="admin-sidebar">
+    <!-- Sidebar Navigation Backdrop -->
+    <div id="adminSidebarOverlay" class="admin-sidebar-overlay"></div>
+
+    <aside id="adminSidebar" class="admin-sidebar">
       <div class="sidebar-header" style="display:flex;flex-direction:column;align-items:center;gap:12px;padding:24px 20px;">
         <img src="assets/images/logo.jpeg" alt="Logo" style="width:auto;max-width:100%;height:auto;max-height:48px;object-fit:contain;">
         <div style="font-family:var(--font-heading);font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;color:var(--primary);text-align:center;line-height:1.2;">Management Dashboard</div>
@@ -176,6 +192,26 @@
 
 <script>
 document.addEventListener('DOMContentLoaded', () => {
+
+  // ── MOBILE SIDEBAR TOGGLE ──
+  const adminHamburgerBtn = document.getElementById('adminHamburgerBtn');
+  const adminSidebar = document.querySelector('.admin-sidebar');
+  const adminSidebarOverlay = document.getElementById('adminSidebarOverlay');
+
+  const toggleDrawer = () => {
+    adminHamburgerBtn.classList.toggle('active');
+    adminSidebar.classList.toggle('open');
+    adminSidebarOverlay.classList.toggle('active');
+  };
+
+  const closeDrawer = () => {
+    adminHamburgerBtn.classList.remove('active');
+    adminSidebar.classList.remove('open');
+    adminSidebarOverlay.classList.remove('active');
+  };
+
+  if (adminHamburgerBtn) adminHamburgerBtn.addEventListener('click', toggleDrawer);
+  if (adminSidebarOverlay) adminSidebarOverlay.addEventListener('click', closeDrawer);
   const loginOverlay = document.getElementById('loginOverlay');
   if (sessionStorage.getItem('admin_logged_in') !== 'true') { loginOverlay.style.display='flex'; }
   else { loginOverlay.style.display='none'; init(); }
@@ -189,8 +225,7 @@ document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('logoutBtn').addEventListener('click',()=>{sessionStorage.removeItem('admin_logged_in');window.location.href='admin.html';});
 
   let allTestis=[], currentPage=1, perPage=10, editId=null;
-  const DEFAULT=[{id:'testi-1',author:'Rajesh Kumar',company:'HR Lead at TVS Motor Company',text:'Placement Keepers has been an invaluable staffing partner. They successfully placed over 50 skilled machine operators in Hosur within a record 5-day window.',rating:5,active:true},{id:'testi-2',author:'Meera Sen',company:'Senior Operations Director at Foxconn',text:'For our seasonal electronic manufacturing ramp-ups, the contract staffing from People Pulse has been top-notch.',rating:5,active:true},{id:'testi-3',author:'Amit Varma',company:'Engineering Head at Indo-MIM',text:'Their IT staff augmentation team provided exceptional Senior CAD Engineers on short notice.',rating:5,active:true}];
-
+  const DEFAULT = [];
   function init(){if(!localStorage.getItem('testimonials'))localStorage.setItem('testimonials',JSON.stringify(DEFAULT));allTestis=JSON.parse(localStorage.getItem('testimonials'))||[];renderTable();bindForm();bindControls();}
 
   function esc(s){return(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}

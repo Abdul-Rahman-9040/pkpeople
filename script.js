@@ -10,175 +10,19 @@ document.addEventListener('DOMContentLoaded', () => {
   // ==========================================
   
   // Default Company Profile Gallery Seed Data
-  const defaultGalleryItems = [
-    {
-      id: "g1",
-      title: "Collaborative Workspaces",
-      category: "office",
-      img: "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=600&q=80"
-    },
-    {
-      id: "g2",
-      title: "Executive Meetups",
-      category: "events",
-      img: "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=600&q=80"
-    },
-    {
-      id: "g3",
-      title: "Talent Sourcing Teams",
-      category: "team",
-      img: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=600&q=80"
-    },
-    {
-      id: "g4",
-      title: "Quality Assurance Standards",
-      category: "achievements",
-      img: "https://images.unsplash.com/photo-1531545514256-b1400bc00f31?auto=format&fit=crop&w=600&q=80"
-    },
-    {
-      id: "g5",
-      title: "Tech Recruitment Lounge",
-      category: "office",
-      img: "https://images.unsplash.com/photo-1497215728101-856f4ea42174?auto=format&fit=crop&w=600&q=80"
-    },
-    {
-      id: "g6",
-      title: "Corporate Strategy Sessions",
-      category: "events",
-      img: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=600&q=80"
-    }
-  ];
+  const defaultGalleryItems = [];
 
   // Default Company Profile Blog Seed Data
-  const defaultBlogArticles = [
-    {
-      id: "1",
-      title: "Navigating IT Staffing: Augmentation vs. Direct Hiring",
-      category: "IT Insights",
-      meta: "Published May 25, 2026 • By Tech Sourcing Team",
-      img: "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=800&q=80",
-      desc: "With tech landscapes moving at rapid speeds, how does your company decide between temporary IT staff augmentation and onboarding permanent software engineering profiles? We analyze costs, scale, flexibility, and onboarding friction parameters to help IT leaders make optimal workforce structuring decisions.",
-      content: `
-        <p>In the highly dynamic technology ecosystems of 2026, software development leaders face a persistent challenge: balancing rapid deployment timelines with team cost optimization. The decision between temporary IT staff augmentation and standard full-time permanent recruitment is crucial.</p>
-        
-        <h4 style="font-family: var(--font-heading); font-size: 1.25rem; font-weight: 700; margin: 24px 0 12px 0; color: var(--primary);">Understanding IT Staff Augmentation</h4>
-        <p>IT Staff Augmentation allows organizations to inject specialized technical talent (such as senior cloud engineers, full-stack React developers, or cybersecurity analysts) directly into active internal sprint teams. The candidates remain on the agency's structured payroll, mitigating onboarding compliance liabilities and corporate risk. This model is exceptionally effective for bridging specific project-based gaps, executing temporary product scaling cycles, and accelerating critical sprint deadlines.</p>
-        
-        <h4 style="font-family: var(--font-heading); font-size: 1.25rem; font-weight: 700; margin: 24px 0 12px 0; color: var(--primary);">The Merits of Direct Permanent Recruitment</h4>
-        <p>Direct hiring focuses on locating, vetting, and onboarding long-term talents into your organization's core workforce culture. While the initial turnaround time is longer (often 3 to 6 weeks) and administrative setup is more intensive, permanent hiring builds critical internal IP, establishes long-term project knowledge bases, and binds candidates strongly to your company's core values.</p>
-        
-        <h4 style="font-family: var(--font-heading); font-size: 1.25rem; font-weight: 700; margin: 24px 0 12px 0; color: var(--primary);">Determining the Optimal Path</h4>
-        <p>A simple framework for engineering managers is to evaluate two core metrics: <strong>Project Horizon</strong> and <strong>Operational Specialization</strong>.</p>
-        <ul>
-          <li><strong>Staff Augmentation is best when:</strong> The development cycle is short-term (3 to 9 months), the required skill set is extremely niche (e.g., Rust developers or specialized AI model training experts), or rapid team scaling is required under tight deadlines.</li>
-          <li><strong>Direct Hire is best when:</strong> Sourcing key technical leaders, building proprietary core platforms, or scaling standard long-term DevOps and product management teams.</li>
-        </ul>
-        <p>At Placement Keepers People Pulse, our specialized IT recruiters operate a robust pre-screened database of top technical candidates in Bangalore and nationwide, ensuring we can support either strategic model under exceptionally tight 48-hour matching SLA cycles.</p>
-      `
-    },
-    {
-      id: "2",
-      title: "Why Bangalore Leads in Automobile & Tech Engineering Sourcing",
-      category: "Engineering",
-      meta: "Published May 18, 2026 • By Engineering Sourcing Team",
-      img: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=800&q=80",
-      desc: "Bangalore continues to hold its ground as India's silicon power hub. Our team dives into what is attracting international and local hardware designers, electronic assembly leaders, and R&D automobile tech centers to invest in Karnataka's highly advanced technical workforce.",
-      content: `
-        <p>Bangalore, Karnataka, has long held the title of India's Silicon Valley. However, in 2026, a significant shift has placed the city at the center of another major industrial revolution: advanced automotive engineering and electronic manufacturing services (EMS) recruitment.</p>
-        
-        <h4 style="font-family: var(--font-heading); font-size: 1.25rem; font-weight: 700; margin: 24px 0 12px 0; color: var(--primary);">The Hardware and Software Convergence</h4>
-        <p>Modern automobiles are no longer just mechanical systems; they are sophisticated computers on wheels. The rise of electric vehicles (EVs), connected car telematics, advanced driver-assistance systems (ADAS), and sensor arrays has converged mechanical engineering directly with software engineering. Bangalore is uniquely positioned to lead this space due to its density of software developers, firmware experts, and traditional mechanical engineering talent.</p>
-        
-        <h4 style="font-family: var(--font-heading); font-size: 1.25rem; font-weight: 700; margin: 24px 0 12px 0; color: var(--primary);">The Role of Local Tech Hubs and Global R&D Centers</h4>
-        <p>With hundreds of global research laboratories, international automotive R&D bases, and world-class technical universities (like IISc and multiple national engineering campuses) calling Bangalore home, the local talent ecosystem provides a continuous stream of highly qualified, specialized talent. Sourcing process-level engineers, CAD designers, structural analysts, and EV battery chemists is exceptionally viable in the Karnataka corridor.</p>
-        
-        <h4 style="font-family: var(--font-heading); font-size: 1.25rem; font-weight: 700; margin: 24px 0 12px 0; color: var(--primary);">Streamlining Sourcing Challenges</h4>
-        <p>Despite the high density of professionals, locating qualified engineering profiles presents complex screening hurdles for companies operating outside of local networks. Navigating specialized skill alignments, salary variables, and competition requires recruitment partners with deep-seated local insights.</p>
-        <p>Placement Keepers People Pulse leverages decades of specialized automotive and engineering recruitment experience, bridging the gap between global enterprises and top engineering candidates via structured campus drives and customized direct search methods.</p>
-      `
-    },
-    {
-      id: "3",
-      title: "Shoring Up Payroll & Compliance in Modern Manufacturing",
-      category: "Management",
-      meta: "Published May 10, 2026 • By Operations Team",
-      img: "https://images.unsplash.com/photo-1450133064473-71024230f91b?auto=format&fit=crop&w=800&q=80",
-      desc: "Statutory guidelines, employee welfare, tax filings, and local labour provisions present heavy administrative loads for manufacturing units. Learn how outsourcing global payroll management and third-party contract staffing mitigates risks and guarantees 100% compliant operational cycles.",
-      content: `
-        <p>In high-capacity manufacturing plants, operational efficiency relies on a reliable and focused workforce. However, managing payroll processing, labor compliance, statutory filings, and tax structures presents a heavy administrative load that can distract leadership from core business goals.</p>
-        
-        <h4 style="font-family: var(--font-heading); font-size: 1.25rem; font-weight: 700; margin: 24px 0 12px 0; color: var(--primary);">The Complexities of Industrial Labor Compliance</h4>
-        <p>Manufacturing plants operate under complex, heavily scrutinized statutory frameworks. Sourcing staff, tracking shift schedules, ensuring minimum wage adjustments, and managing statutory benefits (like EPF, ESIC, Professional Tax, and gratuity payouts) demand highly dedicated, specialized administrative expertise. Non-compliance can lead to severe regulatory delays, penalties, and operational disruption.</p>
-        
-        <h4 style="font-family: var(--font-heading); font-size: 1.25rem; font-weight: 700; margin: 24px 0 12px 0; color: var(--primary);">How Outsourced Payroll & Compliance Mitigates Corporate Risk</h4>
-        <p>By outsourcing payroll management and contract staffing to a structured human resource enterprise, manufacturing firms can transfer administrative overhead and compliance liabilities to dedicated professionals. Strategic benefits include:</p>
-        <ul>
-          <li><strong>Guaranteed Statutory Compliance:</strong> Ensuring all filings, contract records, and benefit disbursements comply with current state and central labor laws.</li>
-          <li><strong>Operational Risk Mitigation:</strong> Transferring employment liabilities, workplace safety compliance, and labor relation overheads to the primary agency.</li>
-          <li><strong>Streamlined Administrative Cost structures:</strong> Standardizing monthly personnel expenditures into predictable, unified service invoices.</li>
-        </ul>
-        
-        <h4 style="font-family: var(--font-heading); font-size: 1.25rem; font-weight: 700; margin: 24px 0 12px 0; color: var(--primary);">Focusing on Plant Productivity</h4>
-        <p>With administrative burdens removed, factory managers can dedicate resources to process optimization, supply chain integration, quality assurance parameters, and driving overall daily production outputs.</p>
-        <p>Placement Keepers People Pulse operates as a fully licensed contract staffing partner, ensuring seamless monthly payroll workflows, thorough statutory adherence, and zero operational friction for major manufacturing divisions in Bangalore and neighboring industrial hubs.</p>
-      `
-    }
-  ];
+  const defaultBlogArticles = [];
 
   // Default Job Openings Data
-  const defaultJobOpenings = [
-    {
-      id: "job_1",
-      title: "Senior Full-Stack Developer",
-      company: "Placement Keepers People Pulse",
-      location: "Bangalore, Karnataka",
-      experience: "5+ Years",
-      salary: "₹12,00,000 - ₹18,00,000 P.A.",
-      description: "We are seeking a senior engineer to manage internal recruitment tools, client-facing applicant systems, and database integrations. Experience with modern front-end frameworks and Node.js is required.",
-      vacancies: "2",
-      contact: "careers@pkpeople.com",
-      active: true
-    },
-    {
-      id: "job_2",
-      title: "Production Planning Control (PPC) Engineer",
-      company: "Indo-MIM Private Limited",
-      location: "Bangalore, Karnataka",
-      experience: "3-6 Years",
-      salary: "₹6,00,000 - ₹9,00,000 P.A.",
-      description: "Oversee process planning for Metal Injection Molding, establish daily scheduling baselines, coordinate logistics, and manage high-volume manufacturing capacities.",
-      vacancies: "4",
-      contact: "hr@indomim.com",
-      active: true
-    },
-    {
-      id: "job_3",
-      title: "Quality Control Inspector",
-      company: "TVS Motor Company",
-      location: "Hosur, Tamil Nadu",
-      experience: "2-4 Years",
-      salary: "₹4,00,000 - ₹5,50,000 P.A.",
-      description: "Conduct dimensional audits on two-wheeler vehicle chassis, log defect rates, and coordinate with assembly floor managers to maintain ISO compliance.",
-      vacancies: "5",
-      contact: "careers@tvs.co.in",
-      active: true
-    },
-    {
-      id: "job_4",
-      title: "Structural Design Engineer",
-      company: "Palanisami Constructions Private Limited",
-      location: "Coimbatore, Tamil Nadu",
-      experience: "4+ Years",
-      salary: "₹7,50,000 - ₹11,00,000 P.A.",
-      description: "Develop structural layouts, perform load calculations using STAAD.Pro, and review building designs to ensure conformance with local construction standards.",
-      vacancies: "1",
-      contact: "hr@palanisamiconstructions.com",
-      active: true
-    }
-  ];
+  const defaultJobOpenings = [];
 
   // Database Seeding Logic
   const initializeDatabase = () => {
+    if (!localStorage.getItem('google_sheets_url')) {
+      localStorage.setItem('google_sheets_url', 'https://script.google.com/macros/s/AKfycbw9ArPAa6kEl21qg3ak63E6K5fAe58WvJuGVxngCI9p1ExEDSWSrxLNX6dAamnBBeLO0Q/exec');
+    }
     if (!localStorage.getItem('gallery_items')) {
       localStorage.setItem('gallery_items', JSON.stringify(defaultGalleryItems));
     }
@@ -401,6 +245,18 @@ document.addEventListener('DOMContentLoaded', () => {
     
     const displayGallery = (items) => {
       galleryGrid.innerHTML = '';
+      if (!items || items.length === 0) {
+        galleryGrid.innerHTML = `
+          <div style="grid-column: 1 / -1; text-align: center; padding: 60px; color: var(--text-muted);">
+            <svg style="width: 48px; height: 48px; margin-bottom: 16px; color: var(--text-muted); opacity: 0.6;" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+            </svg>
+            <h3 style="font-family: var(--font-heading); font-size: 1.25rem; font-weight: 700; color: var(--text-main);">No gallery items found</h3>
+            <p style="font-size: 0.9rem; margin-top: 8px;">Our workspace and event gallery is currently being updated. Please check back later.</p>
+          </div>
+        `;
+        return;
+      }
       items.forEach(item => {
         const card = document.createElement('div');
         card.className = 'gallery-item';
@@ -488,7 +344,7 @@ document.addEventListener('DOMContentLoaded', () => {
       fetch(`${googleSheetsUrl}?action=get_gallery`)
         .then(response => response.json())
         .then(remoteGallery => {
-          if (Array.isArray(remoteGallery) && remoteGallery.length > 0) {
+          if (Array.isArray(remoteGallery)) {
             localStorage.setItem('gallery_items', JSON.stringify(remoteGallery));
             displayGallery(remoteGallery);
           } else {
@@ -566,6 +422,19 @@ document.addEventListener('DOMContentLoaded', () => {
     
     const displayArticles = (articles) => {
       blogGrid.innerHTML = '';
+      if (!articles || articles.length === 0) {
+        blogGrid.innerHTML = `
+          <div style="grid-column: 1 / -1; text-align: center; padding: 60px; color: var(--text-muted);">
+            <svg style="width: 48px; height: 48px; margin-bottom: 16px; color: var(--text-muted); opacity: 0.6;" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"></path>
+            </svg>
+            <h3 style="font-family: var(--font-heading); font-size: 1.25rem; font-weight: 700; color: var(--text-main);">No corporate updates found</h3>
+            <p style="font-size: 0.9rem; margin-top: 8px;">Our blog and industry insights directory is currently empty. Check back soon for new articles.</p>
+          </div>
+        `;
+        initializeScrollReveals();
+        return;
+      }
       articles.forEach(article => {
         const card = document.createElement('article');
         card.className = 'blog-card glass-panel reveal reveal-slide-up';
@@ -634,7 +503,7 @@ document.addEventListener('DOMContentLoaded', () => {
       fetch(`${googleSheetsUrl}?action=get_articles`)
         .then(response => response.json())
         .then(remoteArticles => {
-          if (Array.isArray(remoteArticles) && remoteArticles.length > 0) {
+          if (Array.isArray(remoteArticles)) {
             localStorage.setItem('blog_articles', JSON.stringify(remoteArticles));
             displayArticles(remoteArticles);
           } else {
@@ -1025,6 +894,9 @@ document.addEventListener('DOMContentLoaded', () => {
             <p style="font-size: 0.9rem; margin-top: 8px;">Please try modifying your search term or location filter.</p>
           </div>
         `;
+        if (typeof initializeScrollReveals === 'function') {
+          initializeScrollReveals();
+        }
         return;
       }
 
@@ -1335,32 +1207,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // ==========================================
   // 15. Dynamic Testimonials Seeding & Renderer
   // ==========================================
-  const seedTestimonials = [
-    {
-      id: "testi-1",
-      author: "Rajesh Kumar",
-      company: "HR Lead at TVS Motor Company",
-      text: "Placement Keepers has been an invaluable staffing partner. They successfully placed over 50 skilled machine operators in Hosur within a record 5-day window. Their payroll compliance handling is completely error-free.",
-      rating: 5,
-      active: true
-    },
-    {
-      id: "testi-2",
-      author: "Meera Sen",
-      company: "Senior Operations Director at Foxconn",
-      text: "For our seasonal electronic manufacturing ramp-ups, the contract staffing from People Pulse has been top-notch. Highly professional onboarding, transparent timesheet management, and immediate replacement when required.",
-      rating: 5,
-      active: true
-    },
-    {
-      id: "testi-3",
-      author: "Amit Varma",
-      company: "Engineering Head at Indo-MIM",
-      text: "Their IT staff augmentation team provided us with three exceptional Senior CAD Engineers on short notice. Outstanding technical vetting and extremely reliable performance tracking.",
-      rating: 5,
-      active: true
-    }
-  ];
+  const seedTestimonials = [];
 
   const initTestimonials = () => {
     let storedTestimonials = localStorage.getItem('testimonials');
@@ -1382,8 +1229,12 @@ document.addEventListener('DOMContentLoaded', () => {
     
     if (activeTestimonials.length === 0) {
       grid.innerHTML = `
-        <div style="text-align: center; padding: 40px; color: var(--text-muted); width: 100%;">
-          <p>No active testimonials found.</p>
+        <div style="text-align: center; padding: 60px; color: var(--text-muted); width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+          <svg style="width: 48px; height: 48px; margin-bottom: 16px; color: var(--text-muted); opacity: 0.6;" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
+          </svg>
+          <h3 style="font-family: var(--font-heading); font-size: 1.25rem; font-weight: 700; color: var(--text-main);">No active testimonials found</h3>
+          <p style="font-size: 0.9rem; margin-top: 8px;">We value client feedback. Customer stories and staffing success highlights will be published shortly.</p>
         </div>
       `;
       return;
@@ -1426,6 +1277,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Render jobs on load
   renderJobs();
+
+  // Initialize scroll reveals for static page elements on load
+  initializeScrollReveals();
 
   // Listen for storage events (if admin changes jobs in another tab)
   window.addEventListener('storage', (e) => {

@@ -2983,24 +2983,87 @@ textarea.form-control {
   padding: 40px;
 }
 
-@media (max-width: 768px) {
-  .admin-wrapper {
-    flex-direction: column;
-  }
+/* ==========================================
+   ADMIN PORTAL RESPONSIVE DRAWER (HAMBURGER)
+   ========================================== */
+.admin-mobile-topbar {
+  display: none;
+  height: 70px;
+  background-color: var(--secondary);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 0 20px;
+  align-items: center;
+  justify-content: space-between;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1001;
+  box-shadow: var(--shadow-md);
+}
+.topbar-brand { display: flex; align-items: center; gap: 12px; }
+.topbar-brand img { height: 36px; width: auto; object-fit: contain; }
+.topbar-title { font-family: var(--font-heading); font-weight: 700; font-size: 1.1rem; color: #ffffff; }
+
+.admin-hamburger {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 24px;
+  height: 18px;
+  padding: 0;
+  z-index: 1005;
+}
+.admin-hamburger span {
+  display: block;
+  height: 2px;
+  width: 100%;
+  background-color: #ffffff;
+  border-radius: 4px;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.2s ease;
+}
+.admin-hamburger.active span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+.admin-hamburger.active span:nth-child(2) { opacity: 0; }
+.admin-hamburger.active span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+
+.admin-sidebar-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(15, 23, 42, 0.6);
+  backdrop-filter: blur(4px);
+  z-index: 1001;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+.admin-sidebar-overlay.active { opacity: 1; pointer-events: auto; display: block; }
+
+@media (max-width: 992px) {
+  .admin-mobile-topbar { display: flex; }
+  .admin-sidebar-overlay { display: block; }
   .admin-sidebar {
-    width: 100%;
-    height: auto;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 280px;
+    height: 100vh;
+    transform: translateX(-100%);
+    z-index: 1002;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: var(--shadow-xl);
   }
-  .sidebar-menu {
-    flex-direction: row;
-    flex-wrap: wrap;
-    padding: 12px;
-    gap: 4px;
-  }
-  .sidebar-btn {
-    padding: 8px 12px;
-    font-size: 0.85rem;
-  }
+  .admin-sidebar.open { transform: translateX(0); }
+  .admin-main { padding: 100px 20px 40px 20px !important; }
+}
+
+@media (max-width: 768px) {
   .admin-main {
     padding: 20px;
   }

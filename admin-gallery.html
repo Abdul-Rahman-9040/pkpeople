@@ -76,8 +76,24 @@
     </div>
   </div>
 
+  <!-- ── RESPONSIVE MOBILE TOPBAR ── -->
+  <header class="admin-mobile-topbar">
+    <div class="topbar-brand">
+      <img src="assets/images/logo.jpeg" alt="Logo">
+      <div class="topbar-title">People Pulse Admin</div>
+    </div>
+    <button id="adminHamburgerBtn" class="admin-hamburger" aria-label="Toggle Navigation Menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </header>
+
   <div class="admin-wrapper">
-    <aside class="admin-sidebar">
+    <!-- Sidebar Navigation Backdrop -->
+    <div id="adminSidebarOverlay" class="admin-sidebar-overlay"></div>
+
+    <aside id="adminSidebar" class="admin-sidebar">
       <div class="sidebar-header" style="display:flex;flex-direction:column;align-items:center;gap:12px;padding:24px 20px;">
         <img src="assets/images/logo.jpeg" alt="Logo" style="width:auto;max-width:100%;height:auto;max-height:48px;object-fit:contain;">
         <div style="font-family:var(--font-heading);font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;color:var(--primary);text-align:center;line-height:1.2;">Management Dashboard</div>
@@ -209,6 +225,26 @@
 
 <script>
 document.addEventListener('DOMContentLoaded', () => {
+
+  // ── MOBILE SIDEBAR TOGGLE ──
+  const adminHamburgerBtn = document.getElementById('adminHamburgerBtn');
+  const adminSidebar = document.querySelector('.admin-sidebar');
+  const adminSidebarOverlay = document.getElementById('adminSidebarOverlay');
+
+  const toggleDrawer = () => {
+    adminHamburgerBtn.classList.toggle('active');
+    adminSidebar.classList.toggle('open');
+    adminSidebarOverlay.classList.toggle('active');
+  };
+
+  const closeDrawer = () => {
+    adminHamburgerBtn.classList.remove('active');
+    adminSidebar.classList.remove('open');
+    adminSidebarOverlay.classList.remove('active');
+  };
+
+  if (adminHamburgerBtn) adminHamburgerBtn.addEventListener('click', toggleDrawer);
+  if (adminSidebarOverlay) adminSidebarOverlay.addEventListener('click', closeDrawer);
   let allPhotos = [], filtered = [], currentPage = 1, perPage = 12, selectedIds = new Set();
 
   const loginOverlay = document.getElementById('loginOverlay');
@@ -240,7 +276,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const url = localStorage.getItem('google_sheets_url');
     if (url && url.trim()) {
       fetch(`${url}?action=get_gallery`).then(r => r.json()).then(remote => {
-        if (Array.isArray(remote) && remote.length > 0) { localStorage.setItem('gallery_items', JSON.stringify(remote)); allPhotos = remote; }
+        if (Array.isArray(remote)) { localStorage.setItem('gallery_items', JSON.stringify(remote)); allPhotos = remote; }
         else allPhotos = JSON.parse(localStorage.getItem('gallery_items')) || [];
         renderGrid();
       }).catch(() => { allPhotos = JSON.parse(localStorage.getItem('gallery_items')) || []; renderGrid(); });
@@ -347,8 +383,19 @@ document.addEventListener('DOMContentLoaded', () => {
     const galTitle=document.getElementById('galTitle'), galCat=document.getElementById('galCategory'), galImg=document.getElementById('galImage'), galFile=document.getElementById('galFileInput');
     const prevImg=document.getElementById('prevGalImg');
     
+    const isValidImageSrc = (val) => {
+      if (!val) return false;
+      val = val.trim();
+      if (val === '') return false;
+      if (/^(https?:\/\/|data:|blob:)/i.test(val)) return true;
+      if (/^(\/|\.\/|\.\.\/)/.test(val)) return true;
+      if (val.includes('/') && !val.endsWith('/')) return true;
+      if (/\.(png|jpe?g|gif|webp|svg|bmp)$/i.test(val)) return true;
+      return false;
+    };
+
     function setImg(src) {
-      if(src) { prevImg.src = src; prevImg.onerror = () => { prevImg.src = 'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=800&q=80'; }; }
+      if(src && isValidImageSrc(src)) { prevImg.src = src; prevImg.onerror = () => { prevImg.src = 'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=800&q=80'; }; }
       else { prevImg.src = 'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=600&q=80'; }
     }
 
