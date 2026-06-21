@@ -6,8 +6,39 @@
   <title>Manage Job Openings | Admin Dashboard</title>
   <link rel="icon" type="image/x-icon" href="assets/images/logo.jpeg">
   <link rel="stylesheet" href="styles.css">
+  <!-- Quill Rich Text Editor CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.snow.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.js"></script>
   <style>
     body { background-color: var(--bg-base); }
+    /* Custom Quill Editor Styles to fit glassmorphism theme */
+    .ql-toolbar.ql-snow {
+      border-color: var(--border-color) !important;
+      background: var(--bg-surface) !important;
+      border-top-left-radius: var(--radius-sm);
+      border-top-right-radius: var(--radius-sm);
+    }
+    .ql-container.ql-snow {
+      border-color: var(--border-color) !important;
+      background: var(--bg-surface) !important;
+      border-bottom-left-radius: var(--radius-sm);
+      border-bottom-right-radius: var(--radius-sm);
+      font-family: inherit;
+      font-size: 0.9rem;
+      color: var(--text-main) !important;
+    }
+    .ql-editor {
+      min-height: 150px;
+    }
+    .ql-snow .ql-stroke {
+      stroke: var(--text-main) !important;
+    }
+    .ql-snow .ql-fill {
+      fill: var(--text-main) !important;
+    }
+    .ql-snow .ql-picker {
+      color: var(--text-main) !important;
+    }
     .jobs-layout { display:grid; grid-template-columns:400px 1fr; gap:28px; align-items:start; }
     @media(max-width:1100px){.jobs-layout{grid-template-columns:1fr;}}
     .form-sticky { position:sticky; top:24px; }
@@ -127,7 +158,11 @@
                   <div class="form-group"><label for="jobVacanciesInput" class="form-label">Vacancies</label><input id="jobVacanciesInput" type="number" class="form-control" placeholder="5" min="1" required></div>
                   <div class="form-group"><label for="jobContactInput" class="form-label">Apply Email</label><input id="jobContactInput" type="text" class="form-control" placeholder="hr@company.com" required></div>
                 </div>
-                <div class="form-group"><label for="jobDescInput" class="form-label">Job Description</label><textarea id="jobDescInput" class="form-control" placeholder="Describe key roles..." style="min-height:100px;" required></textarea></div>
+                <div class="form-group">
+                  <label class="form-label">Job Description</label>
+                  <div id="jobDescEditor"></div>
+                  <input type="hidden" id="jobDescInput">
+                </div>
                 <div class="form-group" style="display:flex;align-items:center;gap:10px;margin-bottom:24px;">
                   <input id="jobActiveInput" type="checkbox" checked style="width:18px;height:18px;accent-color:var(--primary);cursor:pointer;">
                   <label for="jobActiveInput" class="form-label" style="margin-bottom:0;cursor:pointer;font-weight:600;">Mark as Active (visible on site)</label>
@@ -234,12 +269,31 @@ document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('logoutBtn').addEventListener('click',()=>{sessionStorage.removeItem('admin_logged_in');window.location.href='admin.html';});
 
   let allJobs=[], currentPage=1, perPage=10, editId=null;
+  let quill;
+
+  function initQuill() {
+    quill = new Quill('#jobDescEditor', {
+      theme: 'snow',
+      modules: {
+        toolbar: [
+          [{ 'header': [1, 2, 3, false] }],
+          ['bold', 'italic', 'underline', 'strike'],
+          [{ 'color': [] }, { 'background': [] }],
+          [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+          [{ 'indent': '-1'}, { 'indent': '+1' }],
+          [{ 'align': [] }],
+          ['clean']
+        ]
+      }
+    });
+  }
 
   const DEFAULT_JOBS=[];
 
   function init() {
     if(!localStorage.getItem('job_openings')) localStorage.setItem('job_openings',JSON.stringify(DEFAULT_JOBS));
     allJobs=JSON.parse(localStorage.getItem('job_openings'))||[];
+    initQuill();
     renderTable(); bindForm(); bindControls();
   }
 
@@ -299,6 +353,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('jobVacanciesInput').value=job.vacancies;
         document.getElementById('jobContactInput').value=job.contact;
         document.getElementById('jobDescInput').value=job.description;
+        if (quill) quill.root.innerHTML = job.description || '';
         document.getElementById('jobActiveInput').checked=job.active;
         document.getElementById('jobSubmitBtn').textContent='Save Changes';
         document.getElementById('jobCancelBtn').style.display='inline-flex';
@@ -332,6 +387,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function resetForm(){
     document.getElementById('jobForm').reset(); editId=null; document.getElementById('jobEditId').value='';
+    if (quill) quill.setContents([]);
     document.getElementById('jobSubmitBtn').textContent='Post Job Opening';
     document.getElementById('jobCancelBtn').style.display='none';
     document.getElementById('jobFormTitle').textContent='💼 Post New Job Opening';
@@ -341,7 +397,13 @@ document.addEventListener('DOMContentLoaded', () => {
   function bindForm(){
     document.getElementById('jobForm').addEventListener('submit',e=>{
       e.preventDefault();
-      const jobData={title:document.getElementById('jobTitleInput').value.trim(),company:document.getElementById('jobCompanyInput').value.trim(),location:document.getElementById('jobLocationInput').value.trim(),experience:document.getElementById('jobExpInput').value.trim(),salary:document.getElementById('jobSalaryInput').value.trim(),vacancies:document.getElementById('jobVacanciesInput').value.trim(),contact:document.getElementById('jobContactInput').value.trim(),description:document.getElementById('jobDescInput').value.trim(),active:document.getElementById('jobActiveInput').checked};
+      const descVal = quill ? quill.root.innerHTML.trim() : '';
+      const plainText = quill ? quill.getText().trim() : '';
+      if (plainText === '') {
+        alert('Please enter a job description.');
+        return;
+      }
+      const jobData={title:document.getElementById('jobTitleInput').value.trim(),company:document.getElementById('jobCompanyInput').value.trim(),location:document.getElementById('jobLocationInput').value.trim(),experience:document.getElementById('jobExpInput').value.trim(),salary:document.getElementById('jobSalaryInput').value.trim(),vacancies:document.getElementById('jobVacanciesInput').value.trim(),contact:document.getElementById('jobContactInput').value.trim(),description:descVal,active:document.getElementById('jobActiveInput').checked};
       if(editId){
         const idx=allJobs.findIndex(j=>j.id===editId);
         if(idx!==-1){allJobs[idx]={...allJobs[idx],...jobData};alert('Job updated!');}
@@ -358,6 +420,8 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('sortSelect').addEventListener('change',()=>{currentPage=1;renderTable();});
     document.getElementById('perPageSelect').addEventListener('change',e=>{perPage=parseInt(e.target.value);currentPage=1;renderTable();});
   }
+
+  // Old formatting toolbar helper removed since Quill is active
 });
 </script>
 </body>

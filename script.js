@@ -10,7 +10,32 @@ document.addEventListener('DOMContentLoaded', () => {
   // ==========================================
   
   // Default Company Profile Gallery Seed Data
-  const defaultGalleryItems = [];
+  const defaultGalleryItems = [
+    {
+      id: "gal_1",
+      title: "Conference & Meeting Space",
+      category: "office",
+      img: "assets/images/1.jpeg"
+    },
+    {
+      id: "gal_2",
+      title: "Interactive Classroom & Training Session",
+      category: "events",
+      img: "assets/images/2.jpeg"
+    },
+    {
+      id: "gal_3",
+      title: "Collaborative Team Discussion",
+      category: "team",
+      img: "assets/images/3.jpeg"
+    },
+    {
+      id: "gal_4",
+      title: "Orientation Program & Induction Class",
+      category: "office",
+      img: "assets/images/4.jpeg"
+    }
+  ];
 
   // Default Company Profile Blog Seed Data
   const defaultBlogArticles = [];
@@ -23,7 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!localStorage.getItem('google_sheets_url')) {
       localStorage.setItem('google_sheets_url', 'https://script.google.com/macros/s/AKfycbw9ArPAa6kEl21qg3ak63E6K5fAe58WvJuGVxngCI9p1ExEDSWSrxLNX6dAamnBBeLO0Q/exec');
     }
-    if (!localStorage.getItem('gallery_items')) {
+    if (!localStorage.getItem('gallery_items') || localStorage.getItem('gallery_items') === '[]') {
       localStorage.setItem('gallery_items', JSON.stringify(defaultGalleryItems));
     }
     if (!localStorage.getItem('blog_articles')) {
@@ -923,7 +948,7 @@ document.addEventListener('DOMContentLoaded', () => {
             <span class="job-pill job-pill-primary">${job.experience}</span>
             <span class="job-pill">${job.salary}</span>
           </div>
-          <p class="job-desc">${job.description.length > 140 ? job.description.substring(0, 140) + '...' : job.description}</p>
+          <div class="job-desc">${job.description || ''}</div>
           <div class="job-footer">
             <div class="${vacanciesClass}">
               ${vacanciesText}
@@ -991,7 +1016,9 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('jobModalSubtitle').textContent = `${job.company} • ${job.location}`;
     document.getElementById('jobModalExp').textContent = job.experience;
     document.getElementById('jobModalSalary').textContent = job.salary;
-    document.getElementById('jobModalDesc').textContent = job.description;
+    let formattedDesc = job.description || '';
+    formattedDesc = formattedDesc.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+    document.getElementById('jobModalDesc').innerHTML = formattedDesc;
     document.getElementById('jobModalVacancies').textContent = `${job.vacancies} position(s) available`;
     document.getElementById('jobModalContact').textContent = `Please contact: ${job.contact}`;
 
