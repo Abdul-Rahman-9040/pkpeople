@@ -87,6 +87,9 @@ body.dark-theme {
 /* ==========================================
    GLOBAL RESET & INITIAL SETUP
    ========================================== */
+/* ==========================================
+   GLOBAL RESET & INITIAL SETUP
+   ========================================== */
 *, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
@@ -97,6 +100,7 @@ html {
   scroll-behavior: smooth;
   font-size: 16px;
   -webkit-tap-highlight-color: transparent;
+  overflow-x: hidden;
 }
 
 body {
@@ -105,6 +109,7 @@ body {
   color: var(--text-main);
   line-height: 1.6;
   overflow-x: hidden;
+  width: 100%;
   transition: background-color var(--transition-smooth), color var(--transition-smooth);
 }
 
@@ -213,7 +218,7 @@ button, input, textarea, select {
   font-family: var(--font-heading);
   font-weight: 600;
   padding: 14px 28px;
-  border-radius: var(--radius-md);
+  border-radius: 50px;
   cursor: pointer;
   transition: all var(--transition-bounce);
   position: relative;
@@ -4171,7 +4176,7 @@ body.dark-theme .clients-slider::after {
   opacity: 0;
   pointer-events: none;
   transition: opacity var(--transition-smooth);
-  padding: 24px;
+  padding: 40px 24px;
 }
 
 .careers-modal.active {
@@ -4182,6 +4187,9 @@ body.dark-theme .clients-slider::after {
 .careers-modal-container {
   max-width: 600px;
   width: 100%;
+  max-height: 85vh;
+  overflow-y: auto;
+  background-color: var(--bg-surface);
   border-radius: var(--radius-lg);
   padding: 40px;
   box-shadow: var(--shadow-xl);
@@ -4276,8 +4284,15 @@ body.dark-theme .clients-slider::after {
   .jobs-grid {
     grid-template-columns: 1fr;
   }
+  .careers-modal {
+    padding: 16px;
+  }
   .careers-modal-container {
     padding: 30px 20px;
+  }
+  .careers-modal-footer {
+    flex-direction: column;
+    gap: 12px;
   }
 }
 
