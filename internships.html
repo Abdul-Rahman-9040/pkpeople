@@ -1,0 +1,2457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="PK People Internship & Placement Portal - Industry-Oriented Internship Programs across Computer Science, Electronics, Mechanical, Electrical, Civil, Fashion, Automobile & Mechatronics Engineering.">
+  <meta name="keywords" content="PK People Internships, Engineering Internships, Placement Portal, Cloud Computing Internship, AI Internship, Cybersecurity, Full Stack, Core Engineering Internships">
+  <meta name="author" content="Placement Keepers People Pulse">
+  
+  <title>Internship & Placement Portal | Placement Keepers People Pulse</title>
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="assets/images/logo.jpeg">
+  
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="styles.css?v=1.3">
+  
+  <!-- FontAwesome for Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Page Specific Custom Styles for Portal -->
+  <style>
+    /* Portal Hero & Header Extensions */
+    .portal-hero {
+      padding-top: 120px;
+      padding-bottom: 60px;
+      background: radial-gradient(circle at 80% 20%, hsla(var(--primary-hue), var(--primary-sat), var(--primary-lightness), 0.08) 0%, transparent 60%);
+      position: relative;
+    }
+    
+    .portal-hero-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 40px;
+      align-items: center;
+    }
+    
+    .portal-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 16px;
+      border-radius: var(--radius-full);
+      background-color: var(--primary-glow);
+      color: var(--primary);
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 16px;
+    }
+
+    .portal-tag span {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background-color: var(--primary);
+    }
+    
+    .portal-title {
+      font-family: var(--font-heading);
+      font-size: 2.75rem;
+      font-weight: 800;
+      line-height: 1.15;
+      color: var(--text-main);
+      margin-bottom: 16px;
+    }
+
+    .portal-title span {
+      color: var(--primary);
+    }
+    
+    .portal-desc {
+      font-size: 1.1rem;
+      color: var(--text-muted);
+      margin-bottom: 28px;
+      line-height: 1.6;
+    }
+
+    /* Controls Bar: Search & Branch Filter */
+    .portal-controls-card {
+      padding: 24px;
+      border-radius: var(--radius-lg);
+      margin-bottom: 40px;
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .search-input-group {
+      flex: 1;
+      min-width: 280px;
+      position: relative;
+    }
+
+    .search-input-group svg {
+      position: absolute;
+      left: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 20px;
+      height: 20px;
+      color: var(--text-muted);
+    }
+
+    .search-input {
+      width: 100%;
+      padding: 14px 16px 14px 48px;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-color);
+      background-color: var(--bg-surface);
+      color: var(--text-main);
+      font-size: 0.95rem;
+      transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+    }
+
+    .search-input:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px var(--primary-glow);
+    }
+
+    .filter-select-group {
+      min-width: 240px;
+      position: relative;
+    }
+
+    .filter-select {
+      width: 100%;
+      padding: 14px 40px 14px 16px;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-color);
+      background-color: var(--bg-surface);
+      color: var(--text-main);
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      appearance: none;
+      -webkit-appearance: none;
+    }
+
+    .filter-select-group::after {
+      content: '';
+      position: absolute;
+      right: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 0;
+      height: 0;
+      border-left: 5px solid transparent;
+      border-right: 5px solid transparent;
+      border-top: 6px solid var(--text-muted);
+      pointer-events: none;
+    }
+
+    /* Branch Grid & Cards */
+    .branches-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 24px;
+    }
+
+    .branch-card {
+      padding: 30px 24px;
+      border-radius: var(--radius-lg);
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform var(--transition-smooth), box-shadow var(--transition-smooth), border-color var(--transition-smooth);
+    }
+
+    .branch-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-xl);
+      border-color: var(--primary);
+    }
+
+    .branch-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+
+    .branch-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: var(--radius-md);
+      background-color: var(--primary-glow);
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .branch-icon svg {
+      width: 26px;
+      height: 26px;
+    }
+
+    .branch-number {
+      font-family: var(--font-heading);
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--primary);
+      opacity: 0.6;
+    }
+
+    .branch-title {
+      font-family: var(--font-heading);
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 10px;
+    }
+
+    .branch-desc {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+      margin-bottom: 20px;
+      flex: 1;
+    }
+
+    .branch-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-top: 1px solid var(--border-color);
+      padding-top: 16px;
+      margin-top: auto;
+    }
+
+    .branch-count-badge {
+      font-size: 0.8rem;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: var(--radius-full);
+      background-color: var(--bg-surface-alt);
+      color: var(--text-muted);
+    }
+
+    .branch-cta-link {
+      font-family: var(--font-heading);
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--primary);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: gap var(--transition-fast);
+    }
+
+    .branch-card:hover .branch-cta-link {
+      gap: 10px;
+    }
+
+    /* Specialization Grid Cards */
+    .spec-card {
+      padding: 28px;
+      border-radius: var(--radius-lg);
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      transition: transform var(--transition-smooth), box-shadow var(--transition-smooth), border-color var(--transition-smooth);
+    }
+
+    .spec-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-xl);
+      border-color: var(--primary);
+    }
+
+    .spec-card-top {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+
+    .spec-title {
+      font-family: var(--font-heading);
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 4px;
+    }
+
+    .spec-duration {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.8rem;
+      color: var(--primary);
+      font-weight: 600;
+    }
+
+    .tech-badges-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 16px 0 24px 0;
+    }
+
+    .tech-badge {
+      font-size: 0.78rem;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: var(--radius-sm);
+      background-color: var(--primary-glow);
+      color: var(--primary);
+    }
+
+    /* Breadcrumbs component */
+    .portal-breadcrumb {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      margin-bottom: 24px;
+    }
+
+    .portal-breadcrumb a {
+      color: var(--text-muted);
+      transition: color var(--transition-fast);
+    }
+
+    .portal-breadcrumb a:hover {
+      color: var(--primary);
+    }
+
+    .portal-breadcrumb .current {
+      color: var(--primary);
+      font-weight: 600;
+    }
+
+    .portal-breadcrumb-sep {
+      opacity: 0.5;
+    }
+
+    /* Details View Components */
+    .details-layout-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 32px;
+      align-items: start;
+    }
+
+    .details-section-card {
+      padding: 32px;
+      border-radius: var(--radius-lg);
+      margin-bottom: 24px;
+    }
+
+    .section-head-title {
+      font-family: var(--font-heading);
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .section-head-title svg {
+      width: 22px;
+      height: 22px;
+      color: var(--primary);
+    }
+
+    .learning-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 16px;
+    }
+
+    .learning-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px;
+      border-radius: var(--radius-md);
+      background-color: var(--bg-surface-alt);
+      font-size: 0.92rem;
+      font-weight: 500;
+    }
+
+    .learning-item svg {
+      width: 18px;
+      height: 18px;
+      color: var(--success);
+      flex-shrink: 0;
+    }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 16px;
+    }
+
+    .project-card-item {
+      padding: 18px;
+      border-radius: var(--radius-md);
+      background-color: var(--bg-surface-alt);
+      border-left: 3px solid var(--primary);
+    }
+
+    .project-card-item h5 {
+      font-family: var(--font-heading);
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--primary);
+      margin-bottom: 4px;
+    }
+
+    .project-card-item h4 {
+      font-size: 0.98rem;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    .skills-flex {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .skill-pill {
+      padding: 8px 16px;
+      border-radius: var(--radius-full);
+      background-color: var(--primary-glow);
+      color: var(--primary);
+      font-weight: 600;
+      font-size: 0.85rem;
+    }
+
+    .careers-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .career-badge {
+      padding: 8px 16px;
+      border-radius: var(--radius-md);
+      background-color: var(--bg-surface-alt);
+      font-weight: 600;
+      font-size: 0.9rem;
+      color: var(--text-main);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .career-badge svg {
+      width: 16px;
+      height: 16px;
+      color: var(--primary);
+    }
+
+    .back-btn-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-heading);
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 20px;
+      cursor: pointer;
+      transition: transform var(--transition-fast);
+    }
+
+    .back-btn-link:hover {
+      transform: translateX(-6px);
+    }
+
+    /* Modal dialog styling */
+    .apply-modal-backdrop {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(6px);
+      z-index: 2000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity var(--transition-smooth), visibility var(--transition-smooth);
+    }
+
+    .apply-modal-backdrop.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .apply-modal-box {
+      width: 100%;
+      max-width: 580px;
+      max-height: 90vh;
+      overflow-y: auto;
+      border-radius: var(--radius-lg);
+      padding: 32px;
+      position: relative;
+      transform: scale(0.95);
+      transition: transform var(--transition-smooth);
+    }
+
+    .apply-modal-backdrop.active .apply-modal-box {
+      transform: scale(1);
+    }
+
+    .modal-close-btn {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background-color: var(--bg-surface-alt);
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background-color var(--transition-fast);
+    }
+
+    .modal-close-btn:hover {
+      background-color: var(--border-color);
+    }
+
+    /* Advanced Animations & Support Card Styles */
+    @keyframes floatAnim {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-8px); }
+    }
+
+    @keyframes pulseGlow {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(14, 165, 233, 0.4); }
+      50% { box-shadow: 0 0 0 10px rgba(14, 165, 233, 0); }
+    }
+
+    .animated-float {
+      animation: floatAnim 4s ease-in-out infinite;
+    }
+
+    .animated-pulse {
+      animation: pulseGlow 2.5s infinite;
+    }
+
+    .support-card {
+      padding: 32px;
+      border-radius: var(--radius-lg);
+      transition: transform var(--transition-smooth), box-shadow var(--transition-smooth), border-color var(--transition-smooth);
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .support-card:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-xl);
+      border-color: var(--primary);
+    }
+
+    .benefit-feature-card {
+      padding: 28px;
+      border-radius: var(--radius-lg);
+      position: relative;
+      overflow: hidden;
+      transition: transform var(--transition-smooth), box-shadow var(--transition-smooth);
+      border-left: 4px solid var(--primary);
+    }
+
+    .benefit-feature-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-xl);
+    }
+
+    .benefit-badge-num {
+      width: 40px;
+      height: 40px;
+      border-radius: var(--radius-md);
+      background-color: var(--primary-glow);
+      color: var(--primary);
+      font-family: var(--font-heading);
+      font-weight: 800;
+      font-size: 1.1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 16px;
+    }
+
+    .provide-list-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 14px;
+      border-radius: var(--radius-md);
+      background-color: var(--bg-surface-alt);
+      font-size: 0.92rem;
+      font-weight: 600;
+      color: var(--text-main);
+      transition: transform var(--transition-fast), background-color var(--transition-fast);
+    }
+
+    .provide-list-item:hover {
+      transform: translateX(6px);
+      background-color: var(--primary-glow);
+    }
+
+    .provide-list-item svg {
+      width: 18px;
+      height: 18px;
+      color: var(--primary);
+      flex-shrink: 0;
+    }
+
+    /* Mobile Adaptability */
+    @media (max-width: 992px) {
+      .portal-hero-grid, .details-layout-grid {
+        grid-template-columns: 1fr;
+      }
+      .portal-title {
+        font-size: 2.2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ==========================================
+       SCROLL TO TOP BUTTON
+       ========================================== -->
+  <button id="scrollTop" class="scroll-top" aria-label="Scroll to top">
+    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
+    </svg>
+  </button>
+
+  <!-- ==========================================
+       HEADER & NAVIGATION
+       ========================================== -->
+  <header id="header" class="header">
+    <div class="container">
+      <a href="index.html#home" class="logo">
+        <img src="assets/images/logo.jpeg" alt="Placement Keepers People Pulse Logo">
+      </a>
+      
+      <nav id="nav-menu" class="nav-menu">
+        <div class="nav-item">
+          <a href="index.html#home" class="nav-link">Home</a>
+        </div>
+        <div class="nav-item has-dropdown">
+          <a href="index.html#about" class="nav-link dropdown-trigger">
+            About Us
+            <svg class="dropdown-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7" />
+            </svg>
+          </a>
+          <div class="dropdown-menu">
+            <a href="index.html#about" class="dropdown-item">
+              <div class="dropdown-item-icon">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
+              </div>
+              <div class="dropdown-item-content">
+                <span class="dropdown-item-title">Our Profile</span>
+                <span class="dropdown-item-desc">Who we are & our vision</span>
+              </div>
+            </a>
+            <a href="index.html#team" class="dropdown-item">
+              <div class="dropdown-item-icon">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+              </div>
+              <div class="dropdown-item-content">
+                <span class="dropdown-item-title">Corporate Leadership</span>
+                <span class="dropdown-item-desc">Meet our co-founders & team</span>
+              </div>
+            </a>
+          </div>
+        </div>
+        <div class="nav-item has-dropdown">
+          <a href="index.html#services" class="nav-link dropdown-trigger active">
+            Services
+            <svg class="dropdown-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7" />
+            </svg>
+          </a>
+          <div class="dropdown-menu">
+            <a href="index.html#services" class="dropdown-item">
+              <div class="dropdown-item-icon">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+              </div>
+              <div class="dropdown-item-content">
+                <span class="dropdown-item-title">Recruitment Services</span>
+                <span class="dropdown-item-desc">Staffing, IT augmentation & payroll</span>
+              </div>
+            </a>
+            <a href="internships.html" class="dropdown-item">
+              <div class="dropdown-item-icon">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0112 20.055a11.952 11.952 0 01-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"/></svg>
+              </div>
+              <div class="dropdown-item-content">
+                <span class="dropdown-item-title">Internship Portal</span>
+                <span class="dropdown-item-desc">Industry-oriented training programs</span>
+              </div>
+            </a>
+          </div>
+        </div>
+        <div class="nav-item">
+          <a href="index.html#careers" class="nav-link">Careers</a>
+        </div>
+        <div class="nav-item">
+          <a href="index.html#contact" class="nav-link">Contact</a>
+        </div>
+      </nav>
+      
+      <div class="nav-actions">
+        <!-- Theme Toggle -->
+        <button id="themeToggle" class="theme-toggle" aria-label="Toggle dark/light theme">
+          <svg class="moon-icon" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+            <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+          </svg>
+          <svg class="sun-icon" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd"></path>
+          </svg>
+        </button>
+        
+        <a href="index.html#contact" class="btn btn-primary btn-sm header-cta" style="padding: 10px 20px; font-size: 0.9rem;">Get in Touch</a>
+        
+        <!-- Hamburger Menu -->
+        <button id="menuBtn" class="menu-btn" aria-label="Toggle mobile menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ==========================================
+       DYNAMIC VIEW CONTAINER
+       ========================================== -->
+  <main id="portalApp">
+    <!-- Views will be injected dynamically by JavaScript based on state -->
+  </main>
+
+  <!-- ==========================================
+       APPLY NOW MODAL WINDOW
+       ========================================== -->
+  <div id="applyModal" class="apply-modal-backdrop">
+    <div class="apply-modal-box glass-panel">
+      <button id="closeApplyModal" class="modal-close-btn" aria-label="Close modal">&times;</button>
+      <div style="margin-bottom: 24px;">
+        <span class="portal-tag" style="font-size: 0.75rem; padding: 4px 12px;">Internship Application</span>
+        <h3 id="modalInternshipTitle" style="font-family: var(--font-heading); font-size: 1.5rem; font-weight: 800; color: var(--text-main); margin-top: 6px;">Apply for Internship</h3>
+        <p id="modalInternshipSubtitle" style="font-size: 0.9rem; color: var(--text-muted);">Placement Keepers People Pulse Career Fast-Track</p>
+      </div>
+
+      <form id="internshipApplyForm">
+        <div class="form-group" style="margin-bottom: 16px;">
+          <label style="display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 6px;">Full Name *</label>
+          <input type="text" id="applicantName" class="search-input" style="padding-left: 16px;" placeholder="e.g. Rahul Sharma" required>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px;">
+          <div class="form-group">
+            <label style="display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 6px;">Email Address *</label>
+            <input type="email" id="applicantEmail" class="search-input" style="padding-left: 16px;" placeholder="rahul@example.com" required>
+          </div>
+          <div class="form-group">
+            <label style="display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 6px;">Phone Number *</label>
+            <input type="tel" id="applicantPhone" class="search-input" style="padding-left: 16px;" placeholder="+91 9876543210" required>
+          </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px;">
+          <div class="form-group">
+            <label style="display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 6px;">College / University</label>
+            <input type="text" id="applicantCollege" class="search-input" style="padding-left: 16px;" placeholder="Your College Name">
+          </div>
+          <div class="form-group">
+            <label style="display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 6px;">Year of Passing</label>
+            <input type="text" id="applicantGradYear" class="search-input" style="padding-left: 16px;" placeholder="e.g. 2025 / 2026">
+          </div>
+        </div>
+
+        <div class="form-group" style="margin-bottom: 24px;">
+          <label style="display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 6px;">Cover Note / Areas of Interest</label>
+          <textarea id="applicantMsg" class="search-input" style="padding-left: 16px; height: 90px; resize: vertical;" placeholder="Tell us briefly about your career goals or projects..."></textarea>
+        </div>
+
+        <button type="submit" id="submitAppBtn" class="btn btn-primary" style="width: 100%; justify-content: center; padding: 14px;">
+          Submit Application
+          <svg style="width: 18px; height: 18px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div id="portalToast" class="form-toast" style="position: fixed; bottom: 30px; right: 30px; z-index: 2500; background: var(--success); color: white; padding: 16px 24px; border-radius: var(--radius-md); box-shadow: var(--shadow-xl); opacity: 0; pointer-events: none; transition: opacity var(--transition-smooth);">
+    Application submitted successfully! Our placement coordinators will reach out shortly.
+  </div>
+
+  <!-- ==========================================
+       FOOTER
+       ========================================== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid" style="display: grid; grid-template-columns: 1.5fr repeat(3, 1fr); gap: 40px; padding-bottom: 60px;">
+        <div class="footer-brand">
+          <a href="index.html#home" class="footer-logo">
+            <img src="assets/images/logo.jpeg" alt="Placement Keepers People Pulse Logo" style="height: 48px; border-radius: var(--radius-sm);">
+          </a>
+          <p style="color: var(--text-muted); margin-top: 16px; font-size: 0.92rem; line-height: 1.6;">Placement Keepers People Pulse Pvt. Ltd. is a premier staffing and workforce solutions enterprise committed to empowering candidates and corporate clients.</p>
+        </div>
+        
+        <div>
+          <h4 style="font-family: var(--font-heading); font-size: 1.05rem; font-weight: 700; color: var(--text-main); margin-bottom: 20px;">Quick Links</h4>
+          <ul style="display: flex; flex-direction: column; gap: 10px; font-size: 0.9rem; color: var(--text-muted);">
+            <li><a href="index.html#home">Home</a></li>
+            <li><a href="index.html#about">About Us</a></li>
+            <li><a href="index.html#services">Services</a></li>
+            <li><a href="internships.html">Internship Portal</a></li>
+            <li><a href="index.html#careers">Careers</a></li>
+          </ul>
+        </div>
+        
+        <div>
+          <h4 style="font-family: var(--font-heading); font-size: 1.05rem; font-weight: 700; color: var(--text-main); margin-bottom: 20px;">Engineering Branches</h4>
+          <ul style="display: flex; flex-direction: column; gap: 10px; font-size: 0.9rem; color: var(--text-muted);">
+            <li><a href="internships.html?branch=computer-science-engineering">Computer Science</a></li>
+            <li><a href="internships.html?branch=electronics-communication-engineering">Electronics & Comm</a></li>
+            <li><a href="internships.html?branch=mechanical-engineering">Mechanical Engineering</a></li>
+            <li><a href="internships.html?branch=electrical-engineering">Electrical Engineering</a></li>
+            <li><a href="internships.html?branch=civil-engineering">Civil Engineering</a></li>
+          </ul>
+        </div>
+        
+        <div>
+          <h4 style="font-family: var(--font-heading); font-size: 1.05rem; font-weight: 700; color: var(--text-main); margin-bottom: 20px;">Contact Us</h4>
+          <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 12px;">
+            Bangalore, Karnataka, India<br>
+            Email: info@placementkeepers.com<br>
+            Phone: +91 98765 43210
+          </p>
+        </div>
+      </div>
+      
+      <div style="border-top: 1px solid var(--border-color); padding: 24px 0; text-align: center; font-size: 0.85rem; color: var(--text-muted);">
+        &copy; 2026 Placement Keepers People Pulse Pvt. Ltd. All rights reserved.
+      </div>
+    </div>
+  </footer>
+
+  <!-- PORTAL CONTROLLER JS -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // 1. Theme Toggle logic
+      const themeToggle = document.getElementById('themeToggle');
+      const body = document.body;
+      const savedTheme = localStorage.getItem('theme');
+      if (savedTheme === 'dark') body.classList.add('dark-theme');
+      
+      if (themeToggle) {
+        themeToggle.addEventListener('click', () => {
+          body.classList.toggle('dark-theme');
+          localStorage.setItem('theme', body.classList.contains('dark-theme') ? 'dark' : 'light');
+        });
+      }
+
+      // Sticky Header
+      const header = document.getElementById('header');
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > 40) header.classList.add('scrolled');
+        else header.classList.remove('scrolled');
+      });
+
+      // Mobile Menu
+      const menuBtn = document.getElementById('menuBtn');
+      const navMenu = document.getElementById('nav-menu');
+      if (menuBtn && navMenu) {
+        menuBtn.addEventListener('click', () => {
+          menuBtn.classList.toggle('active');
+          navMenu.classList.toggle('active');
+        });
+      }
+
+      // Scroll to Top
+      const scrollTopBtn = document.getElementById('scrollTop');
+      if (scrollTopBtn) {
+        window.addEventListener('scroll', () => {
+          if (window.scrollY > 400) scrollTopBtn.classList.add('active');
+          else scrollTopBtn.classList.remove('active');
+        });
+        scrollTopBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+      }
+
+      // =========================================================================
+      // 2. CENTRAL DATA ARCHITECTURE: 8 BRANCHES & SPECIALIZATIONS DATA
+      // =========================================================================
+      const internshipData = {
+        "mechanical-engineering": {
+          num: "01",
+          name: "Mechanical Engineering",
+          slug: "mechanical-engineering",
+          desc: "Hands-on opportunities in automotive design, industrial robotics, precision manufacturing, and thermal systems.",
+          icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 9.172V5L8 4z"/></svg>`,
+          specializations: [
+            {
+              name: "Automotive Technology",
+              slug: "automotive-technology",
+              desc: "Deep dive into engine design, vehicle dynamics, thermal management, powertrain optimization, and automotive testing protocols.",
+              duration: "6 Weeks / 3 Months",
+              technologies: ["SolidWorks", "ANSYS", "CATIA", "MATLAB", "Vehicle Dynamics"],
+              overview: "The Automotive Technology internship equips mechanical engineering candidates with practical skills in vehicle component engineering, computational fluid dynamics (CFD), structural crash analysis, and electric powertrain integration. Trainees work alongside experienced design engineers on live automotive models.",
+              learningOutcomes: ["3D Parametric Vehicle Modeling", "Finite Element Analysis (FEA)", "Internal Combustion & Hybrid Systems", "Automotive Testing Standards", "Material Selection for Lightweighting"],
+              activities: ["Hands-on CAD assembly design", "Thermal simulation of radiator loops", "Component stress analysis", "Vehicle test drive data logging", "Project reporting & documentation"],
+              skills: ["CAD/CAM Modeling", "FEA Analysis", "GD&T", "Automotive Electronics Integration", "Technical Documentation"],
+              projects: [
+                { id: 1, title: "Chassis Frame Stress Analysis" },
+                { id: 2, title: "Engine Heat Exchanger CFD Optimization" },
+                { id: 3, title: "Brake Caliper Mechanical Design" },
+                { id: 4, title: "Transmission Gearbox Assembly Simulation" }
+              ],
+              careerOpportunities: ["Automotive Design Engineer", "FEA Analyst", "Quality Control Engineer", "Powertrain Specialist", "Production Engineer"],
+              benefits: ["Industry-recognized internship certificate", "Hands-on CAD workstation exposure", "Mentorship from Senior OEMs", "Placement assistance with automotive tier-1 suppliers"],
+              eligibility: "Pursuing or completed B.E. / B.Tech in Mechanical Engineering or related streams."
+            },
+            {
+              name: "Robotics",
+              slug: "robotics",
+              desc: "Focus on industrial robotic arm kinematics, actuators, sensors, machine vision, and automated factory line integration.",
+              duration: "6 Weeks / 3 Months",
+              technologies: ["ROS (Robot OS)", "SolidWorks", "C++", "Python", "Kinematic Simulators"],
+              overview: "Our Robotics specialization covers forward and inverse kinematics, robotic arm assembly design, servo control systems, and automated trajectory planning. Interns build physical and virtual robotic prototypes used in automated manufacturing lines.",
+              learningOutcomes: ["Robotic Kinematics & Dynamics", "Sensor Integration & Signal Conditioning", "ROS Trajectory Planning", "Industrial Automation Systems", "Servo Motor Calibration"],
+              activities: ["Programming 6-DOF robotic arms", "3D printing custom end-effectors", "Sensory feedback loop tuning", "Simulating industrial pick-and-place routines"],
+              skills: ["ROS Development", "Robotic Trajectory Control", "Sensor Interfacing", "CAD Assembly", "C++/Python Programming"],
+              projects: [
+                { id: 1, title: "6-Axis Articulated Robotic Arm Design" },
+                { id: 2, title: "ROS-Based Autonomous Mobile Robot" },
+                { id: 3, title: "Pneumatic Gripper Automation" },
+                { id: 4, title: "Vision-Guided Sorting Robot" }
+              ],
+              careerOpportunities: ["Robotics Engineer", "Automation Specialist", "Mechatronics Designer", "Control Systems Engineer"],
+              benefits: ["Hands-on robot kit access", "ROS project portfolio creation", "Industry mentoring", "Placement referrals"],
+              eligibility: "Engineering students in Mechanical, Robotics, or Electrical branches."
+            },
+            {
+              name: "Production and Operations",
+              slug: "production-and-operations",
+              desc: "Learn lean manufacturing, Six Sigma quality control, inventory optimization, CNC machining, and plant layout design.",
+              duration: "8 Weeks / 3 Months",
+              technologies: ["Lean Six Sigma", "ERP Systems", "CNC Programming", "Value Stream Mapping", "Minitab"],
+              overview: "Focuses on optimizing manufacturing plant performance through Lean methodologies, statistical process control (SPC), supply chain logistics, and automated assembly line workflow design.",
+              learningOutcomes: ["Lean Manufacturing & Kaizen", "Statistical Process Control", "CNC G-Code/M-Code Programming", "Supply Chain & Inventory Management", "Plant Layout Optimization"],
+              activities: ["Conducting time & motion studies", "Creating value stream maps", "Programming CNC lathe & milling machines", "Root cause failure analysis"],
+              skills: ["Process Optimization", "Quality Assurance", "CNC Machining", "Supply Chain Management", "Six Sigma Tools"],
+              projects: [
+                { id: 1, title: "Assembly Line Bottleneck Reduction" },
+                { id: 2, title: "Statistical Quality Control Implementation" },
+                { id: 3, title: "Plant Layout Redesign for Optimal Flow" },
+                { id: 4, title: "Automated Tool Wear Monitoring Setup" }
+              ],
+              careerOpportunities: ["Production Engineer", "Quality Manager", "Operations Specialist", "Industrial Engineer"],
+              benefits: ["Six Sigma Green Belt Orientation", "Plant visit exposure", "Direct hiring assistance"],
+              eligibility: "Mechanical, Industrial & Production engineering students."
+            }
+          ]
+        },
+        "electronics-communication-engineering": {
+          num: "02",
+          name: "Electronics and Communication Engineering",
+          slug: "electronics-communication-engineering",
+          desc: "Pathways in embedded microcontrollers, renewable solar/wind circuits, IoT smart devices, and high-frequency communication.",
+          icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>`,
+          specializations: [
+            {
+              name: "Embedded Systems",
+              slug: "embedded-systems",
+              desc: "Program ARM Cortex microcontrollers, RTOS kernels, PCB layouts, firmware code, and hardware peripheral drivers.",
+              duration: "6 Weeks / 3 Months",
+              technologies: ["Embedded C", "ARM Cortex-M", "STM32", "FreeRTOS", "KiCAD", "SPI/I2C/UART"],
+              overview: "Master real-time firmware development for modern electronics. Interns write low-level hardware drivers, interface LCD displays, sensors, and wireless transceivers, and design custom PCBs using professional EDA software.",
+              learningOutcomes: ["Bare-Metal C Programming", "ARM Microcontroller Architecture", "FreeRTOS Kernel Tasks & Queues", "Schematic & Multi-layer PCB Design", "Hardware Debugging with Oscilloscopes"],
+              activities: ["Writing peripheral drivers for timers & ADC", "Designing custom PCB boards in KiCAD", "Building FreeRTOS multi-threaded applications", "Flashing and debugging firmware on target hardware"],
+              skills: ["Embedded C", "PCB Layout Design", "RTOS Architecture", "Bus Protocols (SPI/I2C/CAN)", "Hardware Troubleshooting"],
+              projects: [
+                { id: 1, title: "FreeRTOS-Based Data Logger System" },
+                { id: 2, title: "Custom STM32 Microcontroller Board Layout" },
+                { id: 3, title: "CAN Bus Vehicle Telemetry Node" },
+                { id: 4, title: "Smart Power Meter Firmware" }
+              ],
+              careerOpportunities: ["Embedded Software Engineer", "Firmware Developer", "Hardware Design Engineer", "PCB Layout Specialist"],
+              benefits: ["Free Hardware Development Board provided", "1-on-1 Code Review", "Verified Internship Certificate", "Direct job referrals"],
+              eligibility: "ECE, EEE, Instrumentation, or Computer Science students."
+            },
+            {
+              name: "Renewable Energy",
+              slug: "renewable-energy",
+              desc: "Study solar PV systems, wind power converters, microgrid battery management, and smart inverter electronics.",
+              duration: "6 Weeks / 3 Months",
+              technologies: ["MATLAB Simulink", "Solar PV Design", "BMS (Battery Management)", "PVSyst", "Inverter Circuits"],
+              overview: "Gain expertise in clean energy transition electronics. Covers solar panel MPPT controllers, battery management systems (BMS) for energy storage, and power electronic converters for grid integration.",
+              learningOutcomes: ["Solar PV System Sizing", "MPPT Control Algorithms", "Lithium Battery BMS Design", "Grid-Tied Inverter Topology", "Power Quality Analysis"],
+              activities: ["Simulating MPPT tracking in MATLAB", "Testing solar charge controller hardware", "Designing battery balancing circuits", "Grid synchronization analysis"],
+              skills: ["Renewable System Sizing", "Power Electronics", "BMS Design", "Simulink Modeling", "Grid Code Compliance"],
+              projects: [
+                { id: 1, title: "Micro-Grid Solar MPPT Inverter System" },
+                { id: 2, title: "Li-Ion Battery Cell Balancer Circuit" },
+                { id: 3, title: "Wind Turbine Power Converter Simulation" },
+                { id: 4, title: "Smart Energy Storage Monitor" }
+              ],
+              careerOpportunities: ["Renewable Energy Engineer", "Power Electronics Designer", "Solar System Integrator"],
+              benefits: ["Industry green energy certification", "Real-world project portfolio", "Placement guidance"],
+              eligibility: "ECE, EEE & Electrical Engineering students."
+            },
+            {
+              name: "Industrial Automation",
+              slug: "industrial-automation",
+              desc: "Master PLC programming, SCADA dashboards, HMI screens, industrial sensors, and factory fieldbus networks.",
+              duration: "8 Weeks / 3 Months",
+              technologies: ["Siemens S7-1200", "Allen Bradley", "Ladder Logic", "SCADA", "HMI", "Modbus"],
+              overview: "Build automated control loops used in modern smart factories. Interns program Programmable Logic Controllers (PLCs), construct supervisory SCADA graphics, and wire industrial sensors and vfd drives.",
+              learningOutcomes: ["Ladder Diagram & Structured Text Programming", "HMI Screen Development", "SCADA Alarms & Data Telemetry", "Industrial Fieldbus Networking", "Variable Frequency Drive (VFD) Calibration"],
+              activities: ["Programming Siemens PLC logic", "Designing SCADA graphics", "Wiring industrial proximity sensors", "Configuring motor speed via VFD"],
+              skills: ["PLC Programming", "SCADA System Design", "Industrial Networking", "Control Panel Wiring", "Troubleshooting"],
+              projects: [
+                { id: 1, title: "Automated Bottle Filling Plant PLC Code" },
+                { id: 2, title: "Factory SCADA Central Monitoring Station" },
+                { id: 3, title: "Conveyor Sorting System with Vision & VFD" },
+                { id: 4, title: "PID Temperature Control Loop" }
+              ],
+              careerOpportunities: ["PLC Programmer", "Automation Engineer", "Control System Technician", "SCADA Specialist"],
+              benefits: ["Hands-on PLC trainer kit access", "Siemens TIA Portal certification prep", "Career placement support"],
+              eligibility: "ECE, Electrical, Instrumentation & Mechatronics students."
+            },
+            {
+              name: "IoT",
+              slug: "iot",
+              desc: "Develop connected sensor networks using ESP32, MQTT protocols, cloud dashboards, and wireless gateway nodes.",
+              duration: "6 Weeks / 3 Months",
+              technologies: ["ESP32", "MQTT", "HTTP REST", "Node-RED", "ThingSpeak", "AWS IoT Core"],
+              overview: "Connect physical devices to the cloud. Trainees design low-power wireless sensor nodes, configure MQTT brokers, build web dashboards, and implement over-the-air (OTA) firmware updates.",
+              learningOutcomes: ["ESP32 Wi-Fi / Bluetooth Programming", "MQTT Broker Setup & Telemetry", "Cloud IoT Dashboard Development", "Low-Power Sleep Modes", "IoT Data Security"],
+              activities: ["Wiring environmental sensors to ESP32", "Publishing telemetry data over MQTT", "Building real-time web dashboards", "Setting up automated cloud alerts"],
+              skills: ["IoT Protocol Stack", "ESP32 C++", "Cloud Dashboard Setup", "Sensor Calibration", "Network Debugging"],
+              projects: [
+                { id: 1, title: "Smart Building Environmental Telemetry Node" },
+                { id: 2, title: "Industrial Asset Tracking IoT System" },
+                { id: 3, title: "Agricultural Soil Moisture Monitoring Network" },
+                { id: 4, title: "AWS IoT Core Connected Smart Energy Meter" }
+              ],
+              careerOpportunities: ["IoT Solutions Developer", "Firmware Engineer", "Smart Systems Architect"],
+              benefits: ["IoT Hardware Development Kit", "Cloud Platform Exposure", "Certificate & Job Assistance"],
+              eligibility: "ECE, CSE, EEE & IT students."
+            },
+            {
+              name: "Power Systems",
+              slug: "power-systems",
+              desc: "High-voltage transmission line simulation, protection relaying, transformer design, and smart grid automation.",
+              duration: "6 Weeks / 3 Months",
+              technologies: ["ETAP", "MATLAB", "Power Factory", "Relay Protection", "Smart Grid"],
+              overview: "Explore power grid engineering, load flow calculations, short-circuit fault analysis, and digital protective relay configuration for substation safety.",
+              learningOutcomes: ["Load Flow & Fault Analysis", "Substation Relay Protection", "Grid Power Quality Enhancement", "Smart Grid Metering"],
+              activities: ["Simulating grid stability in ETAP", "Configuring overcurrent relay trip curves", "Analyzing transformer load losses"],
+              skills: ["Power System Analysis", "ETAP Modeling", "Relay Protection", "Grid Code Compliance"],
+              projects: [
+                { id: 1, title: "33kV Substation Load Flow & Short Circuit Study" },
+                { id: 2, title: "Digital Relay Overcurrent Protection Coordination" }
+              ],
+              careerOpportunities: ["Power Systems Engineer", "Substation Designer", "Grid Operations Analyst"],
+              benefits: ["ETAP simulation tool exposure", "Industry mentor guidance"],
+              eligibility: "ECE & EEE students."
+            }
+          ]
+        },
+        "computer-science-engineering": {
+          num: "03",
+          name: "Computer Science Engineering",
+          slug: "computer-science-engineering",
+          desc: "Software development pathways in Cloud Architecture, AI/ML, Offensive & Defensive Cybersecurity, and Full Stack Web Apps.",
+          icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/><line x1="14" y1="4" x2="10" y2="20"/></svg>`,
+          specializations: [
+            {
+              name: "Cybersecurity",
+              slug: "cybersecurity",
+              desc: "Learn ethical hacking, penetration testing, network defense, threat analysis, SOC monitoring, and security compliance.",
+              duration: "6 Weeks / 3 Months",
+              technologies: ["Kali Linux", "Wireshark", "Metasploit", "Burp Suite", "Nmap", "SIEM (Splunk)", "Python"],
+              overview: "Protect enterprise digital assets from sophisticated cyber threats. Interns receive intensive practical training in network vulnerability scanning, web application security auditing, incident response, and SIEM monitoring.",
+              learningOutcomes: ["Ethical Hacking & Vulnerability Assessment", "Network Traffic & Packet Analysis", "Web Application Penetration Testing (OWASP Top 10)", "Security Information & Event Management (SIEM)", "Defensive Hardening & Firewalls"],
+              activities: ["Conducting authorized penetration tests", "Analyzing packet captures in Wireshark", "Hardening Linux server configurations", "Simulating phishing & malware analysis", "Drafting vulnerability audit reports"],
+              skills: ["Penetration Testing", "Network Security", "OWASP Auditing", "Log Analysis", "Python Scripting for Security"],
+              projects: [
+                { id: 1, title: "Web Application OWASP Security Audit" },
+                { id: 2, title: "Automated Network Vulnerability Scanner" },
+                { id: 3, title: "SOC SIEM Dashboard & Alert System" },
+                { id: 4, title: "Secure VPN & Firewall Architecture" }
+              ],
+              careerOpportunities: ["Cybersecurity Analyst", "Penetration Tester", "SOC Analyst", "Security Engineer", "Information Security Specialist"],
+              benefits: ["Hands-on Cyber Lab access", "Ethical Hacking Portfolio", "Certified Internship Document", "Direct corporate placement referrals"],
+              eligibility: "Computer Science, IT, BCA/MCA, or ECE background students."
+            },
+            {
+              name: "Cloud Computing",
+              slug: "cloud-computing",
+              desc: "Architect scalable cloud infrastructures, microservices containers, automated CI/CD pipelines, and cloud security controls.",
+              duration: "6 Weeks / 3 Months",
+              technologies: ["AWS", "Microsoft Azure", "Google Cloud", "Docker", "Kubernetes", "Linux", "Git", "Terraform", "CI/CD"],
+              overview: "Master modern cloud infrastructure and DevOps practices. Trainees deploy multi-tier web applications on AWS and Azure, automate infrastructure provisioning using Terraform, and orchestrate containerized microservices with Docker and Kubernetes.",
+              learningOutcomes: ["AWS Core Services (EC2, S3, VPC, RDS, IAM)", "Docker Containerization & Multi-stage Builds", "Kubernetes Cluster Management & Pod Scaling", "Infrastructure as Code (IaC) with Terraform", "Automated CI/CD Deployment Pipelines"],
+              activities: ["Setting up secure Virtual Private Clouds (VPC)", "Writing Dockerfiles & Kubernetes Manifests", "Building GitHub Actions CI/CD workflows", "Monitoring application metrics with Prometheus & Grafana", "Automating server provisioning"],
+              skills: ["AWS/Azure Administration", "Docker & Kubernetes", "Terraform IaC", "CI/CD Pipelines", "Linux SysAdmin", "Cloud Security"],
+              projects: [
+                { id: 1, title: "Cloud-Based High Availability Web Application Deployment" },
+                { id: 2, title: "Automated CI/CD Deployment Pipeline" },
+                { id: 3, title: "Cloud Infrastructure Monitoring Dashboard" },
+                { id: 4, title: "Multi-Node Kubernetes Microservices Cluster" }
+              ],
+              careerOpportunities: ["Cloud Engineer", "DevOps Engineer", "Cloud Support Analyst", "Infrastructure Engineer", "Cloud Solutions Architect"],
+              benefits: ["AWS Sandbox Credit access", "Real-world DevOps project repository", "Industry Recognized Certificate", "Guaranteed corporate placement support"],
+              eligibility: "Students pursuing Computer Science, IT, Software Engineering, or related technical degrees."
+            },
+            {
+              name: "Artificial Intelligence",
+              slug: "artificial-intelligence",
+              desc: "Build machine learning models, neural networks, computer vision tools, and natural language processing (NLP) pipelines.",
+              duration: "8 Weeks / 3 Months",
+              technologies: ["Python", "TensorFlow", "PyTorch", "Scikit-Learn", "OpenCV", "Pandas", "NumPy", "Jupyter"],
+              overview: "Transform data into intelligent autonomous algorithms. Interns build predictive regression/classification models, train deep neural networks for computer vision, and deploy machine learning APIs to production.",
+              learningOutcomes: ["Data Preprocessing & Feature Engineering", "Supervised & Unsupervised Machine Learning", "Deep Learning Neural Networks (CNNs, RNNs)", "Computer Vision with OpenCV", "Deploying ML Models via Flask/FastAPI"],
+              activities: ["Training image classification models", "Cleaning & processing large datasets", "Evaluating model accuracy & loss metrics", "Building REST APIs to serve ML inference predictions", "Creating interactive Jupyter analytics notebooks"],
+              skills: ["Machine Learning", "Deep Learning", "Python Data Stack", "Computer Vision", "Model Deployment", "Statistical Analysis"],
+              projects: [
+                { id: 1, title: "Automated Defect Detection using Computer Vision" },
+                { id: 2, title: "Customer Churn Prediction Model" },
+                { id: 3, title: "NLP Intelligent Document Summarizer" },
+                { id: 4, title: "Real-Time Face Recognition & Attendance System" }
+              ],
+              careerOpportunities: ["AI/ML Developer", "Data Scientist", "Machine Learning Engineer", "Computer Vision Engineer", "Data Analyst"],
+              benefits: ["GPU Cloud Computing Access", "GitHub ML Portfolio project", "Verified internship credentials", "Direct placement assistance"],
+              eligibility: "CSE, IT, Data Science, AI/ML, Mathematics or Statistics students."
+            },
+            {
+              name: "Full Stack Development",
+              slug: "full-stack-development",
+              desc: "Construct modern web applications using React, Node.js, Express, MongoDB/SQL, REST APIs, and UI/UX responsive designs.",
+              duration: "8 Weeks / 3 Months",
+              technologies: ["JavaScript (ES6+)", "React.js", "Node.js", "Express.js", "MongoDB", "PostgreSQL", "HTML5/CSS3", "Git"],
+              overview: "Develop production-ready web platforms from end to end. Trainees design responsive front-end user interfaces, engineer robust backend RESTful APIs, interact with relational and NoSQL databases, and deploy live applications.",
+              learningOutcomes: ["Responsive Front-End Design (HTML, CSS, React)", "Backend API Architecture (Node.js, Express)", "Database Schema Design (MongoDB, PostgreSQL)", "State Management & Component Architecture", "Authentication & Security (JWT, OAuth)"],
+              activities: ["Building dynamic React single-page apps", "Engineering CRUD REST endpoints", "Designing database schemas & relationships", "Integrating third-party payment gateways & auth", "Deploying full stack apps on cloud servers"],
+              skills: ["Full Stack Development", "React.js", "Node.js API", "Database Management", "Version Control (Git)", "Web Performance"],
+              projects: [
+                { id: 1, title: "E-Commerce Web Platform with Payment Integration" },
+                { id: 2, title: "Real-Time Collaborative Dashboard App" },
+                { id: 3, title: "Corporate HR & Payroll Management Portal" },
+                { id: 4, title: "Social Media Platform with Auth & Chat" }
+              ],
+              careerOpportunities: ["Full Stack Web Developer", "Frontend Developer", "Backend Developer", "Software Engineer"],
+              benefits: ["Live production site hosting", "Code review by senior software engineers", "Certificate of Completion", "Corporate hiring network access"],
+              eligibility: "Open to all CS, IT, Software Engineering & MCA candidates."
+            }
+          ]
+        },
+        "electrical-engineering": {
+          num: "04",
+          name: "Electrical Engineering",
+          slug: "electrical-engineering",
+          desc: "Focused programs in electrical power grids, motor automation, architectural wiring design, renewable solar power, and control systems.",
+          icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>`,
+          specializations: [
+            {
+              name: "Industrial Automation",
+              slug: "industrial-automation",
+              desc: "Program PLCs, VFD motor drives, sensors, relays, and industrial control cabinets.",
+              duration: "8 Weeks / 3 Months",
+              technologies: ["Siemens PLC", "Ladder Logic", "VFD Drives", "HMI", "Relay Control"],
+              overview: "Master industrial electrical panel wiring, motor control circuits, and programmable logic controller (PLC) automation used in manufacturing and processing plants.",
+              learningOutcomes: ["Control Panel Schematic Design", "3-Phase Motor Control & VFDs", "PLC Programming", "Industrial Safety Standards"],
+              activities: ["Wiring relay control panels", "Programming motor speed ramps", "Troubleshooting industrial electrical faults"],
+              skills: ["Control Panel Wiring", "PLC Logic", "VFD Parameterization", "Electrical Safety"],
+              projects: [
+                { id: 1, title: "Dual Motor Automatic Transfer System" },
+                { id: 2, title: "Industrial VFD Pump Speed Control Panel" }
+              ],
+              careerOpportunities: ["Electrical Automation Engineer", "Control Panel Designer", "Maintenance Engineer"],
+              benefits: ["Practical panel wiring lab exposure", "Certified internship"],
+              eligibility: "Electrical & Electronics engineering students."
+            },
+            {
+              name: "Power Systems",
+              slug: "power-systems",
+              desc: "Study power generation, transmission line parameters, transformer substations, and protective relaying.",
+              duration: "6 Weeks / 3 Months",
+              technologies: ["ETAP", "MATLAB", "Power Cables", "Transformers", "Substations"],
+              overview: "Covers high-voltage electrical grid design, transformer load calculations, short circuit fault current calculations, and protective relay setting coordination.",
+              learningOutcomes: ["Substation Equipment Selection", "Load Flow Analysis", "Short Circuit Calculation", "Earthing Grid Design"],
+              activities: ["Drafting 11kV substation single-line diagrams", "Simulating line faults in ETAP", "Calculating transformer sizing"],
+              skills: ["Power Grid Design", "ETAP Simulation", "Single Line Diagrams", "Earthing Design"],
+              projects: [
+                { id: 1, title: "11kV Industrial Substation Single Line Diagram Design" },
+                { id: 2, title: "Substation Earthing & Lightning Protection Grid" }
+              ],
+              careerOpportunities: ["Power Systems Engineer", "Substation Engineer", "Electrical Project Engineer"],
+              benefits: ["ETAP tool training", "Substation site visit exposure"],
+              eligibility: "Electrical Engineering students."
+            },
+            {
+              name: "Electrical Design",
+              slug: "electrical-design",
+              desc: "Architectural building electrification, AutoCAD electrical drafting, load estimation, and lighting calculations.",
+              duration: "6 Weeks / 3 Months",
+              technologies: ["AutoCAD Electrical", "DIALux", "Load Calculators", "NEC / IS Codes"],
+              overview: "Design building electrification systems, cable tray sizing, lighting layouts, distribution board schedules, and emergency generator power backups for commercial projects.",
+              learningOutcomes: ["AutoCAD Electrical Layout Drafting", "DIALux Indoor & Outdoor Lighting Calculation", "Cable Sizing & Voltage Drop Calculations", "Distribution Board Schedule Design"],
+              activities: ["Drafting floor plan electrical layouts", "Calculating illuminance levels", "Selecting circuit breakers & cable gauges"],
+              skills: ["AutoCAD Electrical", "MEP Design", "Load Calculation", "Standard Code Compliance"],
+              projects: [
+                { id: 1, title: "Commercial High-Rise Electrical Layout Design" },
+                { id: 2, title: "Industrial Plant Lighting & Cable Sizing Model" }
+              ],
+              careerOpportunities: ["Electrical Design Engineer", "MEP Consultant", "AutoCAD Draftsman"],
+              benefits: ["Commercial CAD layout project portfolio", "Job assistance"],
+              eligibility: "EEE & Electrical Engineering students."
+            },
+            {
+              name: "Renewable Energy",
+              slug: "renewable-energy",
+              desc: "Grid-tied solar PV systems, wind turbines, battery energy storage systems (BESS), and power converters.",
+              duration: "6 Weeks / 3 Months",
+              technologies: ["PVSyst", "HelioScope", "Solar Inverters", "BESS", "MATLAB"],
+              overview: "Learn rooftop and utility-scale solar PV system design, inverter matching, battery storage integration, and grid interconnection feasibility analysis.",
+              learningOutcomes: ["Solar PV Yield Estimation", "Inverter & String Sizing", "Battery Storage System Sizing", "Grid Interconnection Standards"],
+              activities: ["Designing 100kW rooftop solar plant in PVSyst", "Calculating battery backup requirements", "Sizing solar cables & DC isolators"],
+              skills: ["PVSyst Modeling", "Solar System Sizing", "Battery Management", "Green Energy Standards"],
+              projects: [
+                { id: 1, title: "100kW Commercial Solar Rooftop PV Design" },
+                { id: 2, title: "Hybrid Solar & Battery Storage Microgrid Model" }
+              ],
+              careerOpportunities: ["Solar Design Engineer", "Renewable Energy Consultant", "Project Manager"],
+              benefits: ["PVSyst software certification prep", "Placement referrals"],
+              eligibility: "EEE & Electrical Engineering students."
+            },
+            {
+              name: "Control Systems",
+              slug: "control-systems",
+              desc: "Feedback loops, PID controllers, system modeling, state-space equations, and stability analysis.",
+              duration: "6 Weeks / 3 Months",
+              technologies: ["MATLAB", "Simulink", "PID Tuning", "LabVIEW", "Control Theory"],
+              overview: "Analyze and tune dynamic control loops for precision motor speed control, temperature regulation, and stability enhancement in power plants.",
+              learningOutcomes: ["Transfer Function Modeling", "PID Controller Tuning", "Root Locus & Bode Stability Analysis", "State-Space Feedback Design"],
+              activities: ["Tuning PID loops in Simulink", "Modeling motor speed response", "Simulating feedback stability under disturbances"],
+              skills: ["MATLAB Control Toolbox", "PID Tuning", "Feedback Loop Design", "System Modeling"],
+              projects: [
+                { id: 1, title: "Precision Motor Speed PID Controller Design" },
+                { id: 2, title: "Thermal Process Control Loop Simulation" }
+              ],
+              careerOpportunities: ["Control Systems Engineer", "Instrumentation Engineer", "R&D Engineer"],
+              benefits: ["MATLAB Simulink project portfolio", "Certificate of completion"],
+              eligibility: "Electrical & Electronics engineering candidates."
+            }
+          ]
+        },
+        "civil-engineering": {
+          num: "05",
+          name: "Civil Engineering",
+          slug: "civil-engineering",
+          desc: "Structural analysis, BIM building modeling, transportation design, environmental systems, and geotechnical foundations.",
+          icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>`,
+          specializations: [
+            {
+              name: "Transportation Engineering",
+              slug: "transportation-engineering",
+              desc: "Highway geometric design, flexible/rigid pavement design, traffic flow simulation, and urban transit planning.",
+              duration: "6 Weeks / 3 Months",
+              technologies: ["AutoCAD Civil 3D", "MX Road", "Traffic Simulators", "IRC Codes"],
+              overview: "Master highway alignment design, pavement thickness calculations, intersection traffic management, and road safety auditing adhering to IRC guidelines.",
+              learningOutcomes: ["Highway Geometric Alignment", "Pavement Design (IRC 37 / IRC 58)", "Traffic Survey Data Analysis", "Intersection Signal Timing"],
+              activities: ["Designing highway vertical & horizontal curves", "Calculating asphalt pavement layer thickness", "Simulating junction traffic flow"],
+              skills: ["Civil 3D Highway Design", "Pavement Design", "Traffic Analysis", "IRC Standard Codes"],
+              projects: [
+                { id: 1, title: "4-Lane Highway Alignment & Pavement Design" },
+                { id: 2, title: "Urban Junction Traffic Signal Optimization" }
+              ],
+              careerOpportunities: ["Highway Engineer", "Transportation Planner", "Civil Infrastructure Specialist"],
+              benefits: ["Civil 3D software exposure", "Infrastructure project portfolio"],
+              eligibility: "Civil Engineering students."
+            },
+            {
+              name: "Environmental Technology",
+              slug: "environmental-technology",
+              desc: "Wastewater treatment plants (STP/ETP), solid waste management, environmental impact assessment (EIA), and air pollution control.",
+              duration: "6 Weeks / 3 Months",
+              technologies: ["WaterCAD", "BioWin", "EIA Frameworks", "Water Quality Analyzers"],
+              overview: "Focuses on sustainable environmental engineering. Trainees design sewage treatment plants (STP), industrial effluent treatment plants (ETP), and conduct environmental impact studies.",
+              learningOutcomes: ["Biological Wastewater Treatment Design", "Water Supply Distribution Modeling", "Solid Waste Recycling Workflows", "EIA Documentation"],
+              activities: ["Sizing aeration tanks & clarifiers", "Simulating water pipe networks", "Conducting water quality lab tests"],
+              skills: ["Wastewater Plant Sizing", "Environmental Auditing", "WaterCAD", "Environmental Regulations"],
+              projects: [
+                { id: 1, title: "5 MLD Sewage Treatment Plant (STP) Process Design" },
+                { id: 2, title: "Urban Water Supply Network Distribution Model" }
+              ],
+              careerOpportunities: ["Environmental Engineer", "Water Treatment Specialist", "EIA Consultant"],
+              benefits: ["Practical plant sizing exposure", "Environmental certification"],
+              eligibility: "Civil & Environmental engineering students."
+            },
+            {
+              name: "Geotechnical Engineering",
+              slug: "geotechnical-engineering",
+              desc: "Soil mechanic testing, shallow and deep foundation design, slope stability analysis, and ground improvement techniques.",
+              duration: "6 Weeks / 3 Months",
+              technologies: ["PLAXIS", "GeoStudio", "Soil Lab Equipment", "IS Soil Codes"],
+              overview: "Analyze soil bearing capacity, settlement parameters, retaining wall earth pressures, and deep pile foundation design for heavy civil structures.",
+              learningOutcomes: ["Soil Borelog Data Interpretation", "Shallow & Pile Foundation Sizing", "Slope Stability Modeling", "Retaining Structure Design"],
+              activities: ["Calculating allowable soil bearing capacity", "Simulating embankment slope stability", "Evaluating pile load capacities"],
+              skills: ["Geotechnical Analysis", "PLAXIS Modeling", "Foundation Sizing", "Soil Mechanics"],
+              projects: [
+                { id: 1, title: "High-Rise Building Deep Pile Foundation Analysis" },
+                { id: 2, title: "Hillside Slope Stability & Retaining Wall Design" }
+              ],
+              careerOpportunities: ["Geotechnical Engineer", "Foundation Designer", "Site Investigation Specialist"],
+              benefits: ["PLAXIS software training", "Industry project guidance"],
+              eligibility: "Civil Engineering candidates."
+            },
+            {
+              name: "Structural Engineering",
+              slug: "structural-engineering",
+              desc: "Analyze and design reinforced concrete (RCC) and steel structures using ETABS and STAAD.Pro.",
+              duration: "8 Weeks / 3 Months",
+              technologies: ["ETABS", "STAAD.Pro", "Revit Structure", "IS 456 / IS 800"],
+              overview: "Build structural models for multi-story residential and commercial buildings. Interns calculate dead, live, wind, and seismic loads and draft structural reinforcement rebar drawings.",
+              learningOutcomes: ["3D Structural Building Modeling", "Seismic & Wind Load Calculation", "RCC Beam, Column & Slab Design", "Steel Truss & Connection Details"],
+              activities: ["Building multi-story frame models in ETABS", "Performing dynamic response spectrum analysis", "Drafting rebar detailing drawings"],
+              skills: ["ETABS / STAAD.Pro", "RCC Design", "Steel Structural Detailing", "IS Code Compliance"],
+              projects: [
+                { id: 1, title: "G+10 Commercial RCC Building Seismic Structural Design" },
+                { id: 2, title: "Long-Span Industrial Steel Roof Truss Model" }
+              ],
+              careerOpportunities: ["Structural Design Engineer", "BIM Structural Modeler", "Civil Structural Analyst"],
+              benefits: ["ETABS project portfolio", "Placement support in design consultancies"],
+              eligibility: "Civil Engineering students."
+            },
+            {
+              name: "Construction Technology",
+              slug: "construction-technology",
+              desc: "Construction project management, Primavera P6 scheduling, cost estimation, quantity surveying, and site safety.",
+              duration: "8 Weeks / 3 Months",
+              technologies: ["Primavera P6", "MS Project", "AutoCAD", "BOM / BOQ Tools"],
+              overview: "Master construction management workflows, work breakdown structures (WBS), project scheduling, quantity estimation, and quality assurance at site.",
+              learningOutcomes: ["Primavera P6 Project Scheduling", "Quantity Surveying & Bill of Quantities (BOQ)", "Rate Analysis & Cost Estimation", "Construction Site Safety & QA/QC"],
+              activities: ["Drafting project Gantt charts", "Calculating concrete & steel quantities", "Preparing project budget schedules"],
+              skills: ["Project Scheduling", "Quantity Surveying", "Primavera P6", "Cost Estimation"],
+              projects: [
+                { id: 1, title: "Residential Complex Primavera P6 Project Master Schedule" },
+                { id: 2, title: "Comprehensive BOQ & Cost Estimation for Villa Project" }
+              ],
+              careerOpportunities: ["Construction Project Engineer", "Quantity Surveyor", "Planning Engineer"],
+              benefits: ["Primavera software exposure", "Direct construction firm referrals"],
+              eligibility: "Civil Engineering candidates."
+            }
+          ]
+        },
+        "fashion-designing": {
+          num: "06",
+          name: "Fashion Designing",
+          slug: "fashion-designing",
+          desc: "Creativity meets technology in garment construction, digital textile printing, apparel production management, and fashion illustration.",
+          icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>`,
+          specializations: [
+            {
+              name: "Fashion Design",
+              slug: "fashion-design",
+              desc: "Couture collection conceptualization, mood board creation, garment draping, pattern making, and fashion show styling.",
+              duration: "6 Weeks / 3 Months",
+              technologies: ["Adobe Illustrator", "CLO 3D", "Photoshop", "Pattern Drafting", "Draping"],
+              overview: "Express fashion vision through modern CAD software and traditional draping techniques. Interns build themed apparel collections, create digital 3D garment prototypes, and construct finished garments.",
+              learningOutcomes: ["Theme Research & Mood Board Conceptualization", "Digital Fashion Illustration", "3D Garment Simulation in CLO 3D", "Flat Pattern Making & Draping"],
+              activities: ["Creating digital fashion sketches", "Simulating fabric drape in CLO 3D", "Stitching prototype garments", "Styling lookbooks"],
+              skills: ["Fashion Illustration", "CLO 3D Modeling", "Pattern Making", "Garment Construction", "Trend Forecasting"],
+              projects: [
+                { id: 1, title: "Sustainable Apparel Collection & Lookbook" },
+                { id: 2, title: "CLO 3D Virtual Garment Fitting Model" }
+              ],
+              careerOpportunities: ["Fashion Designer", "Apparel Stylist", "3D Fashion Modeler", "Creative Director"],
+              benefits: ["Portfolio collection showcases", "Certificate of completion"],
+              eligibility: "Fashion Design, Textile, or Fine Arts students."
+            },
+            {
+              name: "Apparel Production",
+              slug: "apparel-production",
+              desc: "Garment manufacturing unit management, industrial sewing workflows, quality inspection, and assembly line optimization.",
+              duration: "6 Weeks / 3 Months",
+              technologies: ["Garment ERP", "Tech Packs", "Quality Audit Sheets", "SAM/SMV Calculators"],
+              overview: "Learn the operational side of mass garment manufacturing. Trainees draft technical specification packs (Tech Packs), calculate Standard Allowable Minutes (SAM), and conduct AQL quality inspections.",
+              learningOutcomes: ["Technical Pack (Tech Pack) Creation", "Industrial Sewing Machine Operations", "Line Balancing & SAM Calculation", "AQL Quality Inspection"],
+              activities: ["Drafting complete apparel Tech Packs", "Conducting line balancing for t-shirt assembly", "Performing fabric defect audits"],
+              skills: ["Tech Pack Creation", "Garment Quality Control", "Production Planning", "Industrial Sewing"],
+              projects: [
+                { id: 1, title: "Woven Shirt Tech Pack & Production Line Plan" },
+                { id: 2, title: "Garment Factory AQL Quality Audit Study" }
+              ],
+              careerOpportunities: ["Apparel Production Manager", "Garment Quality Auditor", "Merchandiser"],
+              benefits: ["Garment factory visit exposure", "Industry placement support"],
+              eligibility: "Fashion Designing & Apparel Technology students."
+            },
+            {
+              name: "Textile Design",
+              slug: "textile-design",
+              desc: "Print creation, weave structures, fabric dyeing techniques, surface ornamentation, and digital fabric printing.",
+              duration: "6 Weeks / 3 Months",
+              technologies: ["NedGraphics", "Adobe Photoshop", "Textile Printing", "Weave Simulators"],
+              overview: "Explore fabric creation from fiber to finished print. Interns design seamless digital repeat patterns, study jacquard and dobby weave structures, and experiment with eco-friendly dyes.",
+              learningOutcomes: ["Seamless Pattern Repeat Design", "Jacquard & Dobby Weave Structures", "Textile Dyeing & Printing Processes", "Surface Ornamentation Techniques"],
+              activities: ["Designing digital textile print repeats", "Testing natural fabric dye fastness", "Creating woven fabric swatches"],
+              skills: ["Textile Print Design", "Weave Structure Modeling", "Fabric Dyeing", "Surface Design"],
+              projects: [
+                { id: 1, title: "Botanical Digital Print Textile Collection" },
+                { id: 2, title: "Jacquard Weave Fabric Structure Portfolio" }
+              ],
+              careerOpportunities: ["Textile Designer", "Surface Ornamentation Specialist", "Fabric Developer"],
+              benefits: ["Fabric swatch portfolio creation", "Direct brand placement assistance"],
+              eligibility: "Fashion, Textile, or Applied Arts candidates."
+            },
+            {
+              name: "Fashion Illustration",
+              slug: "fashion-illustration",
+              desc: "Master 9-head croquis drawing, digital vector rendering, fabric texture representation, and editorial fashion art.",
+              duration: "6 Weeks / 3 Months",
+              technologies: ["Procreate", "Adobe Illustrator", "Photoshop", "Digital Sketching"],
+              overview: "Develop high-end fashion artistic rendering skills. Learn digital Croquis sketching, realistic fabric texture shading (leather, silk, denim), and editorial fashion presentation.",
+              learningOutcomes: ["9-Head Fashion Figure Croquis", "Digital Texture & Fabric Shading", "Editorial Layout & Vector Rendering"],
+              activities: ["Sketching digital fashion croquis", "Rendering metallic & silk textures in Procreate"],
+              skills: ["Procreate Illustration", "Vector Fashion Art", "Editorial Design"],
+              projects: [
+                { id: 1, title: "High-Fashion Haute Couture Digital Sketchbook" }
+              ],
+              careerOpportunities: ["Fashion Illustrator", "Graphic Designer for Apparel", "Trend Visualizer"],
+              benefits: ["Professional digital illustration portfolio"],
+              eligibility: "Fashion & Design students."
+            },
+            {
+              name: "Garment Technology",
+              slug: "garment-technology",
+              desc: "Advanced fabric performance testing, pattern grading software, seam strength analysis, and smart textiles.",
+              duration: "6 Weeks / 3 Months",
+              technologies: ["Optitex", "Gerber CAD", "Fabric Testing Instruments"],
+              overview: "Focus on the technical aspects of garment fit, computerized pattern grading, fabric GSM and tensile testing, and performance activewear development.",
+              learningOutcomes: ["Computerized Pattern Grading in Optitex", "Fabric Tensile & GSM Testing", "Seam Engineering"],
+              activities: ["Grading garment patterns for sizes XS-XXL", "Conducting fabric tear strength tests"],
+              skills: ["Pattern Grading", "Fabric Science", "Optitex CAD"],
+              projects: [
+                { id: 1, title: "Computerized Pattern Grading & Marker Efficiency Optimization" }
+              ],
+              careerOpportunities: ["Garment Technologist", "Pattern CAD Specialist", "R&D Specialist"],
+              benefits: ["Gerber/Optitex software training"],
+              eligibility: "Fashion & Textile Technology candidates."
+            }
+          ]
+        },
+        "automobile-engineering": {
+          num: "07",
+          name: "Automobile Engineering",
+          slug: "automobile-engineering",
+          desc: "Specialized training in Electric Vehicles (EV), battery packs, automotive diagnostic tools, CAD component design, and assembly.",
+          icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>`,
+          specializations: [
+            {
+              name: "Electric and Hybrid Vehicles",
+              slug: "electric-hybrid-vehicles",
+              desc: "EV powertrain architecture, Li-ion battery management systems (BMS), electric motor controllers, and EV charging infrastructure.",
+              duration: "8 Weeks / 3 Months",
+              technologies: ["MATLAB Simulink", "EV BMS", "BLDC Motor Controllers", "CAN Bus", "Ansys Maxwell"],
+              overview: "Step into the electric mobility revolution. Trainees model electric vehicle drive cycles, design high-voltage Li-ion battery packs, program motor drive controllers, and study CCS2 charging protocols.",
+              learningOutcomes: ["EV Powertrain System Sizing", "Lithium Battery Pack & BMS Architecture", "BLDC / PMSM Motor Control", "CAN Bus Telemetry in EVs", "EV Thermal Management"],
+              activities: ["Simulating EV drive cycles in Simulink", "Wiring BLDC motor controller speed loops", "Testing battery cell balancing circuits", "Logging CAN bus diagnostic messages"],
+              skills: ["EV Powertrain Design", "BMS Programming", "Motor Control", "MATLAB Simulation", "Battery Safety"],
+              projects: [
+                { id: 1, title: "10kWh EV Battery Pack Thermal & BMS Model" },
+                { id: 2, title: "BLDC Electric Motor Speed Controller Simulation" },
+                { id: 3, title: "CAN Bus Vehicle Telemetry Data Logger" },
+                { id: 4, title: "Smart EV Fast Charging Protocol Station" }
+              ],
+              careerOpportunities: ["EV Powertrain Engineer", "BMS Hardware Engineer", "Battery Pack Designer", "EV Calibration Engineer"],
+              benefits: ["EV hardware kit exposure", "Industry EV certification", "Placement assistance with EV OEMs"],
+              eligibility: "Automobile, Mechanical, EEE & ECE engineering students."
+            },
+            {
+              name: "Electrical Diagnosis and Testing",
+              slug: "electrical-diagnosis-testing",
+              desc: "Vehicle OBD-II diagnostics, ECU flashing, automotive wiring harness troubleshooting, and sensor fault simulation.",
+              duration: "6 Weeks / 3 Months",
+              technologies: ["OBD-II Scanners", "CANalyzer", "Oscilloscopes", "Multimeters", "ECU Flashing"],
+              overview: "Hands-on diagnostic training for modern vehicle electronics. Interns use OBD-II scanners and CANalyzer tools to read DTC fault codes, analyze sensor waveforms, and troubleshoot automotive wiring systems.",
+              learningOutcomes: ["OBD-II Diagnostic Troubleshooting", "ECU Sensor Waveform Analysis", "CAN Bus Communication Diagnostics", "Vehicle Electrical Wiring Harness Repair"],
+              activities: ["Scanning vehicle ECU for diagnostic codes", "Probing crank sensor signals with oscilloscope", "Troubleshooting relay & fuse circuits"],
+              skills: ["OBD-II Diagnostics", "CAN Bus Analysis", "Electrical Wiring Repair", "Sensor Testing"],
+              projects: [
+                { id: 1, title: "Automotive OBD-II Fault Diagnosis & Telemetry Setup" },
+                { id: 2, title: "Engine Management ECU Sensor Signal Audit" }
+              ],
+              careerOpportunities: ["Automotive Diagnostic Specialist", "Service Engineer", "ECU Calibration Technician"],
+              benefits: ["Hands-on OBD-II scanner kit exposure", "Job placement support"],
+              eligibility: "Automobile & Electrical students."
+            },
+            {
+              name: "AutoCAD and Component Designing",
+              slug: "autocad-component-designing",
+              desc: "Detailed 2D/3D CAD drafting of engine parts, suspension arms, steering linkages, and chassis sheet metal.",
+              duration: "6 Weeks / 3 Months",
+              technologies: ["AutoCAD Mechanical", "SolidWorks", "CATIA V5", "GD&T"],
+              overview: "Master parametric 3D automotive design. Interns model complex engine pistons, steering knuckles, and suspension arms following GD&T tolerance drafting standards.",
+              learningOutcomes: ["2D/3D Automotive CAD Drafting", "Parametric Solid & Sheet Metal Modeling", "Geometric Dimensioning & Tolerancing (GD&T)", "Assembly BOM Generation"],
+              activities: ["Drafting 3D engine piston assemblies", "Applying GD&T callouts to manufacturing drawings", "Conducting interference fit checks"],
+              skills: ["CATIA / SolidWorks", "Automotive Design", "GD&T", "Sheet Metal CAD"],
+              projects: [
+                { id: 1, title: "Double Wishbone Suspension Assembly CAD Model" },
+                { id: 2, title: "IC Engine Piston & Connecting Rod 3D CAD Design" }
+              ],
+              careerOpportunities: ["Automotive CAD Designer", "Design Engineer", "Drafting Engineer"],
+              benefits: ["Industry standard CAD project portfolio"],
+              eligibility: "Automobile & Mechanical engineering candidates."
+            },
+            {
+              name: "Production and Assembly",
+              slug: "production-assembly",
+              desc: "Automobile assembly line layout, robotic welding fixtures, conveyor timing, and quality inspection.",
+              duration: "6 Weeks / 3 Months",
+              technologies: ["Line Balancing", "Robotic Welding Fixtures", "Assembly Timers", "Quality Audits"],
+              overview: "Understand mass automotive assembly line operations, vehicle body-in-white (BIW) welding workflows, and final vehicle inspection quality gates.",
+              learningOutcomes: ["Automobile Assembly Line Flow", "BIW Welding Fixture Design Basics", "Vehicle Quality Inspection Gates"],
+              activities: ["Mapping assembly line takt time", "Inspecting body panel gap & flushness"],
+              skills: ["Assembly Line Planning", "Quality Control", "Takt Time Optimization"],
+              projects: [
+                { id: 1, title: "Automobile Final Assembly Line Takt Time & Ergonomics Optimization" }
+              ],
+              careerOpportunities: ["Automobile Assembly Engineer", "Plant Quality Engineer"],
+              benefits: ["OEM assembly plant visit exposure"],
+              eligibility: "Automobile & Production engineering students."
+            }
+          ]
+        },
+        "mechatronics-engineering": {
+          num: "08",
+          name: "Mechatronics Engineering",
+          slug: "mechatronics-engineering",
+          desc: "Synergy of mechanics, electronics, microcontrollers, PLC SCADA programming, and industrial automated systems.",
+          icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a10 10 0 100 20 10 10 0 000-20zm0 14a4 4 0 110-8 4 4 0 010 8z"/></svg>`,
+          specializations: [
+            {
+              name: "Robotics and Automation",
+              slug: "robotics-automation",
+              desc: "Build autonomous robots, pneumatic actuators, servo controllers, sensor fusion networks, and industrial automation rigs.",
+              duration: "8 Weeks / 3 Months",
+              technologies: ["Arduino/STM32", "Pneumatics", "Servo Motors", "ROS", "LabVIEW", "Sensors"],
+              overview: "Integrate mechanical hardware with smart electronics and microcontrollers. Trainees construct electro-pneumatic systems, program autonomous mobile robots, and wire industrial sensor arrays.",
+              learningOutcomes: ["Electro-Pneumatic Circuit Design", "Microcontroller Sensor Interfacing", "Servo & Stepper Motor Tuning", "Autonomous Robot Navigation", "LabVIEW System Control"],
+              activities: ["Wiring electro-pneumatic valves", "Programming autonomous maze-solving robots", "Building real-time LabVIEW dashboards", "Calibrating photoelectric & inductive sensors"],
+              skills: ["Mechatronic System Integration", "Electro-Pneumatics", "Microcontroller C++", "LabVIEW", "Sensor Calibration"],
+              projects: [
+                { id: 1, title: "Automated Electro-Pneumatic Sorting Station" },
+                { id: 2, title: "Autonomous Mobile Robot with LiDAR Navigation" },
+                { id: 3, title: "LabVIEW Real-Time Sensor Monitoring System" },
+                { id: 4, title: "3-Axis CNC Micro-Milling Controller" }
+              ],
+              careerOpportunities: ["Mechatronics Engineer", "Robotics Specialist", "Automation Systems Engineer", "R&D Prototype Developer"],
+              benefits: ["Mechatronics Kit provided", "1-on-1 Hardware Mentorship", "Verified Internship Certificate", "Direct job placement support"],
+              eligibility: "Mechatronics, Mechanical, ECE, EEE & Automation students."
+            },
+            {
+              name: "IoT",
+              slug: "iot",
+              desc: "Industrial IoT (IIoT) architecture, smart factory sensor nodes, edge gateway computing, and MQTT telemetry.",
+              duration: "6 Weeks / 3 Months",
+              technologies: ["Node-RED", "ESP32", "Modbus-to-MQTT", "Raspberry Pi", "InfluxDB", "Grafana"],
+              overview: "Connect industrial machine telemetry to cloud dashboards. Interns read Modbus registers from industrial meters and transmit sensor data to Grafana real-time monitoring boards.",
+              learningOutcomes: ["Industrial Modbus Protocol Communication", "Edge Gateway Programming on Raspberry Pi", "Node-RED Data Flow Wiring", "Grafana Real-Time Dashboard Creation"],
+              activities: ["Reading machine status over Modbus RS485", "Creating Node-RED flow pipelines", "Setting up automated Telegram/Email alert bots"],
+              skills: ["IIoT Architecture", "Node-RED", "Grafana Dashboards", "Modbus Protocol"],
+              projects: [
+                { id: 1, title: "Smart Factory Modbus-to-Cloud Monitoring Gateway" },
+                { id: 2, title: "Predictive Machine Vibration IIoT Telemetry Node" }
+              ],
+              careerOpportunities: ["IIoT Solutions Engineer", "Smart Factory Consultant", "Edge Computing Developer"],
+              benefits: ["Raspberry Pi hardware exposure", "IIoT project portfolio"],
+              eligibility: "Mechatronics, ECE, CSE & EEE students."
+            },
+            {
+              name: "PLC and SCADA Programming",
+              slug: "plc-scada-programming",
+              desc: "Advanced industrial logic controllers, HMI touchscreens, SCADA supervisory screens, and safety interlocks.",
+              duration: "8 Weeks / 3 Months",
+              technologies: ["Siemens TIA Portal", "Allen Bradley RSLogix", "SCADA Ignition", "HMI Design"],
+              overview: "Master industrial programming standards for manufacturing lines. Trainees program complex PLC ladder routines with timer/counter interlocks and design interactive SCADA HMI touchscreens.",
+              learningOutcomes: ["Advanced PLC Ladder & Function Block Programming", "HMI Touchscreen Interface Design", "SCADA Historical Trending & Alarming"],
+              activities: ["Programming multi-stage conveyor logic", "Designing HMI touch buttons & dynamic indicators"],
+              skills: ["TIA Portal PLC Logic", "HMI Touch Screen Design", "SCADA Alarming"],
+              projects: [
+                { id: 1, title: "Automated Packaging Plant PLC & HMI System" },
+                { id: 2, title: "Industrial Chemical Batching SCADA Station" }
+              ],
+              careerOpportunities: ["PLC & SCADA Programmer", "Industrial Automation Engineer"],
+              benefits: ["Siemens TIA portal lab software exposure"],
+              eligibility: "Mechatronics, Electrical & ECE candidates."
+            },
+            {
+              name: "Biomedical Mechatronics",
+              slug: "biomedical-mechatronics",
+              desc: "Design medical instrumentation, prosthetic limb actuators, biosensors, and ECG signal conditioning.",
+              duration: "6 Weeks / 3 Months",
+              technologies: ["Biomedical Sensors", "Op-Amp Instrumentation", "LabVIEW", "3D Printing"],
+              overview: "Fuses electronics and mechanics for healthcare devices. Learn ECG/EMG biopotential amplifier design, prosthetic servo motor control, and medical device safety compliance.",
+              learningOutcomes: ["ECG & EMG Bio-Signal Amplification", "Prosthetic Motor Control", "Medical Instrumentation Safety"],
+              activities: ["Designing low-noise bio-amp circuits", "Testing EMG controlled prosthetic hand prototypes"],
+              skills: ["Biosensor Interfacing", "Bio-Signal Processing", "Prosthetic Control"],
+              projects: [
+                { id: 1, title: "EMG Muscle Signal Controlled Prosthetic Hand Prototype" }
+              ],
+              careerOpportunities: ["Biomedical Engineer", "Medical Device Modeler", "R&D Bio-Specialist"],
+              benefits: ["Biomedical sensor prototype lab access"],
+              eligibility: "Mechatronics, Biomedical & ECE students."
+            },
+            {
+              name: "Industrial Mechatronics",
+              slug: "industrial-mechatronics",
+              desc: "Hydraulic actuators, heavy pneumatic machinery, automated conveyor sorting, and industrial safety guards.",
+              duration: "6 Weeks / 3 Months",
+              technologies: ["Hydraulics", "Pneumatics", "PLC Interlocks", "Safety Relays"],
+              overview: "Focus on high-power industrial hydraulic and pneumatic actuation systems used in steel mills, automotive stamping, and heavy manufacturing.",
+              learningOutcomes: ["Hydraulic Circuit Design & Calculation", "Safety Relay Interlocks", "Heavy Material Handling Conveyors"],
+              activities: ["Designing hydraulic press valve circuits", "Testing safety light curtain interlocks"],
+              skills: ["Hydraulic Circuit Design", "Industrial Safety", "Heavy Machine Automation"],
+              projects: [
+                { id: 1, title: "Automated Hydraulic Press Control & Safety System" }
+              ],
+              careerOpportunities: ["Industrial Maintenance Engineer", "Mechatronics Site Engineer"],
+              benefits: ["Practical hydraulic trainer exposure"],
+              eligibility: "Mechatronics & Mechanical candidates."
+            }
+          ]
+        }
+      };
+
+      // =========================================================================
+      // 3. STATE CONTROLLER & ROUTER
+      // =========================================================================
+      const portalApp = document.getElementById('portalApp');
+
+      const getRouteParams = () => {
+        const urlParams = new URLSearchParams(window.location.search);
+        return {
+          branch: urlParams.get('branch'),
+          spec: urlParams.get('spec')
+        };
+      };
+
+      const setRoute = (branchSlug = null, specSlug = null) => {
+        let newUrl = window.location.pathname;
+        const params = new URLSearchParams();
+        if (branchSlug) params.set('branch', branchSlug);
+        if (specSlug) params.set('spec', specSlug);
+        
+        const queryString = params.toString();
+        if (queryString) newUrl += '?' + queryString;
+
+        history.pushState({ branch: branchSlug, spec: specSlug }, '', newUrl);
+        renderView();
+      };
+
+      window.addEventListener('popstate', () => {
+        renderView();
+      });
+
+      const initScrollReveals = () => {
+        const revealElements = document.querySelectorAll('.reveal');
+        const revealObserver = new IntersectionObserver((entries, observer) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('active');
+              observer.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.1 });
+        revealElements.forEach(el => revealObserver.observe(el));
+      };
+
+      // RENDER CONTROLLER
+      const renderView = () => {
+        const { branch, spec } = getRouteParams();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+
+        if (branch && internshipData[branch] && spec) {
+          // Specialization Details View
+          const branchObj = internshipData[branch];
+          const specObj = branchObj.specializations.find(s => s.slug === spec);
+          if (specObj) {
+            renderSpecializationDetailsView(branchObj, specObj);
+            setTimeout(initScrollReveals, 100);
+            return;
+          }
+        }
+        
+        if (branch && internshipData[branch]) {
+          // Branch View
+          const branchObj = internshipData[branch];
+          renderBranchSpecializationsView(branchObj);
+          setTimeout(initScrollReveals, 100);
+          return;
+        }
+
+        // Default: Landing Portal View
+        renderLandingPortalView();
+        setTimeout(initScrollReveals, 100);
+      };
+
+      // -------------------------------------------------------------------------
+      // VIEW 1: LANDING PORTAL VIEW
+      // -------------------------------------------------------------------------
+      const renderLandingPortalView = () => {
+        document.title = "Internship & Placement Portal | Placement Keepers People Pulse";
+
+        let branchCardsHtml = '';
+        Object.values(internshipData).forEach(b => {
+          branchCardsHtml += `
+            <div class="branch-card glass-panel" data-branch="${b.slug}">
+              <div class="branch-card-header">
+                <div class="branch-icon">${b.icon}</div>
+                <span class="branch-number">${b.num}</span>
+              </div>
+              <h3 class="branch-title">${b.name}</h3>
+              <p class="branch-desc">${b.desc}</p>
+              <div class="branch-footer">
+                <span class="branch-count-badge">${b.specializations.length} Specializations</span>
+                <span class="branch-cta-link">Explore Specializations &rarr;</span>
+              </div>
+            </div>
+          `;
+        });
+
+        portalApp.innerHTML = `
+          <!-- HERO -->
+          <section class="portal-hero">
+            <div class="container">
+              <div class="portal-hero-grid">
+                <div>
+                  <span class="portal-tag"><span></span> Career Fast-Track</span>
+                  <h1 class="portal-title">Industry-Oriented <span>Internship Programs</span></h1>
+                  <p class="portal-desc">Gain practical knowledge, work on real-world projects, develop industry-relevant skills, and prepare for your professional career with PK People internship programs.</p>
+                  <div style="display: flex; gap: 16px; flex-wrap: wrap;">
+                    <a href="#explore-branches" class="btn btn-primary" style="padding: 14px 28px;">
+                      Explore Internships
+                      <svg style="width: 20px; height: 20px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                    </a>
+                  </div>
+                </div>
+                <div>
+                  <div class="glass-panel" style="padding: 16px; border-radius: var(--radius-lg); position: relative; overflow: hidden;">
+                    <img src="assets/images/2.jpeg" alt="PK People Internship Training Session" style="width: 100%; height: 320px; object-fit: cover; border-radius: var(--radius-md);">
+                    <div style="position: absolute; bottom: 24px; left: 24px; right: 24px; background: rgba(15, 23, 42, 0.85); backdrop-filter: blur(8px); padding: 16px; border-radius: var(--radius-md); color: white;">
+                      <h4 style="font-family: var(--font-heading); font-size: 1rem; font-weight: 700; margin-bottom: 2px;">Corporate Grooming</h4>
+                      <p style="font-size: 0.82rem; color: rgba(255,255,255,0.8); margin: 0;">Mentorship by seasoned industry specialists</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- CONTROLS & BRANCHES -->
+          <section id="explore-branches" class="section-padding" style="padding-top: 40px;">
+            <div class="container">
+              <div class="section-header" style="text-align: center; max-width: 720px; margin: 0 auto 40px auto;">
+                <div class="portal-tag" style="margin: 0 auto 12px auto;">Engineering & Design Sectors</div>
+                <h2 class="section-title">Explore Internships by <span>Engineering Branch</span></h2>
+                <p class="section-subtitle">Select your academic discipline to discover dedicated technology pathways, real-world project assignments, and corporate placement tracks.</p>
+              </div>
+
+              <!-- CONTROLS BAR: SEARCH & BRANCH FILTER -->
+              <div class="portal-controls-card glass-panel">
+                <div class="search-input-group">
+                  <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+                  <input type="text" id="portalSearch" class="search-input" placeholder="Search internships or specializations (e.g. Cloud Computing, AI, Robotics, Embedded)...">
+                </div>
+                <div class="filter-select-group">
+                  <select id="branchFilter" class="filter-select">
+                    <option value="all">Filter by Branch: All Branches</option>
+                    <option value="mechanical-engineering">Mechanical Engineering</option>
+                    <option value="electronics-communication-engineering">Electronics & Communication</option>
+                    <option value="computer-science-engineering">Computer Science Engineering</option>
+                    <option value="electrical-engineering">Electrical Engineering</option>
+                    <option value="civil-engineering">Civil Engineering</option>
+                    <option value="fashion-designing">Fashion Designing</option>
+                    <option value="automobile-engineering">Automobile Engineering</option>
+                    <option value="mechatronics-engineering">Mechatronics Engineering</option>
+                  </select>
+                </div>
+              </div>
+
+              <!-- DYNAMIC BRANCHES / SEARCH RESULTS GRID -->
+              <div id="branchesGrid" class="branches-grid">
+                ${branchCardsHtml}
+              </div>
+            </div>
+          </section>
+
+          <!-- BRANCH-SPECIFIC INTERNSHIP SUPPORT SECTION -->
+          <section class="section-padding" style="padding-top: 40px; padding-bottom: 40px; background: radial-gradient(circle at 20% 80%, hsla(var(--primary-hue), var(--primary-sat), var(--primary-lightness), 0.04) 0%, transparent 60%);">
+            <div class="container">
+              <div class="section-header" style="text-align: center; max-width: 760px; margin: 0 auto 40px auto;">
+                <div class="portal-tag animated-pulse" style="margin: 0 auto 12px auto;">Tailored Academic & Technical Support</div>
+                <h2 class="section-title">Branch-Specific <span>Internship Support</span></h2>
+                <p class="section-subtitle">Dedicated learning ecosystems engineered specifically for Computer Science & Engineering (CSE) and Civil Engineering candidates.</p>
+              </div>
+
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px;">
+                
+                <!-- CARD 1: CSE SUPPORT -->
+                <div class="support-card glass-panel reveal reveal-slide-left">
+                  <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px;">
+                    <div class="branch-icon animated-float" style="width: 56px; height: 56px;">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/><line x1="14" y1="4" x2="10" y2="20"/></svg>
+                    </div>
+                    <span class="portal-tag" style="font-size: 0.75rem; margin: 0;">CSE Discipline</span>
+                  </div>
+
+                  <h3 style="font-family: var(--font-heading); font-size: 1.4rem; font-weight: 800; color: var(--text-main); margin-bottom: 8px;">Computer Science & Engineering</h3>
+                  <p style="font-size: 0.92rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 20px;">The CSE internship focuses on providing students with practical technical knowledge, project-based learning, and exposure to industry-relevant technologies.</p>
+
+                  <h4 style="font-family: var(--font-heading); font-size: 0.95rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--primary); margin-bottom: 14px;">What We Provide:</h4>
+                  
+                  <div style="display: flex; flex-direction: column; gap: 10px; flex: 1;">
+                    <div class="provide-list-item">
+                      <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+                      <span>Live Online Training / Classes</span>
+                    </div>
+                    <div class="provide-list-item">
+                      <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/></svg>
+                      <span>Hands-on Projects</span>
+                    </div>
+                    <div class="provide-list-item">
+                      <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+                      <span>Real-World Development Assignments</span>
+                    </div>
+                    <div class="provide-list-item">
+                      <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 9.172V5L8 4z"/></svg>
+                      <span>Industry-Oriented Tools & Technologies</span>
+                    </div>
+                    <div class="provide-list-item">
+                      <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+                      <span>Mentor Guidance</span>
+                    </div>
+                    <div class="provide-list-item">
+                      <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                      <span>Project Reviews & Feedback</span>
+                    </div>
+                    <div class="provide-list-item">
+                      <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/></svg>
+                      <span>Final Project & Report Support</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- CARD 2: CIVIL SUPPORT -->
+                <div class="support-card glass-panel reveal reveal-slide-right">
+                  <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px;">
+                    <div class="branch-icon animated-float" style="width: 56px; height: 56px; animation-delay: 1.5s;">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
+                    </div>
+                    <span class="portal-tag" style="font-size: 0.75rem; margin: 0;">Civil Discipline</span>
+                  </div>
+
+                  <h3 style="font-family: var(--font-heading); font-size: 1.4rem; font-weight: 800; color: var(--text-main); margin-bottom: 8px;">Civil Engineering</h3>
+                  <p style="font-size: 0.92rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 20px;">The Civil Engineering internship focuses on providing students with practical knowledge through site visits, real-world construction exposure, interaction with professionals, and hands-on learning.</p>
+
+                  <h4 style="font-family: var(--font-heading); font-size: 0.95rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--primary); margin-bottom: 14px;">What We Provide:</h4>
+                  
+                  <div style="display: flex; flex-direction: column; gap: 10px; flex: 1;">
+                    <div class="provide-list-item">
+                      <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
+                      <span>Practical Classroom / Training Sessions</span>
+                    </div>
+                    <div class="provide-list-item">
+                      <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                      <span>Construction Site Visits</span>
+                    </div>
+                    <div class="provide-list-item">
+                      <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                      <span>Hands-on Site Exposure</span>
+                    </div>
+                    <div class="provide-list-item">
+                      <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                      <span>Interaction with Site Engineers</span>
+                    </div>
+                    <div class="provide-list-item">
+                      <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 002-2h2a2 2 0 002 2m-6 9l2 2 4-4"/></svg>
+                      <span>Real-World Construction Activities</span>
+                    </div>
+                    <div class="provide-list-item">
+                      <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
+                      <span>Quantity Estimation & Documentation</span>
+                    </div>
+                    <div class="provide-list-item">
+                      <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+                      <span>Mentor Guidance</span>
+                    </div>
+                    <div class="provide-list-item">
+                      <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/></svg>
+                      <span>Practical Project & Report Support</span>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </section>
+
+          <!-- DEDICATED INTERNSHIP BENEFITS & CERTIFICATION SECTION -->
+          <section class="section-padding" style="padding-top: 40px; padding-bottom: 60px;">
+            <div class="container">
+              <div class="section-header" style="text-align: center; max-width: 780px; margin: 0 auto 40px auto;">
+                <div class="portal-tag animated-pulse" style="margin: 0 auto 12px auto;">Academic Excellence & Certification</div>
+                <h2 class="section-title">Internship Benefits & <span>Certification</span></h2>
+                <p class="section-subtitle">Highlighting the academic evaluation support, practical exposure, project assistance, and official certification provided to every enrolled candidate.</p>
+              </div>
+
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px;">
+                
+                <!-- FEATURE 1: CIE SUPPORT -->
+                <div class="benefit-feature-card glass-panel reveal reveal-slide-up">
+                  <div class="benefit-badge-num">01</div>
+                  <h3 style="font-family: var(--font-heading); font-size: 1.3rem; font-weight: 800; color: var(--text-main); margin-bottom: 12px;">CIE Support</h3>
+                  <ul style="display: flex; flex-direction: column; gap: 12px; font-size: 0.92rem; color: var(--text-muted); line-height: 1.6;">
+                    <li style="display: flex; align-items: flex-start; gap: 10px;">
+                      <svg style="width: 18px; height: 18px; color: var(--primary); flex-shrink: 0; margin-top: 3px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                      <span><strong>Evaluation Support:</strong> Support for CIE 1, CIE 2, and CIE 3 throughout the entire internship program.</span>
+                    </li>
+                    <li style="display: flex; align-items: flex-start; gap: 10px;">
+                      <svg style="width: 18px; height: 18px; color: var(--primary); flex-shrink: 0; margin-top: 3px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                      <span><strong>Progress Documentation:</strong> Required internship progress documentation will be provided for academic evaluation and submission.</span>
+                    </li>
+                  </ul>
+                </div>
+
+                <!-- FEATURE 2: FINAL INTERNSHIP REPORT -->
+                <div class="benefit-feature-card glass-panel reveal reveal-slide-up" style="border-left-color: var(--primary);">
+                  <div class="benefit-badge-num">02</div>
+                  <h3 style="font-family: var(--font-heading); font-size: 1.3rem; font-weight: 800; color: var(--text-main); margin-bottom: 12px;">Final Internship Report</h3>
+                  <ul style="display: flex; flex-direction: column; gap: 12px; font-size: 0.92rem; color: var(--text-muted); line-height: 1.6;">
+                    <li style="display: flex; align-items: flex-start; gap: 10px;">
+                      <svg style="width: 18px; height: 18px; color: var(--primary); flex-shrink: 0; margin-top: 3px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                      <span><strong>Completion Report:</strong> Students will receive a Final Internship Report upon successful completion of the internship.</span>
+                    </li>
+                    <li style="display: flex; align-items: flex-start; gap: 10px;">
+                      <svg style="width: 18px; height: 18px; color: var(--primary); flex-shrink: 0; margin-top: 3px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                      <span><strong>Academic Submission:</strong> The report can be used for academic submission and internship evaluation.</span>
+                    </li>
+                  </ul>
+                </div>
+
+                <!-- FEATURE 3: INTERNSHIP CERTIFICATE -->
+                <div class="benefit-feature-card glass-panel reveal reveal-slide-up" style="border-left-color: var(--success);">
+                  <div class="benefit-badge-num" style="background: var(--success-glow); color: var(--success);">03</div>
+                  <h3 style="font-family: var(--font-heading); font-size: 1.3rem; font-weight: 800; color: var(--text-main); margin-bottom: 12px;">Internship Certificate</h3>
+                  <ul style="display: flex; flex-direction: column; gap: 12px; font-size: 0.92rem; color: var(--text-muted); line-height: 1.6;">
+                    <li style="display: flex; align-items: flex-start; gap: 10px;">
+                      <svg style="width: 18px; height: 18px; color: var(--success); flex-shrink: 0; margin-top: 3px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                      <span><strong>Completion Certificate:</strong> Every candidate who successfully completes the internship will receive an Internship Completion Certificate.</span>
+                    </li>
+                    <li style="display: flex; align-items: flex-start; gap: 10px;">
+                      <svg style="width: 18px; height: 18px; color: var(--success); flex-shrink: 0; margin-top: 3px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                      <span><strong>Certificate Details:</strong> The certificate will include the candidate's name, internship domain/pathway, internship duration, and completion details.</span>
+                    </li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </section>
+        `;
+
+        // BIND EVENT LISTENERS FOR BRANCH CARDS & SEARCH/FILTER
+        document.querySelectorAll('.branch-card').forEach(card => {
+          card.addEventListener('click', () => {
+            const branchSlug = card.getAttribute('data-branch');
+            setRoute(branchSlug);
+          });
+        });
+
+        const searchInput = document.getElementById('portalSearch');
+        const filterSelect = document.getElementById('branchFilter');
+        const branchesGrid = document.getElementById('branchesGrid');
+
+        const handleSearchAndFilter = () => {
+          const query = searchInput.value.toLowerCase().trim();
+          const selectedBranch = filterSelect.value;
+
+          if (query === '' && selectedBranch === 'all') {
+            branchesGrid.innerHTML = branchCardsHtml;
+            document.querySelectorAll('.branch-card').forEach(card => {
+              card.addEventListener('click', () => {
+                setRoute(card.getAttribute('data-branch'));
+              });
+            });
+            return;
+          }
+
+          // Gather matching specializations across branches
+          let specResults = [];
+          Object.values(internshipData).forEach(b => {
+            if (selectedBranch !== 'all' && b.slug !== selectedBranch) return;
+
+            b.specializations.forEach(s => {
+              const matchesQuery = query === '' || 
+                s.name.toLowerCase().includes(query) ||
+                s.desc.toLowerCase().includes(query) ||
+                b.name.toLowerCase().includes(query) ||
+                s.technologies.some(t => t.toLowerCase().includes(query)) ||
+                s.skills.some(sk => sk.toLowerCase().includes(query));
+
+              if (matchesQuery) {
+                specResults.push({ branch: b, spec: s });
+              }
+            });
+          });
+
+          if (specResults.length === 0) {
+            branchesGrid.innerHTML = `
+              <div style="grid-column: 1 / -1; text-align: center; padding: 60px; color: var(--text-muted);" class="glass-panel">
+                <svg style="width: 48px; height: 48px; margin-bottom: 16px; color: var(--text-muted); opacity: 0.6;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+                <h3 style="font-family: var(--font-heading); font-size: 1.25rem; font-weight: 700; color: var(--text-main);">No matching specializations found</h3>
+                <p style="font-size: 0.9rem; margin-top: 8px;">Try searching for another keyword like "Cloud", "Cybersecurity", "Embedded", "Robotics" or reset the branch filter.</p>
+              </div>
+            `;
+            return;
+          }
+
+          let resultsHtml = '';
+          specResults.forEach(res => {
+            let techBadges = res.spec.technologies.slice(0, 4).map(t => `<span class="tech-badge">${t}</span>`).join('');
+            resultsHtml += `
+              <div class="spec-card glass-panel" data-branch="${res.branch.slug}" data-spec="${res.spec.slug}" style="cursor: pointer;">
+                <div style="font-size: 0.75rem; font-weight: 700; color: var(--primary); text-transform: uppercase; margin-bottom: 4px;">${res.branch.name}</div>
+                <h3 class="spec-title">${res.spec.name}</h3>
+                <div class="spec-duration">
+                  <svg style="width: 14px; height: 14px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                  ${res.spec.duration}
+                </div>
+                <p style="font-size: 0.88rem; color: var(--text-muted); margin: 12px 0; flex: 1;">${res.spec.desc}</p>
+                <div class="tech-badges-list">${techBadges}</div>
+                <button class="btn btn-primary btn-sm" style="width: 100%; justify-content: center; margin-top: auto;">View Internship &rarr;</button>
+              </div>
+            `;
+          });
+
+          branchesGrid.innerHTML = resultsHtml;
+          document.querySelectorAll('.spec-card').forEach(card => {
+            card.addEventListener('click', () => {
+              setRoute(card.getAttribute('data-branch'), card.getAttribute('data-spec'));
+            });
+          });
+        };
+
+        searchInput.addEventListener('input', handleSearchAndFilter);
+        filterSelect.addEventListener('change', handleSearchAndFilter);
+      };
+
+      // -------------------------------------------------------------------------
+      // VIEW 2: BRANCH SPECIALIZATIONS VIEW
+      // -------------------------------------------------------------------------
+      const renderBranchSpecializationsView = (branchObj) => {
+        document.title = `${branchObj.name} Internships | PK People`;
+
+        let specCardsHtml = '';
+        branchObj.specializations.forEach(s => {
+          let techBadges = s.technologies.map(t => `<span class="tech-badge">${t}</span>`).join('');
+          specCardsHtml += `
+            <div class="spec-card glass-panel">
+              <div class="spec-card-top">
+                <div class="branch-icon" style="width: 44px; height: 44px;">${branchObj.icon}</div>
+                <div>
+                  <h3 class="spec-title">${s.name}</h3>
+                  <div class="spec-duration">
+                    <svg style="width: 14px; height: 14px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                    ${s.duration}
+                  </div>
+                </div>
+              </div>
+              <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.5; margin-bottom: 14px; flex: 1;">${s.desc}</p>
+              <div style="font-size: 0.8rem; font-weight: 700; color: var(--text-main); margin-bottom: 6px;">Technologies & Tools:</div>
+              <div class="tech-badges-list">${techBadges}</div>
+              <button class="btn btn-primary btn-sm btn-view-spec" data-branch="${branchObj.slug}" data-spec="${s.slug}" style="width: 100%; justify-content: center; margin-top: auto; padding: 10px;">
+                View Internship
+                <svg style="width: 16px; height: 16px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+              </button>
+            </div>
+          `;
+        });
+
+        portalApp.innerHTML = `
+          <section class="portal-hero" style="padding-top: 110px; padding-bottom: 40px;">
+            <div class="container">
+              <!-- BREADCRUMB -->
+              <nav class="portal-breadcrumb">
+                <a href="index.html#home">Home</a>
+                <span class="portal-breadcrumb-sep">&rarr;</span>
+                <a href="javascript:void(0)" id="bcRoot">Internships</a>
+                <span class="portal-breadcrumb-sep">&rarr;</span>
+                <span class="current">${branchObj.name}</span>
+              </nav>
+
+              <div style="margin-top: 10px; max-width: 800px;">
+                <span class="portal-tag"><span></span> Branch Pathways</span>
+                <h1 class="portal-title" style="font-size: 2.25rem;">${branchObj.name} Internships</h1>
+                <p class="portal-desc" style="margin-bottom: 0;">Explore specialized internship streams designed for ${branchObj.name} students. Develop industry-relevant skills and build real project experience.</p>
+              </div>
+            </div>
+          </section>
+
+          <section class="section-padding" style="padding-top: 30px;">
+            <div class="container">
+              <div class="back-btn-link" id="btnBackToPortal">
+                &larr; Back to All Branches
+              </div>
+
+              <div class="branches-grid" style="margin-top: 15px;">
+                ${specCardsHtml}
+              </div>
+            </div>
+          </section>
+        `;
+
+        document.getElementById('bcRoot').addEventListener('click', () => setRoute());
+        document.getElementById('btnBackToPortal').addEventListener('click', () => setRoute());
+
+        document.querySelectorAll('.btn-view-spec').forEach(btn => {
+          btn.addEventListener('click', () => {
+            const bSlug = btn.getAttribute('data-branch');
+            const sSlug = btn.getAttribute('data-spec');
+            setRoute(bSlug, sSlug);
+          });
+        });
+      };
+
+      // -------------------------------------------------------------------------
+      // VIEW 3: SPECIALIZATION DETAILS VIEW
+      // -------------------------------------------------------------------------
+      const renderSpecializationDetailsView = (branchObj, specObj) => {
+        document.title = `${specObj.name} Internship | PK People`;
+
+        // Learning outcomes HTML
+        let learningHtml = specObj.learningOutcomes.map(item => `
+          <div class="learning-item">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+            <span>${item}</span>
+          </div>
+        `).join('');
+
+        // Tech Badges HTML
+        let techBadgesHtml = specObj.technologies.map(t => `<span class="tech-badge" style="font-size: 0.88rem; padding: 6px 14px;">${t}</span>`).join('');
+
+        // Activities HTML
+        let activitiesHtml = specObj.activities.map((act, i) => `
+          <div style="display: flex; align-items: flex-start; gap: 14px; margin-bottom: 12px;">
+            <div style="background: var(--primary-glow); color: var(--primary); font-weight: 700; font-size: 0.85rem; width: 26px; height: 26px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">${i+1}</div>
+            <div style="font-size: 0.95rem; color: var(--text-main); margin-top: 2px;">${act}</div>
+          </div>
+        `).join('');
+
+        // Skills HTML
+        let skillsHtml = specObj.skills.map(sk => `<span class="skill-pill">${sk}</span>`).join('');
+
+        // Projects HTML
+        let projectsHtml = specObj.projects.map(p => `
+          <div class="project-card-item">
+            <h5>Project 0${p.id}</h5>
+            <h4>${p.title}</h4>
+          </div>
+        `).join('');
+
+        // Career opportunities HTML
+        let careersHtml = specObj.careerOpportunities.map(c => `
+          <span class="career-badge">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+            ${c}
+          </span>
+        `).join('');
+
+        // Benefits HTML
+        let benefitsHtml = specObj.benefits.map(b => `
+          <div style="display: flex; align-items: center; gap: 10px; font-size: 0.92rem; color: var(--text-muted); margin-bottom: 8px;">
+            <svg style="width: 18px; height: 18px; color: var(--success);" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+            <span>${b}</span>
+          </div>
+        `).join('');
+
+        portalApp.innerHTML = `
+          <section class="portal-hero" style="padding-top: 110px; padding-bottom: 40px;">
+            <div class="container">
+              <!-- BREADCRUMB -->
+              <nav class="portal-breadcrumb">
+                <a href="index.html#home">Home</a>
+                <span class="portal-breadcrumb-sep">&rarr;</span>
+                <a href="javascript:void(0)" id="bcRoot">Internships</a>
+                <span class="portal-breadcrumb-sep">&rarr;</span>
+                <a href="javascript:void(0)" id="bcBranch">${branchObj.name}</a>
+                <span class="portal-breadcrumb-sep">&rarr;</span>
+                <span class="current">${specObj.name}</span>
+              </nav>
+
+              <div class="back-btn-link" id="btnBackToBranch" style="margin-top: 10px;">
+                &larr; Back to Specializations
+              </div>
+
+              <!-- HERO DETAILS -->
+              <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 24px; flex-wrap: wrap; margin-top: 10px;">
+                <div style="max-width: 750px;">
+                  <span class="portal-tag"><span></span> ${branchObj.name}</span>
+                  <h1 class="portal-title" style="font-size: 2.5rem; margin-bottom: 12px;">${specObj.name} Internship</h1>
+                  <div style="display: flex; gap: 16px; align-items: center; flex-wrap: wrap; font-size: 0.95rem; color: var(--text-muted); margin-bottom: 20px;">
+                    <span><strong style="color: var(--text-main);">Duration:</strong> ${specObj.duration}</span>
+                    <span>•</span>
+                    <span><strong style="color: var(--text-main);">Mode:</strong> Classroom / Hybrid Hands-on</span>
+                    <span>•</span>
+                    <span><strong style="color: var(--text-main);">Certificate:</strong> Industry Verified</span>
+                  </div>
+                </div>
+
+                <div>
+                  <button id="btnOpenApplyModal" class="btn btn-primary" style="padding: 16px 36px; font-size: 1.05rem; box-shadow: var(--shadow-primary);">
+                    Apply for This Internship
+                    <svg style="width: 20px; height: 20px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- MAIN DETAILS LAYOUT GRID -->
+          <section class="section-padding" style="padding-top: 30px;">
+            <div class="container">
+              <div class="details-layout-grid">
+                
+                <!-- LEFT CONTENT COLUMN -->
+                <div>
+                  <!-- 1. OVERVIEW -->
+                  <div class="details-section-card glass-panel">
+                    <h3 class="section-head-title">
+                      <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                      Internship Overview
+                    </h3>
+                    <p style="font-size: 1.02rem; color: var(--text-muted); line-height: 1.6;">${specObj.overview}</p>
+                  </div>
+
+                  <!-- 2. WHAT YOU WILL LEARN -->
+                  <div class="details-section-card glass-panel">
+                    <h3 class="section-head-title">
+                      <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0112 20.055a11.952 11.952 0 01-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"/></svg>
+                      What You Will Learn
+                    </h3>
+                    <div class="learning-grid">
+                      ${learningHtml}
+                    </div>
+                  </div>
+
+                  <!-- 3. TECHNOLOGIES & TOOLS -->
+                  <div class="details-section-card glass-panel">
+                    <h3 class="section-head-title">
+                      <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/></svg>
+                      Technologies & Tools Handled
+                    </h3>
+                    <div class="tech-badges-list">
+                      ${techBadgesHtml}
+                    </div>
+                  </div>
+
+                  <!-- 4. INTERNSHIP ACTIVITIES -->
+                  <div class="details-section-card glass-panel">
+                    <h3 class="section-head-title">
+                      <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 002-2h2a2 2 0 002 2m-6 9l2 2 4-4"/></svg>
+                      Practical Internship Activities
+                    </h3>
+                    ${activitiesHtml}
+                  </div>
+
+                  <!-- 5. PROJECT EXPOSURE -->
+                  <div class="details-section-card glass-panel">
+                    <h3 class="section-head-title">
+                      <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/></svg>
+                      Real-World Project Exposure
+                    </h3>
+                    <div class="projects-grid">
+                      ${projectsHtml}
+                    </div>
+                  </div>
+
+                  <!-- 6. SKILLS YOU WILL GAIN -->
+                  <div class="details-section-card glass-panel">
+                    <h3 class="section-head-title">
+                      <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/></svg>
+                      Key Industry Skills Gained
+                    </h3>
+                    <div class="skills-flex">
+                      ${skillsHtml}
+                    </div>
+                  </div>
+
+                </div>
+
+                <!-- RIGHT SIDEBAR COLUMN -->
+                <div>
+                  <!-- ELIGIBILITY & DURATION CARD -->
+                  <div class="details-section-card glass-panel">
+                    <h4 style="font-family: var(--font-heading); font-size: 1.15rem; font-weight: 700; color: var(--text-main); margin-bottom: 16px;">Eligibility & Duration</h4>
+                    
+                    <div style="margin-bottom: 16px;">
+                      <span style="font-size: 0.8rem; text-transform: uppercase; font-weight: 700; color: var(--primary);">Duration</span>
+                      <p style="font-size: 0.95rem; font-weight: 600; color: var(--text-main); margin-top: 2px;">${specObj.duration}</p>
+                    </div>
+
+                    <div style="margin-bottom: 20px;">
+                      <span style="font-size: 0.8rem; text-transform: uppercase; font-weight: 700; color: var(--primary);">Eligible Candidates</span>
+                      <p style="font-size: 0.9rem; color: var(--text-muted); margin-top: 2px;">${specObj.eligibility}</p>
+                    </div>
+
+                    <button id="btnOpenApplyModalSidebar" class="btn btn-primary" style="width: 100%; justify-content: center; padding: 12px;">
+                      Apply Now
+                    </button>
+                  </div>
+
+                  <!-- CAREER OPPORTUNITIES CARD -->
+                  <div class="details-section-card glass-panel">
+                    <h4 style="font-family: var(--font-heading); font-size: 1.15rem; font-weight: 700; color: var(--text-main); margin-bottom: 16px;">Career Opportunities</h4>
+                    <div class="careers-list">
+                      ${careersHtml}
+                    </div>
+                  </div>
+
+                  <!-- BENEFITS CARD -->
+                  <div class="details-section-card glass-panel">
+                    <h4 style="font-family: var(--font-heading); font-size: 1.15rem; font-weight: 700; color: var(--text-main); margin-bottom: 16px;">Program Benefits</h4>
+                    ${benefitsHtml}
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </section>
+        `;
+
+        document.getElementById('bcRoot').addEventListener('click', () => setRoute());
+        document.getElementById('bcBranch').addEventListener('click', () => setRoute(branchObj.slug));
+        document.getElementById('btnBackToBranch').addEventListener('click', () => setRoute(branchObj.slug));
+
+        // Modal triggers
+        const handleOpenModal = () => {
+          document.getElementById('modalInternshipTitle').textContent = `${specObj.name} Internship`;
+          document.getElementById('modalInternshipSubtitle').textContent = `${branchObj.name} • Duration: ${specObj.duration}`;
+          document.getElementById('applyModal').classList.add('active');
+        };
+
+        document.getElementById('btnOpenApplyModal').addEventListener('click', handleOpenModal);
+        document.getElementById('btnOpenApplyModalSidebar').addEventListener('click', handleOpenModal);
+      };
+
+      // BIND APPLY MODAL CLOSING & SUBMISSION
+      const applyModal = document.getElementById('applyModal');
+      const closeApplyModal = document.getElementById('closeApplyModal');
+      const internshipApplyForm = document.getElementById('internshipApplyForm');
+      const portalToast = document.getElementById('portalToast');
+
+      const hideModal = () => {
+        applyModal.classList.remove('active');
+      };
+
+      if (closeApplyModal) closeApplyModal.addEventListener('click', hideModal);
+      if (applyModal) {
+        applyModal.addEventListener('click', (e) => {
+          if (e.target === applyModal) hideModal();
+        });
+      }
+
+      if (internshipApplyForm) {
+        internshipApplyForm.addEventListener('submit', (e) => {
+          e.preventDefault();
+          const name = document.getElementById('applicantName').value.trim();
+          const email = document.getElementById('applicantEmail').value.trim();
+          const phone = document.getElementById('applicantPhone').value.trim();
+          const college = document.getElementById('applicantCollege').value.trim();
+          const gradYear = document.getElementById('applicantGradYear').value.trim();
+          const msg = document.getElementById('applicantMsg').value.trim();
+
+          const submission = {
+            id: "intern_app_" + Date.now(),
+            date: new Date().toLocaleDateString('en-IN', { hour: '2-digit', minute: '2-digit' }),
+            name: name,
+            email: email,
+            phone: phone,
+            service: "Internship & Placement Portal Application",
+            message: `College: ${college} | Grad Year: ${gradYear} | Note: ${msg}`
+          };
+
+          // Save to LocalStorage leads
+          const submissions = JSON.parse(localStorage.getItem('contact_submissions')) || [];
+          submissions.unshift(submission);
+          localStorage.setItem('contact_submissions', JSON.stringify(submissions));
+
+          // Dispatch to Sheets if configured
+          const googleSheetsUrl = localStorage.getItem('google_sheets_url');
+          if (googleSheetsUrl && googleSheetsUrl.trim() !== '') {
+            fetch(googleSheetsUrl, {
+              method: 'POST',
+              headers: { 'Content-Type': 'text/plain' },
+              body: JSON.stringify({
+                action: 'add_lead',
+                id: submission.id,
+                name: submission.name,
+                email: submission.email,
+                phone: submission.phone,
+                service: submission.service,
+                message: submission.message
+              })
+            }).catch(err => console.error('Sheet post failed:', err));
+          }
+
+          hideModal();
+          internshipApplyForm.reset();
+
+          portalToast.style.opacity = '1';
+          setTimeout(() => {
+            portalToast.style.opacity = '0';
+          }, 4500);
+        });
+      }
+
+      // INITIAL VIEW RENDER
+      renderView();
+    });
+  </script>
+</body>
+</html>

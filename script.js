@@ -1146,6 +1146,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const renderActiveServiceSpotlight = (index) => {
     if (!serviceSpotlightCard) return;
     const data = servicesData[index];
+    const detailsUrl = index === 5 ? 'internships.html' : `service-details.html?id=${index}`;
 
     // Fade effect out
     serviceSpotlightCard.style.opacity = '0';
@@ -1158,8 +1159,8 @@ document.addEventListener('DOMContentLoaded', () => {
           <h3 class="service-spotlight-title">${data.title}</h3>
           <p class="service-spotlight-desc">${data.desc}</p>
           <div style="display: flex; gap: 12px; margin-top: 15px; flex-wrap: wrap;">
-            <a href="service-details.html?id=${index}" class="service-spotlight-cta btn btn-primary" style="padding: 12px 24px;">
-              View Details
+            <a href="${detailsUrl}" class="service-spotlight-cta btn btn-primary" style="padding: 12px 24px;">
+              ${index === 5 ? 'Explore Internships' : 'View Details'}
               <svg style="width: 18px; height: 18px; margin-left: 6px; vertical-align: middle;" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"></path>
               </svg>
@@ -1169,7 +1170,7 @@ document.addEventListener('DOMContentLoaded', () => {
             </a>
           </div>
         </div>
-        <a href="service-details.html?id=${index}" class="spotlight-visual" style="display: block;">
+        <a href="${detailsUrl}" class="spotlight-visual" style="display: block;">
           <img src="${data.img}" alt="${data.title}">
           <span class="spotlight-visual-badge">${data.badge}</span>
         </a>
@@ -1221,7 +1222,11 @@ document.addEventListener('DOMContentLoaded', () => {
   // Add click listeners to tab buttons (redirect immediately)
   serviceTabItems.forEach((tab, index) => {
     tab.addEventListener('click', () => {
-      window.location.href = `service-details.html?id=${index}`;
+      if (index === 5) {
+        window.location.href = 'internships.html';
+      } else {
+        window.location.href = `service-details.html?id=${index}`;
+      }
     });
   });
 

@@ -4543,3 +4543,33 @@ body.dark-theme .clients-slider::after {
   color: var(--text-muted);
   font-weight: 500;
 }
+
+/* ==========================================
+   INTERNSHIP PORTAL UTILITY EXTENSIONS
+   ========================================== */
+.portal-hero {
+  padding-top: 120px;
+  padding-bottom: 60px;
+  background: radial-gradient(circle at 80% 20%, hsla(var(--primary-hue), var(--primary-sat), var(--primary-lightness), 0.08) 0%, transparent 60%);
+  position: relative;
+}
+
+.branch-card {
+  transition: transform var(--transition-smooth), box-shadow var(--transition-smooth), border-color var(--transition-smooth);
+}
+
+.branch-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-xl);
+  border-color: var(--primary);
+}
+
+.spec-card {
+  transition: transform var(--transition-smooth), box-shadow var(--transition-smooth), border-color var(--transition-smooth);
+}
+
+.spec-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-xl);
+  border-color: var(--primary);
+}
