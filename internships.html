@@ -3,17 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="PK People Internship & Placement Portal - Industry-Oriented Internship Programs across Computer Science, Electronics, Mechanical, Electrical, Civil, Fashion, Automobile & Mechatronics Engineering.">
-  <meta name="keywords" content="PK People Internships, Engineering Internships, Placement Portal, Cloud Computing Internship, AI Internship, Cybersecurity, Full Stack, Core Engineering Internships">
+  <meta name="description" content="PK People Diploma Internship & Placement Portal - Branch-Wise Internship Pathways for Diploma Civil, Mechanical, CSE, ECE, EEE, Automobile, Mechatronics, Solar, Metallurgy, ADFT & Commercial Practice.">
+  <meta name="keywords" content="PK People Diploma Internships, Diploma Placement Portal, Civil Engineering Built Environment, EV Vehicle Internship, Solar Energy, Industrial Automation, Full Stack, Cybersecurity, CIE Support">
   <meta name="author" content="Placement Keepers People Pulse">
   
-  <title>Internship & Placement Portal | Placement Keepers People Pulse</title>
+  <title>Diploma Internship & Placement Portal | Placement Keepers People Pulse</title>
   
   <!-- Favicon -->
   <link rel="icon" type="image/x-icon" href="assets/images/logo.jpeg">
   
   <!-- Stylesheet -->
-  <link rel="stylesheet" href="styles.css?v=1.3">
+  <link rel="stylesheet" href="styles.css?v=1.4">
   
   <!-- FontAwesome for Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -122,7 +122,7 @@
     }
 
     .filter-select-group {
-      min-width: 240px;
+      min-width: 260px;
       position: relative;
     }
 
@@ -157,7 +157,7 @@
     /* Branch Grid & Cards */
     .branches-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
       gap: 24px;
     }
 
@@ -482,66 +482,6 @@
       transform: translateX(-6px);
     }
 
-    /* Modal dialog styling */
-    .apply-modal-backdrop {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.6);
-      backdrop-filter: blur(6px);
-      z-index: 2000;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-      opacity: 0;
-      visibility: hidden;
-      transition: opacity var(--transition-smooth), visibility var(--transition-smooth);
-    }
-
-    .apply-modal-backdrop.active {
-      opacity: 1;
-      visibility: visible;
-    }
-
-    .apply-modal-box {
-      width: 100%;
-      max-width: 580px;
-      max-height: 90vh;
-      overflow-y: auto;
-      border-radius: var(--radius-lg);
-      padding: 32px;
-      position: relative;
-      transform: scale(0.95);
-      transition: transform var(--transition-smooth);
-    }
-
-    .apply-modal-backdrop.active .apply-modal-box {
-      transform: scale(1);
-    }
-
-    .modal-close-btn {
-      position: absolute;
-      top: 20px;
-      right: 20px;
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
-      background-color: var(--bg-surface-alt);
-      color: var(--text-main);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      transition: background-color var(--transition-fast);
-    }
-
-    .modal-close-btn:hover {
-      background-color: var(--border-color);
-    }
-
     /* Advanced Animations & Support Card Styles */
     @keyframes floatAnim {
       0%, 100% { transform: translateY(0px); }
@@ -628,6 +568,118 @@
       height: 18px;
       color: var(--primary);
       flex-shrink: 0;
+    }
+
+    .works-step-card {
+      padding: 28px 24px;
+      border-radius: var(--radius-lg);
+      position: relative;
+      transition: transform var(--transition-smooth), box-shadow var(--transition-smooth);
+    }
+
+    .works-step-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-xl);
+    }
+
+    .works-step-num {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--primary);
+      color: white;
+      font-family: var(--font-heading);
+      font-weight: 800;
+      font-size: 0.95rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 16px;
+    }
+
+    .gain-item-card {
+      padding: 18px;
+      border-radius: var(--radius-md);
+      background-color: var(--bg-surface-alt);
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--text-main);
+      transition: transform var(--transition-fast), background-color var(--transition-fast);
+    }
+
+    .gain-item-card:hover {
+      transform: translateY(-4px);
+      background-color: var(--primary-glow);
+    }
+
+    .gain-item-card svg {
+      width: 22px;
+      height: 22px;
+      color: var(--primary);
+      flex-shrink: 0;
+    }
+
+    /* Modal dialog styling */
+    .apply-modal-backdrop {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(6px);
+      z-index: 2000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity var(--transition-smooth), visibility var(--transition-smooth);
+    }
+
+    .apply-modal-backdrop.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .apply-modal-box {
+      width: 100%;
+      max-width: 580px;
+      max-height: 90vh;
+      overflow-y: auto;
+      border-radius: var(--radius-lg);
+      padding: 32px;
+      position: relative;
+      transform: scale(0.95);
+      transition: transform var(--transition-smooth);
+    }
+
+    .apply-modal-backdrop.active .apply-modal-box {
+      transform: scale(1);
+    }
+
+    .modal-close-btn {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background-color: var(--bg-surface-alt);
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background-color var(--transition-fast);
+    }
+
+    .modal-close-btn:hover {
+      background-color: var(--border-color);
     }
 
     /* Mobile Adaptability */
@@ -842,13 +894,13 @@
         </div>
         
         <div>
-          <h4 style="font-family: var(--font-heading); font-size: 1.05rem; font-weight: 700; color: var(--text-main); margin-bottom: 20px;">Engineering Branches</h4>
+          <h4 style="font-family: var(--font-heading); font-size: 1.05rem; font-weight: 700; color: var(--text-main); margin-bottom: 20px;">Diploma Branches</h4>
           <ul style="display: flex; flex-direction: column; gap: 10px; font-size: 0.9rem; color: var(--text-muted);">
+            <li><a href="internships.html?branch=civil-engineering">Civil Engineering</a></li>
+            <li><a href="internships.html?branch=automobile-engineering">Automobile Engineering</a></li>
+            <li><a href="internships.html?branch=mechanical-engineering">Mechanical Engineering</a></li>
             <li><a href="internships.html?branch=computer-science-engineering">Computer Science</a></li>
             <li><a href="internships.html?branch=electronics-communication-engineering">Electronics & Comm</a></li>
-            <li><a href="internships.html?branch=mechanical-engineering">Mechanical Engineering</a></li>
-            <li><a href="internships.html?branch=electrical-engineering">Electrical Engineering</a></li>
-            <li><a href="internships.html?branch=civil-engineering">Civil Engineering</a></li>
           </ul>
         </div>
         
@@ -912,747 +964,483 @@
       }
 
       // =========================================================================
-      // 2. CENTRAL DATA ARCHITECTURE: 8 BRANCHES & SPECIALIZATIONS DATA
+      // 2. CENTRAL DIPLOMA DATA ARCHITECTURE: 11 BRANCHES & PATHWAYS
       // =========================================================================
       const internshipData = {
-        "mechanical-engineering": {
+        "civil-engineering": {
           num: "01",
+          name: "Civil Engineering",
+          slug: "civil-engineering",
+          desc: "Bridge classroom education with site experience in Built Environment, Transportation, and Town Planning.",
+          icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>`,
+          specializations: [
+            {
+              name: "Built Environment",
+              slug: "built-environment",
+              desc: "Planning, construction, maintenance, and management of buildings and infrastructure.",
+              duration: "4 Weeks / 6 Weeks / 3 Months",
+              technologies: ["Building Construction", "CAD Drafting", "Material Testing", "Safety Protocols", "BOQ Estimation"],
+              overview: "The Built Environment pathway introduces Diploma Civil Engineering students to the planning, construction, maintenance, and management of buildings and infrastructure.",
+              learningOutcomes: ["Building construction processes", "Construction materials and applications", "Building planning and basic estimation", "Structural and architectural concepts", "Construction site safety", "Quality control and inspection", "Reading basic construction drawings", "Site documentation and reporting"],
+              activities: ["Construction site visits to observe foundation work", "Structural and masonry inspection", "Concrete work & finishing observations", "Material handling & safety procedures"],
+              practicalExposure: "Students participate in construction site visits and observe real-world activities such as foundation work, structural work, masonry, concrete work, finishing, material handling, and safety procedures.",
+              skills: ["Site Observation", "Construction Drawing Reading", "Quality Inspection", "Estimation", "Site Safety"],
+              projects: [{ id: 1, title: "Building Construction Site Inspection Report" }, { id: 2, title: "Structural Material & Quality Log Study" }],
+              careerOpportunities: ["Site Supervisor", "Assistant Construction Engineer", "Quality Inspector", "Drafting Assistant"],
+              benefits: ["Construction site visit exposure", "Academic report documentation", "CIE evaluation support"],
+              eligibility: "Diploma students in Civil Engineering."
+            },
+            {
+              name: "Transportation",
+              slug: "transportation",
+              desc: "Fundamentals of transportation infrastructure, highway construction, and mobility systems.",
+              duration: "4 Weeks / 6 Weeks / 3 Months",
+              technologies: ["Highway Engineering", "Road Construction", "Traffic Surveying", "Pavement Design"],
+              overview: "This pathway focuses on the fundamentals of transportation infrastructure and mobility systems for Diploma Civil students.",
+              learningOutcomes: ["Road construction fundamentals", "Highway engineering concepts", "Traffic management", "Road safety", "Transportation planning", "Pavement construction & maintenance", "Basic surveying concepts", "Infrastructure inspection"],
+              activities: ["Site visits to road construction projects", "Highway pavement surveys", "Traffic density observation", "Surveying demonstrations"],
+              practicalExposure: "Students gain exposure through site visits, road and infrastructure observations, surveying demonstrations, and practical discussions related to transportation projects.",
+              skills: ["Highway Surveying", "Pavement Inspection", "Traffic Surveying", "Road Safety Audits"],
+              projects: [{ id: 1, title: "Highway Pavement Observation & Traffic Study" }],
+              careerOpportunities: ["Highway Supervisor", "Road Construction Assistant", "Infrastructure Surveyor"],
+              benefits: ["Surveying demo exposure", "CIE evaluation documentation"],
+              eligibility: "Diploma students in Civil Engineering."
+            },
+            {
+              name: "Town Planning & Green Building",
+              slug: "town-planning-green-building",
+              desc: "Sustainable urban development, land-use planning, and environmentally responsible construction.",
+              duration: "4 Weeks / 6 Weeks / 3 Months",
+              technologies: ["Urban Planning", "Green Building", "Energy Efficiency", "Waste Management"],
+              overview: "Focuses on sustainable urban development and environmentally responsible construction for diploma candidates.",
+              learningOutcomes: ["Town and urban planning fundamentals", "Land-use planning", "Sustainable development", "Green building concepts", "Energy-efficient buildings", "Water conservation", "Waste management", "Environment-friendly practices"],
+              activities: ["Observing sustainable building sites", "Green building rating checklists", "Urban land-use layout study"],
+              practicalExposure: "Students are exposed to real buildings, construction sites, layouts, and planning examples to understand how sustainable practices are incorporated into modern infrastructure.",
+              skills: ["Green Building Auditing", "Urban Layout Analysis", "Sustainable Construction"],
+              projects: [{ id: 1, title: "Green Building Sustainable Feature Audit" }],
+              careerOpportunities: ["Town Planning Assistant", "Sustainability Inspector", "Green Building Junior Consultant"],
+              benefits: ["Eco-building site visits", "Academic project report"],
+              eligibility: "Diploma students in Civil Engineering."
+            }
+          ]
+        },
+
+        "automobile-engineering": {
+          num: "02",
+          name: "Automobile Engineering",
+          slug: "automobile-engineering",
+          desc: "Explore electric and hybrid mobility, EV powertrains, battery management, and modern vehicle diagnostics.",
+          icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>`,
+          specializations: [
+            {
+              name: "Electric Hybrid Vehicles (EV)",
+              slug: "electric-hybrid-vehicles",
+              desc: "Electric vehicle architecture, EV powertrains, battery systems, BMS, and charging infrastructure.",
+              duration: "4 Weeks / 6 Weeks / 3 Months",
+              technologies: ["EV Architecture", "BMS Systems", "BLDC Motors", "Charging Infrastructure", "OBD Diagnostics"],
+              overview: "This pathway is designed to introduce Diploma Automobile students to the rapidly developing field of electric and hybrid mobility.",
+              learningOutcomes: ["Electric vehicle architecture", "EV powertrain systems", "Electric motors", "Battery systems", "Battery Management Systems (BMS)", "Charging systems", "Regenerative braking", "Hybrid vehicle concepts", "EV safety", "Basic vehicle diagnostics"],
+              activities: ["EV component assembly demonstrations", "Battery pack balancing inspection", "Diagnostic tool scanning", "Charging station protocol testing"],
+              practicalExposure: "Students receive practical demonstrations and industry-oriented exposure to EV components, vehicle systems, charging infrastructure, diagnostics, and maintenance concepts.",
+              skills: ["EV Diagnostics", "BMS Inspection", "Motor Testing", "EV Safety"],
+              projects: [{ id: 1, title: "EV Powertrain & BMS Diagnostic Observation" }],
+              careerOpportunities: ["EV Service Technician", "EV Assembly Assistant", "Battery Pack Inspector"],
+              benefits: ["Hands-on EV kit demos", "Verified Certificate", "CIE support"],
+              eligibility: "Diploma students in Automobile & Mechanical Engineering."
+            }
+          ]
+        },
+
+        "alternative-energy": {
+          num: "03",
+          name: "Alternative Energy",
+          slug: "alternative-energy",
+          desc: "Solar energy technology, PV panel installation, inverters, storage batteries, and renewable grid connections.",
+          icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32l1.41 1.41M2 12h2m16 0h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>`,
+          specializations: [
+            {
+              name: "Solar Energy",
+              slug: "solar-energy",
+              desc: "Solar PV systems, solar panels, inverters, energy storage batteries, installation, and maintenance.",
+              duration: "4 Weeks / 6 Weeks / 3 Months",
+              technologies: ["Solar PV Panels", "Inverters", "Charge Controllers", "Batteries", "Solar Sizing"],
+              overview: "The Solar Energy pathway introduces students to renewable energy technologies, with a primary focus on solar power generation.",
+              learningOutcomes: ["Solar photovoltaic (PV) systems", "Solar panels and components", "Solar energy generation", "Inverters", "Batteries and energy storage", "Charge controllers", "Solar system installation concepts", "Electrical connections", "Solar system maintenance", "Basic system sizing"],
+              activities: ["Testing solar panel output voltage", "Wiring charge controllers", "Observing inverter installation", "Battery bank connection testing"],
+              practicalExposure: "Students receive practical demonstrations of solar panels, electrical connections, energy-generation systems, and installation procedures.",
+              skills: ["Solar PV Installation", "Wiring & Connections", "Inverter Setup", "Basic System Sizing"],
+              projects: [{ id: 1, title: "Rooftop Solar PV Installation & Wiring Model" }],
+              careerOpportunities: ["Solar Technician", "Renewable System Installer", "Solar Maintenance Assistant"],
+              benefits: ["Practical solar panel demos", "CIE academic report support"],
+              eligibility: "Diploma students in Electrical, ECE, Mechanical, or Alternative Energy."
+            }
+          ]
+        },
+
+        "mechanical-engineering": {
+          num: "04",
           name: "Mechanical Engineering",
           slug: "mechanical-engineering",
-          desc: "Hands-on opportunities in automotive design, industrial robotics, precision manufacturing, and thermal systems.",
+          desc: "Advanced manufacturing production technologies, CNC machining, automation, robotics, and fluid power.",
           icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 9.172V5L8 4z"/></svg>`,
           specializations: [
             {
-              name: "Automotive Technology",
-              slug: "automotive-technology",
-              desc: "Deep dive into engine design, vehicle dynamics, thermal management, powertrain optimization, and automotive testing protocols.",
-              duration: "6 Weeks / 3 Months",
-              technologies: ["SolidWorks", "ANSYS", "CATIA", "MATLAB", "Vehicle Dynamics"],
-              overview: "The Automotive Technology internship equips mechanical engineering candidates with practical skills in vehicle component engineering, computational fluid dynamics (CFD), structural crash analysis, and electric powertrain integration. Trainees work alongside experienced design engineers on live automotive models.",
-              learningOutcomes: ["3D Parametric Vehicle Modeling", "Finite Element Analysis (FEA)", "Internal Combustion & Hybrid Systems", "Automotive Testing Standards", "Material Selection for Lightweighting"],
-              activities: ["Hands-on CAD assembly design", "Thermal simulation of radiator loops", "Component stress analysis", "Vehicle test drive data logging", "Project reporting & documentation"],
-              skills: ["CAD/CAM Modeling", "FEA Analysis", "GD&T", "Automotive Electronics Integration", "Technical Documentation"],
-              projects: [
-                { id: 1, title: "Chassis Frame Stress Analysis" },
-                { id: 2, title: "Engine Heat Exchanger CFD Optimization" },
-                { id: 3, title: "Brake Caliper Mechanical Design" },
-                { id: 4, title: "Transmission Gearbox Assembly Simulation" }
-              ],
-              careerOpportunities: ["Automotive Design Engineer", "FEA Analyst", "Quality Control Engineer", "Powertrain Specialist", "Production Engineer"],
-              benefits: ["Industry-recognized internship certificate", "Hands-on CAD workstation exposure", "Mentorship from Senior OEMs", "Placement assistance with automotive tier-1 suppliers"],
-              eligibility: "Pursuing or completed B.E. / B.Tech in Mechanical Engineering or related streams."
+              name: "AMT (Advanced Manufacturing Tech)",
+              slug: "amt",
+              desc: "Modern manufacturing processes, production planning, machine operations, CNC, quality, and workflow.",
+              duration: "4 Weeks / 6 Weeks / 3 Months",
+              technologies: ["Manufacturing Processes", "CNC Machining", "Quality Inspection", "Production Planning", "Workshop Safety"],
+              overview: "The AMT pathway focuses on modern manufacturing and production technologies relevant to mechanical engineering diploma students.",
+              learningOutcomes: ["Manufacturing processes", "Production planning", "Machine operations", "Industrial tools and equipment", "Quality inspection", "Production workflow", "Manufacturing safety", "Process improvement", "Industry-oriented production practices"],
+              activities: ["Workshop machining demonstrations", "CNC program verification", "Quality inspection using Vernier & Micrometers", "Assembly line workflow observation"],
+              practicalExposure: "Students receive workshop demonstrations, manufacturing-process exposure, equipment demonstrations, and practical observations to understand production systems.",
+              skills: ["Machine Operation", "Quality Inspection", "CNC Basic Programming", "Production Planning"],
+              projects: [{ id: 1, title: "Manufacturing Process & Quality Inspection Study" }],
+              careerOpportunities: ["Production Assistant", "Quality Control Inspector", "CNC Machine Operator"],
+              benefits: ["Workshop process exposure", "Final project report assistance"],
+              eligibility: "Diploma students in Mechanical Engineering."
             },
             {
-              name: "Robotics",
-              slug: "robotics",
-              desc: "Focus on industrial robotic arm kinematics, actuators, sensors, machine vision, and automated factory line integration.",
-              duration: "6 Weeks / 3 Months",
-              technologies: ["ROS (Robot OS)", "SolidWorks", "C++", "Python", "Kinematic Simulators"],
-              overview: "Our Robotics specialization covers forward and inverse kinematics, robotic arm assembly design, servo control systems, and automated trajectory planning. Interns build physical and virtual robotic prototypes used in automated manufacturing lines.",
-              learningOutcomes: ["Robotic Kinematics & Dynamics", "Sensor Integration & Signal Conditioning", "ROS Trajectory Planning", "Industrial Automation Systems", "Servo Motor Calibration"],
-              activities: ["Programming 6-DOF robotic arms", "3D printing custom end-effectors", "Sensory feedback loop tuning", "Simulating industrial pick-and-place routines"],
-              skills: ["ROS Development", "Robotic Trajectory Control", "Sensor Interfacing", "CAD Assembly", "C++/Python Programming"],
-              projects: [
-                { id: 1, title: "6-Axis Articulated Robotic Arm Design" },
-                { id: 2, title: "ROS-Based Autonomous Mobile Robot" },
-                { id: 3, title: "Pneumatic Gripper Automation" },
-                { id: 4, title: "Vision-Guided Sorting Robot" }
-              ],
-              careerOpportunities: ["Robotics Engineer", "Automation Specialist", "Mechatronics Designer", "Control Systems Engineer"],
-              benefits: ["Hands-on robot kit access", "ROS project portfolio creation", "Industry mentoring", "Placement referrals"],
-              eligibility: "Engineering students in Mechanical, Robotics, or Electrical branches."
-            },
-            {
-              name: "Production and Operations",
-              slug: "production-and-operations",
-              desc: "Learn lean manufacturing, Six Sigma quality control, inventory optimization, CNC machining, and plant layout design.",
-              duration: "8 Weeks / 3 Months",
-              technologies: ["Lean Six Sigma", "ERP Systems", "CNC Programming", "Value Stream Mapping", "Minitab"],
-              overview: "Focuses on optimizing manufacturing plant performance through Lean methodologies, statistical process control (SPC), supply chain logistics, and automated assembly line workflow design.",
-              learningOutcomes: ["Lean Manufacturing & Kaizen", "Statistical Process Control", "CNC G-Code/M-Code Programming", "Supply Chain & Inventory Management", "Plant Layout Optimization"],
-              activities: ["Conducting time & motion studies", "Creating value stream maps", "Programming CNC lathe & milling machines", "Root cause failure analysis"],
-              skills: ["Process Optimization", "Quality Assurance", "CNC Machining", "Supply Chain Management", "Six Sigma Tools"],
-              projects: [
-                { id: 1, title: "Assembly Line Bottleneck Reduction" },
-                { id: 2, title: "Statistical Quality Control Implementation" },
-                { id: 3, title: "Plant Layout Redesign for Optimal Flow" },
-                { id: 4, title: "Automated Tool Wear Monitoring Setup" }
-              ],
-              careerOpportunities: ["Production Engineer", "Quality Manager", "Operations Specialist", "Industrial Engineer"],
-              benefits: ["Six Sigma Green Belt Orientation", "Plant visit exposure", "Direct hiring assistance"],
-              eligibility: "Mechanical, Industrial & Production engineering students."
+              name: "Automation & Robotics",
+              slug: "automation-robotics",
+              desc: "Industrial automation, robotics fundamentals, sensors, pneumatics, hydraulics, and PLC control.",
+              duration: "4 Weeks / 6 Weeks / 3 Months",
+              technologies: ["Industrial Robotics", "Sensors & Actuators", "Pneumatics", "Hydraulics", "PLC"],
+              overview: "Introduces students to automation technologies, fluid power, and industrial robotics in automated manufacturing environments.",
+              learningOutcomes: ["Industrial automation", "Robotics fundamentals", "Sensors and actuators", "Pneumatic and hydraulic systems", "PLC fundamentals", "Automated production systems", "Robotic applications", "Machine control", "Industrial safety"],
+              activities: ["Pneumatic circuit wiring", "Robotic arm pick-and-place demos", "PLC ladder logic testing", "Industrial sensor calibration"],
+              practicalExposure: "Students receive demonstrations and practical exposure to automation systems, robotic applications, sensors, control systems, and industrial processes.",
+              skills: ["Pneumatic Circuit Wiring", "PLC Ladder Logic", "Sensor Interfacing", "Robot Operation"],
+              projects: [{ id: 1, title: "Automated Pneumatic Sorting System Project" }],
+              careerOpportunities: ["Automation Assistant", "Robotics Maintenance Technician", "PLC Operator"],
+              benefits: ["Robotics demo kit exposure", "CIE 1, 2 & 3 evaluation support"],
+              eligibility: "Diploma students in Mechanical, Mechatronics, or Electrical."
             }
           ]
         },
-        "electronics-communication-engineering": {
-          num: "02",
-          name: "Electronics and Communication Engineering",
-          slug: "electronics-communication-engineering",
-          desc: "Pathways in embedded microcontrollers, renewable solar/wind circuits, IoT smart devices, and high-frequency communication.",
-          icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>`,
+
+        "adft": {
+          num: "05",
+          name: "ADFT (Apparel Design & Tech)",
+          slug: "adft",
+          desc: "Apparel design, fabric production operations, quality management, inspection, and defect control.",
+          icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>`,
           specializations: [
             {
-              name: "Embedded Systems",
-              slug: "embedded-systems",
-              desc: "Program ARM Cortex microcontrollers, RTOS kernels, PCB layouts, firmware code, and hardware peripheral drivers.",
-              duration: "6 Weeks / 3 Months",
-              technologies: ["Embedded C", "ARM Cortex-M", "STM32", "FreeRTOS", "KiCAD", "SPI/I2C/UART"],
-              overview: "Master real-time firmware development for modern electronics. Interns write low-level hardware drivers, interface LCD displays, sensors, and wireless transceivers, and design custom PCBs using professional EDA software.",
-              learningOutcomes: ["Bare-Metal C Programming", "ARM Microcontroller Architecture", "FreeRTOS Kernel Tasks & Queues", "Schematic & Multi-layer PCB Design", "Hardware Debugging with Oscilloscopes"],
-              activities: ["Writing peripheral drivers for timers & ADC", "Designing custom PCB boards in KiCAD", "Building FreeRTOS multi-threaded applications", "Flashing and debugging firmware on target hardware"],
-              skills: ["Embedded C", "PCB Layout Design", "RTOS Architecture", "Bus Protocols (SPI/I2C/CAN)", "Hardware Troubleshooting"],
-              projects: [
-                { id: 1, title: "FreeRTOS-Based Data Logger System" },
-                { id: 2, title: "Custom STM32 Microcontroller Board Layout" },
-                { id: 3, title: "CAN Bus Vehicle Telemetry Node" },
-                { id: 4, title: "Smart Power Meter Firmware" }
-              ],
-              careerOpportunities: ["Embedded Software Engineer", "Firmware Developer", "Hardware Design Engineer", "PCB Layout Specialist"],
-              benefits: ["Free Hardware Development Board provided", "1-on-1 Code Review", "Verified Internship Certificate", "Direct job referrals"],
-              eligibility: "ECE, EEE, Instrumentation, or Computer Science students."
-            },
-            {
-              name: "Renewable Energy",
-              slug: "renewable-energy",
-              desc: "Study solar PV systems, wind power converters, microgrid battery management, and smart inverter electronics.",
-              duration: "6 Weeks / 3 Months",
-              technologies: ["MATLAB Simulink", "Solar PV Design", "BMS (Battery Management)", "PVSyst", "Inverter Circuits"],
-              overview: "Gain expertise in clean energy transition electronics. Covers solar panel MPPT controllers, battery management systems (BMS) for energy storage, and power electronic converters for grid integration.",
-              learningOutcomes: ["Solar PV System Sizing", "MPPT Control Algorithms", "Lithium Battery BMS Design", "Grid-Tied Inverter Topology", "Power Quality Analysis"],
-              activities: ["Simulating MPPT tracking in MATLAB", "Testing solar charge controller hardware", "Designing battery balancing circuits", "Grid synchronization analysis"],
-              skills: ["Renewable System Sizing", "Power Electronics", "BMS Design", "Simulink Modeling", "Grid Code Compliance"],
-              projects: [
-                { id: 1, title: "Micro-Grid Solar MPPT Inverter System" },
-                { id: 2, title: "Li-Ion Battery Cell Balancer Circuit" },
-                { id: 3, title: "Wind Turbine Power Converter Simulation" },
-                { id: 4, title: "Smart Energy Storage Monitor" }
-              ],
-              careerOpportunities: ["Renewable Energy Engineer", "Power Electronics Designer", "Solar System Integrator"],
-              benefits: ["Industry green energy certification", "Real-world project portfolio", "Placement guidance"],
-              eligibility: "ECE, EEE & Electrical Engineering students."
-            },
-            {
-              name: "Industrial Automation",
-              slug: "industrial-automation",
-              desc: "Master PLC programming, SCADA dashboards, HMI screens, industrial sensors, and factory fieldbus networks.",
-              duration: "8 Weeks / 3 Months",
-              technologies: ["Siemens S7-1200", "Allen Bradley", "Ladder Logic", "SCADA", "HMI", "Modbus"],
-              overview: "Build automated control loops used in modern smart factories. Interns program Programmable Logic Controllers (PLCs), construct supervisory SCADA graphics, and wire industrial sensors and vfd drives.",
-              learningOutcomes: ["Ladder Diagram & Structured Text Programming", "HMI Screen Development", "SCADA Alarms & Data Telemetry", "Industrial Fieldbus Networking", "Variable Frequency Drive (VFD) Calibration"],
-              activities: ["Programming Siemens PLC logic", "Designing SCADA graphics", "Wiring industrial proximity sensors", "Configuring motor speed via VFD"],
-              skills: ["PLC Programming", "SCADA System Design", "Industrial Networking", "Control Panel Wiring", "Troubleshooting"],
-              projects: [
-                { id: 1, title: "Automated Bottle Filling Plant PLC Code" },
-                { id: 2, title: "Factory SCADA Central Monitoring Station" },
-                { id: 3, title: "Conveyor Sorting System with Vision & VFD" },
-                { id: 4, title: "PID Temperature Control Loop" }
-              ],
-              careerOpportunities: ["PLC Programmer", "Automation Engineer", "Control System Technician", "SCADA Specialist"],
-              benefits: ["Hands-on PLC trainer kit access", "Siemens TIA Portal certification prep", "Career placement support"],
-              eligibility: "ECE, Electrical, Instrumentation & Mechatronics students."
-            },
-            {
-              name: "IoT",
-              slug: "iot",
-              desc: "Develop connected sensor networks using ESP32, MQTT protocols, cloud dashboards, and wireless gateway nodes.",
-              duration: "6 Weeks / 3 Months",
-              technologies: ["ESP32", "MQTT", "HTTP REST", "Node-RED", "ThingSpeak", "AWS IoT Core"],
-              overview: "Connect physical devices to the cloud. Trainees design low-power wireless sensor nodes, configure MQTT brokers, build web dashboards, and implement over-the-air (OTA) firmware updates.",
-              learningOutcomes: ["ESP32 Wi-Fi / Bluetooth Programming", "MQTT Broker Setup & Telemetry", "Cloud IoT Dashboard Development", "Low-Power Sleep Modes", "IoT Data Security"],
-              activities: ["Wiring environmental sensors to ESP32", "Publishing telemetry data over MQTT", "Building real-time web dashboards", "Setting up automated cloud alerts"],
-              skills: ["IoT Protocol Stack", "ESP32 C++", "Cloud Dashboard Setup", "Sensor Calibration", "Network Debugging"],
-              projects: [
-                { id: 1, title: "Smart Building Environmental Telemetry Node" },
-                { id: 2, title: "Industrial Asset Tracking IoT System" },
-                { id: 3, title: "Agricultural Soil Moisture Monitoring Network" },
-                { id: 4, title: "AWS IoT Core Connected Smart Energy Meter" }
-              ],
-              careerOpportunities: ["IoT Solutions Developer", "Firmware Engineer", "Smart Systems Architect"],
-              benefits: ["IoT Hardware Development Kit", "Cloud Platform Exposure", "Certificate & Job Assistance"],
-              eligibility: "ECE, CSE, EEE & IT students."
-            },
-            {
-              name: "Power Systems",
-              slug: "power-systems",
-              desc: "High-voltage transmission line simulation, protection relaying, transformer design, and smart grid automation.",
-              duration: "6 Weeks / 3 Months",
-              technologies: ["ETAP", "MATLAB", "Power Factory", "Relay Protection", "Smart Grid"],
-              overview: "Explore power grid engineering, load flow calculations, short-circuit fault analysis, and digital protective relay configuration for substation safety.",
-              learningOutcomes: ["Load Flow & Fault Analysis", "Substation Relay Protection", "Grid Power Quality Enhancement", "Smart Grid Metering"],
-              activities: ["Simulating grid stability in ETAP", "Configuring overcurrent relay trip curves", "Analyzing transformer load losses"],
-              skills: ["Power System Analysis", "ETAP Modeling", "Relay Protection", "Grid Code Compliance"],
-              projects: [
-                { id: 1, title: "33kV Substation Load Flow & Short Circuit Study" },
-                { id: 2, title: "Digital Relay Overcurrent Protection Coordination" }
-              ],
-              careerOpportunities: ["Power Systems Engineer", "Substation Designer", "Grid Operations Analyst"],
-              benefits: ["ETAP simulation tool exposure", "Industry mentor guidance"],
-              eligibility: "ECE & EEE students."
+              name: "Applied Production & Quality Management",
+              slug: "applied-production-quality-management",
+              desc: "Production planning, garment manufacturing workflow, quality control, defect identification, and inspection.",
+              duration: "4 Weeks / 6 Weeks / 3 Months",
+              technologies: ["Garment ERP", "Quality Control", "Defect Auditing", "Workstation Layout", "Tech Packs"],
+              overview: "This pathway focuses on production operations and quality management in apparel and industrial manufacturing environments.",
+              learningOutcomes: ["Production planning", "Manufacturing workflow", "Quality control", "Quality assurance", "Inspection processes", "Defect identification", "Process monitoring", "Productivity improvement", "Workplace safety", "Industrial documentation"],
+              activities: ["Garment defect inspection drills", "Production workflow time study", "Quality audit sheet documentation"],
+              practicalExposure: "Students observe production processes, quality inspection activities, manufacturing workflows, and industrial quality practices.",
+              skills: ["Quality Assurance", "Defect Identification", "Apparel Workflow", "Industrial Documentation"],
+              projects: [{ id: 1, title: "Apparel Quality Inspection & Defect Analysis Report" }],
+              careerOpportunities: ["Apparel Quality Inspector", "Production Assistant", "Garment Merchandiser Assistant"],
+              benefits: ["Apparel unit observation", "CIE documentation support"],
+              eligibility: "Diploma students in ADFT, Fashion Design, or Textile Tech."
             }
           ]
         },
+
+        "commercial-practice": {
+          num: "06",
+          name: "Commercial Practice",
+          slug: "commercial-practice",
+          desc: "Practical business finance, corporate taxation, GST fundamentals, invoicing, payroll documentation, and Excel.",
+          icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>`,
+          specializations: [
+            {
+              name: "Finance & Taxation",
+              slug: "finance-taxation",
+              desc: "Practical accounting, business transactions, invoicing, GST, taxation, payroll docs, and Excel reporting.",
+              duration: "4 Weeks / 6 Weeks / 3 Months",
+              technologies: ["Tally / Accounting Tools", "GST Filing Basics", "MS Excel", "Invoicing", "Payroll Docs"],
+              overview: "Introduces Commercial Practice diploma students to practical financial and taxation concepts used in real business environments.",
+              learningOutcomes: ["Basic accounting concepts", "Financial documentation", "Invoicing", "Business transactions", "GST fundamentals", "Taxation basics", "Payroll-related documentation", "Financial record management", "Excel-based financial work", "Basic business reporting"],
+              activities: ["Creating corporate invoice sheets in Excel", "Simulating GST billing workflows", "Drafting payroll calculation statements"],
+              practicalExposure: "Students work with practical examples, documentation exercises, spreadsheets, financial scenarios, and business-oriented assignments.",
+              skills: ["Financial Documentation", "GST Billing", "MS Excel Data Management", "Invoicing"],
+              projects: [{ id: 1, title: "Business Financial Documentation & GST Workbook Project" }],
+              careerOpportunities: ["Accounts Assistant", "Taxation Associate", "Billing Specialist", "Office Admin"],
+              benefits: ["Practical Excel financial workbook", "CIE evaluation support"],
+              eligibility: "Diploma students in Commercial Practice, Secretarial, or Commerce."
+            }
+          ]
+        },
+
         "computer-science-engineering": {
-          num: "03",
-          name: "Computer Science Engineering",
+          num: "07",
+          name: "Computer Science (CS)",
           slug: "computer-science-engineering",
-          desc: "Software development pathways in Cloud Architecture, AI/ML, Offensive & Defensive Cybersecurity, and Full Stack Web Apps.",
+          desc: "Live online classes, hands-on projects, Cybersecurity, Cloud, AI/ML, and Full Stack Web Development.",
           icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/><line x1="14" y1="4" x2="10" y2="20"/></svg>`,
           specializations: [
             {
               name: "Cybersecurity",
               slug: "cybersecurity",
-              desc: "Learn ethical hacking, penetration testing, network defense, threat analysis, SOC monitoring, and security compliance.",
-              duration: "6 Weeks / 3 Months",
-              technologies: ["Kali Linux", "Wireshark", "Metasploit", "Burp Suite", "Nmap", "SIEM (Splunk)", "Python"],
-              overview: "Protect enterprise digital assets from sophisticated cyber threats. Interns receive intensive practical training in network vulnerability scanning, web application security auditing, incident response, and SIEM monitoring.",
-              learningOutcomes: ["Ethical Hacking & Vulnerability Assessment", "Network Traffic & Packet Analysis", "Web Application Penetration Testing (OWASP Top 10)", "Security Information & Event Management (SIEM)", "Defensive Hardening & Firewalls"],
-              activities: ["Conducting authorized penetration tests", "Analyzing packet captures in Wireshark", "Hardening Linux server configurations", "Simulating phishing & malware analysis", "Drafting vulnerability audit reports"],
-              skills: ["Penetration Testing", "Network Security", "OWASP Auditing", "Log Analysis", "Python Scripting for Security"],
-              projects: [
-                { id: 1, title: "Web Application OWASP Security Audit" },
-                { id: 2, title: "Automated Network Vulnerability Scanner" },
-                { id: 3, title: "SOC SIEM Dashboard & Alert System" },
-                { id: 4, title: "Secure VPN & Firewall Architecture" }
-              ],
-              careerOpportunities: ["Cybersecurity Analyst", "Penetration Tester", "SOC Analyst", "Security Engineer", "Information Security Specialist"],
-              benefits: ["Hands-on Cyber Lab access", "Ethical Hacking Portfolio", "Certified Internship Document", "Direct corporate placement referrals"],
-              eligibility: "Computer Science, IT, BCA/MCA, or ECE background students."
+              desc: "Network security, threats, authentication, password security, OWASP web security, and ethical hacking.",
+              duration: "4 Weeks / 6 Weeks / 3 Months",
+              technologies: ["Kali Linux", "Wireshark", "Metasploit", "Nmap", "Web Security"],
+              overview: "Introduces students to the fundamentals of protecting computers, networks, applications, and data against cyber threats.",
+              learningOutcomes: ["Cybersecurity fundamentals", "Network security basics", "Common cyber threats", "Authentication and access control", "Password security", "Web security fundamentals", "Vulnerability awareness", "Security best practices", "Ethical hacking fundamentals", "Cybersecurity tools"],
+              activities: ["Wireshark packet capture analysis", "Nmap network scanning exercises", "Ethical hacking vulnerability assessment"],
+              practicalLearning: "Students work through practical exercises, security scenarios, demonstrations, assignments, and guided activities.",
+              skills: ["Network Security", "Vulnerability Scanning", "Packet Analysis", "Ethical Hacking Basics"],
+              projects: [{ id: 1, title: "Network Vulnerability Audit & Security Assessment" }],
+              careerOpportunities: ["Cybersecurity Associate", "Network Security Assistant", "SOC Junior Analyst"],
+              benefits: ["Live online classes", "Recorded study materials", "Doubt clearing & mentor support"],
+              eligibility: "Diploma students in Computer Science, IT, or Computer Applications."
             },
             {
-              name: "Cloud Computing",
-              slug: "cloud-computing",
-              desc: "Architect scalable cloud infrastructures, microservices containers, automated CI/CD pipelines, and cloud security controls.",
-              duration: "6 Weeks / 3 Months",
-              technologies: ["AWS", "Microsoft Azure", "Google Cloud", "Docker", "Kubernetes", "Linux", "Git", "Terraform", "CI/CD"],
-              overview: "Master modern cloud infrastructure and DevOps practices. Trainees deploy multi-tier web applications on AWS and Azure, automate infrastructure provisioning using Terraform, and orchestrate containerized microservices with Docker and Kubernetes.",
-              learningOutcomes: ["AWS Core Services (EC2, S3, VPC, RDS, IAM)", "Docker Containerization & Multi-stage Builds", "Kubernetes Cluster Management & Pod Scaling", "Infrastructure as Code (IaC) with Terraform", "Automated CI/CD Deployment Pipelines"],
-              activities: ["Setting up secure Virtual Private Clouds (VPC)", "Writing Dockerfiles & Kubernetes Manifests", "Building GitHub Actions CI/CD workflows", "Monitoring application metrics with Prometheus & Grafana", "Automating server provisioning"],
-              skills: ["AWS/Azure Administration", "Docker & Kubernetes", "Terraform IaC", "CI/CD Pipelines", "Linux SysAdmin", "Cloud Security"],
-              projects: [
-                { id: 1, title: "Cloud-Based High Availability Web Application Deployment" },
-                { id: 2, title: "Automated CI/CD Deployment Pipeline" },
-                { id: 3, title: "Cloud Infrastructure Monitoring Dashboard" },
-                { id: 4, title: "Multi-Node Kubernetes Microservices Cluster" }
-              ],
-              careerOpportunities: ["Cloud Engineer", "DevOps Engineer", "Cloud Support Analyst", "Infrastructure Engineer", "Cloud Solutions Architect"],
-              benefits: ["AWS Sandbox Credit access", "Real-world DevOps project repository", "Industry Recognized Certificate", "Guaranteed corporate placement support"],
-              eligibility: "Students pursuing Computer Science, IT, Software Engineering, or related technical degrees."
+              name: "DevOps",
+              slug: "devops",
+              desc: "Cloud service models, DevOps CI/CD, virtual machines, cloud storage, networking, IAM, containerization, and deployment.",
+              duration: "4 Weeks / 6 Weeks / 3 Months",
+              technologies: ["DevOps", "AWS", "Docker", "Linux", "Virtual Machines", "CI/CD"],
+              overview: "Introduces students to DevOps practices, cloud infrastructure, CI/CD automation, and modern deployment models.",
+              learningOutcomes: ["DevOps & Cloud fundamentals", "Cloud service models (IaaS/PaaS/SaaS)", "Virtual machines & Linux", "Docker & Containerization", "Networking fundamentals", "Cloud databases", "Identity & Access Management", "Cloud security basics", "Application deployment", "Monitoring & Resource management"],
+              activities: ["Deploying EC2 virtual servers", "Setting up CI/CD pipeline automation", "Configuring S3 storage & Docker containers"],
+              practicalLearning: "Students work with DevOps tools, cloud platforms, and guided practical exercises to deploy and manage applications.",
+              skills: ["DevOps CI/CD", "Cloud Deployment", "Linux SysAdmin", "Docker Setup"],
+              projects: [{ id: 1, title: "Automated DevOps CI/CD Pipeline & Cloud Deployment Project" }],
+              careerOpportunities: ["DevOps Associate", "Cloud Assistant", "Junior System Engineer"],
+              benefits: ["Hands-on AWS & Docker exposure", "Live classes & mentor guidance"],
+              eligibility: "Diploma students in CS, IT, or Computer Applications."
             },
             {
-              name: "Artificial Intelligence",
-              slug: "artificial-intelligence",
-              desc: "Build machine learning models, neural networks, computer vision tools, and natural language processing (NLP) pipelines.",
-              duration: "8 Weeks / 3 Months",
-              technologies: ["Python", "TensorFlow", "PyTorch", "Scikit-Learn", "OpenCV", "Pandas", "NumPy", "Jupyter"],
-              overview: "Transform data into intelligent autonomous algorithms. Interns build predictive regression/classification models, train deep neural networks for computer vision, and deploy machine learning APIs to production.",
-              learningOutcomes: ["Data Preprocessing & Feature Engineering", "Supervised & Unsupervised Machine Learning", "Deep Learning Neural Networks (CNNs, RNNs)", "Computer Vision with OpenCV", "Deploying ML Models via Flask/FastAPI"],
-              activities: ["Training image classification models", "Cleaning & processing large datasets", "Evaluating model accuracy & loss metrics", "Building REST APIs to serve ML inference predictions", "Creating interactive Jupyter analytics notebooks"],
-              skills: ["Machine Learning", "Deep Learning", "Python Data Stack", "Computer Vision", "Model Deployment", "Statistical Analysis"],
-              projects: [
-                { id: 1, title: "Automated Defect Detection using Computer Vision" },
-                { id: 2, title: "Customer Churn Prediction Model" },
-                { id: 3, title: "NLP Intelligent Document Summarizer" },
-                { id: 4, title: "Real-Time Face Recognition & Attendance System" }
-              ],
-              careerOpportunities: ["AI/ML Developer", "Data Scientist", "Machine Learning Engineer", "Computer Vision Engineer", "Data Analyst"],
-              benefits: ["GPU Cloud Computing Access", "GitHub ML Portfolio project", "Verified internship credentials", "Direct placement assistance"],
-              eligibility: "CSE, IT, Data Science, AI/ML, Mathematics or Statistics students."
+              name: "AI & Machine Learning",
+              slug: "ai-machine-learning",
+              desc: "AI concepts, ML algorithms, data preparation, supervised/unsupervised learning, model training & evaluation.",
+              duration: "4 Weeks / 6 Weeks / 3 Months",
+              technologies: ["Python", "Pandas", "Scikit-Learn", "Jupyter", "Machine Learning"],
+              overview: "Introduces students to Artificial Intelligence and Machine Learning concepts through practical learning and hands-on Python projects.",
+              learningOutcomes: ["AI fundamentals", "Machine Learning concepts", "Data preparation", "Data analysis", "Supervised learning", "Unsupervised learning", "Classification", "Regression", "Model training", "Model evaluation", "Introduction to AI applications"],
+              activities: ["Data cleaning with Pandas", "Training classification algorithms", "Evaluating model accuracy in Jupyter"],
+              practicalLearning: "Students work on guided datasets, practical exercises, mini-projects, and beginner-friendly AI/ML applications.",
+              skills: ["Python Programming", "Data Analysis", "Machine Learning Basics", "Model Evaluation"],
+              projects: [{ id: 1, title: "Predictive Machine Learning Classification Model" }],
+              careerOpportunities: ["AI/ML Associate", "Junior Data Analyst", "Python Developer"],
+              benefits: ["Guided datasets", "Mini-projects", "Live class recordings"],
+              eligibility: "Diploma students in Computer Science, IT, or AI."
             },
             {
               name: "Full Stack Development",
               slug: "full-stack-development",
-              desc: "Construct modern web applications using React, Node.js, Express, MongoDB/SQL, REST APIs, and UI/UX responsive designs.",
-              duration: "8 Weeks / 3 Months",
-              technologies: ["JavaScript (ES6+)", "React.js", "Node.js", "Express.js", "MongoDB", "PostgreSQL", "HTML5/CSS3", "Git"],
-              overview: "Develop production-ready web platforms from end to end. Trainees design responsive front-end user interfaces, engineer robust backend RESTful APIs, interact with relational and NoSQL databases, and deploy live applications.",
-              learningOutcomes: ["Responsive Front-End Design (HTML, CSS, React)", "Backend API Architecture (Node.js, Express)", "Database Schema Design (MongoDB, PostgreSQL)", "State Management & Component Architecture", "Authentication & Security (JWT, OAuth)"],
-              activities: ["Building dynamic React single-page apps", "Engineering CRUD REST endpoints", "Designing database schemas & relationships", "Integrating third-party payment gateways & auth", "Deploying full stack apps on cloud servers"],
-              skills: ["Full Stack Development", "React.js", "Node.js API", "Database Management", "Version Control (Git)", "Web Performance"],
-              projects: [
-                { id: 1, title: "E-Commerce Web Platform with Payment Integration" },
-                { id: 2, title: "Real-Time Collaborative Dashboard App" },
-                { id: 3, title: "Corporate HR & Payroll Management Portal" },
-                { id: 4, title: "Social Media Platform with Auth & Chat" }
-              ],
-              careerOpportunities: ["Full Stack Web Developer", "Frontend Developer", "Backend Developer", "Software Engineer"],
-              benefits: ["Live production site hosting", "Code review by senior software engineers", "Certificate of Completion", "Corporate hiring network access"],
-              eligibility: "Open to all CS, IT, Software Engineering & MCA candidates."
+              desc: "Frontend (HTML, CSS, JS), Backend (Node.js, Express, APIs), and Databases (SQL, CRUD operations).",
+              duration: "4 Weeks / 6 Weeks / 3 Months",
+              technologies: ["HTML5/CSS3", "JavaScript", "React.js", "Node.js", "SQL/MongoDB"],
+              overview: "The Full Stack Development pathway provides students with practical exposure to both frontend and backend web development.",
+              learningOutcomes: ["HTML, CSS & JavaScript", "Responsive web design", "UI development", "Server-side programming", "REST APIs", "Database connectivity & SQL", "Authentication fundamentals", "CRUD operations"],
+              activities: ["Building responsive HTML/CSS web pages", "Creating Node.js REST API endpoints", "SQL CRUD database queries"],
+              practicalLearning: "Students build web pages, applications, APIs, database-driven applications, and guided projects.",
+              skills: ["Frontend Web Design", "Backend API Development", "SQL Database Management", "Full Stack Web"],
+              projects: [{ id: 1, title: "Database-Driven Full Stack E-Commerce Web App" }],
+              careerOpportunities: ["Junior Full Stack Developer", "Frontend Web Developer", "Web Designer"],
+              benefits: ["Live online classes", "Practical coding sessions", "Complete project support"],
+              eligibility: "Diploma students in Computer Science, IT, or Web Tech."
             }
           ]
         },
-        "electrical-engineering": {
-          num: "04",
-          name: "Electrical Engineering",
-          slug: "electrical-engineering",
-          desc: "Focused programs in electrical power grids, motor automation, architectural wiring design, renewable solar power, and control systems.",
-          icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>`,
+
+        "electronics-communication-engineering": {
+          num: "08",
+          name: "Electronics & Communication (EC)",
+          slug: "electronics-communication-engineering",
+          desc: "Industrial automation PLCs, E-Mobility electrical circuits, and IIoT Industrial Internet of Things.",
+          icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>`,
           specializations: [
             {
               name: "Industrial Automation",
               slug: "industrial-automation",
-              desc: "Program PLCs, VFD motor drives, sensors, relays, and industrial control cabinets.",
-              duration: "8 Weeks / 3 Months",
-              technologies: ["Siemens PLC", "Ladder Logic", "VFD Drives", "HMI", "Relay Control"],
-              overview: "Master industrial electrical panel wiring, motor control circuits, and programmable logic controller (PLC) automation used in manufacturing and processing plants.",
-              learningOutcomes: ["Control Panel Schematic Design", "3-Phase Motor Control & VFDs", "PLC Programming", "Industrial Safety Standards"],
-              activities: ["Wiring relay control panels", "Programming motor speed ramps", "Troubleshooting industrial electrical faults"],
-              skills: ["Control Panel Wiring", "PLC Logic", "VFD Parameterization", "Electrical Safety"],
-              projects: [
-                { id: 1, title: "Dual Motor Automatic Transfer System" },
-                { id: 2, title: "Industrial VFD Pump Speed Control Panel" }
-              ],
-              careerOpportunities: ["Electrical Automation Engineer", "Control Panel Designer", "Maintenance Engineer"],
-              benefits: ["Practical panel wiring lab exposure", "Certified internship"],
-              eligibility: "Electrical & Electronics engineering students."
+              desc: "Sensors, actuators, PLC fundamentals, control systems, industrial communication, and motor control.",
+              duration: "4 Weeks / 6 Weeks / 3 Months",
+              technologies: ["PLC S7-1200", "Sensors & Actuators", "Motor Control", "HMI", "Ladder Logic"],
+              overview: "Introduces students to automation technologies and programmable logic controllers used in modern processing industries.",
+              learningOutcomes: ["Industrial automation fundamentals", "Sensors", "Actuators", "PLC fundamentals", "Control systems", "Industrial communication", "Automated production systems", "Motor control", "Industrial safety"],
+              activities: ["PLC ladder logic wiring", "Sensory feedback testing", "Industrial motor speed control"],
+              practicalExposure: "Students receive equipment demonstrations, automation examples, control-system exercises, and industrial-oriented practical learning.",
+              skills: ["PLC Programming", "Industrial Sensor Wiring", "Motor Speed Control"],
+              projects: [{ id: 1, title: "PLC-Based Automated Process Control System" }],
+              careerOpportunities: ["Automation Associate", "PLC Technician", "Control System Assistant"],
+              benefits: ["PLC trainer kit demos", "CIE academic documentation"],
+              eligibility: "Diploma students in ECE, EEE, or Mechatronics."
             },
             {
-              name: "Power Systems",
-              slug: "power-systems",
-              desc: "Study power generation, transmission line parameters, transformer substations, and protective relaying.",
-              duration: "6 Weeks / 3 Months",
-              technologies: ["ETAP", "MATLAB", "Power Cables", "Transformers", "Substations"],
-              overview: "Covers high-voltage electrical grid design, transformer load calculations, short circuit fault current calculations, and protective relay setting coordination.",
-              learningOutcomes: ["Substation Equipment Selection", "Load Flow Analysis", "Short Circuit Calculation", "Earthing Grid Design"],
-              activities: ["Drafting 11kV substation single-line diagrams", "Simulating line faults in ETAP", "Calculating transformer sizing"],
-              skills: ["Power Grid Design", "ETAP Simulation", "Single Line Diagrams", "Earthing Design"],
-              projects: [
-                { id: 1, title: "11kV Industrial Substation Single Line Diagram Design" },
-                { id: 2, title: "Substation Earthing & Lightning Protection Grid" }
-              ],
-              careerOpportunities: ["Power Systems Engineer", "Substation Engineer", "Electrical Project Engineer"],
-              benefits: ["ETAP tool training", "Substation site visit exposure"],
-              eligibility: "Electrical Engineering students."
+              name: "E-Mobility",
+              slug: "e-mobility",
+              desc: "EV electrical systems, motors, battery management, charging systems, power electronics, and energy management.",
+              duration: "4 Weeks / 6 Weeks / 3 Months",
+              technologies: ["EV Electrical Systems", "BMS", "Power Electronics", "Charging Technologies"],
+              overview: "Focuses on electronic and electrical technologies used in modern electric mobility for diploma candidates.",
+              learningOutcomes: ["Electric mobility fundamentals", "EV electrical systems", "Motors", "Battery systems", "Charging systems", "Power electronics fundamentals", "Vehicle control systems", "EV safety", "Energy management"],
+              activities: ["Testing EV power converters", "Battery management system voltage balancing", "Charger connection demos"],
+              practicalExposure: "Students receive practical demonstrations related to EV components, electrical systems, charging technologies, and mobility applications.",
+              skills: ["EV Electrical Testing", "BMS Circuitry", "Power Electronics Basics"],
+              projects: [{ id: 1, title: "E-Mobility Battery Management & Charging Circuit Model" }],
+              careerOpportunities: ["E-Mobility Assistant", "EV Electronics Tester", "Charger Technician"],
+              benefits: ["EV component demos", "Academic report support"],
+              eligibility: "Diploma students in ECE, EEE, or Automobile."
             },
             {
-              name: "Electrical Design",
-              slug: "electrical-design",
-              desc: "Architectural building electrification, AutoCAD electrical drafting, load estimation, and lighting calculations.",
-              duration: "6 Weeks / 3 Months",
-              technologies: ["AutoCAD Electrical", "DIALux", "Load Calculators", "NEC / IS Codes"],
-              overview: "Design building electrification systems, cable tray sizing, lighting layouts, distribution board schedules, and emergency generator power backups for commercial projects.",
-              learningOutcomes: ["AutoCAD Electrical Layout Drafting", "DIALux Indoor & Outdoor Lighting Calculation", "Cable Sizing & Voltage Drop Calculations", "Distribution Board Schedule Design"],
-              activities: ["Drafting floor plan electrical layouts", "Calculating illuminance levels", "Selecting circuit breakers & cable gauges"],
-              skills: ["AutoCAD Electrical", "MEP Design", "Load Calculation", "Standard Code Compliance"],
-              projects: [
-                { id: 1, title: "Commercial High-Rise Electrical Layout Design" },
-                { id: 2, title: "Industrial Plant Lighting & Cable Sizing Model" }
-              ],
-              careerOpportunities: ["Electrical Design Engineer", "MEP Consultant", "AutoCAD Draftsman"],
-              benefits: ["Commercial CAD layout project portfolio", "Job assistance"],
-              eligibility: "EEE & Electrical Engineering students."
-            },
-            {
-              name: "Renewable Energy",
-              slug: "renewable-energy",
-              desc: "Grid-tied solar PV systems, wind turbines, battery energy storage systems (BESS), and power converters.",
-              duration: "6 Weeks / 3 Months",
-              technologies: ["PVSyst", "HelioScope", "Solar Inverters", "BESS", "MATLAB"],
-              overview: "Learn rooftop and utility-scale solar PV system design, inverter matching, battery storage integration, and grid interconnection feasibility analysis.",
-              learningOutcomes: ["Solar PV Yield Estimation", "Inverter & String Sizing", "Battery Storage System Sizing", "Grid Interconnection Standards"],
-              activities: ["Designing 100kW rooftop solar plant in PVSyst", "Calculating battery backup requirements", "Sizing solar cables & DC isolators"],
-              skills: ["PVSyst Modeling", "Solar System Sizing", "Battery Management", "Green Energy Standards"],
-              projects: [
-                { id: 1, title: "100kW Commercial Solar Rooftop PV Design" },
-                { id: 2, title: "Hybrid Solar & Battery Storage Microgrid Model" }
-              ],
-              careerOpportunities: ["Solar Design Engineer", "Renewable Energy Consultant", "Project Manager"],
-              benefits: ["PVSyst software certification prep", "Placement referrals"],
-              eligibility: "EEE & Electrical Engineering students."
-            },
-            {
-              name: "Control Systems",
-              slug: "control-systems",
-              desc: "Feedback loops, PID controllers, system modeling, state-space equations, and stability analysis.",
-              duration: "6 Weeks / 3 Months",
-              technologies: ["MATLAB", "Simulink", "PID Tuning", "LabVIEW", "Control Theory"],
-              overview: "Analyze and tune dynamic control loops for precision motor speed control, temperature regulation, and stability enhancement in power plants.",
-              learningOutcomes: ["Transfer Function Modeling", "PID Controller Tuning", "Root Locus & Bode Stability Analysis", "State-Space Feedback Design"],
-              activities: ["Tuning PID loops in Simulink", "Modeling motor speed response", "Simulating feedback stability under disturbances"],
-              skills: ["MATLAB Control Toolbox", "PID Tuning", "Feedback Loop Design", "System Modeling"],
-              projects: [
-                { id: 1, title: "Precision Motor Speed PID Controller Design" },
-                { id: 2, title: "Thermal Process Control Loop Simulation" }
-              ],
-              careerOpportunities: ["Control Systems Engineer", "Instrumentation Engineer", "R&D Engineer"],
-              benefits: ["MATLAB Simulink project portfolio", "Certificate of completion"],
-              eligibility: "Electrical & Electronics engineering candidates."
+              name: "IIoT — Industrial Internet of Things",
+              slug: "iiot",
+              desc: "Connecting industrial equipment, sensors, networks, remote monitoring, and data analytics.",
+              duration: "4 Weeks / 6 Weeks / 3 Months",
+              technologies: ["ESP32", "MQTT", "Industrial Sensors", "Node-RED", "Cloud Monitoring"],
+              overview: "Introduces students to the connection of industrial equipment, sensors, networks, and software systems.",
+              learningOutcomes: ["IoT fundamentals", "Industrial IoT concepts", "Sensors and data collection", "Connected devices", "Industrial communication", "Data monitoring", "Remote monitoring", "Automation integration", "Basic analytics"],
+              activities: ["Wiring sensors to ESP32 microcontrollers", "Node-RED dashboard data flow setup", "MQTT telemetry publishing"],
+              practicalLearning: "Students work with IoT concepts, sensor-based examples, data collection activities, monitoring systems, and guided mini-projects.",
+              skills: ["IIoT System Setup", "Node-RED Dashboarding", "MQTT Protocols"],
+              projects: [{ id: 1, title: "Industrial Plant Environment Remote Telemetry System" }],
+              careerOpportunities: ["IIoT Technician", "Smart Factory Assistant", "IoT Support Tech"],
+              benefits: ["IoT Hardware Kit Demos", "Project support & CIE help"],
+              eligibility: "Diploma students in ECE, CS, EEE, or Mechatronics."
             }
           ]
         },
-        "civil-engineering": {
-          num: "05",
-          name: "Civil Engineering",
-          slug: "civil-engineering",
-          desc: "Structural analysis, BIM building modeling, transportation design, environmental systems, and geotechnical foundations.",
-          icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>`,
+
+        "electrical-engineering": {
+          num: "09",
+          name: "Electrical & Electronics (EEE)",
+          slug: "electrical-engineering",
+          desc: "Electrical utility distribution, transformers, switchgear, power generation, and power engineering.",
+          icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>`,
           specializations: [
             {
-              name: "Transportation Engineering",
-              slug: "transportation-engineering",
-              desc: "Highway geometric design, flexible/rigid pavement design, traffic flow simulation, and urban transit planning.",
-              duration: "6 Weeks / 3 Months",
-              technologies: ["AutoCAD Civil 3D", "MX Road", "Traffic Simulators", "IRC Codes"],
-              overview: "Master highway alignment design, pavement thickness calculations, intersection traffic management, and road safety auditing adhering to IRC guidelines.",
-              learningOutcomes: ["Highway Geometric Alignment", "Pavement Design (IRC 37 / IRC 58)", "Traffic Survey Data Analysis", "Intersection Signal Timing"],
-              activities: ["Designing highway vertical & horizontal curves", "Calculating asphalt pavement layer thickness", "Simulating junction traffic flow"],
-              skills: ["Civil 3D Highway Design", "Pavement Design", "Traffic Analysis", "IRC Standard Codes"],
-              projects: [
-                { id: 1, title: "4-Lane Highway Alignment & Pavement Design" },
-                { id: 2, title: "Urban Junction Traffic Signal Optimization" }
-              ],
-              careerOpportunities: ["Highway Engineer", "Transportation Planner", "Civil Infrastructure Specialist"],
-              benefits: ["Civil 3D software exposure", "Infrastructure project portfolio"],
-              eligibility: "Civil Engineering students."
+              name: "Electrical Utility",
+              slug: "electrical-utility",
+              desc: "Electrical power distribution, equipment, transformers, switchgear, protection, transmission, and maintenance.",
+              duration: "4 Weeks / 6 Weeks / 3 Months",
+              technologies: ["Power Distribution", "Transformers", "Switchgear", "Relays", "Electrical Safety"],
+              overview: "Provides students with practical exposure to electrical power distribution and utility systems.",
+              learningOutcomes: ["Electrical power fundamentals", "Power distribution", "Electrical equipment", "Transformers", "Switchgear", "Protection systems", "Electrical safety", "Power transmission fundamentals", "Maintenance practices"],
+              activities: ["Transformer load testing observation", "Switchgear safety circuit inspection", "Substation single-line diagram study"],
+              practicalExposure: "Students receive electrical-system demonstrations, equipment observations, site visits, safety training, and practical discussions.",
+              skills: ["Transformer Maintenance Basics", "Switchgear Operation", "Electrical Safety"],
+              projects: [{ id: 1, title: "Electrical Substation Distribution & Switchgear Inspection Report" }],
+              careerOpportunities: ["Utility Technician", "Substation Assistant", "Electrical Maintenance Tech"],
+              benefits: ["Utility site visit / demos", "CIE 1, 2, 3 documentation"],
+              eligibility: "Diploma students in EEE or Electrical Engineering."
             },
             {
-              name: "Environmental Technology",
-              slug: "environmental-technology",
-              desc: "Wastewater treatment plants (STP/ETP), solid waste management, environmental impact assessment (EIA), and air pollution control.",
-              duration: "6 Weeks / 3 Months",
-              technologies: ["WaterCAD", "BioWin", "EIA Frameworks", "Water Quality Analyzers"],
-              overview: "Focuses on sustainable environmental engineering. Trainees design sewage treatment plants (STP), industrial effluent treatment plants (ETP), and conduct environmental impact studies.",
-              learningOutcomes: ["Biological Wastewater Treatment Design", "Water Supply Distribution Modeling", "Solid Waste Recycling Workflows", "EIA Documentation"],
-              activities: ["Sizing aeration tanks & clarifiers", "Simulating water pipe networks", "Conducting water quality lab tests"],
-              skills: ["Wastewater Plant Sizing", "Environmental Auditing", "WaterCAD", "Environmental Regulations"],
-              projects: [
-                { id: 1, title: "5 MLD Sewage Treatment Plant (STP) Process Design" },
-                { id: 2, title: "Urban Water Supply Network Distribution Model" }
-              ],
-              careerOpportunities: ["Environmental Engineer", "Water Treatment Specialist", "EIA Consultant"],
-              benefits: ["Practical plant sizing exposure", "Environmental certification"],
-              eligibility: "Civil & Environmental engineering students."
-            },
-            {
-              name: "Geotechnical Engineering",
-              slug: "geotechnical-engineering",
-              desc: "Soil mechanic testing, shallow and deep foundation design, slope stability analysis, and ground improvement techniques.",
-              duration: "6 Weeks / 3 Months",
-              technologies: ["PLAXIS", "GeoStudio", "Soil Lab Equipment", "IS Soil Codes"],
-              overview: "Analyze soil bearing capacity, settlement parameters, retaining wall earth pressures, and deep pile foundation design for heavy civil structures.",
-              learningOutcomes: ["Soil Borelog Data Interpretation", "Shallow & Pile Foundation Sizing", "Slope Stability Modeling", "Retaining Structure Design"],
-              activities: ["Calculating allowable soil bearing capacity", "Simulating embankment slope stability", "Evaluating pile load capacities"],
-              skills: ["Geotechnical Analysis", "PLAXIS Modeling", "Foundation Sizing", "Soil Mechanics"],
-              projects: [
-                { id: 1, title: "High-Rise Building Deep Pile Foundation Analysis" },
-                { id: 2, title: "Hillside Slope Stability & Retaining Wall Design" }
-              ],
-              careerOpportunities: ["Geotechnical Engineer", "Foundation Designer", "Site Investigation Specialist"],
-              benefits: ["PLAXIS software training", "Industry project guidance"],
-              eligibility: "Civil Engineering candidates."
-            },
-            {
-              name: "Structural Engineering",
-              slug: "structural-engineering",
-              desc: "Analyze and design reinforced concrete (RCC) and steel structures using ETABS and STAAD.Pro.",
-              duration: "8 Weeks / 3 Months",
-              technologies: ["ETABS", "STAAD.Pro", "Revit Structure", "IS 456 / IS 800"],
-              overview: "Build structural models for multi-story residential and commercial buildings. Interns calculate dead, live, wind, and seismic loads and draft structural reinforcement rebar drawings.",
-              learningOutcomes: ["3D Structural Building Modeling", "Seismic & Wind Load Calculation", "RCC Beam, Column & Slab Design", "Steel Truss & Connection Details"],
-              activities: ["Building multi-story frame models in ETABS", "Performing dynamic response spectrum analysis", "Drafting rebar detailing drawings"],
-              skills: ["ETABS / STAAD.Pro", "RCC Design", "Steel Structural Detailing", "IS Code Compliance"],
-              projects: [
-                { id: 1, title: "G+10 Commercial RCC Building Seismic Structural Design" },
-                { id: 2, title: "Long-Span Industrial Steel Roof Truss Model" }
-              ],
-              careerOpportunities: ["Structural Design Engineer", "BIM Structural Modeler", "Civil Structural Analyst"],
-              benefits: ["ETABS project portfolio", "Placement support in design consultancies"],
-              eligibility: "Civil Engineering students."
-            },
-            {
-              name: "Construction Technology",
-              slug: "construction-technology",
-              desc: "Construction project management, Primavera P6 scheduling, cost estimation, quantity surveying, and site safety.",
-              duration: "8 Weeks / 3 Months",
-              technologies: ["Primavera P6", "MS Project", "AutoCAD", "BOM / BOQ Tools"],
-              overview: "Master construction management workflows, work breakdown structures (WBS), project scheduling, quantity estimation, and quality assurance at site.",
-              learningOutcomes: ["Primavera P6 Project Scheduling", "Quantity Surveying & Bill of Quantities (BOQ)", "Rate Analysis & Cost Estimation", "Construction Site Safety & QA/QC"],
-              activities: ["Drafting project Gantt charts", "Calculating concrete & steel quantities", "Preparing project budget schedules"],
-              skills: ["Project Scheduling", "Quantity Surveying", "Primavera P6", "Cost Estimation"],
-              projects: [
-                { id: 1, title: "Residential Complex Primavera P6 Project Master Schedule" },
-                { id: 2, title: "Comprehensive BOQ & Cost Estimation for Villa Project" }
-              ],
-              careerOpportunities: ["Construction Project Engineer", "Quantity Surveyor", "Planning Engineer"],
-              benefits: ["Primavera software exposure", "Direct construction firm referrals"],
-              eligibility: "Civil Engineering candidates."
+              name: "Power Engineering",
+              slug: "power-engineering",
+              desc: "Power generation, transmission, distribution, transformers, motors/generators, protection, and power factor.",
+              duration: "4 Weeks / 6 Weeks / 3 Months",
+              technologies: ["Power Generation", "Motors & Generators", "Relay Protection", "Power Factor"],
+              overview: "Introduces students to electrical power generation, transmission, distribution, and management.",
+              learningOutcomes: ["Power generation", "Transmission systems", "Distribution systems", "Transformers", "Motors and generators", "Electrical protection", "Power factor", "Energy management", "Electrical safety"],
+              activities: ["3-phase motor load tests", "Power factor correction capacitor bank demos", "Relay tripping tests"],
+              practicalExposure: "Students receive practical demonstrations, electrical equipment exposure, system observations, and industry-oriented activities.",
+              skills: ["Power System Observation", "Motor Testing", "Power Factor Correction"],
+              projects: [{ id: 1, title: "Power Factor Correction & Motor Load Test Project" }],
+              careerOpportunities: ["Power Systems Associate", "Plant Electrical Assistant", "Maintenance Operator"],
+              benefits: ["Practical equipment exposure", "Academic report support"],
+              eligibility: "Diploma students in EEE or Electrical Engineering."
             }
           ]
         },
-        "fashion-designing": {
-          num: "06",
-          name: "Fashion Designing",
-          slug: "fashion-designing",
-          desc: "Creativity meets technology in garment construction, digital textile printing, apparel production management, and fashion illustration.",
-          icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>`,
+
+        "metallurgy": {
+          num: "10",
+          name: "Metallurgy",
+          slug: "metallurgy",
+          desc: "Metallurgical heat treatment processes, annealing, normalizing, hardening, tempering, and material testing.",
+          icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 9.172V5L8 4z"/></svg>`,
           specializations: [
             {
-              name: "Fashion Design",
-              slug: "fashion-design",
-              desc: "Couture collection conceptualization, mood board creation, garment draping, pattern making, and fashion show styling.",
-              duration: "6 Weeks / 3 Months",
-              technologies: ["Adobe Illustrator", "CLO 3D", "Photoshop", "Pattern Drafting", "Draping"],
-              overview: "Express fashion vision through modern CAD software and traditional draping techniques. Interns build themed apparel collections, create digital 3D garment prototypes, and construct finished garments.",
-              learningOutcomes: ["Theme Research & Mood Board Conceptualization", "Digital Fashion Illustration", "3D Garment Simulation in CLO 3D", "Flat Pattern Making & Draping"],
-              activities: ["Creating digital fashion sketches", "Simulating fabric drape in CLO 3D", "Stitching prototype garments", "Styling lookbooks"],
-              skills: ["Fashion Illustration", "CLO 3D Modeling", "Pattern Making", "Garment Construction", "Trend Forecasting"],
-              projects: [
-                { id: 1, title: "Sustainable Apparel Collection & Lookbook" },
-                { id: 2, title: "CLO 3D Virtual Garment Fitting Model" }
-              ],
-              careerOpportunities: ["Fashion Designer", "Apparel Stylist", "3D Fashion Modeler", "Creative Director"],
-              benefits: ["Portfolio collection showcases", "Certificate of completion"],
-              eligibility: "Fashion Design, Textile, or Fine Arts students."
-            },
-            {
-              name: "Apparel Production",
-              slug: "apparel-production",
-              desc: "Garment manufacturing unit management, industrial sewing workflows, quality inspection, and assembly line optimization.",
-              duration: "6 Weeks / 3 Months",
-              technologies: ["Garment ERP", "Tech Packs", "Quality Audit Sheets", "SAM/SMV Calculators"],
-              overview: "Learn the operational side of mass garment manufacturing. Trainees draft technical specification packs (Tech Packs), calculate Standard Allowable Minutes (SAM), and conduct AQL quality inspections.",
-              learningOutcomes: ["Technical Pack (Tech Pack) Creation", "Industrial Sewing Machine Operations", "Line Balancing & SAM Calculation", "AQL Quality Inspection"],
-              activities: ["Drafting complete apparel Tech Packs", "Conducting line balancing for t-shirt assembly", "Performing fabric defect audits"],
-              skills: ["Tech Pack Creation", "Garment Quality Control", "Production Planning", "Industrial Sewing"],
-              projects: [
-                { id: 1, title: "Woven Shirt Tech Pack & Production Line Plan" },
-                { id: 2, title: "Garment Factory AQL Quality Audit Study" }
-              ],
-              careerOpportunities: ["Apparel Production Manager", "Garment Quality Auditor", "Merchandiser"],
-              benefits: ["Garment factory visit exposure", "Industry placement support"],
-              eligibility: "Fashion Designing & Apparel Technology students."
-            },
-            {
-              name: "Textile Design",
-              slug: "textile-design",
-              desc: "Print creation, weave structures, fabric dyeing techniques, surface ornamentation, and digital fabric printing.",
-              duration: "6 Weeks / 3 Months",
-              technologies: ["NedGraphics", "Adobe Photoshop", "Textile Printing", "Weave Simulators"],
-              overview: "Explore fabric creation from fiber to finished print. Interns design seamless digital repeat patterns, study jacquard and dobby weave structures, and experiment with eco-friendly dyes.",
-              learningOutcomes: ["Seamless Pattern Repeat Design", "Jacquard & Dobby Weave Structures", "Textile Dyeing & Printing Processes", "Surface Ornamentation Techniques"],
-              activities: ["Designing digital textile print repeats", "Testing natural fabric dye fastness", "Creating woven fabric swatches"],
-              skills: ["Textile Print Design", "Weave Structure Modeling", "Fabric Dyeing", "Surface Design"],
-              projects: [
-                { id: 1, title: "Botanical Digital Print Textile Collection" },
-                { id: 2, title: "Jacquard Weave Fabric Structure Portfolio" }
-              ],
-              careerOpportunities: ["Textile Designer", "Surface Ornamentation Specialist", "Fabric Developer"],
-              benefits: ["Fabric swatch portfolio creation", "Direct brand placement assistance"],
-              eligibility: "Fashion, Textile, or Applied Arts candidates."
-            },
-            {
-              name: "Fashion Illustration",
-              slug: "fashion-illustration",
-              desc: "Master 9-head croquis drawing, digital vector rendering, fabric texture representation, and editorial fashion art.",
-              duration: "6 Weeks / 3 Months",
-              technologies: ["Procreate", "Adobe Illustrator", "Photoshop", "Digital Sketching"],
-              overview: "Develop high-end fashion artistic rendering skills. Learn digital Croquis sketching, realistic fabric texture shading (leather, silk, denim), and editorial fashion presentation.",
-              learningOutcomes: ["9-Head Fashion Figure Croquis", "Digital Texture & Fabric Shading", "Editorial Layout & Vector Rendering"],
-              activities: ["Sketching digital fashion croquis", "Rendering metallic & silk textures in Procreate"],
-              skills: ["Procreate Illustration", "Vector Fashion Art", "Editorial Design"],
-              projects: [
-                { id: 1, title: "High-Fashion Haute Couture Digital Sketchbook" }
-              ],
-              careerOpportunities: ["Fashion Illustrator", "Graphic Designer for Apparel", "Trend Visualizer"],
-              benefits: ["Professional digital illustration portfolio"],
-              eligibility: "Fashion & Design students."
-            },
-            {
-              name: "Garment Technology",
-              slug: "garment-technology",
-              desc: "Advanced fabric performance testing, pattern grading software, seam strength analysis, and smart textiles.",
-              duration: "6 Weeks / 3 Months",
-              technologies: ["Optitex", "Gerber CAD", "Fabric Testing Instruments"],
-              overview: "Focus on the technical aspects of garment fit, computerized pattern grading, fabric GSM and tensile testing, and performance activewear development.",
-              learningOutcomes: ["Computerized Pattern Grading in Optitex", "Fabric Tensile & GSM Testing", "Seam Engineering"],
-              activities: ["Grading garment patterns for sizes XS-XXL", "Conducting fabric tear strength tests"],
-              skills: ["Pattern Grading", "Fabric Science", "Optitex CAD"],
-              projects: [
-                { id: 1, title: "Computerized Pattern Grading & Marker Efficiency Optimization" }
-              ],
-              careerOpportunities: ["Garment Technologist", "Pattern CAD Specialist", "R&D Specialist"],
-              benefits: ["Gerber/Optitex software training"],
-              eligibility: "Fashion & Textile Technology candidates."
+              name: "Heat Treatment Process",
+              slug: "heat-treatment-process",
+              desc: "Modifying mechanical properties of metals via heating, cooling, annealing, normalizing, hardening, and tempering.",
+              duration: "4 Weeks / 6 Weeks / 3 Months",
+              technologies: ["Heat Treatment Furnaces", "Hardness Testing", "Annealing & Tempering", "Metallography"],
+              overview: "This pathway introduces students to the industrial processes used to modify the mechanical properties of metals.",
+              learningOutcomes: ["Heat treatment fundamentals", "Heating and cooling processes", "Annealing", "Normalizing", "Hardening", "Tempering", "Material properties", "Metallurgical testing", "Quality inspection", "Industrial applications"],
+              activities: ["Heat treatment furnace cycle monitoring", "Rockwell/Vickers hardness testing of treated samples", "Microstructure examination"],
+              practicalExposure: "Students observe or receive demonstrations of heat-treatment processes, material testing, inspection methods, and industrial metallurgical practices.",
+              skills: ["Heat Treatment Cycle Inspection", "Hardness Testing", "Metallurgical Quality Audit"],
+              projects: [{ id: 1, title: "Steel Heat Treatment Hardness & Microstructure Analysis" }],
+              careerOpportunities: ["Heat Treatment Technician", "Metallurgical Quality Inspector", "Lab Assistant"],
+              benefits: ["Metallurgical lab demos", "Academic report documentation"],
+              eligibility: "Diploma students in Metallurgy or Mechanical."
             }
           ]
         },
-        "automobile-engineering": {
-          num: "07",
-          name: "Automobile Engineering",
-          slug: "automobile-engineering",
-          desc: "Specialized training in Electric Vehicles (EV), battery packs, automotive diagnostic tools, CAD component design, and assembly.",
-          icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>`,
-          specializations: [
-            {
-              name: "Electric and Hybrid Vehicles",
-              slug: "electric-hybrid-vehicles",
-              desc: "EV powertrain architecture, Li-ion battery management systems (BMS), electric motor controllers, and EV charging infrastructure.",
-              duration: "8 Weeks / 3 Months",
-              technologies: ["MATLAB Simulink", "EV BMS", "BLDC Motor Controllers", "CAN Bus", "Ansys Maxwell"],
-              overview: "Step into the electric mobility revolution. Trainees model electric vehicle drive cycles, design high-voltage Li-ion battery packs, program motor drive controllers, and study CCS2 charging protocols.",
-              learningOutcomes: ["EV Powertrain System Sizing", "Lithium Battery Pack & BMS Architecture", "BLDC / PMSM Motor Control", "CAN Bus Telemetry in EVs", "EV Thermal Management"],
-              activities: ["Simulating EV drive cycles in Simulink", "Wiring BLDC motor controller speed loops", "Testing battery cell balancing circuits", "Logging CAN bus diagnostic messages"],
-              skills: ["EV Powertrain Design", "BMS Programming", "Motor Control", "MATLAB Simulation", "Battery Safety"],
-              projects: [
-                { id: 1, title: "10kWh EV Battery Pack Thermal & BMS Model" },
-                { id: 2, title: "BLDC Electric Motor Speed Controller Simulation" },
-                { id: 3, title: "CAN Bus Vehicle Telemetry Data Logger" },
-                { id: 4, title: "Smart EV Fast Charging Protocol Station" }
-              ],
-              careerOpportunities: ["EV Powertrain Engineer", "BMS Hardware Engineer", "Battery Pack Designer", "EV Calibration Engineer"],
-              benefits: ["EV hardware kit exposure", "Industry EV certification", "Placement assistance with EV OEMs"],
-              eligibility: "Automobile, Mechanical, EEE & ECE engineering students."
-            },
-            {
-              name: "Electrical Diagnosis and Testing",
-              slug: "electrical-diagnosis-testing",
-              desc: "Vehicle OBD-II diagnostics, ECU flashing, automotive wiring harness troubleshooting, and sensor fault simulation.",
-              duration: "6 Weeks / 3 Months",
-              technologies: ["OBD-II Scanners", "CANalyzer", "Oscilloscopes", "Multimeters", "ECU Flashing"],
-              overview: "Hands-on diagnostic training for modern vehicle electronics. Interns use OBD-II scanners and CANalyzer tools to read DTC fault codes, analyze sensor waveforms, and troubleshoot automotive wiring systems.",
-              learningOutcomes: ["OBD-II Diagnostic Troubleshooting", "ECU Sensor Waveform Analysis", "CAN Bus Communication Diagnostics", "Vehicle Electrical Wiring Harness Repair"],
-              activities: ["Scanning vehicle ECU for diagnostic codes", "Probing crank sensor signals with oscilloscope", "Troubleshooting relay & fuse circuits"],
-              skills: ["OBD-II Diagnostics", "CAN Bus Analysis", "Electrical Wiring Repair", "Sensor Testing"],
-              projects: [
-                { id: 1, title: "Automotive OBD-II Fault Diagnosis & Telemetry Setup" },
-                { id: 2, title: "Engine Management ECU Sensor Signal Audit" }
-              ],
-              careerOpportunities: ["Automotive Diagnostic Specialist", "Service Engineer", "ECU Calibration Technician"],
-              benefits: ["Hands-on OBD-II scanner kit exposure", "Job placement support"],
-              eligibility: "Automobile & Electrical students."
-            },
-            {
-              name: "AutoCAD and Component Designing",
-              slug: "autocad-component-designing",
-              desc: "Detailed 2D/3D CAD drafting of engine parts, suspension arms, steering linkages, and chassis sheet metal.",
-              duration: "6 Weeks / 3 Months",
-              technologies: ["AutoCAD Mechanical", "SolidWorks", "CATIA V5", "GD&T"],
-              overview: "Master parametric 3D automotive design. Interns model complex engine pistons, steering knuckles, and suspension arms following GD&T tolerance drafting standards.",
-              learningOutcomes: ["2D/3D Automotive CAD Drafting", "Parametric Solid & Sheet Metal Modeling", "Geometric Dimensioning & Tolerancing (GD&T)", "Assembly BOM Generation"],
-              activities: ["Drafting 3D engine piston assemblies", "Applying GD&T callouts to manufacturing drawings", "Conducting interference fit checks"],
-              skills: ["CATIA / SolidWorks", "Automotive Design", "GD&T", "Sheet Metal CAD"],
-              projects: [
-                { id: 1, title: "Double Wishbone Suspension Assembly CAD Model" },
-                { id: 2, title: "IC Engine Piston & Connecting Rod 3D CAD Design" }
-              ],
-              careerOpportunities: ["Automotive CAD Designer", "Design Engineer", "Drafting Engineer"],
-              benefits: ["Industry standard CAD project portfolio"],
-              eligibility: "Automobile & Mechanical engineering candidates."
-            },
-            {
-              name: "Production and Assembly",
-              slug: "production-assembly",
-              desc: "Automobile assembly line layout, robotic welding fixtures, conveyor timing, and quality inspection.",
-              duration: "6 Weeks / 3 Months",
-              technologies: ["Line Balancing", "Robotic Welding Fixtures", "Assembly Timers", "Quality Audits"],
-              overview: "Understand mass automotive assembly line operations, vehicle body-in-white (BIW) welding workflows, and final vehicle inspection quality gates.",
-              learningOutcomes: ["Automobile Assembly Line Flow", "BIW Welding Fixture Design Basics", "Vehicle Quality Inspection Gates"],
-              activities: ["Mapping assembly line takt time", "Inspecting body panel gap & flushness"],
-              skills: ["Assembly Line Planning", "Quality Control", "Takt Time Optimization"],
-              projects: [
-                { id: 1, title: "Automobile Final Assembly Line Takt Time & Ergonomics Optimization" }
-              ],
-              careerOpportunities: ["Automobile Assembly Engineer", "Plant Quality Engineer"],
-              benefits: ["OEM assembly plant visit exposure"],
-              eligibility: "Automobile & Production engineering students."
-            }
-          ]
-        },
+
         "mechatronics-engineering": {
-          num: "08",
-          name: "Mechatronics Engineering",
+          num: "11",
+          name: "Mechatronics",
           slug: "mechatronics-engineering",
-          desc: "Synergy of mechanics, electronics, microcontrollers, PLC SCADA programming, and industrial automated systems.",
+          desc: "Convergence of mechanical systems, electronics, IIoT, automotive electronics, embedded systems, and analytics.",
           icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a10 10 0 100 20 10 10 0 000-20zm0 14a4 4 0 110-8 4 4 0 010 8z"/></svg>`,
           specializations: [
             {
-              name: "Robotics and Automation",
-              slug: "robotics-automation",
-              desc: "Build autonomous robots, pneumatic actuators, servo controllers, sensor fusion networks, and industrial automation rigs.",
-              duration: "8 Weeks / 3 Months",
-              technologies: ["Arduino/STM32", "Pneumatics", "Servo Motors", "ROS", "LabVIEW", "Sensors"],
-              overview: "Integrate mechanical hardware with smart electronics and microcontrollers. Trainees construct electro-pneumatic systems, program autonomous mobile robots, and wire industrial sensor arrays.",
-              learningOutcomes: ["Electro-Pneumatic Circuit Design", "Microcontroller Sensor Interfacing", "Servo & Stepper Motor Tuning", "Autonomous Robot Navigation", "LabVIEW System Control"],
-              activities: ["Wiring electro-pneumatic valves", "Programming autonomous maze-solving robots", "Building real-time LabVIEW dashboards", "Calibrating photoelectric & inductive sensors"],
-              skills: ["Mechatronic System Integration", "Electro-Pneumatics", "Microcontroller C++", "LabVIEW", "Sensor Calibration"],
-              projects: [
-                { id: 1, title: "Automated Electro-Pneumatic Sorting Station" },
-                { id: 2, title: "Autonomous Mobile Robot with LiDAR Navigation" },
-                { id: 3, title: "LabVIEW Real-Time Sensor Monitoring System" },
-                { id: 4, title: "3-Axis CNC Micro-Milling Controller" }
-              ],
-              careerOpportunities: ["Mechatronics Engineer", "Robotics Specialist", "Automation Systems Engineer", "R&D Prototype Developer"],
-              benefits: ["Mechatronics Kit provided", "1-on-1 Hardware Mentorship", "Verified Internship Certificate", "Direct job placement support"],
-              eligibility: "Mechatronics, Mechanical, ECE, EEE & Automation students."
+              name: "Industrial IoT Systems",
+              slug: "industrial-iot-systems",
+              desc: "Combining mechanical hardware, electronics, sensors, data acquisition, smart manufacturing, and predictive maintenance.",
+              duration: "4 Weeks / 6 Weeks / 3 Months",
+              technologies: ["IIoT Sensors", "Data Acquisition", "Predictive Maintenance", "Smart Factory"],
+              overview: "Combines mechanical systems, electronics, automation, sensors, and software for smart manufacturing.",
+              learningOutcomes: ["Industrial IoT", "Sensors", "Actuators", "Automation", "Data acquisition", "Machine monitoring", "Industrial communication", "Smart manufacturing", "Predictive maintenance concepts"],
+              activities: ["Machine vibration sensor setup", "Data logging on industrial gateways", "Predictive maintenance dashboard visualization"],
+              practicalLearning: "Students work with automation examples, sensor-based systems, monitoring concepts, and guided IIoT activities.",
+              skills: ["IIoT Integration", "Sensor Interfacing", "Machine Monitoring"],
+              projects: [{ id: 1, title: "Smart Machine Predictive Maintenance IIoT System" }],
+              careerOpportunities: ["Mechatronics Assistant", "IIoT Maintenance Tech", "Automation Associate"],
+              benefits: ["IIoT hardware kit demos", "CIE evaluation support"],
+              eligibility: "Diploma students in Mechatronics, Mechanical, ECE, or EEE."
             },
             {
-              name: "IoT",
-              slug: "iot",
-              desc: "Industrial IoT (IIoT) architecture, smart factory sensor nodes, edge gateway computing, and MQTT telemetry.",
-              duration: "6 Weeks / 3 Months",
-              technologies: ["Node-RED", "ESP32", "Modbus-to-MQTT", "Raspberry Pi", "InfluxDB", "Grafana"],
-              overview: "Connect industrial machine telemetry to cloud dashboards. Interns read Modbus registers from industrial meters and transmit sensor data to Grafana real-time monitoring boards.",
-              learningOutcomes: ["Industrial Modbus Protocol Communication", "Edge Gateway Programming on Raspberry Pi", "Node-RED Data Flow Wiring", "Grafana Real-Time Dashboard Creation"],
-              activities: ["Reading machine status over Modbus RS485", "Creating Node-RED flow pipelines", "Setting up automated Telegram/Email alert bots"],
-              skills: ["IIoT Architecture", "Node-RED", "Grafana Dashboards", "Modbus Protocol"],
-              projects: [
-                { id: 1, title: "Smart Factory Modbus-to-Cloud Monitoring Gateway" },
-                { id: 2, title: "Predictive Machine Vibration IIoT Telemetry Node" }
-              ],
-              careerOpportunities: ["IIoT Solutions Engineer", "Smart Factory Consultant", "Edge Computing Developer"],
-              benefits: ["Raspberry Pi hardware exposure", "IIoT project portfolio"],
-              eligibility: "Mechatronics, ECE, CSE & EEE students."
+              name: "Automotive",
+              slug: "automotive",
+              desc: "Modern automotive technologies combining mechanical, electrical, and electronic vehicle control systems.",
+              duration: "4 Weeks / 6 Weeks / 3 Months",
+              technologies: ["Vehicle Electronics", "Automotive Sensors", "OBD Diagnostics", "Electric Mobility"],
+              overview: "Provides exposure to modern automotive technologies combining mechanical, electrical, and electronic systems.",
+              learningOutcomes: ["Automotive systems", "Vehicle electronics", "Sensors", "Actuators", "Engine and vehicle systems", "Automotive diagnostics", "Vehicle automation", "Electric mobility fundamentals"],
+              activities: ["Automotive ECU sensor scanning", "Multimeter vehicle wiring test", "Actuator testing"],
+              practicalExposure: "Students receive automotive system demonstrations, component-level learning, diagnostics exposure, and practical observations.",
+              skills: ["Automotive Diagnostic Scanning", "Vehicle Sensor Testing", "Automotive Wiring"],
+              projects: [{ id: 1, title: "Mechatronic Automotive Sensor Diagnostic Study" }],
+              careerOpportunities: ["Automotive Mechatronics Tech", "Service Diagnostic Associate"],
+              benefits: ["Diagnostic scanner demos", "Academic report support"],
+              eligibility: "Diploma students in Mechatronics, Automobile, or Mechanical."
             },
             {
-              name: "PLC and SCADA Programming",
-              slug: "plc-scada-programming",
-              desc: "Advanced industrial logic controllers, HMI touchscreens, SCADA supervisory screens, and safety interlocks.",
-              duration: "8 Weeks / 3 Months",
-              technologies: ["Siemens TIA Portal", "Allen Bradley RSLogix", "SCADA Ignition", "HMI Design"],
-              overview: "Master industrial programming standards for manufacturing lines. Trainees program complex PLC ladder routines with timer/counter interlocks and design interactive SCADA HMI touchscreens.",
-              learningOutcomes: ["Advanced PLC Ladder & Function Block Programming", "HMI Touchscreen Interface Design", "SCADA Historical Trending & Alarming"],
-              activities: ["Programming multi-stage conveyor logic", "Designing HMI touch buttons & dynamic indicators"],
-              skills: ["TIA Portal PLC Logic", "HMI Touch Screen Design", "SCADA Alarming"],
-              projects: [
-                { id: 1, title: "Automated Packaging Plant PLC & HMI System" },
-                { id: 2, title: "Industrial Chemical Batching SCADA Station" }
-              ],
-              careerOpportunities: ["PLC & SCADA Programmer", "Industrial Automation Engineer"],
-              benefits: ["Siemens TIA portal lab software exposure"],
-              eligibility: "Mechatronics, Electrical & ECE candidates."
+              name: "Embedded & Robotics",
+              slug: "embedded-robotics",
+              desc: "Microcontrollers, sensors, actuators, embedded programming, robotics fundamentals, motor control, and automation.",
+              duration: "4 Weeks / 6 Weeks / 3 Months",
+              technologies: ["Microcontrollers", "Embedded C++", "Robotics", "Servo Motors", "Sensors"],
+              overview: "Combines embedded systems, electronics, programming, and robotics for automated machines.",
+              learningOutcomes: ["Embedded systems fundamentals", "Microcontrollers", "Sensors", "Actuators", "Embedded programming", "Robotics fundamentals", "Motor control", "Automation", "Robot applications"],
+              activities: ["Flashing microcontroller firmware", "Robotic servo motor angle control", "Ultrasonic obstacle avoidance robot programming"],
+              practicalLearning: "Students work on guided embedded-system exercises, sensor-based applications, robotics activities, and mini-projects.",
+              skills: ["Embedded Programming", "Robotic Servo Control", "Sensor Interfacing"],
+              projects: [{ id: 1, title: "Autonomous Sensor-Guided Robotic Vehicle Project" }],
+              careerOpportunities: ["Embedded Systems Associate", "Robotics Assistant", "Firmware Tech"],
+              benefits: ["Hands-on robotics kits", "Complete project code"],
+              eligibility: "Diploma students in Mechatronics, ECE, CS, or Mechanical."
             },
             {
-              name: "Biomedical Mechatronics",
-              slug: "biomedical-mechatronics",
-              desc: "Design medical instrumentation, prosthetic limb actuators, biosensors, and ECG signal conditioning.",
-              duration: "6 Weeks / 3 Months",
-              technologies: ["Biomedical Sensors", "Op-Amp Instrumentation", "LabVIEW", "3D Printing"],
-              overview: "Fuses electronics and mechanics for healthcare devices. Learn ECG/EMG biopotential amplifier design, prosthetic servo motor control, and medical device safety compliance.",
-              learningOutcomes: ["ECG & EMG Bio-Signal Amplification", "Prosthetic Motor Control", "Medical Instrumentation Safety"],
-              activities: ["Designing low-noise bio-amp circuits", "Testing EMG controlled prosthetic hand prototypes"],
-              skills: ["Biosensor Interfacing", "Bio-Signal Processing", "Prosthetic Control"],
-              projects: [
-                { id: 1, title: "EMG Muscle Signal Controlled Prosthetic Hand Prototype" }
-              ],
-              careerOpportunities: ["Biomedical Engineer", "Medical Device Modeler", "R&D Bio-Specialist"],
-              benefits: ["Biomedical sensor prototype lab access"],
-              eligibility: "Mechatronics, Biomedical & ECE students."
-            },
-            {
-              name: "Industrial Mechatronics",
-              slug: "industrial-mechatronics",
-              desc: "Hydraulic actuators, heavy pneumatic machinery, automated conveyor sorting, and industrial safety guards.",
-              duration: "6 Weeks / 3 Months",
-              technologies: ["Hydraulics", "Pneumatics", "PLC Interlocks", "Safety Relays"],
-              overview: "Focus on high-power industrial hydraulic and pneumatic actuation systems used in steel mills, automotive stamping, and heavy manufacturing.",
-              learningOutcomes: ["Hydraulic Circuit Design & Calculation", "Safety Relay Interlocks", "Heavy Material Handling Conveyors"],
-              activities: ["Designing hydraulic press valve circuits", "Testing safety light curtain interlocks"],
-              skills: ["Hydraulic Circuit Design", "Industrial Safety", "Heavy Machine Automation"],
-              projects: [
-                { id: 1, title: "Automated Hydraulic Press Control & Safety System" }
-              ],
-              careerOpportunities: ["Industrial Maintenance Engineer", "Mechatronics Site Engineer"],
-              benefits: ["Practical hydraulic trainer exposure"],
-              eligibility: "Mechatronics & Mechanical candidates."
+              name: "Analytics",
+              slug: "analytics",
+              desc: "Data collection, cleaning, Excel analysis, visualization, industrial data, performance analysis, and predictive analytics.",
+              duration: "4 Weeks / 6 Weeks / 3 Months",
+              technologies: ["MS Excel", "Data Visualization", "Dashboards", "Industrial Data Analytics"],
+              overview: "Introduces students to the use of data for monitoring, analysis, and decision-making in technical and industrial environments.",
+              learningOutcomes: ["Data fundamentals", "Data collection", "Data cleaning", "Data analysis", "Excel-based analysis", "Basic visualization", "Industrial data", "Performance analysis", "Predictive analytics introduction"],
+              activities: ["Cleaning industrial machine log CSV files", "Building dynamic Excel KPI dashboards", "Trend chart visualization"],
+              practicalLearning: "Students work with sample datasets, practical assignments, dashboards, analysis exercises, and guided projects.",
+              skills: ["Data Cleaning", "MS Excel Advanced Dashboards", "Industrial KPI Analysis"],
+              projects: [{ id: 1, title: "Industrial Machine Performance & Productivity Analytics Dashboard" }],
+              careerOpportunities: ["Technical Data Analyst Assistant", "Operations Analytics Associate"],
+              benefits: ["Sample industrial datasets", "Guided project workbook"],
+              eligibility: "Diploma students in Mechatronics, CS, IT, or Engineering."
             }
           ]
         }
@@ -1734,7 +1522,7 @@
       // VIEW 1: LANDING PORTAL VIEW
       // -------------------------------------------------------------------------
       const renderLandingPortalView = () => {
-        document.title = "Internship & Placement Portal | Placement Keepers People Pulse";
+        document.title = "Diploma Internship & Placement Portal | Placement Keepers People Pulse";
 
         let branchCardsHtml = '';
         Object.values(internshipData).forEach(b => {
@@ -1747,7 +1535,7 @@
               <h3 class="branch-title">${b.name}</h3>
               <p class="branch-desc">${b.desc}</p>
               <div class="branch-footer">
-                <span class="branch-count-badge">${b.specializations.length} Specializations</span>
+                <span class="branch-count-badge">${b.specializations.length} Pathways</span>
                 <span class="branch-cta-link">Explore Specializations &rarr;</span>
               </div>
             </div>
@@ -1760,12 +1548,12 @@
             <div class="container">
               <div class="portal-hero-grid">
                 <div>
-                  <span class="portal-tag"><span></span> Career Fast-Track</span>
-                  <h1 class="portal-title">Industry-Oriented <span>Internship Programs</span></h1>
-                  <p class="portal-desc">Gain practical knowledge, work on real-world projects, develop industry-relevant skills, and prepare for your professional career with PK People internship programs.</p>
+                  <span class="portal-tag"><span></span> For Diploma Students</span>
+                  <h1 class="portal-title">Branch-Wise <span>Diploma Internship Pathways</span></h1>
+                  <p class="portal-desc">Our Diploma Internship Programs are designed to bridge the gap between classroom education and real-world industry experience. Gain practical activities, site visits, guided projects, and industry readiness.</p>
                   <div style="display: flex; gap: 16px; flex-wrap: wrap;">
                     <a href="#explore-branches" class="btn btn-primary" style="padding: 14px 28px;">
-                      Explore Internships
+                      Explore Diploma Pathways
                       <svg style="width: 20px; height: 20px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
                     </a>
                   </div>
@@ -1774,8 +1562,8 @@
                   <div class="glass-panel" style="padding: 16px; border-radius: var(--radius-lg); position: relative; overflow: hidden;">
                     <img src="assets/images/2.jpeg" alt="PK People Internship Training Session" style="width: 100%; height: 320px; object-fit: cover; border-radius: var(--radius-md);">
                     <div style="position: absolute; bottom: 24px; left: 24px; right: 24px; background: rgba(15, 23, 42, 0.85); backdrop-filter: blur(8px); padding: 16px; border-radius: var(--radius-md); color: white;">
-                      <h4 style="font-family: var(--font-heading); font-size: 1rem; font-weight: 700; margin-bottom: 2px;">Corporate Grooming</h4>
-                      <p style="font-size: 0.82rem; color: rgba(255,255,255,0.8); margin: 0;">Mentorship by seasoned industry specialists</p>
+                      <h4 style="font-family: var(--font-heading); font-size: 1rem; font-weight: 700; margin-bottom: 2px;">Classroom to Industry</h4>
+                      <p style="font-size: 0.82rem; color: rgba(255,255,255,0.8); margin: 0;">Practical hands-on exposure & site demonstrations</p>
                     </div>
                   </div>
                 </div>
@@ -1786,29 +1574,32 @@
           <!-- CONTROLS & BRANCHES -->
           <section id="explore-branches" class="section-padding" style="padding-top: 40px;">
             <div class="container">
-              <div class="section-header" style="text-align: center; max-width: 720px; margin: 0 auto 40px auto;">
-                <div class="portal-tag" style="margin: 0 auto 12px auto;">Engineering & Design Sectors</div>
-                <h2 class="section-title">Explore Internships by <span>Engineering Branch</span></h2>
-                <p class="section-subtitle">Select your academic discipline to discover dedicated technology pathways, real-world project assignments, and corporate placement tracks.</p>
+              <div class="section-header" style="text-align: center; max-width: 760px; margin: 0 auto 40px auto;">
+                <div class="portal-tag" style="margin: 0 auto 12px auto;">11 Diploma Engineering & Tech Branches</div>
+                <h2 class="section-title">Explore Pathways by <span>Diploma Branch</span></h2>
+                <p class="section-subtitle">Select your academic discipline to discover dedicated technology pathways, real-world project assignments, site visits, and corporate placement tracks.</p>
               </div>
 
               <!-- CONTROLS BAR: SEARCH & BRANCH FILTER -->
               <div class="portal-controls-card glass-panel">
                 <div class="search-input-group">
                   <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
-                  <input type="text" id="portalSearch" class="search-input" placeholder="Search internships or specializations (e.g. Cloud Computing, AI, Robotics, Embedded)...">
+                  <input type="text" id="portalSearch" class="search-input" placeholder="Search pathways (e.g. Built Environment, EV, Solar, Cybersecurity, PLC, Commercial Practice)...">
                 </div>
                 <div class="filter-select-group">
                   <select id="branchFilter" class="filter-select">
-                    <option value="all">Filter by Branch: All Branches</option>
-                    <option value="mechanical-engineering">Mechanical Engineering</option>
-                    <option value="electronics-communication-engineering">Electronics & Communication</option>
-                    <option value="computer-science-engineering">Computer Science Engineering</option>
-                    <option value="electrical-engineering">Electrical Engineering</option>
+                    <option value="all">Filter by Branch: All 11 Branches</option>
                     <option value="civil-engineering">Civil Engineering</option>
-                    <option value="fashion-designing">Fashion Designing</option>
                     <option value="automobile-engineering">Automobile Engineering</option>
-                    <option value="mechatronics-engineering">Mechatronics Engineering</option>
+                    <option value="alternative-energy">Alternative Energy</option>
+                    <option value="mechanical-engineering">Mechanical Engineering</option>
+                    <option value="adft">ADFT (Apparel Design)</option>
+                    <option value="commercial-practice">Commercial Practice</option>
+                    <option value="computer-science-engineering">Computer Science (CS)</option>
+                    <option value="electronics-communication-engineering">Electronics & Comm (EC)</option>
+                    <option value="electrical-engineering">Electrical & Electronics (EEE)</option>
+                    <option value="metallurgy">Metallurgy</option>
+                    <option value="mechatronics-engineering">Mechatronics</option>
                   </select>
                 </div>
               </div>
@@ -1816,6 +1607,107 @@
               <!-- DYNAMIC BRANCHES / SEARCH RESULTS GRID -->
               <div id="branchesGrid" class="branches-grid">
                 ${branchCardsHtml}
+              </div>
+            </div>
+          </section>
+
+          <!-- HOW OUR DIPLOMA INTERNSHIP WORKS -->
+          <section class="section-padding" style="padding-top: 40px; padding-bottom: 40px;">
+            <div class="container">
+              <div class="section-header" style="text-align: center; max-width: 760px; margin: 0 auto 40px auto;">
+                <div class="portal-tag animated-pulse" style="margin: 0 auto 12px auto;">Structured Internship Model</div>
+                <h2 class="section-title">How Our <span>Diploma Internship Works</span></h2>
+                <p class="section-subtitle">A structured 6-step framework enabling diploma students to bridge the gap between classroom concepts and active industrial execution.</p>
+              </div>
+
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px;">
+                <div class="works-step-card glass-panel reveal reveal-slide-up">
+                  <div class="works-step-num">01</div>
+                  <h3 style="font-family: var(--font-heading); font-size: 1.2rem; font-weight: 800; color: var(--text-main); margin-bottom: 10px;">Branch-Specific Learning</h3>
+                  <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.6;">Students are placed into a pathway directly related to their Diploma branch and career interests to align with their academic curriculum.</p>
+                </div>
+
+                <div class="works-step-card glass-panel reveal reveal-slide-up" style="animation-delay: 0.1s;">
+                  <div class="works-step-num">02</div>
+                  <h3 style="font-family: var(--font-heading); font-size: 1.2rem; font-weight: 800; color: var(--text-main); margin-bottom: 10px;">Practical Exposure</h3>
+                  <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.6;">Includes construction site visits, workshop demonstrations, lab activities, equipment observations, and industry-oriented case studies.</p>
+                </div>
+
+                <div class="works-step-card glass-panel reveal reveal-slide-up" style="animation-delay: 0.2s;">
+                  <div class="works-step-num">03</div>
+                  <h3 style="font-family: var(--font-heading); font-size: 1.2rem; font-weight: 800; color: var(--text-main); margin-bottom: 10px;">Online Technical Training</h3>
+                  <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.6;">For CS & Tech pathways: live online classes, recorded lectures, study materials, practical coding exercises, and doubt-clearing sessions.</p>
+                </div>
+
+                <div class="works-step-card glass-panel reveal reveal-slide-up" style="animation-delay: 0.3s;">
+                  <div class="works-step-num">04</div>
+                  <h3 style="font-family: var(--font-heading); font-size: 1.2rem; font-weight: 800; color: var(--text-main); margin-bottom: 10px;">Industry-Oriented Projects</h3>
+                  <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.6;">Students apply their learning through mini-projects, guided assignments, and practical building blocks relevant to their chosen field.</p>
+                </div>
+
+                <div class="works-step-card glass-panel reveal reveal-slide-up" style="animation-delay: 0.4s;">
+                  <div class="works-step-num">05</div>
+                  <h3 style="font-family: var(--font-heading); font-size: 1.2rem; font-weight: 800; color: var(--text-main); margin-bottom: 10px;">Mentor Support</h3>
+                  <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.6;">Experienced technical mentors guide students throughout the internship to understand complex concepts and troubleshoot assignments.</p>
+                </div>
+
+                <div class="works-step-card glass-panel reveal reveal-slide-up" style="animation-delay: 0.5s;">
+                  <div class="works-step-num">06</div>
+                  <h3 style="font-family: var(--font-heading); font-size: 1.2rem; font-weight: 800; color: var(--text-main); margin-bottom: 10px;">Internship Documentation</h3>
+                  <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.6;">Complete internship documentation, log records, and report templates for academic evaluation and diploma submission.</p>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- WHAT STUDENTS GAIN SECTION -->
+          <section class="section-padding" style="padding-top: 40px; padding-bottom: 40px;">
+            <div class="container">
+              <div class="glass-panel" style="padding: 40px; border-radius: var(--radius-lg); border-left: 5px solid var(--primary);">
+                <div style="max-width: 800px; margin-bottom: 30px;">
+                  <span class="portal-tag"><span></span> Diploma Graduate Benefits</span>
+                  <h2 style="font-family: var(--font-heading); font-size: 2rem; font-weight: 800; color: var(--text-main); margin-top: 6px;">From Diploma Classroom to <span>Industry Readiness</span></h2>
+                  <p style="font-size: 1rem; color: var(--text-muted); line-height: 1.6;">Our internship pathways give Diploma students more than theoretical exposure. The objective is to help students understand how their branch is applied in real-world industries and develop practical skills that support academic and career growth.</p>
+                </div>
+
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px;">
+                  <div class="gain-item-card">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                    <span>Practical Technical Knowledge</span>
+                  </div>
+                  <div class="gain-item-card">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                    <span>Industry Awareness</span>
+                  </div>
+                  <div class="gain-item-card">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                    <span>Hands-on Learning Experience</span>
+                  </div>
+                  <div class="gain-item-card">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                    <span>Project Experience</span>
+                  </div>
+                  <div class="gain-item-card">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                    <span>Problem-Solving Skills</span>
+                  </div>
+                  <div class="gain-item-card">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                    <span>Technical Communication</span>
+                  </div>
+                  <div class="gain-item-card">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                    <span>Workplace Understanding</span>
+                  </div>
+                  <div class="gain-item-card">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                    <span>Confidence in Chosen Field</span>
+                  </div>
+                  <div class="gain-item-card">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                    <span>Better Career Understanding</span>
+                  </div>
+                </div>
               </div>
             </div>
           </section>
@@ -1837,7 +1729,7 @@
                     <div class="branch-icon animated-float" style="width: 56px; height: 56px;">
                       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/><line x1="14" y1="4" x2="10" y2="20"/></svg>
                     </div>
-                    <span class="portal-tag" style="font-size: 0.75rem; margin: 0;">CSE Discipline</span>
+                    <span class="portal-tag" style="font-size: 0.75rem; margin: 0;">CS Discipline</span>
                   </div>
 
                   <h3 style="font-family: var(--font-heading); font-size: 1.4rem; font-weight: 800; color: var(--text-main); margin-bottom: 8px;">Computer Science & Engineering</h3>
@@ -1855,7 +1747,7 @@
                       <span>Hands-on Projects</span>
                     </div>
                     <div class="provide-list-item">
-                      <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+                      <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 01-2-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
                       <span>Real-World Development Assignments</span>
                     </div>
                     <div class="provide-list-item">
@@ -1913,7 +1805,7 @@
                       <span>Real-World Construction Activities</span>
                     </div>
                     <div class="provide-list-item">
-                      <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
+                      <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
                       <span>Quantity Estimation & Documentation</span>
                     </div>
                     <div class="provide-list-item">
@@ -2045,7 +1937,7 @@
               <div style="grid-column: 1 / -1; text-align: center; padding: 60px; color: var(--text-muted);" class="glass-panel">
                 <svg style="width: 48px; height: 48px; margin-bottom: 16px; color: var(--text-muted); opacity: 0.6;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
                 <h3 style="font-family: var(--font-heading); font-size: 1.25rem; font-weight: 700; color: var(--text-main);">No matching specializations found</h3>
-                <p style="font-size: 0.9rem; margin-top: 8px;">Try searching for another keyword like "Cloud", "Cybersecurity", "Embedded", "Robotics" or reset the branch filter.</p>
+                <p style="font-size: 0.9rem; margin-top: 8px;">Try searching for another keyword like "Civil", "EV", "Solar", "Cybersecurity" or reset the branch filter.</p>
               </div>
             `;
             return;
@@ -2103,7 +1995,7 @@
                 </div>
               </div>
               <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.5; margin-bottom: 14px; flex: 1;">${s.desc}</p>
-              <div style="font-size: 0.8rem; font-weight: 700; color: var(--text-main); margin-bottom: 6px;">Technologies & Tools:</div>
+              <div style="font-size: 0.8rem; font-weight: 700; color: var(--text-main); margin-bottom: 6px;">Technologies & Concepts:</div>
               <div class="tech-badges-list">${techBadges}</div>
               <button class="btn btn-primary btn-sm btn-view-spec" data-branch="${branchObj.slug}" data-spec="${s.slug}" style="width: 100%; justify-content: center; margin-top: auto; padding: 10px;">
                 View Internship
@@ -2126,9 +2018,9 @@
               </nav>
 
               <div style="margin-top: 10px; max-width: 800px;">
-                <span class="portal-tag"><span></span> Branch Pathways</span>
-                <h1 class="portal-title" style="font-size: 2.25rem;">${branchObj.name} Internships</h1>
-                <p class="portal-desc" style="margin-bottom: 0;">Explore specialized internship streams designed for ${branchObj.name} students. Develop industry-relevant skills and build real project experience.</p>
+                <span class="portal-tag"><span></span> Diploma Branch Pathways</span>
+                <h1 class="portal-title" style="font-size: 2.25rem;">${branchObj.name} Internship Pathways</h1>
+                <p class="portal-desc" style="margin-bottom: 0;">${branchObj.desc}</p>
               </div>
             </div>
           </section>
@@ -2236,9 +2128,9 @@
                   <div style="display: flex; gap: 16px; align-items: center; flex-wrap: wrap; font-size: 0.95rem; color: var(--text-muted); margin-bottom: 20px;">
                     <span><strong style="color: var(--text-main);">Duration:</strong> ${specObj.duration}</span>
                     <span>•</span>
-                    <span><strong style="color: var(--text-main);">Mode:</strong> Classroom / Hybrid Hands-on</span>
+                    <span><strong style="color: var(--text-main);">Mode:</strong> Practical Exposure & Training</span>
                     <span>•</span>
-                    <span><strong style="color: var(--text-main);">Certificate:</strong> Industry Verified</span>
+                    <span><strong style="color: var(--text-main);">Certificate:</strong> Verified Completion</span>
                   </div>
                 </div>
 
@@ -2268,29 +2160,40 @@
                     <p style="font-size: 1.02rem; color: var(--text-muted); line-height: 1.6;">${specObj.overview}</p>
                   </div>
 
-                  <!-- 2. WHAT YOU WILL LEARN -->
+                  <!-- 2. PRACTICAL EXPOSURE (IF SPECIFIED) -->
+                  ${specObj.practicalExposure ? `
+                  <div class="details-section-card glass-panel" style="border-left: 4px solid var(--primary);">
+                    <h3 class="section-head-title">
+                      <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 9.172V5L8 4z"/></svg>
+                      Practical Exposure & Industry Learning
+                    </h3>
+                    <p style="font-size: 1.02rem; color: var(--text-muted); line-height: 1.6;">${specObj.practicalExposure}</p>
+                  </div>
+                  ` : ''}
+
+                  <!-- 3. WHAT YOU WILL LEARN -->
                   <div class="details-section-card glass-panel">
                     <h3 class="section-head-title">
                       <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0112 20.055a11.952 11.952 0 01-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"/></svg>
-                      What You Will Learn
+                      Core Learning Outcomes
                     </h3>
                     <div class="learning-grid">
                       ${learningHtml}
                     </div>
                   </div>
 
-                  <!-- 3. TECHNOLOGIES & TOOLS -->
+                  <!-- 4. TECHNOLOGIES & TOOLS -->
                   <div class="details-section-card glass-panel">
                     <h3 class="section-head-title">
                       <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/></svg>
-                      Technologies & Tools Handled
+                      Technologies & Key Tools Covered
                     </h3>
                     <div class="tech-badges-list">
                       ${techBadgesHtml}
                     </div>
                   </div>
 
-                  <!-- 4. INTERNSHIP ACTIVITIES -->
+                  <!-- 5. INTERNSHIP ACTIVITIES -->
                   <div class="details-section-card glass-panel">
                     <h3 class="section-head-title">
                       <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 002-2h2a2 2 0 002 2m-6 9l2 2 4-4"/></svg>
@@ -2299,22 +2202,22 @@
                     ${activitiesHtml}
                   </div>
 
-                  <!-- 5. PROJECT EXPOSURE -->
+                  <!-- 6. PROJECT EXPOSURE -->
                   <div class="details-section-card glass-panel">
                     <h3 class="section-head-title">
                       <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/></svg>
-                      Real-World Project Exposure
+                      Project & Mini-Assignment Exposure
                     </h3>
                     <div class="projects-grid">
                       ${projectsHtml}
                     </div>
                   </div>
 
-                  <!-- 6. SKILLS YOU WILL GAIN -->
+                  <!-- 7. SKILLS YOU WILL GAIN -->
                   <div class="details-section-card glass-panel">
                     <h3 class="section-head-title">
                       <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/></svg>
-                      Key Industry Skills Gained
+                      Industry Skills Developed
                     </h3>
                     <div class="skills-flex">
                       ${skillsHtml}
@@ -2330,7 +2233,7 @@
                     <h4 style="font-family: var(--font-heading); font-size: 1.15rem; font-weight: 700; color: var(--text-main); margin-bottom: 16px;">Eligibility & Duration</h4>
                     
                     <div style="margin-bottom: 16px;">
-                      <span style="font-size: 0.8rem; text-transform: uppercase; font-weight: 700; color: var(--primary);">Duration</span>
+                      <span style="font-size: 0.8rem; text-transform: uppercase; font-weight: 700; color: var(--primary);">Duration Options</span>
                       <p style="font-size: 0.95rem; font-weight: 600; color: var(--text-main); margin-top: 2px;">${specObj.duration}</p>
                     </div>
 
@@ -2346,7 +2249,7 @@
 
                   <!-- CAREER OPPORTUNITIES CARD -->
                   <div class="details-section-card glass-panel">
-                    <h4 style="font-family: var(--font-heading); font-size: 1.15rem; font-weight: 700; color: var(--text-main); margin-bottom: 16px;">Career Opportunities</h4>
+                    <h4 style="font-family: var(--font-heading); font-size: 1.15rem; font-weight: 700; color: var(--text-main); margin-bottom: 16px;">Career Pathways</h4>
                     <div class="careers-list">
                       ${careersHtml}
                     </div>
@@ -2412,7 +2315,7 @@
             name: name,
             email: email,
             phone: phone,
-            service: "Internship & Placement Portal Application",
+            service: "Diploma Internship Portal Application",
             message: `College: ${college} | Grad Year: ${gradYear} | Note: ${msg}`
           };
 
