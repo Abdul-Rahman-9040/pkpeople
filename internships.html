@@ -2792,6 +2792,47 @@
         let cie2Html = (specObj.cie2 || defaultCie2).map(item => `<li style="margin-bottom: 6px;">${item}</li>`).join('');
         let cie3Html = (specObj.cie3 || defaultCie3).map(item => `<li style="margin-bottom: 6px;">${item}</li>`).join('');
 
+        // RETRIEVE PATHWAY GALLERY (Admin Managed or Default Sample Photos)
+        let storedGallery = JSON.parse(localStorage.getItem('gallery_items')) || [];
+        let specGallery = storedGallery.filter(p => p.category === specObj.slug || p.pathway === specObj.slug);
+
+        if (specGallery.length === 0) {
+          if (specObj.slug === 'built-environment') {
+            specGallery = [
+              { id: 'def_be1', title: 'Candidate Site Inspection – Foundation & Structural Concrete Work', img: 'assets/images/1.jpeg' },
+              { id: 'def_be2', title: 'Practical Site Activity – Structural Quality & Reinforcement Audit', img: 'assets/images/2.jpeg' },
+              { id: 'def_be3', title: 'Technical Drawing Review & Site Progress Verification', img: 'assets/images/3.jpeg' }
+            ];
+          } else if (specObj.slug === 'transportation') {
+            specGallery = [
+              { id: 'def_tr1', title: 'Highway Construction Site Visit & Alignment Survey', img: 'assets/images/4.jpeg' },
+              { id: 'def_tr2', title: 'Pavement Compaction & Subgrade Quality Testing', img: 'assets/images/1.jpeg' },
+              { id: 'def_tr3', title: 'Traffic Flow Survey & Field Measurements Exercise', img: 'assets/images/2.jpeg' }
+            ];
+          } else if (specObj.slug === 'town-planning-green-building') {
+            specGallery = [
+              { id: 'def_tp1', title: 'Green Building Solar Energy & Energy Efficiency Audit', img: 'assets/images/3.jpeg' },
+              { id: 'def_tp2', title: 'Sustainable Infrastructure & Urban Layout Planning Study', img: 'assets/images/4.jpeg' },
+              { id: 'def_tp3', title: 'Rainwater Harvesting & Environmentally Responsible Site Visit', img: 'assets/images/1.jpeg' }
+            ];
+          }
+        }
+
+        let galleryCardsHtml = specGallery.map(g => `
+          <div class="pathway-gal-card" style="border-radius: var(--radius-md); overflow: hidden; border: 1px solid var(--border-color); background: var(--bg-surface); cursor: pointer; transition: transform 0.25s, box-shadow 0.25s;" onclick="window.openPathwayLightbox('${g.img}', '${(g.title || '').replace(/'/g, "\\'")}')" onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='var(--shadow-lg)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
+            <div style="overflow: hidden; position: relative; height: 160px;">
+              <img src="${g.img}" alt="${g.title}" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s ease;" onerror="this.src='assets/images/1.jpeg'">
+              <div style="position: absolute; top: 10px; right: 10px; background: rgba(0,0,0,0.65); color: #fff; border-radius: 50%; width: 28px; height: 28px; display: flex; align-items: center; justify-content: center; backdrop-filter: blur(4px);">
+                <svg style="width: 14px; height: 14px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+              </div>
+            </div>
+            <div style="padding: 12px 14px;">
+              <h4 style="font-size: 0.88rem; font-weight: 700; color: var(--text-main); margin: 0 0 4px 0; line-height: 1.4;">${g.title}</h4>
+              <span style="font-size: 0.75rem; color: var(--primary); font-weight: 600;">Candidate Activity Photo</span>
+            </div>
+          </div>
+        `).join('');
+
         portalApp.innerHTML = `
           <section class="portal-hero" style="padding-top: 110px; padding-bottom: 40px;">
             <div class="container">
@@ -2932,6 +2973,22 @@
                     </h3>
                     ${activitiesHtml}
                   </div>
+
+                  <!-- PATHWAY CANDIDATE ACTIVITY GALLERY -->
+                  ${specGallery.length > 0 ? `
+                  <div class="details-section-card glass-panel" style="border-left: 4px solid var(--primary);">
+                    <h3 class="section-head-title">
+                      <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                      Internship Candidate Activity Gallery
+                    </h3>
+                    <p style="font-size: 0.93rem; color: var(--text-muted); margin-bottom: 20px; line-height: 1.6;">
+                      Photos from previous candidate batches showcasing site visits, field inspection activities, equipment demonstrations, and hands-on project work for <strong>${specObj.name}</strong>:
+                    </p>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px;">
+                      ${galleryCardsHtml}
+                    </div>
+                  </div>
+                  ` : ''}
 
                   <!-- 6. PROJECT EXPOSURE -->
                   <div class="details-section-card glass-panel">
@@ -3082,6 +3139,37 @@
           }, 4500);
         });
       }
+
+      // LIGHTBOX MODAL FOR PATHWAY CANDIDATE GALLERY
+      window.openPathwayLightbox = (imgSrc, title) => {
+        let lightbox = document.getElementById('pathwayLightbox');
+        if (!lightbox) {
+          lightbox = document.createElement('div');
+          lightbox.id = 'pathwayLightbox';
+          lightbox.style.cssText = 'position: fixed; inset: 0; background: rgba(15, 23, 42, 0.92); backdrop-filter: blur(10px); z-index: 99999; display: flex; align-items: center; justify-content: center; padding: 24px; opacity: 0; transition: opacity 0.3s ease;';
+          lightbox.innerHTML = `
+            <div style="position: relative; max-width: 800px; width: 100%; background: var(--bg-surface); border-radius: var(--radius-lg); border: 1px solid var(--border-color); overflow: hidden; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5);">
+              <button id="closePathwayLightbox" style="position: absolute; top: 12px; right: 12px; background: rgba(0,0,0,0.6); color: white; border: none; border-radius: 50%; width: 36px; height: 36px; font-size: 1.4rem; cursor: pointer; display: flex; align-items: center; justify-content: center; z-index: 10;">&times;</button>
+              <img id="pathwayLightboxImg" src="" alt="" style="width: 100%; max-height: 520px; object-fit: cover; display: block;">
+              <div style="padding: 16px 20px; background: var(--bg-surface);">
+                <h4 id="pathwayLightboxTitle" style="font-family: var(--font-heading); font-size: 1.1rem; font-weight: 700; color: var(--text-main); margin: 0;"></h4>
+                <p style="font-size: 0.8rem; color: var(--primary); margin: 4px 0 0 0; font-weight: 600;">Placement Keepers People Pulse — Internship Activity Record</p>
+              </div>
+            </div>
+          `;
+          document.body.appendChild(lightbox);
+          lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox || e.target.id === 'closePathwayLightbox') {
+              lightbox.style.opacity = '0';
+              setTimeout(() => { lightbox.style.display = 'none'; }, 300);
+            }
+          });
+        }
+        document.getElementById('pathwayLightboxImg').src = imgSrc;
+        document.getElementById('pathwayLightboxTitle').textContent = title;
+        lightbox.style.display = 'flex';
+        setTimeout(() => { lightbox.style.opacity = '1'; }, 10);
+      };
 
       // INITIAL VIEW RENDER
       renderView();

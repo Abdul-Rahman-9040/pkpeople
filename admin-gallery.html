@@ -133,12 +133,26 @@
                   <input id="galTitle" type="text" class="form-control" placeholder="E.g., ISO Standards Celebration" required>
                 </div>
                 <div class="form-group">
-                  <label for="galCategory" class="form-label">Category</label>
+                  <label for="galCategory" class="form-label">Category / Internship Pathway</label>
                   <select id="galCategory" class="form-control" style="appearance:none;background-image:url('data:image/svg+xml;utf8,<svg fill=%22%236b7280%22 viewBox=%220 0 20 20%22 xmlns=%22http://www.w3.org/2000/svg%22><path fill-rule=%22evenodd%22 d=%22M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z%22 clip-rule=%22evenodd%22></path></svg>');background-repeat:no-repeat;background-position:right 18px center;background-size:20px;">
                     <option value="office">Office &amp; Culture</option>
                     <option value="events">Corporate Events</option>
                     <option value="team">Team Bonding</option>
                     <option value="achievements">Achievements</option>
+                    <optgroup label="Civil Engineering Pathways">
+                      <option value="built-environment">Built Environment (Civil)</option>
+                      <option value="transportation">Transportation (Civil)</option>
+                      <option value="town-planning-green-building">Town Planning &amp; Green Building (Civil)</option>
+                    </optgroup>
+                    <optgroup label="Other Tech Pathways">
+                      <option value="electric-hybrid-vehicles">EV &amp; Hybrid Vehicles</option>
+                      <option value="solar-energy">Solar Energy</option>
+                      <option value="amt">Advanced Manufacturing (AMT)</option>
+                      <option value="full-stack-development">Full Stack Web Dev</option>
+                      <option value="cloud-computing">Cloud Computing</option>
+                      <option value="cybersecurity">Cybersecurity</option>
+                      <option value="ai-machine-learning">AI &amp; Machine Learning</option>
+                    </optgroup>
                   </select>
                 </div>
                 <div class="form-group">
@@ -170,11 +184,18 @@
                   </div>
                   <div style="display:flex;gap:10px;flex-wrap:wrap;">
                     <select id="categoryFilter" class="form-control" style="flex:1;min-width:130px;">
-                      <option value="">All Categories</option>
+                      <option value="">All Categories &amp; Pathways</option>
                       <option value="office">Office &amp; Culture</option>
                       <option value="events">Corporate Events</option>
                       <option value="team">Team Bonding</option>
                       <option value="achievements">Achievements</option>
+                      <option value="built-environment">Built Environment (Civil)</option>
+                      <option value="transportation">Transportation (Civil)</option>
+                      <option value="town-planning-green-building">Town Planning (Civil)</option>
+                      <option value="electric-hybrid-vehicles">EV &amp; Hybrid Vehicles</option>
+                      <option value="solar-energy">Solar Energy</option>
+                      <option value="amt">Advanced Manufacturing</option>
+                      <option value="full-stack-development">Full Stack Web Dev</option>
                     </select>
                     <select id="perPageSelect" class="form-control" style="flex:1;min-width:100px;">
                       <option value="12">12 / page</option>
@@ -293,7 +314,22 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  const catLabel = { office:'Office & Culture', events:'Corporate Events', team:'Team Bonding', achievements:'Achievements' };
+  const catLabel = { 
+    office:'Office & Culture', 
+    events:'Corporate Events', 
+    team:'Team Bonding', 
+    achievements:'Achievements',
+    'built-environment': 'Built Environment (Civil)',
+    'transportation': 'Transportation (Civil)',
+    'town-planning-green-building': 'Town Planning & Green Building (Civil)',
+    'electric-hybrid-vehicles': 'EV & Hybrid Vehicles',
+    'solar-energy': 'Solar Energy',
+    'amt': 'Advanced Manufacturing',
+    'full-stack-development': 'Full Stack Web Dev',
+    'cloud-computing': 'Cloud Computing',
+    'cybersecurity': 'Cybersecurity',
+    'ai-machine-learning': 'AI & Machine Learning'
+  };
 
   function renderGrid() {
     filtered = getFiltered();

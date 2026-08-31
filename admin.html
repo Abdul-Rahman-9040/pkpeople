@@ -382,6 +382,20 @@
                     <option value="events">Corporate Events</option>                     
                     <option value="team">Team Bonding</option>                     
                     <option value="achievements">Achievements</option>                   
+                    <optgroup label="Civil Engineering Pathways">
+                      <option value="built-environment">Built Environment (Civil)</option>
+                      <option value="transportation">Transportation (Civil)</option>
+                      <option value="town-planning-green-building">Town Planning &amp; Green Building (Civil)</option>
+                    </optgroup>
+                    <optgroup label="Other Tech Pathways">
+                      <option value="electric-hybrid-vehicles">EV &amp; Hybrid Vehicles</option>
+                      <option value="solar-energy">Solar Energy</option>
+                      <option value="amt">Advanced Manufacturing (AMT)</option>
+                      <option value="full-stack-development">Full Stack Web Dev</option>
+                      <option value="cloud-computing">Cloud Computing</option>
+                      <option value="cybersecurity">Cybersecurity</option>
+                      <option value="ai-machine-learning">AI &amp; Machine Learning</option>
+                    </optgroup>
                   </select>                 
                 </div>                 
                 <div class="form-group">                   
@@ -1499,22 +1513,25 @@ function uploadToDrive(data) {
         };         
         if (galFileInput.files.length > 0) {           
           const file = galFileInput.files[0];                      
-          if (!googleSheetsUrl || googleSheetsUrl.trim() === '') {             
-            alert('Please configure your Google Sheets Webhook URL first under "Google Sheets Config" tab to upload local files directly to Google Drive!');             
-            return;           
-          }           
           const originalText = submitBtn.innerHTML;           
-          submitBtn.innerHTML = `Uploading to Google Drive...`;           
+          submitBtn.innerHTML = `Reading Image File...`;           
           submitBtn.setAttribute('disabled', 'disabled');           
           const reader = new FileReader();           
           reader.onload = () => {             
-            const base64Content = reader.result.split(',')[1];                          
+            const dataUri = reader.result;
+            if (!googleSheetsUrl || googleSheetsUrl.trim() === '') {             
+              saveGalleryLocally(dataUri);
+              submitBtn.innerHTML = originalText;               
+              submitBtn.removeAttribute('disabled');
+              return;           
+            }
+            submitBtn.innerHTML = `Uploading to Google Drive...`;
             fetch(googleSheetsUrl, {               
               method: 'POST',               
               headers: { 'Content-Type': 'text/plain' },               
               body: JSON.stringify({                 
                 action: 'upload_to_drive',                 
-                base64: base64Content,                 
+                base64: dataUri.split(',')[1],                 
                 filename: file.name,                 
                 mimeType: file.type               
               })             
@@ -1525,18 +1542,19 @@ function uploadToDrive(data) {
             })             
             .then(text => {               
               let driveRes = JSON.parse(text);                              
-              submitBtn.innerHTML = originalText;               
-              submitBtn.removeAttribute('disabled');                              
-              if (driveRes.status === 'success') {                 
+              if (driveRes.status === 'success' && driveRes.url) {                 
                 saveGalleryLocally(driveRes.url);               
               } else {                 
-                alert('Failed to upload image to Google Drive: ' + (driveRes.message || 'Unknown error'));               
+                saveGalleryLocally(dataUri);               
               }             
             })             
             .catch(err => {               
+              console.warn('Drive upload failed, using local base64 fallback:', err);
+              saveGalleryLocally(dataUri);
+            })
+            .finally(() => {
               submitBtn.innerHTML = originalText;               
-              submitBtn.removeAttribute('disabled');               
-              alert('Error uploading to Google Drive:\n\n' + err.message);             
+              submitBtn.removeAttribute('disabled');
             });           
           };           
           reader.readAsDataURL(file);         
