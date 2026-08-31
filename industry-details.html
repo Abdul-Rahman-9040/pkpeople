@@ -3,22 +3,25 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Detailed overview of our specialized recruitment and staffing solutions across core industrial sectors. Placement Keepers People Pulse Pvt. Ltd.">
-  <meta name="keywords" content="Placement Keepers, Staffing Industries, Recruitment Details, Manufacturing Recruitment, IT Staffing, Automobile Staffing, Logistics Hiring">
+  <meta name="description" content="Detailed overview of our specialized engineering pathways and industrial recruitment solutions across core technical sectors. Placement Keepers People Pulse Pvt. Ltd.">
+  <meta name="keywords" content="Placement Keepers, Engineering Pathways, Built Environment, Transportation, EV Vehicle Technology, Solar Energy, Advanced Manufacturing, Automation Robotics, ADFT, Finance Taxation, Cybersecurity, Cloud Computing, AI ML, Full Stack, IIoT, Power Engineering, Heat Treatment, Mechatronics">
   <meta name="author" content="Placement Keepers People Pulse">
   
-  <title>Industry Details | Placement Keepers People Pulse</title>
+  <title>Engineering Pathways & Sector Details | Placement Keepers People Pulse</title>
   
   <!-- Favicon -->
   <link rel="icon" type="image/x-icon" href="assets/images/logo.jpeg">
   
   <!-- Stylesheet -->
-  <link rel="stylesheet" href="styles.css?v=1.2">
+  <link rel="stylesheet" href="styles.css?v=1.3">
   
-  <!-- Custom styles for Details Page -->
+  <!-- Pathways Data Source -->
+  <script src="assets/pathways-data.js"></script>
+
+  <!-- Custom styles for Details & Pathway Page -->
   <style>
     .details-hero {
-      padding-top: 100px; /* Pulls content closer to scrolled sticky header */
+      padding-top: 100px;
       padding-bottom: 40px;
       background: radial-gradient(circle at 10% 20%, hsla(var(--primary-hue), var(--primary-sat), var(--primary-lightness), 0.04) 0%, transparent 60%);
       position: relative;
@@ -31,24 +34,72 @@
       font-family: var(--font-heading);
       font-weight: 600;
       color: var(--primary);
-      margin-bottom: 16px; /* Reduced from 24px */
+      margin-bottom: 16px;
       transition: transform var(--transition-fast);
+      text-decoration: none;
     }
     
     .details-back-link:hover {
       transform: translateX(-5px);
     }
     
+    .pathway-selector-card {
+      padding: 20px;
+      border-radius: var(--radius-lg);
+      margin-bottom: 24px;
+      display: flex;
+      gap: 16px;
+      align-items: center;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      border: 1px solid var(--border-color);
+    }
+
+    .pathway-select-group {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex: 1;
+      min-width: 280px;
+    }
+
+    .pathway-select-label {
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: var(--text-main);
+      white-space: nowrap;
+    }
+
+    .pathway-dropdown {
+      width: 100%;
+      padding: 10px 16px;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-color);
+      background-color: var(--bg-surface);
+      color: var(--text-main);
+      font-family: inherit;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      outline: none;
+      transition: border-color var(--transition-fast);
+    }
+
+    .pathway-dropdown:focus {
+      border-color: var(--primary);
+    }
+
     .details-grid {
       display: grid;
-      grid-template-columns: 1.2fr 0.8fr;
-      gap: 30px; /* Reduced from 50px */
-      margin-top: 15px; /* Reduced from 40px */
-      align-items: start; /* Prevents sidebar stretching and huge empty gaps */
+      grid-template-columns: 1.25fr 0.75fr;
+      gap: 30px;
+      margin-top: 15px;
+      align-items: start;
     }
     
     .details-card {
-      padding: 30px; /* Reduced padding from 40px */
+      padding: 32px;
       border-radius: var(--radius-lg);
       margin-bottom: 20px;
     }
@@ -56,14 +107,14 @@
     .details-title-section {
       display: flex;
       align-items: center;
-      gap: 16px; /* Reduced from 20px */
-      margin-bottom: 16px; /* Reduced from 24px */
+      gap: 16px;
+      margin-bottom: 20px;
       border-bottom: 1px solid var(--border-color);
-      padding-bottom: 16px; /* Reduced from 24px */
+      padding-bottom: 16px;
     }
     
     .details-icon {
-      width: 56px; /* Reduced from 64px */
+      width: 56px;
       height: 56px;
       border-radius: var(--radius-md);
       background-color: var(--primary-glow);
@@ -81,7 +132,7 @@
     
     .details-title {
       font-family: var(--font-heading);
-      font-size: 1.85rem; /* Balanced size */
+      font-size: 1.85rem;
       font-weight: 800;
       line-height: 1.2;
       color: var(--text-main);
@@ -100,69 +151,175 @@
       margin-top: 4px;
     }
     
-    .details-text {
-      font-size: 1.05rem;
-      color: var(--text-muted);
-      line-height: 1.6;
-      margin-bottom: 20px; /* Reduced from 30px */
+    /* 13-Point Component Sections */
+    .section-block {
+      margin-bottom: 28px;
+      padding-bottom: 24px;
+      border-bottom: 1px solid var(--border-color);
     }
-    
-    .roles-section {
-      margin-top: 24px; /* Reduced from 40px */
+
+    .section-block:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
     }
-    
-    .roles-title {
+
+    .section-head-title {
       font-family: var(--font-heading);
-      font-size: 1.25rem;
+      font-size: 1.2rem;
       font-weight: 700;
       color: var(--text-main);
-      margin-bottom: 12px; /* Reduced from 20px */
+      margin-bottom: 14px;
       display: flex;
       align-items: center;
       gap: 10px;
     }
-    
-    .roles-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-      gap: 12px; /* Reduced from 16px */
-    }
-    
-    .role-item {
-      padding: 10px 14px; /* Reduced from 16px 20px */
-      border-radius: var(--radius-sm);
-      background-color: var(--bg-base);
-      border: 1px solid var(--border-color);
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-weight: 500;
-      font-size: 0.95rem; /* Balanced font size */
-      transition: all var(--transition-fast);
-    }
-    
-    .role-item:hover {
-      border-color: var(--primary);
-      transform: translateY(-2px);
-      box-shadow: var(--shadow-sm);
-    }
-    
-    .role-bullet {
-      width: 6px;
-      height: 6px;
-      border-radius: var(--radius-full);
-      background-color: var(--primary);
+
+    .section-head-title svg {
+      width: 20px;
+      height: 20px;
+      color: var(--primary);
       flex-shrink: 0;
     }
-    
+
+    .point-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .point-list li {
+      position: relative;
+      padding-left: 24px;
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      line-height: 1.55;
+    }
+
+    .point-list li::before {
+      content: "•";
+      position: absolute;
+      left: 8px;
+      top: 0;
+      color: var(--primary);
+      font-weight: bold;
+      font-size: 1.2rem;
+    }
+
+    /* CIE Accordion / Tabs */
+    .cie-tabs-nav {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 14px;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 8px;
+    }
+
+    .cie-tab-btn {
+      padding: 8px 16px;
+      border-radius: var(--radius-sm);
+      background: none;
+      border: 1px solid transparent;
+      font-family: var(--font-heading);
+      font-weight: 600;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all var(--transition-fast);
+    }
+
+    .cie-tab-btn.active {
+      background-color: var(--primary-glow);
+      color: var(--primary);
+      border-color: var(--primary);
+    }
+
+    .cie-pane {
+      display: none;
+    }
+
+    .cie-pane.active {
+      display: block;
+    }
+
+    /* Grid for Equipment & Machines */
+    .machines-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 12px;
+    }
+
+    .machine-card {
+      padding: 12px 16px;
+      border-radius: var(--radius-sm);
+      background-color: var(--bg-surface-alt);
+      border: 1px solid var(--border-color);
+    }
+
+    .machine-name {
+      font-weight: 700;
+      font-size: 0.92rem;
+      color: var(--text-main);
+      margin-bottom: 4px;
+    }
+
+    .machine-desc {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+
+    /* Badge Pills for Software & Skills */
+    .pill-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .pill-item {
+      padding: 6px 14px;
+      border-radius: var(--radius-full);
+      background-color: var(--bg-surface-alt);
+      border: 1px solid var(--border-color);
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-main);
+    }
+
+    .pill-item-primary {
+      background-color: var(--primary-glow);
+      color: var(--primary);
+      border-color: var(--primary);
+    }
+
+    /* Outcome Alert Box */
+    .outcome-box {
+      padding: 20px;
+      border-radius: var(--radius-md);
+      background: linear-gradient(135deg, hsla(var(--primary-hue), var(--primary-sat), var(--primary-lightness), 0.08) 0%, transparent 100%);
+      border-left: 4px solid var(--primary);
+      margin-top: 12px;
+    }
+
+    .outcome-box p {
+      font-size: 0.95rem;
+      color: var(--text-main);
+      line-height: 1.6;
+      margin: 0;
+      font-weight: 500;
+    }
+
     .details-sidebar {
       display: flex;
       flex-direction: column;
-      gap: 20px; /* Reduced from 30px */
+      gap: 20px;
     }
     
     .sidebar-widget {
-      padding: 20px; /* Reduced padding from 30px */
+      padding: 20px;
       border-radius: var(--radius-lg);
     }
     
@@ -170,7 +327,7 @@
       padding: 0;
       overflow: hidden;
       position: relative;
-      height: 200px; /* Reduced image height from 280px to save vertical space */
+      height: 200px;
       box-shadow: var(--shadow-lg);
     }
     
@@ -180,41 +337,7 @@
       object-fit: cover;
       border-radius: var(--radius-lg);
     }
-    
-    .stats-widget {
-      background: linear-gradient(135deg, var(--secondary) 0%, hsl(var(--secondary-hue), var(--secondary-sat), 10%) 100%);
-      color: #ffffff;
-      border: none;
-    }
-    
-    .stats-widget h4 {
-      font-family: var(--font-heading);
-      font-size: 1.15rem;
-      font-weight: 700;
-      margin-bottom: 12px; /* Reduced from 20px */
-      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-      padding-bottom: 8px; /* Reduced from 15px */
-    }
-    
-    .stat-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 8px 0; /* Reduced from 12px */
-      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-    }
-    
-    .stat-row:last-child {
-      border-bottom: none;
-    }
-    
-    .stat-val {
-      font-family: var(--font-heading);
-      font-size: 1.1rem;
-      font-weight: 700;
-      color: var(--primary);
-    }
-    
+
     .cta-widget {
       text-align: center;
     }
@@ -224,33 +347,13 @@
       font-size: 1.2rem;
       font-weight: 700;
       color: var(--text-main);
-      margin-bottom: 8px; /* Reduced from 12px */
+      margin-bottom: 8px;
     }
     
     .cta-widget p {
       font-size: 0.9rem;
       color: var(--text-muted);
-      margin-bottom: 16px; /* Reduced from 24px */
-    }
-    
-    .approach-section {
-      margin-top: 24px; /* Reduced from 40px */
-      border-top: 1px solid var(--border-color);
-      padding-top: 20px; /* Reduced from 40px */
-    }
-    
-    .approach-title {
-      font-family: var(--font-heading);
-      font-size: 1.25rem;
-      font-weight: 700;
-      color: var(--text-main);
-      margin-bottom: 8px; /* Reduced from 16px */
-    }
-    
-    .approach-text {
-      color: var(--text-muted);
-      line-height: 1.6;
-      margin-bottom: 12px;
+      margin-bottom: 16px;
     }
     
     @media (max-width: 992px) {
@@ -311,15 +414,6 @@
                 <span class="dropdown-item-desc">What our clients say about us</span>
               </div>
             </a>
-            <a href="index.html#gallery" class="dropdown-item">
-              <div class="dropdown-item-icon">
-                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
-              </div>
-              <div class="dropdown-item-content">
-                <span class="dropdown-item-title">Office Gallery</span>
-                <span class="dropdown-item-desc">Glimpse of our work environment</span>
-              </div>
-            </a>
           </div>
         </div>
         <div class="nav-item has-dropdown">
@@ -339,6 +433,15 @@
                 <span class="dropdown-item-desc">Staffing, IT augmentation & payroll</span>
               </div>
             </a>
+            <a href="industry-details.html" class="dropdown-item">
+              <div class="dropdown-item-icon">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/></svg>
+              </div>
+              <div class="dropdown-item-content">
+                <span class="dropdown-item-title">Engineering Pathways</span>
+                <span class="dropdown-item-desc">22 Branch-wise curriculum details</span>
+              </div>
+            </a>
             <a href="index.html#industries" class="dropdown-item">
               <div class="dropdown-item-icon">
                 <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 002 2h2a2.5 2.5 0 002.5-2.5V9a2 2 0 00-2-2h-1.07a2 2 0 01-1.414-.586l-.902-.902A2 2 0 0011.54 3H8.382a2 2 0 00-1.328.508L5.3 5.382A2 2 0 005 6.764L5 8"/></svg>
@@ -351,10 +454,10 @@
           </div>
         </div>
         <div class="nav-item">
-          <a href="index.html#careers" class="nav-link">Careers</a>
+          <a href="internships.html" class="nav-link">Internships</a>
         </div>
         <div class="nav-item">
-          <a href="index.html#blog" class="nav-link">Insights</a>
+          <a href="index.html#careers" class="nav-link">Careers</a>
         </div>
         <div class="nav-item">
           <a href="index.html#contact" class="nav-link">Contact</a>
@@ -362,7 +465,6 @@
       </nav>
       
       <div class="nav-actions">
-        <!-- Theme Toggle -->
         <button id="themeToggle" class="theme-toggle" aria-label="Toggle dark/light theme">
           <svg class="moon-icon" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
             <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
@@ -374,7 +476,6 @@
         
         <a href="index.html#contact" class="btn btn-primary btn-sm header-cta" style="padding: 10px 20px; font-size: 0.9rem;">Get in Touch</a>
         
-        <!-- Hamburger Menu -->
         <button id="menuBtn" class="menu-btn" aria-label="Toggle mobile menu">
           <span></span>
           <span></span>
@@ -393,37 +494,92 @@
         <svg style="width: 20px; height: 20px;" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
         </svg>
-        Back to Industries
+        Back to Home / Sectors
       </a>
       
+      <!-- Interactive Pathway Selector Bar -->
+      <div class="pathway-selector-card glass-panel">
+        <div class="pathway-select-group">
+          <label for="pathwaySelect" class="pathway-select-label">Explore Engineering Pathway:</label>
+          <select id="pathwaySelect" class="pathway-dropdown">
+            <optgroup label="Civil Engineering">
+              <option value="civil-built-environment">Civil - Pathway 1: Built Environment</option>
+              <option value="civil-transportation">Civil - Pathway 2: Transportation</option>
+              <option value="civil-town-planning">Civil - Pathway 3: Town Planning & Green Building</option>
+            </optgroup>
+            <optgroup label="Automobile Engineering">
+              <option value="auto-ev-hybrid">Automobile - Pathway: Electric & Hybrid Vehicles</option>
+            </optgroup>
+            <optgroup label="Alternative Energy">
+              <option value="alt-solar">Alternative Energy - Pathway: Solar Energy Systems</option>
+            </optgroup>
+            <optgroup label="Mechanical Engineering">
+              <option value="mech-amt">Mechanical - Pathway 1: Advanced Manufacturing Technology (AMT)</option>
+              <option value="mech-automation-robotics">Mechanical - Pathway 2: Automation & Robotics</option>
+            </optgroup>
+            <optgroup label="ADFT">
+              <option value="adft-production-quality">ADFT - Pathway: Applied Production & Quality Management</option>
+            </optgroup>
+            <optgroup label="Commercial Practice">
+              <option value="comm-finance-taxation">Commercial Practice - Pathway: Finance & Taxation</option>
+            </optgroup>
+            <optgroup label="Computer Science">
+              <option value="cs-cybersecurity">CSE - Pathway 1: Cybersecurity</option>
+              <option value="cs-cloud-computing">CSE - Pathway 2: Cloud Computing</option>
+              <option value="cs-ai-ml">CSE - Pathway 3: AI & Machine Learning</option>
+              <option value="cs-fullstack">CSE - Pathway 4: Full Stack Development</option>
+            </optgroup>
+            <optgroup label="Electronics & Communication (ECE)">
+              <option value="ece-industrial-automation">ECE - Pathway 1: Industrial Automation</option>
+              <option value="ece-emobility">ECE - Pathway 2: E-Mobility</option>
+              <option value="ece-iiot">ECE - Pathway 3: Industrial IoT (IIoT)</option>
+            </optgroup>
+            <optgroup label="Electrical & Electronics (EEE)">
+              <option value="eee-utility">EEE - Pathway 1: Electrical Utility Systems</option>
+              <option value="eee-power-engineering">EEE - Pathway 2: Power Engineering & Smart Grids</option>
+            </optgroup>
+            <optgroup label="Metallurgy">
+              <option value="met-heat-treatment">Metallurgy - Pathway: Heat Treatment Process</option>
+            </optgroup>
+            <optgroup label="Mechatronics">
+              <option value="mecha-iiot-systems">Mechatronics - Pathway 1: Industrial IoT Systems</option>
+              <option value="mecha-embedded-robotics">Mechatronics - Pathway 2: Embedded Systems & Robotics</option>
+              <option value="mecha-analytics">Mechatronics - Pathway 3: Data Analytics & Visualization</option>
+            </optgroup>
+          </select>
+        </div>
+      </div>
+
       <div class="details-grid">
         <!-- Left details panel -->
         <main>
           <div class="details-card glass-panel" id="detailsMainCard">
-            <!-- Loaded dynamically based on ID -->
+            <!-- Dynamically populated per 13-point schema -->
           </div>
         </main>
         
         <!-- Right sidebar -->
         <aside class="details-sidebar">
-          <!-- Banner Image Widget -->
+          <!-- Visual Image Widget -->
           <div class="sidebar-widget visual-widget" id="sidebarImageWidget">
             <!-- Loaded dynamically -->
           </div>
           
-          <!-- Key Metrics Widget -->
-          <div class="sidebar-widget stats-widget glass-panel">
-            <h4>Domain Track Record</h4>
-            <div id="sidebarStatsWidget">
+          <!-- Key Pathway Highlights Widget -->
+          <div class="sidebar-widget glass-panel">
+            <h4 style="font-family: var(--font-heading); font-size: 1.15rem; font-weight: 700; margin-bottom: 12px; border-bottom: 1px solid var(--border-color); padding-bottom: 8px;">
+              Pathway Summary
+            </h4>
+            <div id="sidebarSummaryWidget">
               <!-- Loaded dynamically -->
             </div>
           </div>
           
           <!-- CTA Widget -->
           <div class="sidebar-widget cta-widget glass-panel">
-            <h4>Ready to Partner?</h4>
-            <p>Connect with our vertical recruitment specialists to source top-tier talent for your business.</p>
-            <a href="index.html#contact" class="btn btn-primary" style="width: 100%;">Contact Domain Expert</a>
+            <h4>Inquire for Internships or Hiring</h4>
+            <p>Connect with our engineering domain specialists for corporate partnerships and student placements.</p>
+            <a href="index.html#contact" class="btn btn-primary" style="width: 100%;">Connect with Domain Expert</a>
           </div>
         </aside>
       </div>
@@ -441,7 +597,7 @@
             <img src="assets/images/logo.jpeg" alt="Placement Keepers Logo">
             <span>Placement Keepers</span>
           </div>
-          <p class="footer-desc">Your trusted, ISO-certified staffing partner helping companies build stable and highly scalable workforce pipelines.</p>
+          <p class="footer-desc">Your trusted, ISO-certified staffing & engineering placement partner helping organizations build stable and skilled workforce pipelines.</p>
         </div>
         
         <div class="footer-links">
@@ -449,16 +605,16 @@
           <a href="index.html#home">Home</a>
           <a href="index.html#about">About Us</a>
           <a href="index.html#services">Services</a>
-          <a href="index.html#careers">Careers</a>
-          <a href="index.html#testimonials">Testimonials</a>
+          <a href="internships.html">Internships</a>
+          <a href="index.html#contact">Contact</a>
         </div>
         
         <div class="footer-links">
-          <h4>Sectors</h4>
-          <a href="industry-details.html?id=0">Manufacturing</a>
-          <a href="industry-details.html?id=1">Automobile</a>
-          <a href="industry-details.html?id=3">Engineering</a>
-          <a href="industry-details.html?id=4">IT & Software</a>
+          <h4>Engineering Pathways</h4>
+          <a href="industry-details.html?id=civil-built-environment">Civil Engineering</a>
+          <a href="industry-details.html?id=mech-amt">Mechanical AMT</a>
+          <a href="industry-details.html?id=cs-cybersecurity">Cybersecurity</a>
+          <a href="industry-details.html?id=auto-ev-hybrid">EV Automobile</a>
         </div>
         
         <div class="footer-links">
@@ -474,7 +630,7 @@
     </div>
   </footer>
 
-  <!-- Script logic to load dynamic industry info -->
+  <!-- Script logic to render 13-Point Pathway Schema -->
   <script>
     // Theme Manager
     const body = document.body;
@@ -494,173 +650,241 @@
       localStorage.setItem('theme', activeTheme);
     });
 
-    // Industry Data Dictionary
-    const industryDetailsData = {
-      0: {
-        title: "Manufacturing Industries",
-        badge: "ISO 9001 Vetted",
-        desc: "Our manufacturing recruitment team has extensive experience placing highly skilled personnel across automated factories, production plants, and engineering floors. We understand the critical importance of assembly line throughput, safety standards, and quality controls.",
-        icon: `<svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 9.172V5L8 4z"></path></svg>`,
-        img: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=800&q=80",
-        roles: ["CNC Operators", "Assembly Line Staff", "Production Supervisors", "Quality Inspectors", "Plant Engineers", "Logistics Handlers", "Industrial Safety Officers", "Maintenance Technicians"],
-        approach: "We perform rigorous skill vetting and verification of equipment handling certifications. Our recruitment models accommodate both direct permanent staffing and bulk temporary manpower support during seasonal production cycles.",
-        stats: {
-          "Candidates Placed": "1,200+",
-          "Average SLA Match": "48 Hours",
-          "Verification Pass": "100%",
-          "Retention Rate": "94%"
-        }
-      },
-      1: {
-        title: "Automobile Sector",
-        badge: "EV & Tech Compliant",
-        desc: "Sourcing for the automotive vertical requires matching deep technical engineering capabilities with practical assembly expertise. We support traditional automobile giants and cutting-edge EV developers in assembling design, production, and testing units.",
-        icon: `<svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>`,
-        img: "https://images.unsplash.com/photo-1617788138017-80ad40651399?auto=format&fit=crop&w=800&q=80",
-        roles: ["CAD Design Engineers", "Automobile Mechanics", "EV Battery Specialists", "Quality Assurance Engineers", "Robotics Technicians", "Tool & Die Designers", "Auto Assembly Workers", "Product Managers"],
-        approach: "We utilize specialized industry recruiters who screen candidates for high familiarity with advanced computer-aided design tools (like SolidWorks or CATIA) and modern electric powertrain architectures.",
-        stats: {
-          "Candidates Placed": "850+",
-          "Design Engineer SLA": "72 Hours",
-          "EV Specialist Match": "96%",
-          "Contract-to-Hire Rate": "88%"
-        }
-      },
-      2: {
-        title: "Logistics & Transport",
-        badge: "Supply Chain Precision",
-        desc: "Efficient supply chain management is the backbone of modern retail and commerce. We specialize in volume hiring and support staffing requirements for warehouses, shipping lines, and distribution networks, ensuring high logistics reliability.",
-        icon: `<svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17a2 2 0 11-4 0 2 2 0 014 0zM19 17a2 2 0 11-4 0 2 2 0 014 0zM13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h1m8-1a1 1 0 01-1 1H9m4-1V8a1 1 0 011-1h2.586a1 1 0 01.707.293l2.414 2.414a1 1 0 01.293.707V15a1 1 0 01-1 1h-1m-6 0a2 2 0 002-2h2a2 2 0 002 2m0 0V9a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path></svg>`,
-        img: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=800&q=80",
-        roles: ["Warehouse Supervisors", "Supply Chain Analysts", "Inventory Planners", "Distribution Coordinators", "Commercial Fleet Operators", "Forklift Operators", "Loading Supervisors", "Logistics Admins"],
-        approach: "We conduct strict background vetting, commercial license verifications, and drug screenings. Our system maintains a ready pool of pre-screened logistic candidates to address peak retail seasons.",
-        stats: {
-          "Candidates Placed": "1,500+",
-          "Shift Staffing SLA": "24 Hours",
-          "Background Check Pass": "100%",
-          "Seasonal Ramp Time": "48 Hours"
-        }
-      },
-      3: {
-        title: "Engineering Services",
-        badge: "Core Engineering Domain",
-        desc: "Sourcing for civil, mechanical, structural, and electrical engineering positions requires validation of professional expertise. We support structural consultancies, construction firms, and product R&D laboratories in building elite technical panels.",
-        icon: `<svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>`,
-        img: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=800&q=80",
-        roles: ["Mechanical Design Engineers", "Structural Civil Engineers", "Electrical Grid Architects", "Project Site Supervisors", "CAD Draftsmen", "R&D Specialists", "Quality Assurance Engineers", "Cost Estimators"],
-        approach: "We coordinate portfolio assessments and check academic and professional board registration details to ensure full compliance with civil and structural regulation authorities.",
-        stats: {
-          "Candidates Placed": "650+",
-          "Project Manager SLA": "5 Days",
-          "Verification Match": "100%",
-          "Client Retention": "96%"
-        }
-      },
-      4: {
-        title: "IT & Software Engineering",
-        badge: "Vetted Tech Talents",
-        desc: "Sourcing for tech teams demands speed and deep technical evaluation. Our specialized IT recruiters screen candidates across full-stack development, cloud infrastructure, QA, product strategy, and cybersecurity domains.",
-        icon: `<svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>`,
-        img: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=800&q=80",
-        roles: ["Frontend Developers", "Backend Engineers", "DevOps & Cloud Engineers", "Cybersecurity Architects", "UI/UX Product Designers", "Product Managers", "QA Automation Analysts", "Scrum Masters"],
-        approach: "We utilize code assessment platforms to verify the technical caliber of candidates before introducing them. We focus heavily on engineering excellence, scalable design patterns, and agile workflows.",
-        stats: {
-          "Candidates Placed": "500+",
-          "Average Sourcing SLA": "48 Hours",
-          "Assessment Match Rate": "92%",
-          "Contract Extension Rate": "89%"
-        }
-      },
-      5: {
-        title: "BPO Services & Sales Support",
-        badge: "High Efficiency Staffing",
-        desc: "High volume BPO operations and sales departments need candidates with strong communication, typing, and troubleshooting capabilities. We manage large-scale staffing campaigns to place customer service agents, helpdesks, and sales support teams.",
-        icon: `<svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>`,
-        img: "https://images.unsplash.com/photo-1549923746-c502d488b3ea?auto=format&fit=crop&w=800&q=80",
-        roles: ["Customer Care Agents", "Inside Sales Reps", "Technical Support Admins", "Back Office Executives", "Billing Coordinators", "Rotational Shift Operators", "CRM Data Entry Clerks", "Team Leaders"],
-        approach: "We conduct voice testing, typing speed diagnostics, and active empathy assessments to screen candidate performance. Our volume hiring methods ensure high ramp-up speeds with low staff turnover rates.",
-        stats: {
-          "Candidates Placed": "2,000+",
-          "Batch Ramp-up SLA": "5 Days",
-          "Rotational Slot Fill": "99%",
-          "Retention Guarantee": "120 Days"
-        }
-      }
-    };
-
-    // Load dynamic parameters
+    // Query Parameter Parser
     const getQueryParam = (name) => {
       const urlParams = new URLSearchParams(window.location.search);
       return urlParams.get(name);
     };
 
-    const industryId = parseInt(getQueryParam('id')) || 0;
-    const data = industryDetailsData[industryId] || industryDetailsData[0];
+    const pathwaySelect = document.getElementById('pathwaySelect');
 
-    // Load content dynamically
-    document.title = `${data.title} | Placement Keepers People Pulse`;
+    // Index mapping for legacy numeric query params (0 to 5)
+    const indexMapping = {
+      0: "mech-amt",
+      1: "auto-ev-hybrid",
+      2: "civil-transportation",
+      3: "civil-built-environment",
+      4: "cs-fullstack",
+      5: "comm-finance-taxation"
+    };
 
-    const detailsMainCard = document.getElementById('detailsMainCard');
-    const sidebarImageWidget = document.getElementById('sidebarImageWidget');
-    const sidebarStatsWidget = document.getElementById('sidebarStatsWidget');
+    let rawParam = getQueryParam('id') || getQueryParam('pathway') || 'civil-built-environment';
+    if (/^\d+$/.test(rawParam)) {
+      rawParam = indexMapping[parseInt(rawParam)] || 'civil-built-environment';
+    }
 
-    // Load Main Details Card
-    let rolesHtml = '';
-    data.roles.forEach(role => {
-      rolesHtml += `
-        <div class="role-item">
-          <span class="role-bullet"></span>
-          <span>${role}</span>
+    if (PATHWAYS_DATA[rawParam]) {
+      pathwaySelect.value = rawParam;
+    }
+
+    // Function to render full 13-point pathway layout
+    const renderPathwayDetails = (key) => {
+      const data = PATHWAYS_DATA[key] || PATHWAYS_DATA['civil-built-environment'];
+      document.title = `${data.discipline} - ${data.pathwayName} | Placement Keepers`;
+
+      const detailsMainCard = document.getElementById('detailsMainCard');
+      const sidebarImageWidget = document.getElementById('sidebarImageWidget');
+      const sidebarSummaryWidget = document.getElementById('sidebarSummaryWidget');
+
+      // 1 & 2: What is & Why Important
+      let whatIsHtml = data.whatIs.map(pt => `<li>${pt}</li>`).join('');
+      let whyImportantHtml = data.whyImportant.map(pt => `<li>${pt}</li>`).join('');
+
+      // 3, 4, 5: CIE 1, 2, 3
+      let cie1Html = data.cie1.map(pt => `<li>${pt}</li>`).join('');
+      let cie2Html = data.cie2.map(pt => `<li>${pt}</li>`).join('');
+      let cie3Html = data.cie3.map(pt => `<li>${pt}</li>`).join('');
+
+      // 6: Machines / Equipment
+      let machinesHtml = '';
+      if (Array.isArray(data.machines)) {
+        machinesHtml = data.machines.map(m => `
+          <div class="machine-card">
+            <div class="machine-name">${m.name || m}</div>
+            ${m.desc ? `<div class="machine-desc">${m.desc}</div>` : ''}
+          </div>
+        `).join('');
+      }
+
+      // 7: Software / Tools
+      let softwareHtml = data.software.map(sw => `<span class="pill-item pill-item-primary">${sw}</span>`).join('');
+
+      // 8: Practical Activities
+      let practicalHtml = data.practicalActivities.map(act => `<li>${act}</li>`).join('');
+
+      // 9: What Students Learn
+      let learnHtml = data.whatStudentsLearn.map(l => `<li>${l}</li>`).join('');
+
+      // 10: Skills Developed
+      let skillsHtml = data.skillsDeveloped.map(sk => `<span class="pill-item">${sk}</span>`).join('');
+
+      // 11: Real-World Applications
+      let appsHtml = data.realWorldApplications.map(app => `<li>${app}</li>`).join('');
+
+      // 12: Career Relevance
+      let careersHtml = data.careerRelevance.map(c => `<span class="pill-item pill-item-primary">${c}</span>`).join('');
+
+      // Render Main Content
+      detailsMainCard.innerHTML = `
+        <div class="details-title-section">
+          <div class="details-icon">${data.icon}</div>
+          <div>
+            <span class="details-badge">${data.discipline}</span>
+            <h1 class="details-title" style="margin-top: 4px;">${data.pathwayName}</h1>
+          </div>
+        </div>
+
+        <!-- 1. What is Pathway -->
+        <div class="section-block">
+          <h3 class="section-head-title">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            1. What is ${data.pathwayName.replace(/Pathway\s*\d*\s*–\s*/, '')}?
+          </h3>
+          <ul class="point-list">${whatIsHtml}</ul>
+        </div>
+
+        <!-- 2. Why is it Important -->
+        <div class="section-block">
+          <h3 class="section-head-title">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            2. Why is it Important?
+          </h3>
+          <ul class="point-list">${whyImportantHtml}</ul>
+        </div>
+
+        <!-- 3, 4, 5. CIE Modules -->
+        <div class="section-block">
+          <h3 class="section-head-title">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/></svg>
+            3–5. Industry Exposure Modules (CIE 1, 2, 3)
+          </h3>
+          
+          <div class="cie-tabs-nav">
+            <button class="cie-tab-btn active" onclick="switchCieTab(event, 'cie1-pane')">CIE 1: Industry Intro</button>
+            <button class="cie-tab-btn" onclick="switchCieTab(event, 'cie2-pane')">CIE 2: Project Learning</button>
+            <button class="cie-tab-btn" onclick="switchCieTab(event, 'cie3-pane')">CIE 3: Real-World Experience</button>
+          </div>
+
+          <div id="cie1-pane" class="cie-pane active">
+            <ul class="point-list">${cie1Html}</ul>
+          </div>
+          <div id="cie2-pane" class="cie-pane">
+            <ul class="point-list">${cie2Html}</ul>
+          </div>
+          <div id="cie3-pane" class="cie-pane">
+            <ul class="point-list">${cie3Html}</ul>
+          </div>
+        </div>
+
+        <!-- 6. Machines / Equipment / Tools -->
+        <div class="section-block">
+          <h3 class="section-head-title">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+            6. Machines, Equipment & Hardware Tools
+          </h3>
+          <div class="machines-grid">${machinesHtml}</div>
+        </div>
+
+        <!-- 7. Software / Technologies -->
+        <div class="section-block">
+          <h3 class="section-head-title">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+            7. Software, Frameworks & Technologies
+          </h3>
+          <div class="pill-group">${softwareHtml}</div>
+        </div>
+
+        <!-- 8. Practical Activities -->
+        <div class="section-block">
+          <h3 class="section-head-title">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/></svg>
+            8. Practical Hands-on Activities
+          </h3>
+          <ul class="point-list">${practicalHtml}</ul>
+        </div>
+
+        <!-- 9. What Students Will Learn -->
+        <div class="section-block">
+          <h3 class="section-head-title">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0112 20.055a11.952 11.952 0 01-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"/></svg>
+            9. What Students Will Learn
+          </h3>
+          <ul class="point-list">${learnHtml}</ul>
+        </div>
+
+        <!-- 10. Skills Developed -->
+        <div class="section-block">
+          <h3 class="section-head-title">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+            10. Core Skills Developed
+          </h3>
+          <div class="pill-group">${skillsHtml}</div>
+        </div>
+
+        <!-- 11. Real-World Applications -->
+        <div class="section-block">
+          <h3 class="section-head-title">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"/></svg>
+            11. Real-World Applications
+          </h3>
+          <ul class="point-list">${appsHtml}</ul>
+        </div>
+
+        <!-- 12. Career Relevance -->
+        <div class="section-block">
+          <h3 class="section-head-title">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+            12. Target Job Roles & Career Relevance
+          </h3>
+          <div class="pill-group">${careersHtml}</div>
+        </div>
+
+        <!-- 13. Internship Outcome -->
+        <div class="section-block">
+          <h3 class="section-head-title">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+            13. Internship & Placement Outcome
+          </h3>
+          <div class="outcome-box">
+            <p>${data.internshipOutcome}</p>
+          </div>
         </div>
       `;
+
+      // Sidebar Image Widget
+      sidebarImageWidget.innerHTML = `<img src="${data.img}" alt="${data.pathwayName}">`;
+
+      // Sidebar Summary Widget
+      sidebarSummaryWidget.innerHTML = `
+        <div style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.5; margin-bottom: 12px;">
+          <strong style="color: var(--text-main);">Discipline:</strong> ${data.discipline}<br>
+          <strong style="color: var(--text-main);">Badge:</strong> ${data.badge}<br>
+          <strong style="color: var(--text-main);">Modules:</strong> CIE 1, CIE 2, CIE 3
+        </div>
+        <a href="internships.html" class="btn btn-secondary btn-sm" style="width: 100%; font-size: 0.85rem;">View All Internship Tracks</a>
+      `;
+    };
+
+    // Tab Switcher for CIE 1, 2, 3
+    window.switchCieTab = (e, paneId) => {
+      const parent = e.target.closest('.section-block');
+      parent.querySelectorAll('.cie-tab-btn').forEach(btn => btn.classList.remove('active'));
+      parent.querySelectorAll('.cie-pane').forEach(pane => pane.classList.remove('active'));
+
+      e.target.classList.add('active');
+      document.getElementById(paneId).classList.add('active');
+    };
+
+    // Event listener for dropdown selection
+    pathwaySelect.addEventListener('change', (e) => {
+      const selectedKey = e.target.value;
+      const newUrl = `${window.location.pathname}?id=${selectedKey}`;
+      window.history.pushState({ path: newUrl }, '', newUrl);
+      renderPathwayDetails(selectedKey);
     });
 
-    detailsMainCard.innerHTML = `
-      <div class="details-title-section">
-        <div class="details-icon">${data.icon}</div>
-        <div>
-          <h2 class="details-title">${data.title}</h2>
-          <span class="details-badge">${data.badge}</span>
-        </div>
-      </div>
-      
-      <p class="details-text">${data.desc}</p>
-      
-      <div class="roles-section">
-        <h3 class="roles-title">
-          <svg style="width: 24px; height: 24px; color: var(--primary);" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
-          </svg>
-          Core Roles We Recruit
-        </h3>
-        <div class="roles-grid">
-          ${rolesHtml}
-        </div>
-      </div>
-      
-      <div class="approach-section">
-        <h3 class="approach-title">Sourcing & Screening Approach</h3>
-        <p class="approach-text">${data.approach}</p>
-        <p class="approach-text">Our deep industry integration allows us to filter candidates based on actual performance, past employer feedback, and practical technical tests, saving hours of interviewer evaluation time for our clients.</p>
-      </div>
-    `;
-
-    // Load Sidebar Image
-    sidebarImageWidget.innerHTML = `
-      <img src="${data.img}" alt="${data.title}">
-    `;
-
-    // Load Sidebar Stats
-    let statsHtml = '';
-    for (const [key, value] of Object.entries(data.stats)) {
-      statsHtml += `
-        <div class="stat-row">
-          <span style="font-size: 0.95rem; color: rgba(255,255,255,0.7); font-weight: 500;">${key}</span>
-          <span class="stat-val">${value}</span>
-        </div>
-      `;
-    }
-    sidebarStatsWidget.innerHTML = statsHtml;
+    // Initial Render
+    renderPathwayDetails(pathwaySelect.value);
   </script>
 </body>
 </html>
